@@ -1,0 +1,10 @@
+{
+  "name": "quasar-test",
+  "version": "0.1.0",
+  "description": "Monorepo for test runner integration in quasar-framework projects.",
+  "main": "index.js",
+  "repository": "git@github.com:quasarframework/quasar-test.git",
+  "author": "D.C. Thompson <denjell@kinokabaret.com>",
+  "license": "MIT",
+  "private": false
+}

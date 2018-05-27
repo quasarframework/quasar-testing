@@ -1,24 +1,51 @@
-# @quasar-test
+![Quasar logo](./images/quasar-logo.png) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+![test mode yes](./images/quasar_modes.png)
 
-This is the monorepo for integrating the test-runner of your choice into Quasar. For more information and current status, please refer to the following RFC's:
+#**'@quasar-test'** 
+is the monorepo for integrating the test-runner of your choice into your Quasar-Framework app. For more information and current status, please refer to the following RFC's:
 
 - [\[RFC\] Add --mode test to quasar-cli](https://github.com/quasarframework/quasar-cli/issues/127)
 - [\[RFC\] Add test runners to project during quasar init](https://github.com/quasarframework/quasar-starter-kit/issues/43)
 
+## Contents
 
-### Integration Roadmap
-Test runners currently verified to have valid "integration" at the moment are checked off in the following list:
+The packages in this repo are designed to be installed only by the Quasar framework. They follow the following naming convention: 
+
+ - @quasar/test-base
+ - @quasar/test-unit-* 
+ - @quasar/test-e2e-* 
+ - @quasar/test-quality-*
+
+Where for example the `ava` test-runner would be `@quasar/test-unit-ava`. 
+
+
+> Although you could probably install them all with yarn, it is highly recommended that you install them "properly" with the quasar cli. If you are interested in breaking the warranty, if you were only interested in integrating ava and spectron into your app, technically you could merely run: 
+
+```bash
+$ yarn add @quasar/test-base 
+$ yarn add @quasar/test-unit-ava
+$ yarn add @quasar/test-spectron
+```
+
+
+## Integration Roadmap
+Test runners currently verified to have valid "integration" are checked off in the following list:
+
+### BASE
+- [x] [@vue/test-utils](https://vue-test-utils.vuejs.org/en/)
+- [x] [@vue/test-server-utils](https://vue-test-utils.vuejs.org/en/)
+- [x] [istanbul](https://istanbul.js.org/)
+- [x] [nyc](https://github.com/istanbuljs/nyc)
+- [x] [chai](http://www.chaijs.com/)
+- [x] [sinon](http://sinonjs.org/)
 
 ### UNIT
-- [x]  [@vue/test-utils](https://vue-test-utils.vuejs.org/en/)
 - [x] [ava](https://github.com/avajs/ava)
-- [x] [chai](http://www.chaijs.com/)
 - [x] [jest23](https://facebook.github.io/jest/)
 - [x] [mocha](https://mochajs.org)
 - [ ] [mocha-loader](https://github.com/webpack-contrib/mocha-loader) (for webpack) 
 - [ ] [mocha-webpack](https://github.com/zinserjan/mocha-webpack)
 - [ ] [jasmine](https://jasmine.github.io/)
-- [x] [sinon](http://sinonjs.org/)
 - [ ] [tap](https://github.com/tapjs/node-tap)
 - [ ] [tape](https://github.com/substack/tape)
 
@@ -35,5 +62,5 @@ Test runners currently verified to have valid "integration" at the moment are ch
 - [ ] [bundlesize](https://github.com/siddharthkp/bundlesize)
 
 
-### Contributing
-Contributions to this repository are highly desirable. Please fork and PR.
+## Contributing
+Contributions to this repository are highly desirable. Before you make a PR, please open an issue, create a fork and PR. See the [Contribution Guidelines](./.github/CONTRIBUTING.md) for more details. Please note: Project coordination takes place on the [Discord server](https://discord.gg/5TDhbDg). 
