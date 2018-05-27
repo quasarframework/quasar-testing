@@ -1,7 +1,7 @@
 ![Quasar logo](./images/quasar-logo.png) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 ![test mode yes](./images/quasar_modes.png)
 
-# **`@quasar-test** 
+# **`@quasar/test`** 
 is the monorepo for integrating the test-runner of your choice into your Quasar-Framework app. For more information and current status, please refer to the following RFC's:
 
 - [\[RFC\] Add --mode test to quasar-cli](https://github.com/quasarframework/quasar-cli/issues/127)
