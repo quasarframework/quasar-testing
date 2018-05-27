@@ -15,6 +15,7 @@ There are two main approaches to using Cypress. If you wish to have it installed
 https://docs.cypress.io/guides/references/best-practices.html
 This [monorepo](https://github.com/cypress-io/cypress-example-recipes) from cypress-io is a great place to look for inspiration when you need discover a way to test for example [Vue + Vuex + REST](https://github.com/cypress-io/cypress-example-recipes#vue--vuex--rest-testing).
 
+### this looks promising, but does not seem compatible with quasar16
 https://github.com/bahmutov/cypress-vue-unit-test
 
 
