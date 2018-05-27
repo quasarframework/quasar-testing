@@ -1,7 +1,7 @@
 ![Quasar logo](./images/quasar-logo.png) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 ![test mode yes](./images/quasar_modes.png)
 
-#**'@quasar-test'** 
+# **`@quasar-test** 
 is the monorepo for integrating the test-runner of your choice into your Quasar-Framework app. For more information and current status, please refer to the following RFC's:
 
 - [\[RFC\] Add --mode test to quasar-cli](https://github.com/quasarframework/quasar-cli/issues/127)
@@ -32,8 +32,8 @@ $ yarn add @quasar/test-spectron
 Test runners currently verified to have valid "integration" are checked off in the following list:
 
 ### BASE
-- [x] [@vue/test-utils](https://vue-test-utils.vuejs.org/en/)
-- [x] [@vue/test-server-utils](https://vue-test-utils.vuejs.org/en/)
+- [x] [@vue/test-utils](https://vue-test-utils.vuejs.org)
+- [x] [@vue/test-server-utils](https://github.com/vuejs/vue-test-utils/tree/dev/packages/server-test-utils)
 - [x] [istanbul](https://istanbul.js.org/)
 - [x] [nyc](https://github.com/istanbuljs/nyc)
 - [x] [chai](http://www.chaijs.com/)
