@@ -1,0 +1,10 @@
+{
+  "name": "quasar-test-unit-jest",
+  "version": "1.0.0",
+  "description": "Jest setup for the Quasar test mode",
+  "main": "index.js",
+  "repository": "https://github.com/quasarframework/quasar-test/tree/dev/packages/base",
+  "license": "MIT",
+  "private": false,
+
+}

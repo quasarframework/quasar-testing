@@ -1,5 +1,4 @@
-![Quasar logo](./images/quasar-logo.png) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-![test mode yes](./images/quasar_modes.png)
+![Quasar logo](./images/testing_header.png) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 
 # **`@quasar/test`** - *Work in Progress*
 is the monorepo for integrating the test-runner of your choice into your Quasar-Framework app v0.16 and above. For more information and current status, please refer to the following RFC's:
