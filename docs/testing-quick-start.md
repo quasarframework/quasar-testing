@@ -7,7 +7,7 @@ The testing rig in `quasar-cli` is a mode that you have to explicitly add to you
 ```bash 
 $ quasar mode --add test
 
-$ quasar add --test "Popup.vue"
+$ quasar new --test "Popup.vue"
 
 $ quasar test -u        # runs mocha-webpack --watch 
 $ quasar test -c        # runs code-coverage with NYC
@@ -79,4 +79,4 @@ This mode ships with a **spec** that verifies:
 - that your app/site has some quality according to Lighthouse
 
 #### TIP!
-> On some setups we have noticed that **nyc** will not reinitialise itself unless you remove its output files from the output folder - which can be rather disconcerting when changes have been made to your coverage settings.
+> On some setups we have noticed that **nyc** will not reinitialise itself unless you remove its output files from the output folder - which can be rather disconcerting when changes have been made to your coverage settings. Make sure you have the latest **yarn** or **npm**.
