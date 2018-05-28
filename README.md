@@ -10,6 +10,7 @@ is the monorepo for integrating the test-runner of your choice into your Quasar-
 
 The packages in this repo are designed to be installed only by the Quasar framework. They follow the following naming convention: 
 
+ - @quasar/test
  - @quasar/test-base
  - @quasar/test-unit-* 
  - @quasar/test-e2e-* 
