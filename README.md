@@ -1,5 +1,5 @@
 <p style="text-align:center">
-    <img src="./images/testing_header.png" />
+    <img src="testing_header.png" />
 </p>
 
 # **`@quasar/test`** - *Work in Progress*
@@ -7,7 +7,6 @@ is the monorepo for integrating the test-runner of your choice into your Quasar-
 
 
 The current sprint is regarding the creation of the [MVP unit-test](https://github.com/quasarframework/quasar-test/projects/1)
-
 
 For more information and current status, please refer to the following RFC's:
 
@@ -40,6 +39,7 @@ $ yarn add @quasar/test-spectron
 Test harnesses currently verified to have valid "integration" are checked off in the following list:
 
 ### BASE
+- [ ] [@quasar/test-init](./packages/base/init)
 - [x] [@vue/test-utils](https://vue-test-utils.vuejs.org)
 - [x] [@vue/test-server-utils](https://github.com/vuejs/vue-test-utils/tree/dev/packages/server-test-utils)
 - [x] [chai](http://www.chaijs.com/)
@@ -80,7 +80,10 @@ Test harnesses currently verified to have valid "integration" are checked off in
 - [ ] [jest-codemods](https://www.npmjs.com/package/jest-codemods)
 - [ ] [ava-codemods](https://github.com/avajs/ava-codemods) (tape=>ava)
 
-  
-
 ## Contributing
 Contributions to this repository are highly desirable. Before you make a PR, please open an issue, create a fork and PR. See the [Contribution Guidelines](./.github/CONTRIBUTING.md) for more details. Please note: Project coordination takes place on the [Discord server](https://discord.gg/5TDhbDg). 
+
+## License
+MIT ©2018 - D.C. Thompson & Razvan Stoenescu
+
+All Icons © the respective owners
