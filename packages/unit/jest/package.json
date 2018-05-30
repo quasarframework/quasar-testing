@@ -6,5 +6,10 @@
   "repository": "https://github.com/quasarframework/quasar-test/tree/dev/packages/base",
   "license": "MIT",
   "private": false,
-
+  "dependencies": {
+    "jest": "^23.0.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^23.0.0",
+    "vue-jest": "^2.6.0"
+  }
 }

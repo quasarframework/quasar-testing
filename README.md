@@ -6,7 +6,9 @@
 is the monorepo for integrating the test-runner of your choice into your Quasar-Framework app v0.16 and above. 
 
 
-The current sprint is regarding the creation of the [MVP unit-test](https://github.com/quasarframework/quasar-test/projects/1)
+The current backend sprint is regarding the creation of the [MVP unit-test](https://github.com/quasarframework/quasar-test/projects/1)
+
+The current front-end sprint is regarding the creation of the [MVP storybook-docs](https://github.com/quasarframework/quasar-test/projects/1)
 
 For more information and current status, please refer to the following RFC's:
 
@@ -19,19 +21,21 @@ The packages in this repo are designed to be installed only by the Quasar framew
 
  - @quasar/test
  - @quasar/test-base
+ - @quasar/test-hud
  - @quasar/test-unit-* 
  - @quasar/test-e2e-* 
  - @quasar/test-quality-*
+ - @quasar/test-utils-*
 
 Where for example the `ava` test-runner would be `@quasar/test-unit-ava`. 
 
 
-> Although you could probably install them all with yarn, it is highly recommended that you install them "properly" with the quasar cli. If you are interested in breaking the warranty, if you were only interested in integrating ava and spectron into your app, technically you could merely run: 
+> Although you could probably install them all with yarn, it is highly recommended to follow the normal approach of using the quasar CLI.  If you are interested in breaking the warranty, if you were only interested in integrating ava and spectron into your app, technically you could merely run: 
 
 ```bash
 $ yarn add @quasar/test-base 
 $ yarn add @quasar/test-unit-ava
-$ yarn add @quasar/test-spectron
+$ yarn add @quasar/test-e2e-spectron
 ```
 
 

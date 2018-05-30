@@ -12,18 +12,12 @@
   "private": false,
   "homepage": "http://quasar-framework.org",
   "dependencies": {
-    "test-base": "link:./packages/base",
-    "test-unit-jest": "link:./packages/unit/jest"
+    "test-base": "file:./packages/base"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",
     "chai": "^4.1.2",
-    "eslint": "^4.19.1",
-    "foodoc": "0.0.8",
     "istanbul": "^0.4.5",
-    "jsdoc": "^3.5.5",
-    "jsdoc-oblivion": "0.0.9",
-    "lerna": "^2.11.0",
     "mocha": "^5.1.1",
     "tui-jsdoc-template": "^1.2.2"
   },
@@ -41,8 +35,25 @@
     "test": "test"
   },
   "scripts": {
-    "check" : "./packages/base/lib/tap_active.js",
+    "check": "./packages/base/lib/tap_active.js",
     "test": "mocha",
-    "lint": "eslint --ext .js,.vue src"
+    "lint": "eslint --ext .js,.vue src",
+    "lint:fix": "eslint --ext .js,.vue src --fix"
+  },
+  "quasar": {
+    "version": "0.16.3",
+    "test": {
+      "harnesses": [
+        {
+          "base":"webpack@4:babel@7",
+          "mochaWebpack": "nyc:mocha-webpack:chai:sinon",
+          "unit": "",
+          "coverage": "nyc -lcov",
+          "e2e":"",
+          "utils":"",
+          "reporter":"HUDoc"
+        }
+      ]
+    }
   }
 }
