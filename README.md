@@ -2,8 +2,8 @@
     <img src="testing_header.png" />
 </p>
 
-# **`@quasar/test`** - *Work in Progress*
-is the monorepo for integrating the test-runner of your choice into your Quasar-Framework app v0.16 and above. 
+# **`@quasar/testing`** - *Work in Progress*
+This is the monorepo for integrating the test-runner of your choice into your Quasar-Framework app v0.16 and above. 
 
 
 The current backend sprint is regarding the creation of the [MVP unit-test](https://github.com/quasarframework/quasar-test/projects/1)

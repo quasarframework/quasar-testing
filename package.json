@@ -1,5 +1,5 @@
 {
-  "name": "quasar-test",
+  "name": "quasar-testing",
   "version": "0.1.0",
   "description": "Monorepo for test runner integration in quasar-framework projects.",
   "main": "index.js",
