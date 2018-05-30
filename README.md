@@ -19,15 +19,16 @@ For more information and current status, please refer to the following RFC's:
 
 The packages in this repo are designed to be installed only by the Quasar framework. They follow the following naming convention: 
 
- - @quasar/test
- - @quasar/test-base
- - @quasar/test-hud
- - @quasar/test-unit-* 
- - @quasar/test-e2e-* 
- - @quasar/test-quality-*
- - @quasar/test-utils-*
+ - @quasar/testing
+ - @quasar/testing-base
+ - @quasar/testing-hud
+ - @quasar/testing-unit-* 
+ - @quasar/testing-e2e-* 
+ - @quasar/testing-quality-*
+ - @quasar/testing-utils-*
 
 Where for example the `ava` test-runner would be `@quasar/test-unit-ava`. 
+
 
 
 > Although you could probably install them all with yarn, it is highly recommended to follow the normal approach of using the quasar CLI.  If you are interested in breaking the warranty, if you were only interested in integrating ava and spectron into your app, technically you could merely run: 
@@ -43,7 +44,7 @@ $ yarn add @quasar/test-e2e-spectron
 Test harnesses currently verified to have valid "integration" are checked off in the following list:
 
 ### BASE
-- [ ] [@quasar/test-init](./packages/base/init)
+- [ ] [@quasar/testing-init](./packages/base/init)
 - [x] [@vue/test-utils](https://vue-test-utils.vuejs.org)
 - [x] [@vue/test-server-utils](https://github.com/vuejs/vue-test-utils/tree/dev/packages/server-test-utils)
 - [x] [chai](http://www.chaijs.com/)
