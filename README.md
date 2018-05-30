@@ -8,7 +8,7 @@ This is the monorepo for integrating the test-runner of your choice into your Qu
 
 The current backend sprint is regarding the creation of the [MVP unit-test](https://github.com/quasarframework/quasar-test/projects/1)
 
-The current front-end sprint is regarding the creation of the [MVP storybook-docs](https://github.com/quasarframework/quasar-test/projects/1)
+The current front-end sprint is regarding the creation of the [MVP storybook-docs](https://github.com/quasarframework/quasar-test/projects/2)
 
 For more information and current status, please refer to the following RFC's:
 
