@@ -23,7 +23,6 @@ https://github.com/bahmutov/cypress-vue-unit-test
 https://docs.cypress.io/guides/references/configuration.html
 
 ## Setting up the Test Runner
-
 First, you will need an account at https://dashboard.cypress.io 
 
 ## Sinon-Chai

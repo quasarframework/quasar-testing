@@ -1,3 +1,4 @@
-#!/usr/env node
+// #!/usr/env node
+const decorator = require('truth-runner').decorator
 
-console.log('nothing to see here')
+console.log(decorator.toCamelCase('some -_  thing'))

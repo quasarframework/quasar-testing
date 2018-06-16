@@ -39,6 +39,11 @@ $ yarn add @quasar/test-unit-ava
 $ yarn add @quasar/test-e2e-spectron
 ```
 
+## Development 
+The recommended stable way to install this module is in concert with latest dev branches of quasar-cli and quasar-framework.
+
+There is a microrepo that can help your scaffolding.
+
 
 ## Integration Roadmap
 Test harnesses currently verified to have valid "integration" are checked off in the following list:
@@ -71,6 +76,7 @@ Test harnesses currently verified to have valid "integration" are checked off in
 - [ ] <strike>[funcunit](https://github.com/bitovi/funcunit) (jquery based)</strike>
 - [ ] [karma](https://github.com/karma-runner/karma)
 - [ ] [nightwatch](http://nightwatchjs.org/)
+- [ ] [polly.js](https://github.com/Netflix/pollyjs)
 - [ ] [spectron](https://github.com/electron/spectron) (electron)
 - [ ] [testcafe](https://github.com/DevExpress/testcafe)
 - [ ] [testee](https://github.com/bitovi/testee)
