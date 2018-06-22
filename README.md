@@ -56,9 +56,6 @@ Test harnesses currently verified to have valid "integration" are checked off in
 - [x] [expect](https://js.libhunt.com/expect-js-alternatives)
 - [x] [istanbul](https://istanbul.js.org/)
 - [x] [jsdom](https://github.com/jsdom/jsdom)
-- [x] [mocha](https://mochajs.org)
-- [ ] [mocha-loader](https://github.com/webpack-contrib/mocha-loader) (for webpack) 
-- [ ] [mocha-webpack](https://github.com/zinserjan/mocha-webpack)
 - [x] [nyc](https://github.com/istanbuljs/nyc)
 - [x] [sinon](http://sinonjs.org/)
 
@@ -69,6 +66,9 @@ Test harnesses currently verified to have valid "integration" are checked off in
 - [ ] <strike>[QUnit](http://qunitjs.com/) (jquery based)</strike>
 - [ ] [tap](https://github.com/tapjs/node-tap)
 - [ ] [tape](https://github.com/substack/tape)
+- [x] [mocha](https://mochajs.org)
+- [ ] [mocha-loader](https://github.com/webpack-contrib/mocha-loader) (for webpack) 
+- [ ] [mocha-webpack](https://github.com/zinserjan/mocha-webpack)
 
 ### E2E
 - [ ] [appium](https://github.com/appium/appium) (cordova)
@@ -85,6 +85,7 @@ Test harnesses currently verified to have valid "integration" are checked off in
 - [x] [lighthouse 3.0](https://github.com/GoogleChrome/lighthouse)
 - [ ] [import-cost](https://github.com/wix/import-cost/tree/master/packages/import-cost) (custom)
 - [ ] [bundlesize](https://github.com/siddharthkp/bundlesize) (custom)
+- [ ] https://www.webpagetest.org/
 
 ### UTILS
 - [ ] [snyk](https://snyk.io/test)
@@ -94,6 +95,12 @@ Test harnesses currently verified to have valid "integration" are checked off in
 
 ## Contributing
 Contributions to this repository are highly desirable. Before you make a PR, please open an issue, create a fork and PR. See the [Contribution Guidelines](./.github/CONTRIBUTING.md) for more details. Please note: Project coordination takes place on the [Discord server](https://discord.gg/5TDhbDg). 
+
+## Contributors
+- [andreiTn](https://github.com/andreiTn)
+- mgibson91
+- eugene
+- bloo_df
 
 ## License
 MIT ©2018 - D.C. Thompson & Razvan Stoenescu

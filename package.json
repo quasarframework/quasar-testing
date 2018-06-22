@@ -12,6 +12,7 @@
   "private": false,
   "homepage": "http://quasar-framework.org",
   "dependencies": {
+    "@truthy/truth-runner": "link:../truth-runner-gitlab",
     "truth-runner": "link:../truth-runner-gitlab"
   },
   "devDependencies": {
@@ -47,7 +48,7 @@
     "test": "test"
   },
   "scripts": {
-    "check": "./packages/base/lib/tap_active.js",
+    "check": "node ./packages/base/lib/tap_active.js",
     "test": "mocha",
     "lint": "eslint --ext .js,.vue src"
   }
