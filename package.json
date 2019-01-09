@@ -1,55 +1,29 @@
 {
   "name": "quasar-testing",
-  "version": "0.1.0",
-  "description": "Monorepo for test runner integration in quasar-framework projects.",
-  "main": "index.js",
+  "version": "1.0.0-alpha.1",
+  "description": "Monorepo for test runner integration in Quasar Framework 1.0 projects.",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/quasarframework/quasar-test.git"
+    "url": "git+ssh://git@github.com/quasarframework/quasar-testing.git"
   },
-  "author": "D.C. Thompson <denjell@kinokabaret.com>",
+  "author": "Daniel Thompson-Yvetot<denjell@kinokabaret.com>",
   "license": "MIT",
   "private": false,
   "homepage": "http://quasar-framework.org",
   "dependencies": {
-    "@truthy/truth-runner": "link:../truth-runner-gitlab",
-    "truth-runner": "link:../truth-runner-gitlab"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.51",
-    "@babel/plugin-transform-runtime": "^7.0.0-beta.51",
-    "@babel/preset-env": "^7.0.0-beta.51",
-    "@babel/preset-stage-2": "^7.0.0-beta.51",
-    "@babel/runtime": "^7.0.0-beta.51",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "^8.2.3",
-    "babel-jest": "^23.0.1",
-    "chai": "^4.1.2",
-    "eslint": "^4.19.1",
-    "foodoc": "0.0.8",
-    "istanbul": "^0.4.5",
-    "jsdoc": "^3.5.5",
-    "jsdoc-oblivion": "0.0.9",
-    "lerna": "^2.11.0",
-    "mocha": "^5.1.1",
-    "tui-jsdoc-template": "^1.2.2"
+    "lerna": "3.9.0"
   },
   "engines": {
     "node": ">= 8.9.0",
     "npm": ">= 5.6.0",
-    "yarn": "= 1.6.0"
+    "yarn": "= 1.10.0"
   },
   "bugs": {
-    "url": "https://github.com/quasarframework/quasar-test/issues"
-  },
-  "directories": {
-    "doc": "docs",
-    "example": "examples",
-    "test": "test"
+    "url": "https://github.com/quasarframework/quasar-testing/issues"
   },
   "scripts": {
-    "check": "node ./packages/base/lib/tap_active.js",
-    "test": "mocha",
-    "lint": "eslint --ext .js,.vue src"
+    "init": "yarn && lerna clean && lerna link && lerna bootstrap"
   }
 }

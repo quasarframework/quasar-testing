@@ -1,0 +1,11 @@
+{
+  "baseUrl": "http://localhost:8080/#",
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "cypress.json"
+      ],
+      "url": "https://on.cypress.io/cypress.schema.json"
+    }
+  ]
+}

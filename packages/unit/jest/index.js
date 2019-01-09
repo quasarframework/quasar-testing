@@ -1,2 +1,0 @@
-
-jest-serializer-vue

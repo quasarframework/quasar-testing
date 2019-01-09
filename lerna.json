@@ -4,7 +4,6 @@
   "useWorkspaces": true,
   "workspaces": ["packages/*"],
   "packages": [
-    "packages/*",
     "packages/e2e/*",
     "packages/quality/*",
     "packages/unit/*",

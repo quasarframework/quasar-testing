@@ -3,29 +3,20 @@
 </p>
 
 # **`@quasar/testing`** - *Work in Progress*
-This is the monorepo for integrating the test-runner of your choice into your Quasar-Framework app v0.16 and above. 
+This is the monorepo for integrating the test-runner of your choice into your Quasar-Framework app v1.0 and above. 
 
 
-The current backend sprint is regarding the creation of the [MVP unit-test](https://github.com/quasarframework/quasar-test/projects/1)
-
-The current front-end sprint is regarding the creation of the [MVP storybook-docs](https://github.com/quasarframework/quasar-test/projects/2)
-
-For more information and current status, please refer to the following RFC's:
-
-- [\[RFC\] Add --mode test to quasar-cli](https://github.com/quasarframework/quasar-cli/issues/127)
-- [\[RFC\] Add test runners to project during quasar init](https://github.com/quasarframework/quasar-starter-kit/issues/43)
+## Installation
+There are two methods of installing the test runner(s) of your choice:
+- [ ] During the `quasar create` phase of making a new app.
+- [ ]
 
 ## Contents
-
 The packages in this repo are designed to be installed only by the Quasar framework. They follow the following naming convention: 
 
- - @quasar/testing
- - @quasar/testing-base
- - @quasar/testing-hud
  - @quasar/testing-unit-* 
  - @quasar/testing-e2e-* 
- - @quasar/testing-quality-*
- - @quasar/testing-utils-*
+ - @quasar/testing-quality
 
 Where for example the `ava` test-runner would be `@quasar/test-unit-ava`. 
 
@@ -40,16 +31,13 @@ $ yarn add @quasar/test-e2e-spectron
 ```
 
 ## Development 
-The recommended stable way to install this module is in concert with latest dev branches of quasar-cli and quasar-framework.
-
-There is a microrepo that can help your scaffolding.
+Clone this repository and run `yarn init`.
 
 
 ## Integration Roadmap
 Test harnesses currently verified to have valid "integration" are checked off in the following list:
 
 ### BASE
-- [ ] [@quasar/testing-init](./packages/base/init)
 - [x] [@vue/test-utils](https://vue-test-utils.vuejs.org)
 - [x] [@vue/test-server-utils](https://github.com/vuejs/vue-test-utils/tree/dev/packages/server-test-utils)
 - [x] [chai](http://www.chaijs.com/)
