@@ -1,6 +1,7 @@
 {
-  "name": "quasar-app-extension-e2e-cypress",
+  "name": "quasar-app-extension-testing-e2e-cypress",
   "version": "0.0.1",
+  "license": "MIT",
   "description": "A Quasar CLI Extension",
   "author": "Daniel Thompson-Yvetot <denjell@kinokabaret.com>",
   "scripts": {

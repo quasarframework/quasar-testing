@@ -7,7 +7,7 @@
 module.exports = function (api) {
   //
 	if (api.prompts.sfc) {
-
+		console.log('sfc')
 	}
 	/**
 

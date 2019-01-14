@@ -34,29 +34,31 @@
   ]
 
  */
+const build = [
+  {
+    name: {
+      type: 'string',
+      required: true,
+      message: 'testing-unit-jest',
+    },
+    preset: {
+      type: 'checkbox',
+      message: 'Check the features needed for your project:',
+      choices: [
+        {
+          name: 'SFC <test> template',
+          value: 'sfc'
+        },
+        {
+          name: 'Uninstall script',
+          value: 'uninstall'
+        }
+      ]
+    }
+  }
+]
+
 
 module.exports = function () {
-  return [
-    {
-      name: {
-        type: 'string',
-        required: true,
-        message: 'Unit Testing [Jest]',
-      },
-      preset: {
-        type: 'checkbox',
-        message: 'Check the features needed for your project:',
-        choices: [
-          {
-            name: 'SFC <test> template',
-            value: 'sfc'
-          },
-          {
-            name: 'Uninstall script',
-            value: 'uninstall'
-          }
-        ]
-      }
-    }
-  ]
+  return build
 }

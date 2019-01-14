@@ -1,6 +1,7 @@
 {
-  "name": "quasar-app-extension-testing-jest",
+  "name": "quasar-app-extension-testing-unit-jest",
   "version": "1.0.0-alpha.1",
+  "license": "MIT",
   "description": "A Quasar CLI Extension for running Jest tests",
   "author": "Daniel Thompson-Yvetot <denjell@kinokabaret.com>",
   "scripts": {

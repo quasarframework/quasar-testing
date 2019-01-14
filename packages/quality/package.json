@@ -1,8 +1,9 @@
 {
-  "name": "quasar-app-extension-quality",
-  "version": "0.0.1",
+  "name": "quasar-app-extension-testing-quality",
+  "version": "1.0.0-alpha.1",
+  "license": "MIT",
   "description": "A Quasar CLI Extension",
-  "author": "D.C. Thompson <denjell@kinokabaret.com>",
+  "author": "Daniel Thompson-Yvetot <denjell@kinokabaret.com>",
   "scripts": {
     "test": "echo \"No test specified\" && exit 0"
   },

@@ -9,14 +9,19 @@ This is the monorepo for integrating the test-runner of your choice into your Qu
 ## Installation
 There are two methods of installing the test runner(s) of your choice:
 - [ ] During the `quasar create` phase of making a new app.
-- [ ]
+- [x] By adding an extension with `quasar ext`
+
+```bash
+$ quasar ext --add testing-unit-jest
+```
+
 
 ## Contents
 The packages in this repo are designed to be installed only by the Quasar framework. They follow the following naming convention: 
 
- - @quasar/testing-unit-* 
- - @quasar/testing-e2e-* 
- - @quasar/testing-quality
+ - @quasar/app-extension-testing-unit-* 
+ - @quasar/app-extension-testing-e2e-* 
+ - @quasar/app-extension-testing-quality
 
 Where for example the `ava` test-runner would be `@quasar/test-unit-ava`. 
 
