@@ -1,0 +1,40 @@
+{
+  "name": "testing-demo",
+  "version": "1.0.0-alpha.1",
+  "license": "MIT",
+  "description": "A Quasar Framework app",
+  "productName": "testing-demo",
+  "cordovaId": "org.cordova.quasar.app",
+  "author": "Daniel Thompson-Yvetot",
+  "private": true,
+  "scripts": {
+    "lint": "eslint --ext .js,.vue src",
+    "test": "echo \"No test specified\" && exit 0",
+    "myscript": "quasar info"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.0.0-alpha.0",
+    "quasar": "^1.0.0-alpha.0"
+  },
+  "devDependencies": {
+    "@quasar/app": "^1.0.0-alpha.0",
+    "@quasar/quasar-app-extension-testing-unit-jest": "link:../packages/unit-jest",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.10.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-vue": "^5.0.0",
+    "strip-ansi": "=3.0.1"
+  },
+  "engines": {
+    "node": ">= 8.9.0",
+    "npm": ">= 5.6.0",
+    "yarn": ">= 1.6.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ],
+  "beautiful": true
+}

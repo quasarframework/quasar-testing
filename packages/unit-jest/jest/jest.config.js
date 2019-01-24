@@ -1,5 +1,3 @@
-import * as quasar_conf from './quasar.conf.js'
-
 module.exports = {
 	globals: {
 		__DEV__: true
@@ -9,7 +7,6 @@ module.exports = {
 	bail: true,
 	cache: false,
 	verbose: true,
-	testURL: `${(quasar_conf.devServer.host || 'http://localhost')}:${quasar_conf.devServer.port}`,
 	collectCoverage: false,
 	coverageDirectory: '<rootDir>/test/jest/coverage',
 	collectCoverageFrom: [
