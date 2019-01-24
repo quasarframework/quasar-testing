@@ -1,4 +1,7 @@
 {
-  "@quasar/testing-unit-jest": {},
-  "quasar-app-extension-testing-unit-jest": {}
+  "@quasar/testing-unit-jest": {
+    "runners": [
+      "JEST"
+    ]
+  }
 }

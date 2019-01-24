@@ -1,5 +1,5 @@
 {
-  "name": "quasar-app-extension-testing-unit-jest",
+  "name": "@quasar/quasar-app-extension-testing-unit-jest",
   "version": "1.0.0-alpha.1",
   "license": "MIT",
   "description": "A Quasar CLI Extension for running Jest tests",
@@ -14,6 +14,7 @@
     "yarn": ">= 1.10.0"
   },
   "dependencies": {
+    "@babel/core": "^7.2.2",
     "@types/jest": "23.3.12",
     "@vue/test-utils": "1.0.0-beta.28",
     "babel-core": "7.0.0-bridge.0",
@@ -28,6 +29,6 @@
     "promise": "8.0.2",
     "regenerator-runtime": "0.13.1",
     "vue-jest": "3.0.2",
-    "vue-template-compiler": "2.5.17"
+    "vue-template-compiler": "^2.5.17"
   }
 }

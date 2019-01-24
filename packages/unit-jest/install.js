@@ -9,17 +9,16 @@
  */
 
 module.exports = function (api) {
-	console.log('api.quasarAppVersion', api.quasarAppVersion)
-	console.log('api.extId', api.extId)
-	console.log('api.appDir', api.appDir)
-	console.log('api.resolve.app(src)', api.resolve.app('/'))
+	// console.log('api.quasarAppVersion', api.quasarAppVersion)
+	// console.log('api.extId', api.extId)
+	// console.log('api.appDir', api.appDir)
+	// console.log('api.resolve.app(src)', api.resolve.app('/'))
 
 	api.compatibleWithQuasarApp('1.0.0-alpha.10')
 
 	api.prompts.runners.forEach((val) => {
 		if (val === 'JEST') {
-			console.log('!!!!!!!!!!!!!!!!!!!!!!!!!! JEST')
-			api.render('./jest2')
+			api.render('./jest', {}, true)
 		}
 	})
 }
