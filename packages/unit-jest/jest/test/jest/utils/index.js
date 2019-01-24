@@ -1,4 +1,5 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils'
+// this is mapped in jest.config.js to resolve @vue/test-utils
+import { createLocalVue, shallowMount } from 'test-utils'
 
 import Vuex from 'vuex'
 import VueRouter from 'vue-router'

@@ -1,4 +1,4 @@
-import { createLocalVue, shallowMount } from '@quasar/quasar-app-extension-testing-unit-jest/node_modules/@vue/test-utils'
+import { createLocalVue, shallowMount } from 'test-utils'
 
 import Vuex from 'vuex'
 import VueRouter from 'vue-router'

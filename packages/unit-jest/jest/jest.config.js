@@ -29,17 +29,18 @@ module.exports = {
 	moduleFileExtensions: [
 		'js',
 		'vue',
-    'json'
+		'json'
 	],
 	moduleNameMapper: {
 		'^vue$': '<rootDir>/node_modules/vue/dist/vue.common.js',
-		'^quasar$': '<rootDir>/node_modules/quasar-framework/dist/quasar.umd.min.js',
+		'^test-utils$': '<rootDir>/node_modules/@quasar/quasar-app-extension-testing-unit-jest/node_modules/@vue/test-utils/dist/vue-test-utils.js',
+		'^quasar$': '<rootDir>/node_modules/quasar/dist/quasar.umd.js',
 		'^~/(.*)$': '<rootDir>/$1',
 		'^src/(.*)$': '<rootDir>/src/$1',
-    '.*css$': '<rootDir>/test/jest/utils/stub.css'
-  },
+		'.*css$': '<rootDir>/test/jest/utils/stub.css'
+	},
 	transform: {
-		'.*\\.vue$': '<rootDir>/node_modules/vue-jest',
+		'.*\\.vue$': '<rootDir>/node_modules/@quasar/quasar-app-extension-testing-unit-jest/node_modules/vue-jest',
 		'.*\\.js$': '<rootDir>/node_modules/babel-jest'
 	},
 	snapshotSerializers: [
