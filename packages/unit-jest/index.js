@@ -13,17 +13,12 @@ module.exports = function (api, ctx) {
 		// conf.boot.push('my-boot')
 	})
 
-	console.log('api.quasarAppVersion', api.quasarAppVersion)
-
-	if (api.prompts.preset.sfc) {
-		api.chainWebpack((chain, invoke) => {
-			console.log('chainWebpack called')
-			console.log('  chain', chain !== void 0)
-			console.log('  invoke', invoke)
-			chain.module.rule('jest')
-				.test(/\.jest$/)
-				.use('jest')
-				.loader(require.resolve('./test/loaders/jest-loader.js'))
-		})
-	}
+	console.log('api.quasarAppVersion', api)
+	if (api.prompts.options)
+	api.chainWebpack((chain, invoke) => {
+		chain.module.rule('jest')
+			.test(/\.jest$/)
+			.use('jest')
+			.loader(require.resolve(`${api.appDir}/test/loaders/jest-loader.js`))
+	})
 }

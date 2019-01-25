@@ -38,18 +38,18 @@
 module.exports = function () {
   return [
     {
-      name: 'runners',
+      name: 'options',
       type: 'checkbox',
       required: true,
-      message: 'Please choose the runners needed for your project',
+      message: 'Jest will now be installed. Please choose additional options:',
       choices: [
         {
-          name: 'Jest unit testing',
-          value: 'JEST'
+          name: 'SFC webpack <test> loader',
+          value: 'SFC'
         },
         {
-          name: 'Uninstall script',
-          value: 'uninstall'
+          name: 'extra "scripts" in your package.json',
+          value: 'scripts'
         }
       ]
     }

@@ -1,7 +1,8 @@
 {
   "@quasar/testing-unit-jest": {
-    "runners": [
-      "JEST"
+    "options": [
+      "SFC",
+      "scripts"
     ]
   }
 }

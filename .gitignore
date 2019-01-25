@@ -1,0 +1,12 @@
+.DS_Store
+.idea
+node_modules
+/packages/*/.env
+/packages/*/.env.test
+/packages/*/.nyc_output
+/packages/*/.quasar
+/packages/*/dist
+/packages/*/node_modules
+/packages/*/service-account.json
+/packages/*/*.log*
+/**/coverage

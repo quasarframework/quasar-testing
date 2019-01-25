@@ -1,3 +1,4 @@
+// this is mapped in jest.config.js to resolve @vue/test-utils
 import { createLocalVue, shallowMount } from 'test-utils'
 
 import Vuex from 'vuex'

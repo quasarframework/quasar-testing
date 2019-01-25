@@ -10,15 +10,17 @@ module.exports = {
 	collectCoverage: false,
 	coverageDirectory: '<rootDir>/test/jest/coverage',
 	collectCoverageFrom: [
-		'<rootDir>/src/*.js',
-		'<rootDir>/src/*.vue'
+		'<rootDir>/src/**/*.js',
+		'<rootDir>/src/**/*.vue',
+		'<rootDir>/src/**/*.ts',
+		'<rootDir>/src/**/*.jsx'
 	],
 	coverageThreshold: {
 		global: {
-			branches: 50,
-			functions: 50,
-			lines: 50,
-			statements: 50
+		//	branches: 50,
+		//	functions: 50,
+		//	lines: 50,
+		//	statements: 50
 		}
 	},
 	testMatch: [
@@ -28,8 +30,10 @@ module.exports = {
 	],
 	moduleFileExtensions: [
 		'js',
-		'vue',
-		'json'
+		'jsx',
+		'json',
+		'ts',
+		'tsx'
 	],
 	moduleNameMapper: {
 		'^vue$': '<rootDir>/node_modules/vue/dist/vue.common.js',

@@ -4,7 +4,7 @@
  * API: https://github.com/quasarframework/quasar/blob/master/app/lib/app-extension/InstallAPI.js
  *
  *  $ quasar ext --add @quasar/testing-unit-jest --skip-pkg
- *  "@quasar/quasar-app-extension-testing-unit-jest": "link:../packages/unit-jest",
+ *  '@quasar/quasar-app-extension-testing-unit-jest': 'link:../packages/unit-jest',
  *
  */
 
@@ -16,9 +16,23 @@ module.exports = function (api) {
 
 	api.compatibleWithQuasarApp('1.0.0-alpha.10')
 
-	api.prompts.runners.forEach((val) => {
-		if (val === 'JEST') {
-			api.render('./jest', {}, true)
+	api.render('./base', {}, true)
+
+	api.prompts.options.forEach((val) => {
+		if (val === 'SFC') {
+			api.render('./loader', {}, true)
+		}
+		else if (val === 'scripts') {
+			api.extendPackageJson({
+				beautiful: true,
+				scripts: {
+					'test': 'echo \"See package.json => scripts for available tests.\" && exit 0',
+					'test:unit': 'ENV=test jest',
+					'test:unit:coverage': 'ENV=test jest --coverage',
+					'test:unit:watch': 'ENV=test jest --watch',
+					'serve:test:coverage': 'quasar serve test/jest/coverage/lcov-report/ --port 8788'
+				}
+			})
 		}
 	})
 }
