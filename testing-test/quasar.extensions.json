@@ -1,5 +1,6 @@
 {
   "@quasar/testing-unit-jest": {
+    "babel": "babelrc",
     "options": [
       "SFC",
       "scripts"

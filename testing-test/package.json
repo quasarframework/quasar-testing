@@ -10,10 +10,11 @@
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
     "test": "echo \"See package.json => scripts for available tests.\" && exit 0",
-    "test:unit": "ENV=test jest",
-    "test:unit:coverage": "ENV=test jest --coverage",
-    "test:unit:watch": "ENV=test jest --watch",
-    "serve:test:coverage": "quasar serve test/jest/coverage/lcov-report/ --port 8788"
+    "test:unit": "ENV=test jest --updateSnapshot",
+    "test:unit:coverage": "jest --coverage",
+    "test:unit:watch": "jest --watch",
+    "serve:test:coverage": "quasar serve test/jest/coverage/lcov-report/ --port 8788",
+    "devAndTest": "quasar dev & disown; jest --watch"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0-alpha.0",

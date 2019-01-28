@@ -2,16 +2,18 @@ module.exports = {
 	globals: {
 		__DEV__: true
 	},
-	setupTestFrameworkScriptFile: '<rootDir>/test/jest/jest.setup.js',
+	setupFilesAfterEnv: [
+		'<rootDir>/test/jest/jest.setup.js'
+	],
 	noStackTrace: true,
 	bail: true,
 	cache: false,
 	verbose: true,
-	collectCoverage: false,
+	collectCoverage: true,
 	coverageDirectory: '<rootDir>/test/jest/coverage',
 	collectCoverageFrom: [
-		'<rootDir>/src/**/*.js',
 		'<rootDir>/src/**/*.vue',
+		'<rootDir>/src/**/*.js',
 		'<rootDir>/src/**/*.ts',
 		'<rootDir>/src/**/*.jsx'
 	],
@@ -29,6 +31,7 @@ module.exports = {
 		'<rootDir>/src/**/__tests__/*_jest.spec.js'
 	],
 	moduleFileExtensions: [
+		'vue',
 		'js',
 		'jsx',
 		'json',

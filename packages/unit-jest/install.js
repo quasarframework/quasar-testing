@@ -26,12 +26,16 @@ module.exports = function (api) {
 			api.extendPackageJson({
 				scripts: {
 					'test': 'echo \"See package.json => scripts for available tests.\" && exit 0',
-					'test:unit': 'ENV=test jest',
-					'test:unit:coverage': 'ENV=test jest --coverage',
-					'test:unit:watch': 'ENV=test jest --watch',
-					'serve:test:coverage': 'quasar serve test/jest/coverage/lcov-report/ --port 8788'
+					'test:unit': 'ENV=test jest --updateSnapshot',
+					'test:unit:coverage': 'jest --coverage',
+					'test:unit:watch': 'jest --watch',
+					'serve:test:coverage': 'quasar serve test/jest/coverage/lcov-report/ --port 8788',
+					'devAndTest': 'quasar dev & disown; jest --watch'
 				}
 			})
 		}
 	})
+	if (api.prompts.babel) {
+		api.render(`./${api.prompts.babel}`, {}, true)
+	}
 }
