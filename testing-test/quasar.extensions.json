@@ -10,5 +10,10 @@
     "options": [
       "scripts"
     ]
+  },
+  "@quasar/testing-quality": {
+    "options": [
+      "scripts"
+    ]
   }
 }

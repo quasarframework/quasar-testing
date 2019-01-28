@@ -5,7 +5,6 @@
  */
 
 module.exports = function (api) {
-
 	api.compatibleWithQuasarApp('^1.0.0-alpha.11')
 
 	api.render('./base', {}, true)
