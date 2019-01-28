@@ -6,8 +6,7 @@
   "packages": [
     "packages/e2e/*",
     "packages/quality/*",
-    "packages/unit/*",
-    "packages/utils/*"
+    "packages/unit/*"
   ],
   "version": "0.1.0"
 }

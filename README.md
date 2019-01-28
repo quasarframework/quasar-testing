@@ -16,11 +16,15 @@ There are two methods of installing the test runner(s) of your choice:
 First, clone and fork this repo. Then create a 1.0 Quasar app. Go into the package.json and add this line:
 ``` 
     "@quasar/quasar-app-extension-testing-unit-jest": "link:../%path_to_quasar-testing%/packages/unit-jest",
+    "@quasar/quasar-app-extension-testing-e2e-cypress": "link:../%path_to_quasar-testing%/packages/e2e-cypress",
+    "@quasar/quasar-app-extension-testing-quality": "link:../%path_to_quasar-testing%/packages/quality",
 ```
 Then run `yarn` and finally:
 
 ```bash
-$  quasar ext --add @quasar/testing-unit-jest --skip-pkg
+$ quasar ext --add @quasar/testing-unit-jest --skip-pkg
+$ quasar ext --add @quasar/testing-e2e-cypress --skip-pkg
+$ quasar ext --add @quasar/testing-quality --skip-pkg
 ```
 
 Accept the babel override and both options (`<SFC>` and test scripts).
@@ -35,7 +39,6 @@ The packages in this repo are designed to be installed only by the Quasar framew
  - @quasar/app-extension-testing-quality
 
 Where for example the `ava` test-runner would be `@quasar/test-unit-ava`. 
-
 
 
 > Although you could probably install them all with yarn, it is highly recommended to follow the normal approach of using the quasar CLI.  If you are interested in breaking the warranty, if you were only interested in integrating ava and spectron into your app, technically you could merely run: 

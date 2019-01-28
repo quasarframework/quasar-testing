@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "license": "MIT",
   "description": "A Quasar CLI Extension",
-  "author": "Daniel Thompson-Yvetot <denjell@kinokabaret.com>",
+  "author": "Daniel Thompson-Yvetot",
   "scripts": {
     "test": "echo \"No test specified\" && exit 0"
   },

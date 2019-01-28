@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha.1",
   "license": "MIT",
   "description": "A Quasar CLI Extension for running Jest tests",
-  "author": "Daniel Thompson-Yvetot <denjell@kinokabaret.com>",
+  "author": "Daniel Thompson-Yvetot",
   "scripts": {
     "test:e2e": "jest",
     "test:e2e:watch": "jest --watch"

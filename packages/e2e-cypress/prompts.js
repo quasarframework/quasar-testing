@@ -5,36 +5,21 @@
  * (answers are available as "api.prompts" in the other scripts)
  * https://www.npmjs.com/package/inquirer#question
  *
- * Example:
+ */
 
+module.exports = function () {
   return [
-    name: {
-      type: 'string',
-      required: true,
-      message: 'Quasar CLI Extension name (without prefix)',
-    },
-    preset: {
+    {
+      name: 'options',
       type: 'checkbox',
-      message: 'Check the features needed for your project:',
+      required: true,
+      message: 'Cypress e2e Test Harness will now be installed. Please choose additional options:',
       choices: [
         {
-          name: 'Install script',
-          value: 'install'
-        },
-        {
-          name: 'Prompts script',
-          value: 'prompts'
-        },
-        {
-          name: 'Uninstall script',
-          value: 'uninstall'
+          name: 'extra "scripts" in your package.json',
+          value: 'scripts'
         }
       ]
     }
   ]
-
- */
-
-module.exports = function () {
-  return []
 }
