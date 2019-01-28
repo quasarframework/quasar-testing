@@ -21,7 +21,7 @@
     "quasar": "^1.0.0-alpha.15"
   },
   "devDependencies": {
-    "@quasar/app": "link:../../quasar_v1.0_clean2/app",
+    "@quasar/app": "^1.0.0-alpha.0",
     "@quasar/quasar-app-extension-testing-unit-jest": "link:../packages/unit-jest",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.1",

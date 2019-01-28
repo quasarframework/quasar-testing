@@ -11,10 +11,21 @@ There are two methods of installing the test runner(s) of your choice:
 - [ ] During the `quasar create` phase of making a new app.
 - [x] By adding an extension with `quasar ext`
 
+## TEMPORARY INSTRUCTIONS:
+
+First, clone and fork this repo. Then create a 1.0 Quasar app. Go into the package.json and add this line:
+``` 
+    "@quasar/quasar-app-extension-testing-unit-jest": "link:../packages/unit-jest",
+```
+Then run `yarn` and finally:
+
 ```bash
-$ quasar ext --add testing-unit-jest
+$  quasar ext --add @quasar/testing-unit-jest --skip-pkg
 ```
 
+Accept the babel override and both options (`<SFC>` and test scripts).
+
+When it completes, run `yarn test:jest`.
 
 ## Contents
 The packages in this repo are designed to be installed only by the Quasar framework. They follow the following naming convention: 
