@@ -15,7 +15,7 @@ There are two methods of installing the test runner(s) of your choice:
 
 First, clone and fork this repo. Then create a 1.0 Quasar app. Go into the package.json and add this line:
 ``` 
-    "@quasar/quasar-app-extension-testing-unit-jest": "link:../packages/unit-jest",
+    "@quasar/quasar-app-extension-testing-unit-jest": "link:../%path_to_quasar-testing%/packages/unit-jest",
 ```
 Then run `yarn` and finally:
 
