@@ -2,12 +2,14 @@ module.exports = {
 	globals: {
 		__DEV__: true
 	},
-	setupTestFrameworkScriptFile: '<rootDir>/test/jest/jest.setup.js',
+	setupFilesAfterEnv: [
+		'<rootDir>/test/jest/jest.setup.js'
+	],
 	noStackTrace: true,
 	bail: true,
 	cache: false,
 	verbose: true,
-	collectCoverage: false,
+	collectCoverage: true,
 	coverageDirectory: '<rootDir>/test/jest/coverage',
 	collectCoverageFrom: [
 		'<rootDir>/src/**/*.js',

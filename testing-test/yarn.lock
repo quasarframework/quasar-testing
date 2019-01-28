@@ -9,7 +9,7 @@
   dependencies:
     "@babel/highlight" "^7.0.0"
 
-"@babel/core@7.2.2":
+"@babel/core@7.2.2", "@babel/core@^7.2.2":
   version "7.2.2"
   resolved "https://registry.npmjs.org/@babel/core/-/core-7.2.2.tgz#07adba6dde27bb5ad8d8672f15fde3e08184a687"
   integrity sha512-59vB0RWt09cAct5EIe58+NzGP4TFSD3Bz//2/ELy3ZeTeKF6VTD1AXlH8BGGbCX0PuobZBsIzO7IAI9PH67eKw==
@@ -728,7 +728,7 @@
   resolved "https://registry.npmjs.org/@positron/stack-trace/-/stack-trace-1.0.0.tgz#14fcc712a530038ef9be1ce6952315a839f466a8"
   integrity sha1-FPzHEqUwA475vhzmlSMVqDn0Zqg=
 
-"@quasar/app@link:../../quasar_v1.0_clean/app":
+"@quasar/app@link:../../quasar_v1.0_clean2/app":
   version "0.0.0"
   uid ""
 
@@ -7397,10 +7397,10 @@ qs@6.5.2, qs@~6.5.2:
   resolved "https://registry.npmjs.org/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
   integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
 
-quasar@^1.0.0-alpha.0:
-  version "1.0.0-alpha.14"
-  resolved "https://registry.npmjs.org/quasar/-/quasar-1.0.0-alpha.14.tgz#8d676a8fdcf5fd7eb70112f3da5780b17991fc97"
-  integrity sha512-p2lVfhVyL/jBQHa4jSXJ4sT789kZ5DImztaNgQhFFszB75nCwm9JgRgH76qqsXPbnDG/dqpOPAtBEcI7d9McKA==
+quasar@^1.0.0-alpha.15:
+  version "1.0.0-alpha.15"
+  resolved "https://registry.npmjs.org/quasar/-/quasar-1.0.0-alpha.15.tgz#4226fa87ed6def7d3af01934a6cd42b742d9a4f5"
+  integrity sha512-ihwsBUM2oM29cah5PH7R6Nvt2yfBRTCxygpRpvN/EUMlgxPOFKMsuAUgSLkH8S2XRUxqOsSZ/cYoOmOG8WsQEw==
 
 querystring-es3@^0.2.0:
   version "0.2.1"
@@ -9096,15 +9096,7 @@ vue-style-loader@4.1.2, vue-style-loader@^4.1.0:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-template-compiler@2.5.17:
-  version "2.5.17"
-  resolved "https://registry.npmjs.org/vue-template-compiler/-/vue-template-compiler-2.5.17.tgz#52a4a078c327deb937482a509ae85c06f346c3cb"
-  integrity sha512-63uI4syCwtGR5IJvZM0LN5tVsahrelomHtCxvRkZPJ/Tf3ADm1U1wG6KWycK3qCfqR+ygM5vewUvmJ0REAYksg==
-  dependencies:
-    de-indent "^1.0.2"
-    he "^1.1.0"
-
-vue-template-compiler@2.5.22:
+vue-template-compiler@2.5.22, vue-template-compiler@^2.5.17:
   version "2.5.22"
   resolved "https://registry.npmjs.org/vue-template-compiler/-/vue-template-compiler-2.5.22.tgz#c3d3c02c65f1908205c4fbd3b0ef579e51239955"
   integrity sha512-1VTw/NPTUeHNiwhkq6NkFzO7gYLjFCueBN0FX8NEiQIemd5EUMQ5hxrF7O0zCPo5tae+U9S/scETPea+hIz8Eg==
@@ -9117,7 +9109,7 @@ vue-template-es2015-compiler@^1.6.0:
   resolved "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.8.2.tgz#dd73e80ba58bb65dd7a8aa2aeef6089cf6116f2a"
   integrity sha512-cliV19VHLJqFUYbz/XeWXe5CO6guzwd0yrrqqp0bmjlMP3ZZULY7fu8RTC4+3lmHwo6ESVDHFDsvjB15hcR5IA==
 
-vue@2.5.22:
+vue@2.5.22, vue@^2.5.17:
   version "2.5.22"
   resolved "https://registry.npmjs.org/vue/-/vue-2.5.22.tgz#3bf88041af08b8539c37b268b70ca79245e9cc30"
   integrity sha512-pxY3ZHlXNJMFQbkjEgGVMaMMkSV1ONpz+4qB55kZuJzyJOhn6MSy/YZdzhdnumegNzVTL/Dn3Pp4UrVBYt1j/g==

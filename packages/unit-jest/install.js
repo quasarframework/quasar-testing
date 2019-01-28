@@ -14,7 +14,7 @@ module.exports = function (api) {
 	// console.log('api.appDir', api.appDir)
 	// console.log('api.resolve.app(src)', api.resolve.app('/'))
 
-	api.compatibleWithQuasarApp('1.0.0-alpha.10')
+	api.compatibleWithQuasarApp('^1.0.0-alpha.11')
 
 	api.render('./base', {}, true)
 
@@ -24,7 +24,6 @@ module.exports = function (api) {
 		}
 		else if (val === 'scripts') {
 			api.extendPackageJson({
-				beautiful: true,
 				scripts: {
 					'test': 'echo \"See package.json => scripts for available tests.\" && exit 0',
 					'test:unit': 'ENV=test jest',

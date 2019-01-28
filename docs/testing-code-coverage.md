@@ -4,7 +4,7 @@ title: Code Coverage
     <img alt="coverage by nyc" src="https://img.shields.io/badge/coverage by-istanbul/nyc-2fa4cf.svg">    
 </a>
 
-According to the module authors, "Istanbul instruments your ES5 and ES2015+ JavaScript code with line counters, so that you can track how well your unit-tests exercise your codebase." That means it sees how much of your source code files for which you have specs are really being investigated. It generates both a nice ASCII report as well as a thorough html version that actually lets you click through to find the parts of your code that are not beind tested by your unit tests. You could say that you test coverage to test tests. But you wouldn't. That would sound silly.
+According to the module authors, "Istanbul instruments your ES5 and ES2015+ JavaScript code with line counters, so that you can track how well your unit-tests exercise your codebase." That means it sees how much of your source code files for which you have specs are really being investigated. It generates both a nice ASCII report as well as a thorough html version that actually lets you click through to find the parts of your code that are not being tested by your unit tests. You could say that you test coverage to test tests. But you wouldn't. That would sound silly.
 
 - https://istanbul.js.org/docs/advanced/alternative-reporters/
 

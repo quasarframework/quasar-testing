@@ -10,7 +10,22 @@ module.exports = function (api, ctx) {
 		console.log('extendQuasarConf')
 		console.log('  conf', conf !== void 0)
 		console.log('conf.css', conf.css)
-		// conf.boot.push('my-boot')
+		conf.extendBabel.push({
+			env: {
+				test: {
+					presets: [
+						["@babel/preset-env",
+							{
+								"modules": "commonjs",
+								"targets": {
+									"node": "current"
+								}
+							}
+						]
+					]
+				}
+			}
+		})
 	})
 
 	console.log('api.quasarAppVersion', api)

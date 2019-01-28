@@ -81,7 +81,7 @@ module: {
         exclude: /node_modules|\.spec\.js$/,
       }
     ]
-  }
+    }
 ```
 ## Mocha
 > `/test/mocha.opts`

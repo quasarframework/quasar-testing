@@ -43,7 +43,6 @@ Hi! I’m really excited that you are interested in contributing to Quasar. Befo
  - Ensure that the test-runner actually works in a real quasar project.
  - Write an example test that passes the "baseline.spec.vue" file with deep coverage.
  - If you need to make additions to the host package.json, follow the format in the package_template.json
- - 
 
 - If adding new feature:
   - Provide convincing reason to add this feature. Ideally you should open a suggestion issue first and have it greenlighted before working on it.
