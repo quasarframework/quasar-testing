@@ -14,7 +14,7 @@ module.exports = function (api) {
 	// console.log('api.appDir', api.appDir)
 	// console.log('api.resolve.app(src)', api.resolve.app('/'))
 
-	api.compatibleWithQuasarApp('^1.0.0-alpha.11')
+	api.compatibleWithQuasarApp('^1.0.0-alpha.12')
 
 	api.render('./base', {}, true)
 

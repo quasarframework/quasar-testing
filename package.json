@@ -1,5 +1,5 @@
 {
-  "name": "quasar-testing",
+  "name": "@quasar/testing",
   "version": "1.0.0-alpha.1",
   "description": "Monorepo for test runner integration in Quasar Framework 1.0 projects.",
   "repository": {

@@ -1,12 +1,15 @@
 {
   "name": "@quasar/quasar-app-extension-testing-unit-jest",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "license": "MIT",
   "description": "A Quasar CLI Extension for running Jest tests",
   "author": "Daniel Thompson-Yvetot",
   "scripts": {
     "test:e2e": "jest",
     "test:e2e:watch": "jest --watch"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "engines": {
     "node": ">= 8.9.0",
