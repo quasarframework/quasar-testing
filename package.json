@@ -6,7 +6,7 @@
     "type": "git",
     "url": "git+ssh://git@github.com/quasarframework/quasar-testing.git"
   },
-  "author": "Daniel Thompson-Yvetot<denjell@kinokabaret.com>",
+  "author": "Daniel Thompson-Yvetot",
   "license": "MIT",
   "private": false,
   "homepage": "http://quasar-framework.org",
