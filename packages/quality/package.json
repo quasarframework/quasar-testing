@@ -1,5 +1,5 @@
 {
-  "name": "quasar-app-extension-testing-quality",
+  "name": "@quasar/quasar-app-extension-testing-quality",
   "version": "1.0.0-alpha.1",
   "license": "MIT",
   "description": "A Quasar CLI Extension",
