@@ -4,6 +4,10 @@
   "license": "MIT",
   "description": "A Quasar CLI Extension",
   "author": "Daniel Thompson-Yvetot",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/quasarframework/quasar-testing"
+  },
   "scripts": {
     "test": "echo \"No test specified\" && exit 0"
   },

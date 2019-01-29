@@ -6,7 +6,7 @@
  */
 
 module.exports = function (api) {
-	api.compatibleWithQuasarApp('^1.0.0-alpha.11')
+	api.compatibleWithQuasarApp('^1.0.0-alpha.12')
 
 	api.render('./base', {}, true)
 	api.prompts.options.forEach((val) => {

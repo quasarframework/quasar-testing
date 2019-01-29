@@ -1,10 +1,10 @@
 {
   "name": "@quasar/testing",
   "version": "1.0.0-alpha.1",
-  "description": "Monorepo for test runner integration in Quasar Framework 1.0 projects.",
+  "description": "Monorepo for test harness integration in Quasar Framework 1.0 projects.",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/quasarframework/quasar-testing.git"
+    "url": "https://github.com/quasarframework/quasar-testing"
   },
   "author": "Daniel Thompson-Yvetot",
   "license": "MIT",
