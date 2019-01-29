@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-testing-quality",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "license": "MIT",
   "description": "A Quasar App Extension for Code Quality",
   "author": "Daniel Thompson-Yvetot",
