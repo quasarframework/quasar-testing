@@ -1,12 +1,12 @@
 describe('Page Exists', () => {
-	beforeEach(() => {
-		cy.visit('/')
-	})
+  beforeEach(() => {
+    cy.visit('/')
+  })
 
-	it('has page title', () => {
-		cy.get('[data-cy=title]')
-		.should('contain', 'Quasar')
-	})
+  it('has page title', () => {
+    cy.get('[data-cy=title]')
+    .should('contain', 'Quasar')
+  })
 })
 
 // describe('Home page tests', () => {

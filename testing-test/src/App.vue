@@ -12,3 +12,7 @@ export default {
 
 <style>
 </style>
+
+<test lang="jest">
+  console.log('jest will fail this test')
+</test>

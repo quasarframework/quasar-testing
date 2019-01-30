@@ -26,11 +26,11 @@ module.exports = function (api) {
 			api.extendPackageJson({
 				scripts: {
 					'test': 'echo \"See package.json => scripts for available tests.\" && exit 0',
-					'test:unit': 'ENV=test jest --updateSnapshot',
+					'test:unit': 'jest --updateSnapshot',
 					'test:unit:coverage': 'jest --coverage',
 					'test:unit:watch': 'jest --watch',
 					'serve:test:coverage': 'quasar serve test/jest/coverage/lcov-report/ --port 8788',
-					'devAndTest': 'quasar dev & disown; jest --watch'
+					'devAndTest': 'concurrently \"quasar dev\" \"jest --watch\"'
 				}
 			})
 		}

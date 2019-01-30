@@ -6,16 +6,16 @@
  */
 
 module.exports = function (api, ctx) {
-	if (api.prompts.preset.sfc) {
-		return {
-			build: {
-				chainWebpack(chain) {
-					chain.module.rule('jest')
-					.test(/\.jest$/)
-					.use('jest')
-						.loader(require.resolve('./test/loaders/jest-loader.js'))
-				}
-			}
-		}
-	}
+  if (api.prompts.preset.sfc) {
+    return {
+      build: {
+        chainWebpack (chain) {
+          chain.module.rule('jest')
+            .test(/\.jest$/)
+            .use('jest')
+            .loader(require.resolve('./test/loaders/jest-loader.js'))
+        }
+      }
+    }
+  }
 }

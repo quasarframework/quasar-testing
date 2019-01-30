@@ -16,12 +16,6 @@ module.exports = function () {
       required: true,
       message: 'Please choose how to install required babel rules:',
       choices: [
-        // not working at the moment, todo: figure out why
-        // {
-        //  name: 'Overwrite babel.config.js',
-        //  value: 'babelconfig',
-        //  default: true
-        // },
         {
           name: 'Overwrite babel.config.js and use additional .babelrc',
           value: 'babelrc'
