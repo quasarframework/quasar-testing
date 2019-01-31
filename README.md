@@ -49,6 +49,9 @@ $ yarn add @quasar/test-unit-ava
 $ yarn add @quasar/test-e2e-spectron
 ```
 
+The test-driven-design approach will also help you to write better (and fewer) tests. Even though it may seem like it slows you down to some degree, this habit of great programmers pays its dividends when other developers accidentally change the interface. Think of tests like insurance for your code that always pays out.
+
+
 ## Development 
 Clone this repository and run `yarn init`.
 
@@ -110,6 +113,6 @@ Contributions to this repository are highly desirable. Before you make a PR, ple
 - bloo_df
 
 ## License
-MIT ©2018 - D.C. Thompson & Razvan Stoenescu
+MIT ©2018 - present - D.C. Thompson & Razvan Stoenescu
 
 All Icons © the respective owners
