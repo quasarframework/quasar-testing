@@ -2,7 +2,7 @@
     <img src="testing_header.png" />
 </p>
 
-# **`@quasar/testing`** - *Work in Progress*
+# **`@quasar/testing`**
 This is the monorepo for integrating the test-runner of your choice into your Quasar-Framework app v1.0 and above. 
 
 

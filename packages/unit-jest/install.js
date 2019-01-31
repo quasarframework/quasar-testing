@@ -29,8 +29,9 @@ module.exports = function (api) {
 					'test:unit': 'jest --updateSnapshot',
 					'test:unit:coverage': 'jest --coverage',
 					'test:unit:watch': 'jest --watch',
+					'test:unit:watchAll': 'jest --watchAll',
 					'serve:test:coverage': 'quasar serve test/jest/coverage/lcov-report/ --port 8788',
-					'devAndTest': 'concurrently \"quasar dev\" \"jest --watch\"'
+					'concurrently:dev:jest': 'concurrently -p \"[{name}]\" -n \"QUASAR,_JEST_\" -c \"quasar dev\" \"jest --watch\"'
 				}
 			})
 		}
