@@ -26,21 +26,29 @@ module.exports = function(api, ctx) {
     const yargs = require('yargs')
     const chalk = require('chalk')
     const stripAnsi = require('strip-ansi')
+    const fs = require('fs')
+    const testingConfigPath = api.resolve.app('quasar.testing.json')
+    const testingConfig = fs.existsSync(testingConfigPath)
+      ? require(testingConfigPath)
+      : {}
 
-    const args = yargs.array('unit').parse(rawArgs)
-    if (!args.unit) {
+    const args = yargs
+      .array('unit')
+      .array('e2e')
+      .parse(rawArgs)
+    if (!args.unit && !args.e2e) {
       console.log(
-        chalk`{bgRed  ERROR: } Please say what test runners to use with the --unit argument.`
+        chalk`{bgRed  ERROR: } Please say what test runners to use with the --unit or --e2e argument.`
       )
       process.exit(1)
     }
 
-    // TODO: support e2e
+    // Fill in missing values
+    args.unit = args.unit || []
+    args.e2e = args.e2e || []
+
     args.unit.forEach(runner => {
-      if (
-        !api.hasExtension(`@quasar/unit-${runner}`) &&
-        !api.hasExtension(`unit-${runner}`)
-      ) {
+      if (!testingConfig[`unit-${runner}`]) {
         // TODO: install instructions for non-scoped extension
         console.error(
           chalk`You tried to run tests with {bold ${runner}}, but it is not installed. Please install @quasar/quasar-app-extension-unit-${runner} with {bold quasar ext --add @quasar/unit-${runner}}`
@@ -49,8 +57,18 @@ module.exports = function(api, ctx) {
       }
     })
 
-    // If --dev was passed
-    if (args.dev) {
+    args.e2e.forEach(runner => {
+      if (!testingConfig[`e2e-${runner}`]) {
+        // TODO: install instructions for non-scoped extension
+        console.error(
+          chalk`You tried to run tests with {bold ${runner}}, but it is not installed. Please install @quasar/quasar-app-extension-e2e-${runner} with {bold quasar ext --add @quasar/e2e-${runner}}`
+        )
+        process.exit(1)
+      }
+    })
+
+    // If --dev was passed or e2e tests are being run
+    if (args.dev || args.e2e.length > 0) {
       // Start dev server
       // TODO: use interactive output
       const devServer = execa('quasar', ['dev'], {
@@ -90,31 +108,46 @@ module.exports = function(api, ctx) {
       // Pipe output to console
       devServer.stdout.pipe(process.stdout)
       devServer.stdout.on('data', rawData => {
+        const doneRegex = /App URL\.{11} (https?:\/\/localhost:\d{4}\/)/
         const data = stripAnsi(rawData.toString())
         if (/ERROR {2}Failed to compile with \d* errors/.test(data)) {
           // Dev server errored
           devServer.kill()
           throw new Error('The Quasar dev server failed to start.')
-        } else if (/DONE {2}Compiled successfully in \d*ms/.test(data)) {
+        } else if (doneRegex.test(data)) {
           // Dev server is ready
-          startTest(killDevServer)
+          startTests(
+            // The dev server url
+            data.match(doneRegex)[1],
+            killDevServer
+          )
         }
       })
     } else {
       // Just run tests without dev server
-      startTest()
+      startTests()
     }
 
-    async function startTest(callback) {
+    async function startTests(serverUrl, callback) {
       let failedRunners = []
-      const runTest = runner =>
-        new Promise((resolve, reject) => {
+      const runTest = (runner, type) =>
+        new Promise(resolve => {
           console.log(
             chalk`
-              {bold \n{bgBlue  RUN: } Running tests with ${runner}\n}
+              {bold \n{bgBlue  RUN: } Running ${type} tests with ${runner}\n}
             `
           )
-          const testRunner = execa(runner, { stdio: 'inherit' })
+          const { runnerCommand: runnerCommandString } =
+            testingConfig[`${type}-${runner}`] || runner
+          const runnerCommandArgs = runnerCommandString
+            // Set server url
+            .replace('${serverUrl}', serverUrl)
+            .split(' ')
+          // Remove first arg, that is the command
+          const runnerCommand = runnerCommandArgs.shift()
+          const testRunner = execa(runnerCommand, runnerCommandArgs, {
+            stdio: 'inherit'
+          })
           testRunner.on('exit', code => {
             if (code !== 0) {
               failedRunners.push(runner)
@@ -124,7 +157,10 @@ module.exports = function(api, ctx) {
         })
 
       for (const runner of args.unit) {
-        await runTest(runner)
+        await runTest(runner, 'unit')
+      }
+      for (const runner of args.e2e) {
+        await runTest(runner, 'e2e')
       }
       failedRunners.forEach(runner => {
         console.error(
