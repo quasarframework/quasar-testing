@@ -11,7 +11,7 @@ module.exports = function (api) {
 
   api.extendJsonFile('quasar.testing.json', {
     'e2e-cypress': {
-      runnerCommand: 'cypress run'
+      runnerCommand: 'cypress run --config baseUrl=${serverUrl}'
     }
   })
 
