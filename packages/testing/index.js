@@ -26,6 +26,11 @@ module.exports = function(api, ctx) {
     const yargs = require('yargs')
     const chalk = require('chalk')
     const stripAnsi = require('strip-ansi')
+    const fs = require('fs')
+    const testingConfigPath = api.resolve.app('quasar.testing.json')
+    const testingConfig = fs.existsSync(testingConfigPath)
+      ? require(testingConfigPath)
+      : {}
 
     const args = yargs.array('unit').parse(rawArgs)
     if (!args.unit) {
@@ -37,10 +42,7 @@ module.exports = function(api, ctx) {
 
     // TODO: support e2e
     args.unit.forEach(runner => {
-      if (
-        !api.hasExtension(`@quasar/unit-${runner}`) &&
-        !api.hasExtension(`unit-${runner}`)
-      ) {
+      if (!testingConfig[`unit-${runner}`]) {
         // TODO: install instructions for non-scoped extension
         console.error(
           chalk`You tried to run tests with {bold ${runner}}, but it is not installed. Please install @quasar/quasar-app-extension-unit-${runner} with {bold quasar ext --add @quasar/unit-${runner}}`
@@ -114,7 +116,8 @@ module.exports = function(api, ctx) {
               {bold \n{bgBlue  RUN: } Running tests with ${runner}\n}
             `
           )
-          const testRunner = execa(runner, { stdio: 'inherit' })
+          const { runnerCommand } = testingConfig[`unit-${runner}`] || runner
+          const testRunner = execa(runnerCommand, { stdio: 'inherit' })
           testRunner.on('exit', code => {
             if (code !== 0) {
               failedRunners.push(runner)
