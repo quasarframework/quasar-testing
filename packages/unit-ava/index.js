@@ -6,21 +6,15 @@
  */
 
 module.exports = function(api, ctx) {
-  // api.extendQuasarConf(conf => {
-  // console.log('extendQuasarConf')
-  // console.log('  conf', conf !== void 0)
-  // console.log('conf.css', conf.css)
-  // })
-  // console.log('api.quasarAppVersion', api)
-  // api.prompts.options.forEach(val => {
-  //   if (val === 'SFC') {
-  //     api.chainWebpack((chain, invoke) => {
-  //       chain.module
-  //         .rule('ava')
-  //         .test(/\.ava$/)
-  //         .use('ava')
-  //         .loader(require.resolve(`${api.appDir}/test/loaders/ava-loader.js`))
-  //     })
-  //   }
-  // })
+  api.prompts.options.forEach(val => {
+    if (val === 'SFC') {
+      api.chainWebpack((chain, invoke) => {
+        chain.module
+          .rule('ava')
+          .test(/\.ava$/)
+          .use('ava')
+          .loader(require.resolve(`${api.appDir}/test/loaders/ava-loader.js`))
+      })
+    }
+  })
 }

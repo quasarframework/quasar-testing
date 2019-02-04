@@ -9,5 +9,5 @@ test('Inits component', t => {
       appSuccess: () => fn => fn
     }
   })
-  t.true(component.wrapper.exists())
+  t.true(component.exists())
 })
