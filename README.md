@@ -59,16 +59,6 @@ Clone this repository and run `yarn init`.
 ## Integration Roadmap
 Test harnesses currently verified to have valid "integration" are checked off in the following list:
 
-### BASE
-- [x] [@vue/test-utils](https://vue-test-utils.vuejs.org)
-- [x] [@vue/test-server-utils](https://github.com/vuejs/vue-test-utils/tree/dev/packages/server-test-utils)
-- [x] [chai](http://www.chaijs.com/)
-- [x] [expect](https://js.libhunt.com/expect-js-alternatives)
-- [x] [istanbul](https://istanbul.js.org/)
-- [x] [jsdom](https://github.com/jsdom/jsdom)
-- [x] [nyc](https://github.com/istanbuljs/nyc)
-- [x] [sinon](http://sinonjs.org/)
-
 ### UNIT
 - [x] [ava](https://github.com/avajs/ava)
 - [ ] [jasmine 3](https://jasmine.github.io/)
@@ -93,12 +83,12 @@ Test harnesses currently verified to have valid "integration" are checked off in
 
 ### QUALITY
 - [x] [lighthouse 3.0](https://github.com/GoogleChrome/lighthouse)
+- [x] [snyk](https://snyk.io/test)
 - [ ] [import-cost](https://github.com/wix/import-cost/tree/master/packages/import-cost) (custom)
 - [ ] [bundlesize](https://github.com/siddharthkp/bundlesize) (custom)
 - [ ] https://www.webpagetest.org/
 
 ### UTILS
-- [ ] [snyk](https://snyk.io/test)
 - [ ] [jest-codemods](https://www.npmjs.com/package/jest-codemods)
 - [ ] [ava-codemods](https://github.com/avajs/ava-codemods) (tape=>ava)
 
@@ -107,10 +97,12 @@ Test harnesses currently verified to have valid "integration" are checked off in
 Contributions to this repository are highly desirable. Before you make a PR, please open an issue, create a fork and PR. See the [Contribution Guidelines](./.github/CONTRIBUTING.md) for more details. Please note: Project coordination takes place on the [Discord server](https://discord.gg/5TDhbDg). 
 
 ## Contributors
+- [nklayman](https://github.com/nklayman)
 - [andreiTn](https://github.com/andreiTn)
 - mgibson91
 - eugene
 - bloo_df
+- PhearZero
 
 ## License
 MIT ©2018 - present - D.C. Thompson & Razvan Stoenescu
