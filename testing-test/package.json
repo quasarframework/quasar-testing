@@ -1,0 +1,53 @@
+{
+  "name": "testing-demo",
+  "version": "1.0.0-alpha.1",
+  "license": "MIT",
+  "description": "A Quasar Framework app",
+  "productName": "testing-demo",
+  "cordovaId": "org.cordova.quasar.app",
+  "author": "Daniel Thompson-Yvetot",
+  "private": true,
+  "scripts": {
+    "lint": "eslint --ext .js,.vue src",
+    "test": "echo \"See package.json => scripts for available tests.\" && exit 0",
+    "test:unit": "jest --updateSnapshot",
+    "test:unit:coverage": "jest --coverage",
+    "test:unit:watch": "jest --watch",
+    "serve:test:coverage": "quasar serve test/jest/coverage/lcov-report/ --port 8788",
+    "test:e2e": "cypress open",
+    "test:e2e:CI": "cypress run",
+    "serve:test:lighthouse": "quasar serve test/lighthouse/reports/ --port 8789",
+    "audit:snyk": "snyk test --json > ./test/audits/snyk.json",
+    "audit:node_modules": "yarn audit --json > ./test/audits/node_modules_audit.json",
+    "audit:licenses": "nlf --summary detail > ./test/audits/licenses.txt",
+    "audit:lighthouse": "lighthouse http://localhost:3000 view --output-path=./test/lighthouse/reports/index.html --config-path=./test/lighthouse/configs/full-config.js",
+    "test:unit:watchAll": "jest --watchAll",
+    "concurrently:dev:jest": "concurrently -p \"[{name}]\" -n \"QUASAR,_JEST_\" -c \"quasar dev\" \"jest --watch\""
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.0.0-alpha.0",
+    "quasar": "^1.0.0-alpha.20"
+  },
+  "devDependencies": {
+    "@quasar/app": "link:../../quasar_v1.0_clean2/app",
+    "@quasar/quasar-app-extension-testing-e2e-cypress": "link:../packages/e2e-cypress",
+    "@quasar/quasar-app-extension-testing-quality": "link:../packages/quality",
+    "@quasar/quasar-app-extension-testing-unit-jest": "^1.0.0-beta.1",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.10.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-vue": "^5.0.0",
+    "strip-ansi": "=3.0.1"
+  },
+  "engines": {
+    "node": ">= 8.9.0",
+    "npm": ">= 5.6.0",
+    "yarn": ">= 1.6.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ]
+}

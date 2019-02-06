@@ -4,7 +4,9 @@
   "useWorkspaces": true,
   "workspaces": ["packages/*"],
   "packages": [
-    "packages/*"
+    "packages/e2e/*",
+    "packages/quality/*",
+    "packages/unit/*"
   ],
-  "version": "0.0.0"
+  "version": "0.1.0"
 }

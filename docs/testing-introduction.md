@@ -9,7 +9,6 @@ You may be used to running `yarn test` to run your tests, but we have extended t
 
 There are four kinds of tests that this mode will enable you to run:
 - Unit tests (Make sure your "code-units" work atomically) `quasar test -u`
-- Code Coverage (Make sure that your tests reach entirely into the tested units) `quasar test -c`
 - E2E testing (Guarantee that units work together in the "real" world) `quasar test -e`
 - Quality testing (Get yourself some quality metrics with lighthouse) `quasar test -q`
 
@@ -72,5 +71,4 @@ mgibson91, flopail, rstoenescu and dennythecoder for helping out with this and p
 Moving Forward  
   - https://github.com/phonegap/ios-sim
   - consider Nightwatch option in addition to Cypress
-  
   

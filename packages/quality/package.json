@@ -1,0 +1,24 @@
+{
+  "name": "@quasar/quasar-app-extension-testing-quality",
+  "version": "1.0.0-alpha.3",
+  "license": "MIT",
+  "description": "A Quasar App Extension for Code Quality",
+  "author": "Daniel Thompson-Yvetot",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/quasarframework/quasar-testing"
+  },
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "engines": {
+    "node": ">= 8.9.0",
+    "npm": ">= 5.6.0",
+    "yarn": ">= 1.6.0"
+  },
+  "dependencies": {
+    "lighthouse": "^4.0.0",
+    "nlf": "2.0.1",
+    "snyk": "^1.123.0"
+  }
+}
