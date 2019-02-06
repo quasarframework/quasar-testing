@@ -11,25 +11,6 @@ There are two methods of installing the test runner(s) of your choice:
 - [ ] During the `quasar create` phase of making a new app.
 - [x] By adding an extension with `quasar ext`
 
-## TEMPORARY INSTRUCTIONS:
-
-First, clone and fork this repo. Then create a 1.0 Quasar app. Go into the package.json and add this line:
-``` 
-    "@quasar/quasar-app-extension-testing-unit-jest": "link:../%path_to_quasar-testing%/packages/unit-jest",
-    "@quasar/quasar-app-extension-testing-e2e-cypress": "link:../%path_to_quasar-testing%/packages/e2e-cypress",
-    "@quasar/quasar-app-extension-testing-quality": "link:../%path_to_quasar-testing%/packages/quality",
-```
-Then run `yarn` and finally:
-
-```bash
-$ quasar ext --add @quasar/testing-unit-jest --skip-pkg
-$ quasar ext --add @quasar/testing-e2e-cypress --skip-pkg
-$ quasar ext --add @quasar/testing-quality --skip-pkg
-```
-
-Accept the babel override and both options (`<SFC>` and test scripts).
-
-When it completes, run `yarn test:jest`.
 
 ## Contents
 The packages in this repo are designed to be installed only by the Quasar framework. They follow the following naming convention: 
@@ -55,6 +36,18 @@ The test-driven-design approach will also help you to write better (and fewer) t
 ## Development 
 Clone this repository and run `yarn init`.
 
+Then create a 1.0 Quasar app. Go into the package.json and add this line:
+``` 
+    "@quasar/quasar-app-extension-testing-unit-jest": "link:../%path_to_quasar-testing%/packages/unit-%_your-harness_%",
+```
+
+Then run `yarn` and finally:
+
+```bash
+$ quasar ext --add @quasar/testing-unit-%_your-harness_% --skip-pkg
+```
+
+Please consult the forthcoming documentation about how to create app extensions at the main Quasar docs - or learn by copying.
 
 ## Integration Roadmap
 Test harnesses currently verified to have valid "integration" are checked off in the following list:
@@ -62,8 +55,7 @@ Test harnesses currently verified to have valid "integration" are checked off in
 ### UNIT
 - [x] [ava](https://github.com/avajs/ava)
 - [ ] [jasmine 3](https://jasmine.github.io/)
-- [x] [jest 23](https://facebook.github.io/jest/)
-- [ ] <strike>[QUnit](http://qunitjs.com/) (jquery based)</strike>
+- [x] [jest 24](https://facebook.github.io/jest/)
 - [ ] [tap](https://github.com/tapjs/node-tap)
 - [ ] [tape](https://github.com/substack/tape)
 - [x] [mocha](https://mochajs.org)
@@ -73,7 +65,6 @@ Test harnesses currently verified to have valid "integration" are checked off in
 ### E2E
 - [ ] [appium](https://github.com/appium/appium) (cordova)
 - [x] [cypress](https://github.com/cypress-io/cypress)
-- [ ] <strike>[funcunit](https://github.com/bitovi/funcunit) (jquery based)</strike>
 - [ ] [karma](https://github.com/karma-runner/karma)
 - [ ] [nightwatch](http://nightwatchjs.org/)
 - [ ] [polly.js](https://github.com/Netflix/pollyjs)
