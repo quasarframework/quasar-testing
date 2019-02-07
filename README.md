@@ -23,6 +23,11 @@ $ cd your-quasar-project
 $ quasar ext --add @quasar/testing
 ```
 
+This creates a `test` folder to hold all of your test related files and adds several new configuration files to the root folder of your project:
+
+- `quasar.testing.json` => records the commands relevant to respective harnesses
+- `quasar.extensions.json` => individual extension options 
+
 The lightweight extension installer will ask you which testing harnesses you want to install. Then it will install the respective extensions for these harnesses, which you can configure as you like. It is how multiple testing harnesses are ideally managed within a Quasar project.
 
 It will provide you with a new `quasar run` command that you can use to execute test-runners - and even your HMR dev environment at the same time. This approach can, for example, be quite helpful if you need to pass quasar.ctx to the test runner...
@@ -67,8 +72,8 @@ $ quasar ext --add @quasar/testing-unit-jest
 ```
 
 We have included:
-- a configuration file`jest.config.js`
-- `/test/jest/jest.setup.js
+- a configuration file `jest.config.js`
+- `/test/jest/jest.setup.js`
 - `.babelrc` file
 - a `quasar` scaffolding helper
 - a 'validity' test that makes sure quasar is initiatable
