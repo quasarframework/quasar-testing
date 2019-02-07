@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-testing-unit-jest",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "license": "MIT",
   "description": "A Quasar App Extension for running Jest tests",
   "author": "Daniel Thompson-Yvetot",
@@ -23,9 +23,9 @@
   "dependencies": {
     "@babel/core": "^7.2.2",
     "@types/jest": "^23.3.13",
-    "@vue/test-utils": "1.0.0-beta.28",
+    "@vue/test-utils": "1.0.0-beta.29",
     "babel-core": "7.0.0-bridge.0",
-    "babel-jest": "^24.0.0",
+    "babel-jest": "^24.1.0",
     "babel-plugin-dynamic-import-node": "2.2.0",
     "babel-plugin-transform-relative-paths": "0.1.0",
     "chai": "4.2.0",
