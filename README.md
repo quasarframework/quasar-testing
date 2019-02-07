@@ -79,12 +79,9 @@ We have included:
 - a 'validity' test that makes sure quasar is initiatable
 
 
-::: warning
-If you are not using git or mercurial to manage your code, jest --watch will not work because jest uses version-control to track which files can be looked at. This leaves you with two options:
-
-1. run `git init` in your project directory (or permit the installer to do it for you)
-2. use the alternative `--watchAll` flag for Jest - which will probably have a performance hit - make sure you are ignoring all the folders possible in your Jest configuration.
-:::
+> If you are not using git or mercurial to manage your code, jest --watch will not work because jest uses version-control to track which files can be looked at. This leaves you with two options:
+> 1. run `git init` in your project directory (or permit the installer to do it for you)
+>2. use the alternative `--watchAll` flag for Jest - which will probably have a performance hit - make sure you are ignoring all the folders possible in your Jest configuration.
 
 We have included the optional ability to place your test code inside your vue files, should you choose to do so. It will be rendered by webpack HMR, and there is a script we have included that will run both the `quasar dev` command and `jest --watch`
 
@@ -94,9 +91,7 @@ We have included the optional ability to place your test code inside your vue fi
 </test>
 ```
 
-::: tip
-You may notice that your IDE doesn't know how to parse the test block, so go into the `<test/>` block, press `<alt> + <enter>`, select 'inject language or reference' and select `javascript`. This will grant `<test/>` blocks autocomplete.
-:::
+> You may notice that your IDE doesn't know how to parse the test block, so go into the `<test/>` block, press `<alt> + <enter>`, select 'inject language or reference' and select `javascript`. This will grant `<test/>` blocks autocomplete.
 
 ### e2e Testing
 We recommend testing webapps with Cypress - but if you are building for multiple platforms (electron, cordova and web), then its a good idea to use webdriver.io.
@@ -106,9 +101,7 @@ We recommend testing webapps with Cypress - but if you are building for multiple
 $ quasar ext --add @quasar/testing-e2e-cypress
 ```
 
-::: warning
-You must have a running dev server in order to run integration tests. Be sure to either set the `"baseUrl"` in the `/cypress.json` file or use the `test` command provided by the base `@quasar/testing` extension.
-:::
+> You must have a running dev server in order to run integration tests. Be sure to either set the `"baseUrl"` in the `/cypress.json` file or use the `test` command provided by the base `@quasar/testing` extension.
 
 We actually recommend installing Cypress globally, because otherwise it is a pretty large package to weigh down the already [heaviest thing in the universe](https://i.redd.it/tfugj4n3l6ez.png)
 
