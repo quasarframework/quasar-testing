@@ -1,6 +1,6 @@
 {
   "name": "@quasar/testing",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "Monorepo for test harness integration in Quasar Framework 1.0 projects.",
   "repository": "https://github.com/quasarframework/quasar-testing",
   "author": "Daniel Thompson-Yvetot",
