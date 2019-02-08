@@ -6,6 +6,8 @@
  */
 
 module.exports = async function(api) {
+  const execa = require('execa')
+
   api.render('./base', {}, true)
 
   for (const harness of api.prompts.harnesses) {
