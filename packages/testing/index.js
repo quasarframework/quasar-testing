@@ -33,6 +33,7 @@ module.exports = function(api, ctx) {
     const args = yargs
       .array('unit')
       .array('e2e')
+      .string('dev')
       .parse(rawArgs)
     if (!args.unit && !args.e2e) {
       console.log(
@@ -46,7 +47,7 @@ module.exports = function(api, ctx) {
     args.e2e = args.e2e || []
 
     args.unit.forEach(runner => {
-      if (!testingConfig[`unit-${runner}`]) {
+      if (!testingConfig[`unit-${runner.split(' ')[0]}`]) {
         // TODO: install instructions for non-scoped extension
         console.error(
           chalk`You tried to run tests with {bold ${runner}}, but it is not installed. Please install @quasar/quasar-app-extension-unit-${runner} with {bold quasar ext --add @quasar/unit-${runner}}`
@@ -56,7 +57,7 @@ module.exports = function(api, ctx) {
     })
 
     args.e2e.forEach(runner => {
-      if (!testingConfig[`e2e-${runner}`]) {
+      if (!testingConfig[`e2e-${runner.split(' ')[0]}`]) {
         // TODO: install instructions for non-scoped extension
         console.error(
           chalk`You tried to run tests with {bold ${runner}}, but it is not installed. Please install @quasar/quasar-app-extension-e2e-${runner} with {bold quasar ext --add @quasar/e2e-${runner}}`
@@ -66,10 +67,11 @@ module.exports = function(api, ctx) {
     })
 
     // If --dev was passed or e2e tests are being run
-    if (args.dev || args.e2e.length > 0) {
+    if (args.dev != null || args.e2e.length > 0) {
       // Start dev server
       // TODO: use interactive output
-      const devServer = execa('quasar', ['dev'], {
+      const devServerArgs = (args.dev || '').split(' ')
+      const devServer = execa('quasar', ['dev', ...devServerArgs], {
         cwd: api.resolve.app('.'),
         env: { FORCE_COLOR: true }
       })
@@ -128,8 +130,12 @@ module.exports = function(api, ctx) {
 
     async function startTests(serverUrl, callback) {
       let failedRunners = []
-      const runTest = (runner, type) =>
+      const runTest = (userCommand, type) =>
         new Promise(resolve => {
+          // Split runner command into command and arguments
+          const runner = userCommand.split(' ')[0]
+          const userArgs = userCommand.split(' ').slice(1)
+
           console.log(
             chalk`
               {bold \n{bgBlue  RUN: } Running ${type} tests with ${runner}\n}
@@ -143,7 +149,10 @@ module.exports = function(api, ctx) {
             .split(' ')
           // Remove first arg, that is the command
           const runnerCommand = runnerCommandArgs.shift()
-          const testRunner = execa(runnerCommand, runnerCommandArgs, {
+          // Mix user args and runner args
+          const finalArgs = [...runnerCommandArgs, ...userArgs]
+          console.log('$', runner, finalArgs.join(' '))
+          const testRunner = execa(runnerCommand, finalArgs, {
             stdio: 'inherit'
           })
           testRunner.on('exit', code => {

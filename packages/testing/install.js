@@ -5,17 +5,26 @@
  *
  */
 
-module.exports = function (api) {
+module.exports = async function(api) {
   api.render('./base', {}, true)
-  /*
-  api.prompts.options.forEach((val) => {
-    if (val === 'scripts') {
-      api.extendPackageJson({
-        scripts: {
-          "test": "echo 'Testing managed by @Quasar/Testing' && exit 0"
+
+  for (const harness of api.prompts.harnesses) {
+    try {
+      await execa(
+        'quasar',
+        [
+          'ext',
+          '--add',
+          `@quasar/${harness}`,
+          process.argv.indexOf('--skip-pkg') > -1 ? '--skip-pkg' : ''
+        ],
+        {
+          stdio: 'inherit',
+          cwd: api.resolve.app('.')
         }
-      })
+      )
+    } catch (e) {
+      console.error(`Extension ${harness} failed to install:`, e)
     }
-  })
-  */
+  }
 }
