@@ -5,11 +5,7 @@
  *
  */
 
-const execa = require('execa')
-
 module.exports = async function(api) {
-  api.compatibleWithQuasarApp('^1.0.0-alpha.12')
-
   api.render('./base', {}, true)
 
   for (const harness of api.prompts.harnesses) {
