@@ -17,7 +17,7 @@ module.exports = async function(api) {
         [
           'ext',
           '--add',
-          `@quasar/${harness}`,
+          `@quasar/testing-${harness}`,
           process.argv.indexOf('--skip-pkg') > -1 ? '--skip-pkg' : ''
         ],
         {
