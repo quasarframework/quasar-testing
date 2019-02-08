@@ -16,7 +16,7 @@
 module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
-  console.log(config); // see what all is in here!
+  // console.log(config); // see what all is in here!
 
 
   // Chrome:: Hack for shaking AUT. Cypress Issue: https://github.com/cypress-io/cypress/issues/1620

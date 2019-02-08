@@ -9,11 +9,6 @@
  */
 
 module.exports = function (api) {
-	// console.log('api.quasarAppVersion', api.quasarAppVersion)
-	// console.log('api.extId', api.extId)
-	// console.log('api.appDir', api.appDir)
-	// console.log('api.resolve.app(src)', api.resolve.app('/'))
-
   api.render('./base', {}, true)
 
   api.extendJsonFile('quasar.testing.json', {
