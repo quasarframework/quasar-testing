@@ -11,8 +11,6 @@ module.exports = function(api, ctx) {
 	console.log('api.prompts', api.prompts)
 	*/
 
-  // api.compatibleWithQuasarApp('1.0.0')
-
   api.extendQuasarConf(conf => {
     console.log('extendQuasarConf')
     console.log('  conf', conf !== void 0)

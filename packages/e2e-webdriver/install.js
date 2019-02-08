@@ -5,8 +5,6 @@
  */
 
 module.exports = function (api) {
-  api.compatibleWithQuasarApp('^1.0.0-alpha.12')
-
   api.render('./base', {}, true)
 
   api.extendJsonFile('quasar.testing.json', {
