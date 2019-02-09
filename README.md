@@ -179,7 +179,7 @@ The packages in this repo are designed to be installed only by the Quasar framew
 - @quasar/app-extension-testing-e2e-\*
 - @quasar/app-extension-testing-quality
 
-Because of the way that Quasar internally maps extensions (pruning "app-extension-"), the `ava` test-runner would be `@quasar/test-unit-ava`.
+Because of the way that Quasar internally maps extensions (pruning "app-extension-"), the `ava` test-runner would be `@quasar/testing-unit-ava`.
 
 > Although you could probably install them all with yarn, it is highly recommended to follow the normal approach of using the quasar CLI because of the template files copied over. Furthermore, this will only work with the CLI for Quasar 1.0, not with vue-cli. If you are interested in breaking the warranty, if you were only interested in integrating the node_module dependencies from ava and spectron into your app, technically you could merely run:
 
