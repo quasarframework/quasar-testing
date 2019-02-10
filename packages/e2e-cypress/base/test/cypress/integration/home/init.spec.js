@@ -1,11 +1,11 @@
-describe('Page Exists', () => {
+import * as ctx from  '../../../quasar.conf.js'
+
+describe('Landing', () => {
   beforeEach(() => {
     cy.visit('/')
   })
-
-  it('has page title', () => {
-    cy.get('[data-cy=title]')
-    .should('contain', 'Quasar')
+  it('.should() - assert that <title> is correct', () => {
+    cy.title().should('include', 'Quasar')
   })
 })
 

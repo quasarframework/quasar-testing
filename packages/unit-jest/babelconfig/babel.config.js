@@ -8,5 +8,6 @@ module.exports = {
           "node": "current"
         }
       }
-  ]
+  ],
+  "plugins": ["@babel/plugin-syntax-dynamic-import"]
 }
