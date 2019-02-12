@@ -12,11 +12,11 @@ import chai from 'chai'
 // https://medium.com/@RubenOostinga/combining-chai-and-jest-matchers-d12d1ffd0303
 const originalNot = Object.getOwnPropertyDescriptor(chai.Assertion.prototype, 'not').get
 Object.defineProperty(chai.Assertion.prototype, 'not', {
-  get() {
+  get () {
     Object.assign(this, this.assignedNot)
     return originalNot.apply(this)
   },
-  set(newNot) {
+  set (newNot) {
     this.assignedNot = newNot
     return newNot
   }
@@ -32,6 +32,6 @@ global.expect = (actual) => {
 }
 
 // do this to make sure we don't get multiple hits from both webpacks when running SSR
-setTimeout(()=>{
+setTimeout(() => {
   // do nothing
 }, 1)

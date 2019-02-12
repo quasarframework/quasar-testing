@@ -15,5 +15,16 @@
     "options": [
       "scripts"
     ]
+  },
+  "@quasar/testing-e2e-webdriver": {
+    "options": [
+      "scripts"
+    ]
+  },
+  "@quasar/testing": {
+    "harnesses": [
+      "unit-jest",
+      "e2e-webdriver"
+    ]
   }
 }
