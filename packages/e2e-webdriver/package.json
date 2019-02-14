@@ -22,7 +22,7 @@
   "dependencies": {
     "appium-chromedriver": "4.10.1",
     "selenium-standalone": "6.15.4",
-    "wdio": "3.0.0",
+    "wdio": "^3.0.1",
     "wdio-jasmine-framework": "0.3.8",
     "wdio-mocha-framework": "0.6.4",
     "wdio-spec-reporter": "0.1.5"
