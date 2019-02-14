@@ -5,10 +5,6 @@ import Vuex from 'vuex'
 import VueRouter from 'vue-router'
 import Quasar, { Cookies } from 'quasar'
 
-require('babel-core').transform('code', {
-  plugins: ['dynamic-import-node']
-})
-
 const mockSsrContext = () => {
   return {
     req: {
