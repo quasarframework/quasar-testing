@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-testing-unit-ava",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "license": "MIT",
   "description": "A Quasar App Extension for running AVA tests",
   "author": "Noah Klayman",
