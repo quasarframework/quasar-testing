@@ -9,7 +9,7 @@
     "url": "https://github.com/quasarframework/quasar-testing"
   },
   "scripts": {
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "snyk test && echo \"No test specified\" && exit 0"
   },
   "publishConfig": {
     "access": "public"
@@ -25,5 +25,8 @@
     "wdio-jasmine-framework": "0.3.8",
     "wdio-mocha-framework": "0.6.4",
     "wdio-spec-reporter": "0.1.5"
+  },
+  "devDependencies": {
+    "snyk": "^1.124.0"
   }
 }

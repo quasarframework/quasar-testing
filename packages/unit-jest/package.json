@@ -10,7 +10,8 @@
   },
   "scripts": {
     "test:e2e": "jest",
-    "test:e2e:watch": "jest --watch"
+    "test:e2e:watch": "jest --watch",
+    "test": "snyk test"
   },
   "publishConfig": {
     "access": "public"
@@ -40,5 +41,8 @@
     "vue-jest": "^3.0.3",
     "vue": "^2.6.6",
     "vue-template-compiler": "^2.6.6"
+  },
+  "devDependencies": {
+    "snyk": "^1.124.0"
   }
 }

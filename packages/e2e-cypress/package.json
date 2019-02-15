@@ -9,7 +9,7 @@
     "url": "https://github.com/quasarframework/quasar-testing"
   },
   "scripts": {
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "snyk test && echo \"No test specified\" && exit 0"
   },
   "publishConfig": {
     "access": "public"
@@ -21,5 +21,8 @@
   },
   "dependencies": {
     "cypress": "3.1.5"
+  },
+  "devDependencies": {
+    "snyk": "^1.124.0"
   }
 }

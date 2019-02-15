@@ -8,7 +8,9 @@
     "type": "git",
     "url": "https://github.com/quasarframework/quasar-testing"
   },
-  "scripts": {},
+  "scripts": {
+    "test": "snyk test"
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -22,5 +24,8 @@
     "execa": "^1.0.0",
     "strip-ansi": "^5.0.0",
     "yargs": "^12.0.5"
+  },
+  "devDependencies": {
+    "snyk": "^1.124.0"
   }
 }
