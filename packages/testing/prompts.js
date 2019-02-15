@@ -34,6 +34,10 @@ module.exports = function() {
         {
           name: 'Quality Testing',
           value: 'quality'
+        },
+        {
+          name: 'Security Testing',
+          value: 'security'
         }
       ]
     }
