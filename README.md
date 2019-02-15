@@ -148,6 +148,7 @@ $ yarn selenium:install && selenium:start
 ```
 
 **WIP** - please help battle test this harness.
+FYI: we're using webdriver 4.0 for the moment because wdio requires it. If you need to use webdriver 5, please get in touch and we can create another app-extension.
 
 Prior Work:
 https://github.com/fansanelli/quasar-webdriver/blob
