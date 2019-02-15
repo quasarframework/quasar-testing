@@ -11,7 +11,7 @@
   "scripts": {
     "test:e2e": "jest",
     "test:e2e:watch": "jest --watch",
-    "test": "snyk test"
+    "test": "snyk test && echo \"No test specified\" && exit 0"
   },
   "publishConfig": {
     "access": "public"

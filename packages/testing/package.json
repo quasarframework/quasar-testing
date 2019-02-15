@@ -9,7 +9,7 @@
     "url": "https://github.com/quasarframework/quasar-testing"
   },
   "scripts": {
-    "test": "snyk test"
+    "test": "snyk test && echo \"No test specified\" && exit 0"
   },
   "publishConfig": {
     "access": "public"

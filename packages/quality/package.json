@@ -19,6 +19,6 @@
   "dependencies": {
     "lighthouse": "^4.0.0",
     "nlf": "2.0.1",
-    "snyk": "^1.124.1"
+    "snyk": "^1.130.0"
   }
 }

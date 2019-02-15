@@ -9,7 +9,7 @@
     "url": "https://github.com/quasarframework/quasar-testing"
   },
   "scripts": {
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "snyk test && echo \"No test specified\" && exit 0"
   },
   "engines": {
     "node": ">= 8.9.0",
@@ -17,5 +17,6 @@
     "yarn": ">= 1.8.0"
   },
   "dependencies": {
+    "snyk": "^1.130.0"
   }
 }
