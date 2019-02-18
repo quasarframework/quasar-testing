@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-testing-quality",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0-beta.4",
   "license": "MIT",
   "description": "A Quasar App Extension for Code Quality",
   "author": "Daniel Thompson-Yvetot",
@@ -20,5 +20,8 @@
     "lighthouse": "^4.0.0",
     "nlf": "2.0.1",
     "snyk": "^1.130.0"
+  },
+  "devDependencies": {
+    "snyk": "^1.124.0"
   }
 }
