@@ -1,5 +1,5 @@
 // Setup browser environment
-require('browser-env')()
+require('jsdom-global')()
 // https://github.com/vuejs/vue-cli/issues/2128
 window.Date = Date
 const hooks = require('require-extension-hooks')
@@ -22,6 +22,6 @@ hooks(['vue', 'js'])
 process.env.QUASAR_APP_TEST = true
 
 // Error if console.log is called
-console.log = () => {
-  throw new Error('Do not use console.log() in production')
-}
+// console.log = () => {
+//  throw new Error('Do not use console.log() in production')
+// }
