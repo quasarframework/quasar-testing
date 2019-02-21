@@ -9,7 +9,8 @@
   "homepage": "http://quasar-framework.org",
   "dependencies": {},
   "devDependencies": {
-    "lerna": "^3.13.0"
+    "lerna": "^3.13.0",
+    "wallaby-vue-compiler": "^1.0.4"
   },
   "engines": {
     "node": ">= 8.9.0",
@@ -24,5 +25,7 @@
     "publish": "lerna publish",
     "audit:snyk": "lerna run test"
   },
-  "workspaces": ["packages/*"]
+  "workspaces": [
+    "packages/*"
+  ]
 }

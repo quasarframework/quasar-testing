@@ -6,14 +6,13 @@
 import { mount, createLocalVue, shallowMount } from '@vue/test-utils'
 import { mountQuasar } from '~/test/jest/utils'
 import QBUTTON from './demo/QBtn-demo.vue'
-import Quasar, { Qbtn } from 'quasar'
+import {Quasar, Qbtn } from 'quasar'
 
 describe('Mount Quasar', () => {
-  const wrapper = mountQuasar(QBUTTON, {
-    utils: {
-      appError: () => (fn) => fn,
-      appSuccess: () => (fn) => fn
-    }
+  const localVue = createLocalVue()
+  localVue.use(Quasar, { components: { QBtn }})
+  const wrapper = mount(QBUTTON, {
+    localVue
   })
   const vm = wrapper.vm
 
@@ -38,14 +37,8 @@ describe('Mount Quasar', () => {
   })
 
   it('correctly updates data when button is pressed', () => {
-    const localVue = createLocalVue()
-    localVue.use(Quasar, { components: ['QBtn']})
-    const wrapper2 = mount(QBUTTON, {
-      localVue
-    })
-    const vm2 = wrapper2.vm
-    const button = wrapper2.find('button')
+    const button = wrapper.find('button')
     button.trigger('click')
-    expect(vm2.counter).toBe(1)
+    expect(vm.counter).toBe(1)
   })
 })
