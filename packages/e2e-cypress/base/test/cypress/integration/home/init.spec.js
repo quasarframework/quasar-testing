@@ -1,4 +1,4 @@
-import * as ctx from  '../../../quasar.conf.js'
+import * as ctx from  '../../../../quasar.conf.js'
 
 describe('Landing', () => {
   beforeEach(() => {
