@@ -31,15 +31,17 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
-    "quasar": "^1.0.0-beta.1"
+    "quasar": "^1.0.0-beta.4"
   },
   "devDependencies": {
-    "@quasar/app": "^1.0.0-beta.4",
-    "@quasar/quasar-app-extension-testing": "^1.0.0-beta.5",
+    "@quasar/app": "^1.0.0-beta.5",
+    "@quasar/quasar-app-extension-testing": "link:../packages/testing",
     "@quasar/quasar-app-extension-testing-e2e-cypress": "link:../packages/e2e-cypress",
-    "@quasar/quasar-app-extension-testing-e2e-webdriver": "^1.0.0-beta.2",
+    "@quasar/quasar-app-extension-testing-e2e-webdriver": "link:../packages/e2e-webdriver",
     "@quasar/quasar-app-extension-testing-quality": "link:../packages/quality",
     "@quasar/quasar-app-extension-testing-unit-jest": "link:../packages/unit-jest",
+    "@quasar/quasar-app-extension-testing-unit-ava": "link:../packages/unit-ava",
+    "@quasar/quasar-app-extension-testing-security": "link:../packages/security",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.10.0",
