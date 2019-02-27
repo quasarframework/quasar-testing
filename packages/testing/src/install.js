@@ -16,9 +16,8 @@ module.exports = async function(api) {
         'quasar',
         [
           'ext',
-          '--add',
-          `@quasar/testing-${harness}`,
-          process.argv.indexOf('--skip-pkg') > -1 ? '--skip-pkg' : ''
+          process.argv.indexOf('invoke') > -1 ? 'invoke' : 'add',
+          `@quasar/testing-${harness}`
         ],
         {
           stdio: 'inherit',
