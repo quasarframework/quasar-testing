@@ -10,13 +10,15 @@ module.exports = async function(api) {
 
   api.render('./base', {}, true)
 
+  const addOrInvoke = process.argv.indexOf('invoke') > -1 ? 'invoke' : 'add'
+
   for (const harness of api.prompts.harnesses) {
     try {
-      await execa(
+      const code = await execa(
         'quasar',
         [
           'ext',
-          process.argv.indexOf('invoke') > -1 ? 'invoke' : 'add',
+          addOrInvoke,
           `@quasar/testing-${harness}`
         ],
         {
@@ -24,6 +26,11 @@ module.exports = async function(api) {
           cwd: api.resolve.app('.')
         }
       )
+      if (code.code !== 0) {
+        console.error(`Extension ${harness} failed to install.`)
+        if (addOrInvoke === 'invoke') console.log('Extra debug:\n', code)
+        process.exit(1)
+      }
     } catch (e) {
       console.error(`Extension ${harness} failed to install:`, e)
     }
