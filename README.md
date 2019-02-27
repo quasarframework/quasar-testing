@@ -21,7 +21,7 @@ Testing is not in and of itself hard. The most complicated part is setting up th
 
 ```shell
 $ cd your-quasar-project
-$ quasar ext --add @quasar/testing
+$ quasar ext add @quasar/testing
 ```
 
 This creates a `test` folder to hold all of your test related files and adds several new configuration files to the root folder of your project:
@@ -35,8 +35,7 @@ It will provide you with a new `quasar run` command that you can use to execute 
 
 ```
 # Example to run jest && dev server in pwa mode
-# "--" must be placed before any args you want to pass to the test command
-$ quasar run @quasar/testing test -- --unit jest --dev="-m pwa"
+$ quasar test --unit jest --dev="-m pwa"
 ```
 
 If you ever need to review your choices you can take a look at `quasar.extensions.json`.
@@ -50,13 +49,13 @@ If you don't want to install the base package, you don't have to do so. You can 
 If you mess up your configuration and need to reset - or just want the latest Quasar-approved packages, this would be the way to do it:
 
 ```shell
-$ quasar ext --add @quasar/testing-unit-jest
+$ quasar ext add @quasar/testing-unit-jest
 ```
 
 Be careful though, reinstalling will overwrite ALL existing files (including configurations) if you tell it to. Also, it will install the new packages (if there are any). To prevent installing new or updated node modules, you may do this:
 
 ```shell
-$ quasar ext --add @quasar/testing-unit-jest --skip-pkg
+$ quasar ext add @quasar/testing-unit-jest --skip-pkg
 ```
 
 ## Removing
@@ -64,7 +63,7 @@ $ quasar ext --add @quasar/testing-unit-jest --skip-pkg
 If you want to remove the testing harness, you can run:
 
 ```shell
-$ quasar ext --remove @quasar/testing-unit-jest
+$ quasar ext remove @quasar/testing-unit-jest
 ```
 
 This will remove the associated node module and its dependencies, but it will not delete or modify any files.
@@ -76,7 +75,7 @@ This will remove the associated node module and its dependencies, but it will no
 We recommend using Jest 24. There are many, many reasons for this. Just take our word for it.
 
 ```shell
-$ quasar ext --add @quasar/testing-unit-jest
+$ quasar ext add @quasar/testing-unit-jest
 ```
 
 We have included:
@@ -92,7 +91,7 @@ We have included:
 > 1. run `git init` in your project directory (or permit the installer to do it for you)
 > 2. use the alternative `--watchAll` flag for Jest - which will probably have a performance hit - make sure you are ignoring all the folders possible in your Jest configuration.
 
-We have included the optional ability to place your test code inside your vue files, should you choose to do so. It will be rendered by webpack HMR. To run these tests, run `$ quasar run @quasar/testing test --unit jest --dev`.
+We have included the optional ability to place your test code inside your vue files, should you choose to do so. It will be rendered by webpack HMR. To run these tests, run `$ quasar run test --unit jest --dev`.
 
 ```
 <test lang="jest">
@@ -105,7 +104,7 @@ We have included the optional ability to place your test code inside your vue fi
 ### [AVA](https://github.com/avajs/ava)
 
 ```shell
-$ quasar ext --add @quasar/testing-unit-ava
+$ quasar ext add @quasar/testing-unit-ava
 ```
 
 We have included:
@@ -133,7 +132,7 @@ We recommend testing webapps with Cypress - but if you are building for multiple
 ### [Cypress](https://www.cypress.io/)
 
 ```shell
-$ quasar ext --add @quasar/testing-e2e-cypress
+$ quasar ext add @quasar/testing-e2e-cypress
 ```
 
 > You must have a running dev server in order to run integration tests. Be sure to either set the `"baseUrl"` in the `/cypress.json` file or use the `test` command provided by the base `@quasar/testing` extension.
@@ -143,7 +142,7 @@ We actually recommend installing Cypress globally, because otherwise it is a pre
 ### [WebDriver.io](https://webdriver.io/) (wdio)
 
 ```shell
-$ quasar ext --add @quasar/testing-e2e-wdio
+$ quasar ext add @quasar/testing-e2e-wdio
 $ yarn selenium:install && selenium:start
 ```
 
@@ -157,7 +156,7 @@ https://github.com/NodeJunkie/quasar-webdriver/tree/feat/BackportToQuasar%231
 ### Quality Auditing
 
 ```shell
-$ quasar ext --add @quasar/testing-quality
+$ quasar ext add @quasar/testing-quality
 ```
 
 Auditing the quality of your app is something you want to do before you go in production. Depending on your perspective, quality can mean many things. So we have put together a few tools that we think can help you have a qualitatively better project.
@@ -205,7 +204,7 @@ Then create a 1.0 Quasar app. Go into the package.json and add this line:
 Then run `yarn` and finally:
 
 ```shell
-$ quasar ext --add @quasar/testing-unit-%_your-harness_% --skip-pkg
+$ quasar ext invoke @quasar/testing-unit-%_your-harness_%
 ```
 
 Please consult the forthcoming documentation about how to create app extensions at the main Quasar docs - or learn by copying.

@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-testing-security",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "license": "MIT",
   "description": "A Quasar App Extension for Application Security",
   "author": "Daniel Thompson-Yvetot",
@@ -8,6 +8,7 @@
     "type": "git",
     "url": "https://github.com/quasarframework/quasar-testing"
   },
+  "main": "src/index.js",
   "scripts": {
     "test": "snyk test && echo \"No test specified\" && exit 0"
   },
