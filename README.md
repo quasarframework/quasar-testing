@@ -60,7 +60,7 @@ $ quasar ext add @quasar/testing-unit-jest
 Be careful though, reinstalling will overwrite ALL existing files (including configurations) if you tell it to. Also, it will install the new packages (if there are any). To prevent installing new or updated node modules, you may do this:
 
 ```shell
-$ quasar ext add @quasar/testing-unit-jest --skip-pkg
+$ quasar ext invoke @quasar/testing-unit-jest
 ```
 
 ## Removing
