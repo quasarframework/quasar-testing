@@ -20,7 +20,7 @@ Testing is not in and of itself hard. The most complicated part is setting up th
 
 ```shell
 $ cd your-quasar-project
-$ quasar ext --add @quasar/testing
+$ quasar ext add @quasar/testing
 ```
 
 The lightweight extension installer will ask you which testing harnesses you want to install. Then it will install the respective extensions for these harnesses, which you can configure as you like. It is how multiple testing harnesses are ideally managed within a Quasar project.
@@ -40,12 +40,12 @@ If you don't want to install the base package, you don't have to do so. You can 
 
 If you mess up your configuration and need to reset - or just want the latest Quasar-approved packages, this would be the way to do it:
 ```shell
-$ quasar ext --add @quasar/testing-unit-jest
+$ quasar ext add @quasar/testing-unit-jest
 ```
 Be careful though, reinstalling will overwrite ALL existing files (including configurations) if you tell it to. Also, it will install the new packages (if there are any). To prevent installing new or updated node modules, you may do this:
 
 ```shell
-$ quasar ext --add @quasar/testing-e2e-cypress --skip-pkg
+$ quasar ext add @quasar/testing-e2e-cypress --skip-pkg
 ```
 
 ## Removing
@@ -63,7 +63,7 @@ This will remove the associated node module and its dependencies, but it will no
 We recommend using Jest 24. There are many, many reasons for this. Just take our word for it.
 
 ```shell
-$ quasar ext --add @quasar/testing-unit-jest
+$ quasar ext add @quasar/testing-unit-jest
 ```
 
 We have included:
@@ -98,7 +98,7 @@ We recommend testing webapps with Cypress - but if you are building for multiple
 
 #### Cypress
 ```shell
-$ quasar ext --add @quasar/testing-e2e-cypress
+$ quasar ext add @quasar/testing-e2e-cypress
 ```
 
 ::: warning
@@ -109,7 +109,7 @@ We actually recommend installing Cypress globally, because otherwise it is a pre
 
 #### wdio
 ```shell
-$ quasar ext --add @quasar/testing-e2e-wdio
+$ quasar ext add @quasar/testing-e2e-wdio
 $ yarn selenium:install && selenium:start
 ```
 
@@ -121,7 +121,7 @@ https://github.com/NodeJunkie/quasar-webdriver/tree/feat/BackportToQuasar%231
 
 ### Quality Auditing
 ```shell
-$ quasar ext --add @quasar/testing-quality
+$ quasar ext add @quasar/testing-quality
 ```
 
 Auditing the quality of your app is something you want to do before you go in production. Depending on your perspective, quality can mean many things. So we have put together a few tools that we think can help you have a qualitatively better project.
@@ -170,7 +170,7 @@ Then create a 1.0 Quasar app. Go into the package.json and add this line:
 Then run `yarn` and finally:
 
 ```bash
-$ quasar ext --add @quasar/testing-unit-%_your-harness_% --skip-pkg
+$ quasar ext add @quasar/testing-unit-%_your-harness_% --skip-pkg
 ```
 
 Please consult the forthcoming documentation about how to create app extensions at the main Quasar docs - or learn by copying.
