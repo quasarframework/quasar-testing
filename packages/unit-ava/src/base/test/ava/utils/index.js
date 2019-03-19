@@ -20,13 +20,13 @@ const mockSsrContext = () => {
 export const mountQuasar = (component, options = {}) => {
   const localVue = createLocalVue()
   const app = {}
-  const store = new Vuex.Store({})
-  const router = new VueRouter()
-  
+
   localVue.use(Vuex)
   localVue.use(VueRouter)
   localVue.use(Quasar)
-  
+  const store = new Vuex.Store({})
+  const router = new VueRouter()
+
   if (options) {
     const ssrContext = options.ssr ? mockSsrContext() : null
 
