@@ -22,7 +22,7 @@
     "audit:licenses": "nlf --summary detail > ./test/audits/licenses.txt",
     "audit:lighthouse": "lighthouse http://localhost:3000 view --output-path=./test/lighthouse/reports/index.html --config-path=./test/lighthouse/configs/full-config.js",
     "test:unit:watchAll": "jest --watchAll",
-    "concurrently:dev:jest": "concurrently -p \"[{name}]\" -n \"QUASAR,_JEST_\" -c \"quasar dev\" \"jest --watch\"",
+    "concurrently:dev:jest": "concurrently \"quasar dev\" \"jest --watch\"",
     "test:e2e:appium": "wdio ./test/webdriver/config/wdio.appium.conf.js",
     "test:e2e:electron": "wdio ./test/webdriver/config/wdio.electron.conf.js",
     "selenium:install": "selenium-standalone install",
@@ -31,23 +31,25 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
-    "quasar": "^1.0.0-beta.4"
+    "quasar": "^1.0.0-beta.11",
+    "vue-template-compiler": "2.6.9"
   },
   "devDependencies": {
-    "@quasar/app": "^1.0.0-beta.5",
+    "@quasar/app": "^1.0.0-beta.12",
     "@quasar/quasar-app-extension-testing": "link:../packages/testing",
     "@quasar/quasar-app-extension-testing-e2e-cypress": "link:../packages/e2e-cypress",
     "@quasar/quasar-app-extension-testing-e2e-webdriver": "link:../packages/e2e-webdriver",
     "@quasar/quasar-app-extension-testing-quality": "link:../packages/quality",
-    "@quasar/quasar-app-extension-testing-unit-jest": "link:../packages/unit-jest",
-    "@quasar/quasar-app-extension-testing-unit-ava": "link:../packages/unit-ava",
     "@quasar/quasar-app-extension-testing-security": "link:../packages/security",
+    "@quasar/quasar-app-extension-testing-unit-ava": "link:../packages/unit-ava",
+    "@quasar/quasar-app-extension-testing-unit-jest": "link:../packages/unit-jest",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.10.0",
     "eslint-loader": "^2.1.1",
     "eslint-plugin-vue": "^5.0.0",
-    "strip-ansi": "=3.0.1"
+    "strip-ansi": "=3.0.1",
+    "wallaby-vue-compiler": "^1.0.3"
   },
   "engines": {
     "node": ">= 8.9.0",
