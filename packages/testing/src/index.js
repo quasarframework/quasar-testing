@@ -1,8 +1,7 @@
 module.exports = function(api, ctx) {
-  api.registerCommand('test', ({ args: rawArgs, params }) => {
+  api.registerCommand('test', ({ args: rawArgs, params: args }) => {
     const execa = require('execa')
     const readline = require('readline')
-    const yargs = require('yargs')
     const chalk = require('chalk')
     const stripAnsi = require('strip-ansi')
     const fs = require('fs')
@@ -11,23 +10,26 @@ module.exports = function(api, ctx) {
       ? require(testingConfigPath)
       : {}
 
-    const args = yargs
-      .array('unit')
-      .array('e2e')
-      .string('dev')
-      .parse(rawArgs)
     if (!args.unit && !args.e2e) {
       console.log(
         chalk`{bgRed  ERROR: } Please say what test runners to use with the --unit or --e2e argument.`
       )
+      if (rawArgs.length > 0) {
+        console.log(
+          chalk`{bgBlue  TIP: } It looks like you are using the old argument syntax (placing "--" before your args). Remove the "--" and the command should work.`
+        )
+      }
       process.exit(1)
     }
 
-    // Fill in missing values
-    args.unit = args.unit || []
-    args.e2e = args.e2e || []
-
+    // Convert string values to arrays
+    args.unit = (args.unit || '').split(',')
+    args.e2e = (args.e2e || '').split(',')
     args.unit.forEach(runner => {
+      if (runner === '') {
+        args.unit.splice(args.unit.indexOf(runner), 1)
+        return
+      }
       if (!testingConfig[`unit-${runner.split(' ')[0]}`]) {
         // TODO: install instructions for non-scoped extension
         console.error(
@@ -38,6 +40,10 @@ module.exports = function(api, ctx) {
     })
 
     args.e2e.forEach(runner => {
+      if (runner === '') {
+        args.e2e.splice(args.e2e.indexOf(runner), 1)
+        return
+      }
       if (!testingConfig[`e2e-${runner.split(' ')[0]}`]) {
         // TODO: install instructions for non-scoped extension
         console.error(
