@@ -19,14 +19,14 @@ const mockSsrContext = () => {
 // https://eddyerburgh.me/mock-vuex-in-vue-unit-tests
 export const mountQuasar = (component, options = {}) => {
   const localVue = createLocalVue()
-  const app= {}
-  const store = new Vuex.Store({})
-  const router = new VueRouter()
-  
+  const app = {}
+
   localVue.use(Vuex)
   localVue.use(VueRouter)
   localVue.use(Quasar)
-  
+  const store = new Vuex.Store({})
+  const router = new VueRouter()
+
   if (options) {
     const ssrContext = options.ssr ? mockSsrContext() : null
 
@@ -55,7 +55,7 @@ export const mountQuasar = (component, options = {}) => {
     localVue: localVue,
     store,
     router,
-    mocks:{ $t, $tc, $n, $d },
+    mocks: { $t, $tc, $n, $d },
     // Injections for Components with a QPage root Element
     provide: {
       pageContainer: true,
