@@ -39,6 +39,10 @@ module.exports = function () {
         {
           name: 'extra "scripts" in your package.json',
           value: 'scripts'
+        },
+        {
+          name: 'Install Wallaby.js',
+          value: 'wallabyjs'
         }
       ]
     }

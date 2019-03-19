@@ -35,6 +35,10 @@ module.exports = function() {
         {
           name: 'SFC webpack <test> loader',
           value: 'SFC'
+        },
+        {
+          name: 'Install Wallaby.js',
+          value: 'wallabyjs'
         }
       ]
     }

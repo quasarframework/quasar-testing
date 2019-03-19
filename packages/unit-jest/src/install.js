@@ -21,6 +21,10 @@ module.exports = function (api) {
 		if (val === 'SFC') {
 			api.render('./loader', {}, true)
 		}
+		else if (val === 'wallabyjs') {
+			api.render('./wallabyjs', {}, true)
+			api.extendPackageJson('./wallabyjs/.package.json')
+		}
 		else if (val === 'scripts') {
 			api.extendPackageJson({
 				scripts: {
@@ -30,7 +34,7 @@ module.exports = function (api) {
 					'test:unit:watch': 'jest --watch',
 					'test:unit:watchAll': 'jest --watchAll',
 					'serve:test:coverage': 'quasar serve test/jest/coverage/lcov-report/ --port 8788',
-					'concurrently:dev:jest': 'concurrently -p \"[{name}]\" -n \"QUASAR,_JEST_\" -c \"quasar dev\" \"jest --watch\"'
+					'concurrently:dev:jest': 'concurrently \"quasar dev\" \"jest --watch\"'
 				}
 			})
 		}

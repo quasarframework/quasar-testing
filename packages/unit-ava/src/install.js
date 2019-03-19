@@ -20,6 +20,9 @@ module.exports = function(api) {
   api.prompts.options.forEach(val => {
     if (val === 'SFC') {
       api.render('./loader', {}, true)
+    } else if (val === 'wallabyjs') {
+      api.render('./wallabyjs', {}, true)
+      api.extendPackageJson('./wallabyjs/.package.json')
     } else if (val === 'scripts') {
       api.extendPackageJson({
         scripts: {

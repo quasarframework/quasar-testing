@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "wallaby-vue-compiler": "^1.0.3"
+  }
+}
