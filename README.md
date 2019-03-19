@@ -35,17 +35,19 @@ This creates a `test` folder to hold all of your test related files and adds sev
 
 The lightweight extension installer will ask you which testing harnesses you want to install. Then it will install the respective extensions for these harnesses, which you can configure as you like. It is how multiple testing harnesses are ideally managed within a Quasar project.
 
-It will provide you with a new `quasar run` command that you can use to execute test-runners - and even your HMR dev environment at the same time. This approach can, for example, be quite helpful if you need to pass quasar.ctx to the test runner...
+It will provide you with a new `quasar test` command that you can use to execute test-runners - and even your HMR dev environment at the same time. This approach can, for example, be quite helpful if you need to pass quasar.ctx to the test runner...
 
 ```
 # Example to run jest && dev server in pwa mode
 # "--" must be placed before any args you want to pass to the test command
-$ quasar run @quasar/testing test -- --unit jest --dev="-m pwa"
+$ quasar test --unit jest --dev="-m pwa"
 ```
 
 If you ever need to review your choices you can take a look at `quasar.extensions.json`.
 
 If you don't want to install the base package, you don't have to do so. You can install each test harness app extension individually. They are completely standalone.
+
+**NOTE: Before 1.0.0-rc.0, the command to run the test is `quasar run @quasar/testing test -- [args for command here]`**
 
 ## Updating / Resetting
 
@@ -96,7 +98,7 @@ We have included:
 > 1. run `git init` in your project directory (or permit the installer to do it for you)
 > 2. use the alternative `--watchAll` flag for Jest - which will probably have a performance hit - make sure you are ignoring all the folders possible in your Jest configuration.
 
-We have included the optional ability to place your test code inside your vue files, should you choose to do so. It will be rendered by webpack HMR. To run these tests, run `$ quasar run @quasar/testing test --unit jest --dev`.
+We have included the optional ability to place your test code inside your vue files, should you choose to do so. It will be rendered by webpack HMR. To run these tests, run `$ quasar test --unit jest --dev`.
 
 ```
 <test lang="jest">
@@ -120,7 +122,7 @@ We have included:
 - a `quasar` scaffolding helper
 - a 'validity' test that makes sure quasar is initiatable
 
-We have included the optional ability to place your test code inside your vue files, should you choose to do so. It will be rendered by webpack HMR. To run these tests, run `$ quasar run @quasar/testing test --unit ava --dev`.
+We have included the optional ability to place your test code inside your vue files, should you choose to do so. It will be rendered by webpack HMR. To run these tests, run `$ quasar test --unit ava --dev`.
 
 ```
 <test lang="ava">
