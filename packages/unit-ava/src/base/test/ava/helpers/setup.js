@@ -4,6 +4,8 @@ require('jsdom-global')(undefined, {
 })
 // https://github.com/vuejs/vue-cli/issues/2128
 window.Date = Date
+// https://github.com/vuejs/vue/issues/9698
+global.performance = window.performance
 const hooks = require('require-extension-hooks')
 const Vue = require('vue')
 
