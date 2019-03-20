@@ -39,7 +39,6 @@ It will provide you with a new `quasar test` command that you can use to execute
 
 ```
 # Example to run jest && dev server in pwa mode
-# "--" must be placed before any args you want to pass to the test command
 $ quasar test --unit jest --dev="-m pwa"
 ```
 
