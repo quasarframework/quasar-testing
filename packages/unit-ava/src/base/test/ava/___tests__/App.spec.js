@@ -1,14 +1,12 @@
 import { mount, createLocalVue } from '@vue/test-utils'
-import { mountQuasar } from '../utils'
 import QButton from './demo/QBtn-demo.vue'
-import Quasar from 'quasar'
+import { Quasar, QBtn } from 'quasar'
 import test from 'ava'
 
-const wrapper = mountQuasar(QButton, {
-  utils: {
-    appError: () => fn => fn,
-    appSuccess: () => fn => fn
-  }
+const localVue = createLocalVue()
+localVue.use(Quasar, { components: { QBtn } })
+const wrapper = mount(QButton, {
+  localVue
 })
 const vm = wrapper.vm
 
