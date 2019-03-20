@@ -57,8 +57,8 @@ module.exports = function(api, ctx) {
     if (args.dev != null || args.e2e.length > 0) {
       // Start dev server
       // TODO: use interactive output
-      if (args.dev === true) args.dev = 'spa'
-      console.log(args.dev)
+      if (args.dev === true || typeof args.dev === 'undefined' ) args.dev = 'spa'
+
       args.dev = args.dev.split(' ')
       const devServer = execa('quasar', ['dev', ...args.dev], {
         cwd: api.resolve.app('.'),
