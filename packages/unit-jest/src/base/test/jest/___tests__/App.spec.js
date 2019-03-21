@@ -5,11 +5,15 @@
 
 import { mount, createLocalVue, shallowMount } from '@vue/test-utils'
 import QBUTTON from './demo/QBtn-demo.vue'
-import { Quasar, QBtn } from 'quasar'
+import { Quasar, QBtn, date } from 'quasar'
+import langEn from 'quasar/lang/en-us' // change to any language you wish!
 
 describe('Mount Quasar', () => {
   const localVue = createLocalVue()
-  localVue.use(Quasar, { components: { QBtn }})
+  localVue.use(Quasar, { components: { QBtn },
+    lang: langEn
+  })
+
   const wrapper = mount(QBUTTON, {
     localVue
   })
@@ -39,5 +43,12 @@ describe('Mount Quasar', () => {
     const button = wrapper.find('button')
     button.trigger('click')
     expect(vm.counter).toBe(1)
+  })
+
+  it('formats a date without throwing exception', () => {
+    // test will automatically fail if an exception is thrown
+    // MMMM and MMM require that a language is 'installed' in Quasar
+    let formattedString = date.formatDate(Date.now(), 'YYYY MMMM MMM DD')
+    console.log('formattedString', formattedString)
   })
 })
