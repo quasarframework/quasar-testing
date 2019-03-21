@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-testing-unit-jest",
-  "version": "1.0.0-beta.16",
+  "version": "1.0.0-beta.17",
   "license": "MIT",
   "description": "A Quasar App Extension for running Jest tests",
   "author": "Daniel Thompson-Yvetot",
@@ -9,8 +9,8 @@
     "url": "https://github.com/quasarframework/quasar-testing"
   },
   "scripts": {
-    "test:e2e": "jest",
-    "test:e2e:watch": "jest --watch",
+    "test:unit": "jest",
+    "test:unit:watch": "jest --watch",
     "test": "snyk test && echo \"No test specified\" && exit 0"
   },
   "publishConfig": {
