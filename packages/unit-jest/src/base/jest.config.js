@@ -5,10 +5,11 @@ module.exports = {
   setupFilesAfterEnv: [
     '<rootDir>/test/jest/jest.setup.js'
   ],
-  noStackTrace: true,
-  bail: true,
-  cache: false,
-  verbose: true,
+  // noStackTrace: true,
+  // bail: true,
+  // cache: false,
+  // verbose: true,
+  // watch: true,
   collectCoverage: true,
   coverageDirectory: '<rootDir>/test/jest/coverage',
   collectCoverageFrom: [
