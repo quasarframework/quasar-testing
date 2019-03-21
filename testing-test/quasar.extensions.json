@@ -2,21 +2,18 @@
   "@quasar/testing-unit-jest": {
     "babel": "babelrc",
     "options": [
-      "SFC",
-      "scripts",
-      "wallabyjs"
-    ]
-  },
-  "@quasar/testing-unit-ava": {
-    "babel": false,
-    "options": [
       "SFC"
     ]
   },
-  "@quasar/testing-e2e-cypress": {
+  "@quasar/testing-unit-ava": {
+    "babel": "babelrc",
     "options": [
-      "scripts"
+      "SFC",
+      "wallabyjs"
     ]
+  },
+  "@quasar/testing-e2e-cypress": {
+    "options": []
   },
   "@quasar/testing-e2e-webdriver": {
     "options": [
@@ -24,14 +21,10 @@
     ]
   },
   "@quasar/testing-quality": {
-    "options": [
-      "scripts"
-    ]
+    "options": []
   },
   "@quasar/testing-security": {
-    "options": [
-      "scripts"
-    ]
+    "options": []
   },
   "@quasar/testing": {
     "harnesses": [

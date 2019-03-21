@@ -16,14 +16,14 @@ const mockSsrContext = () => {
   }
 }
 
-const localVue = createLocalVue()
-localVue.use(Vuex)
-localVue.use(VueRouter)
-localVue.use(Quasar)
-
 // https://eddyerburgh.me/mock-vuex-in-vue-unit-tests
 export const mountQuasar = (component, options = {}) => {
+  const localVue = createLocalVue()
   const app = {}
+
+  localVue.use(Vuex)
+  localVue.use(VueRouter)
+  localVue.use(Quasar)
   const store = new Vuex.Store({})
   const router = new VueRouter()
 

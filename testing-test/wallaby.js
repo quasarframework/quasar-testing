@@ -28,15 +28,7 @@ module.exports = (wallaby) => {
     preprocessors: {
       '**/*.vue': file => require('vue-jest').process(file.content, file.path)
     },
-
-    setup: function (wallaby) {
-      const jestConfig = require('./package').jest || require('./jest.config')
-      jestConfig.transform = {}
-      wallaby.testFramework.configure(jestConfig)
-    },
-
-    testFramework: 'jest',
-
+    testFramework: 'ava',
     debug: true
   }
 }

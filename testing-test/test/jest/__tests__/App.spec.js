@@ -9,7 +9,7 @@ import { Quasar, QBtn } from 'quasar'
 
 describe('Mount Quasar', () => {
   const localVue = createLocalVue()
-  localVue.use(Quasar, { components: { QBtn }})
+  localVue.use(Quasar, { components: { QBtn } })
   const wrapper = mount(QBUTTON, {
     localVue
   })
