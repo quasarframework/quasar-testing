@@ -5,7 +5,7 @@ module.exports = {
   setupFilesAfterEnv: [
     '<rootDir>/test/jest/jest.setup.js'
   ],
-  noStackTrace: true,
+  noStackTrace: false,
   bail: true,
   cache: false,
   verbose: true,
