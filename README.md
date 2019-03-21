@@ -3,7 +3,9 @@
 </p>
 
 # **`@quasar/testing`**
-This is the monorepo for integrating the test-runner of your choice into your Quasar-Framework app v1.0 and above. 
+This is the monorepo for integrating the test-runner of your choice into your Quasar-Framework app v1.0 and above.
+
+[Github](https://github.com/quasarframework/quasar-testing)
 
 ## High level overview
 
@@ -229,8 +231,6 @@ Test harnesses currently verified to have valid "integration" are checked off in
 - [chai](http://www.chaijs.com/)
 - [istanbul](https://istanbul.js.org/)
 
-
-
 ## Contributing
 Contributions to this repository are highly desirable. Before you make a PR, please open an issue, create a fork and PR. See the [Contribution Guidelines](./.github/CONTRIBUTING.md) for more details. Please note: Project coordination takes place on the [Discord server](https://discord.gg/5TDhbDg). 
 
@@ -246,6 +246,8 @@ Contributions to this repository are highly desirable. Before you make a PR, ple
 
 ## Special Thanks
 Denjell would like to give a special shout out to all of the people who helped test the testing framework during the transition from 0.17 to 1.0 
+
+[Github](https://github.com/quasarframework/quasar-testing)
 
 ## License
 MIT ©2018 - present - D.C. Thompson & Razvan Stoenescu
