@@ -10,9 +10,9 @@ module.exports = function(api, ctx) {
       ? require(testingConfigPath)
       : {}
 
-    if (!args.unit && !args.e2e) {
+    if ((!args.unit && !args.e2e) || args.unit === true || args.e2e === true) {
       console.log(
-        chalk`{bgRed  ERROR: } Please say what test runners to use with the --unit or --e2e argument.`
+        chalk`{bgRed  ERROR: } Please specify what test runners to use. e.g. quasar test --unit jest or quasar test --e2e cypress.`
       )
       if (rawArgs.length > 0) {
         console.log(
@@ -23,6 +23,7 @@ module.exports = function(api, ctx) {
     }
 
     // Convert string values to arrays
+
     args.unit = (args.unit || '').split(',')
     args.e2e = (args.e2e || '').split(',')
     args.unit.forEach(runner => {
