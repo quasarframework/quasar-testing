@@ -5,10 +5,11 @@ module.exports = {
   setupFilesAfterEnv: [
     '<rootDir>/test/jest/jest.setup.js'
   ],
-  noStackTrace: true,
-  bail: true,
-  cache: false,
-  verbose: true,
+  // noStackTrace: true,
+  // bail: true,
+  // cache: false,
+  // verbose: true,
+  // watch: true,
   collectCoverage: true,
   coverageDirectory: '<rootDir>/test/jest/coverage',
   collectCoverageFrom: [
@@ -54,6 +55,9 @@ module.exports = {
     // '.*\\.vue$': '<rootDir>/node_modules/@quasar/quasar-app-extension-testing-unit-jest/node_modules/vue-jest',
     // '.*\\.js$': '<rootDir>/node_modules/@quasar/quasar-app-extension-testing-unit-jest/node_modules/babel-jest'
   },
+  transformIgnorePatterns: [
+    '<rootDir>/node_modules/(?!quasar/lang)'
+  ],
   snapshotSerializers: [
     '<rootDir>/node_modules/jest-serializer-vue'
   ]

@@ -2,7 +2,9 @@
   "@quasar/testing-unit-jest": {
     "babel": "babelrc",
     "options": [
-      "SFC"
+      "SFC",
+      "scripts",
+      "wallabyjs"
     ]
   },
   "@quasar/testing-unit-ava": {
