@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-testing-security",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "license": "MIT",
   "description": "A Quasar App Extension for Application Security",
   "author": "Daniel Thompson-Yvetot",
