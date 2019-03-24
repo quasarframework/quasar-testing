@@ -1,6 +1,6 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import QButton from './demo/QBtn-demo.vue'
-import { Quasar, QBtn } from 'quasar'
+import Quasar, { QBtn } from 'quasar'
 import test from 'ava'
 
 const localVue = createLocalVue()
