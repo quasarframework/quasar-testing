@@ -19,9 +19,9 @@ module.exports = function(api) {
 
   api.prompts.options.forEach(val => {
     if (val === 'SFC') {
-      api.render('./loader', {}, true)
+      api.render('./loader')
     } else if (val === 'wallabyjs') {
-      api.render('./wallabyjs', {}, true)
+      api.render('./wallabyjs')
       api.extendPackageJson('./wallabyjs/.package.json')
     } else if (val === 'scripts') {
       api.extendPackageJson({
@@ -32,6 +32,6 @@ module.exports = function(api) {
     }
   })
   if (api.prompts.babel) {
-    api.render(`./${api.prompts.babel}`, {}, true)
+    api.render(`./${api.prompts.babel}`)
   }
 }

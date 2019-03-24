@@ -5,7 +5,7 @@
  */
 
 module.exports = function (api) {
-  api.render('./base', {}, true)
+  api.render('./base')
 
   api.extendJsonFile('quasar.testing.json', {
     'e2e-wdio': {

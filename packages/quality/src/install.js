@@ -6,7 +6,7 @@
  */
 
 module.exports = function (api) {
-  api.render('./base', {}, true)
+  api.render('./base')
   api.prompts.options.forEach((val) => {
     if (val === 'scripts') {
       api.extendPackageJson({
