@@ -25,6 +25,7 @@ module.exports = function (api) {
 			api.extendPackageJson({
 				scripts: {
 					'test': 'echo \"See package.json => scripts for available tests.\" && exit 0',
+					'test:unit:ui': 'majestic',
 					'test:unit': 'jest --updateSnapshot',
 					'test:unit:coverage': 'jest --coverage',
 					'test:unit:watch': 'jest --watch',
