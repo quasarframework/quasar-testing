@@ -41,3 +41,8 @@ test('correctly updates data when button is pressed', t => {
   button.trigger('click')
   t.is(vm2.counter, 1)
 })
+
+test('formats a date without throwing exception', t => {
+  // MMMM and MMM require that a language is 'installed' in Quasar
+  t.notThrows(() => date.formatDate(Date.now(), 'YYYY MMMM MMM DD'))
+})
