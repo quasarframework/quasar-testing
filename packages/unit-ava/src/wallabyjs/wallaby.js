@@ -12,7 +12,7 @@ module.exports = wallaby => {
           alias: {
             quasar: path.join(
               wallaby.projectCacheDir,
-              'node_modules/quasar/dist/quasar.umd.js'
+              'node_modules/quasar/dist/quasar.common.js'
             ),
             'test-utils': path.join(
               wallaby.projectCacheDir,

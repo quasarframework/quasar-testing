@@ -17,7 +17,7 @@ if (process.env.QUASAR_APP_TEST) {
     {
       root: ['./'],
       alias: {
-        quasar: './node_modules/quasar/dist/quasar.umd.js',
+        quasar: './node_modules/quasar/dist/quasar.common.js',
         'test-utils': '@vue/test-utils',
         '~': './'
       }

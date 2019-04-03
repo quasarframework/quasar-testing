@@ -1,10 +1,19 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import QButton from './demo/QBtn-demo.vue'
-import Quasar, { QBtn } from 'quasar'
+import * as All from 'quasar'
 import test from 'ava'
+const { Quasar, date } = All
+
+const components = Object.keys(All).reduce((object, key) => {
+  const val = All[key]
+  if (val && val.component && val.component.name != null) {
+    object[key] = val
+  }
+  return object
+}, {})
 
 const localVue = createLocalVue()
-localVue.use(Quasar, { components: { QBtn } })
+localVue.use(Quasar, { components })
 const wrapper = mount(QButton, {
   localVue
 })
@@ -31,13 +40,7 @@ test('sets the correct default data', t => {
 })
 
 test('correctly updates data when button is pressed', t => {
-  const localVue = createLocalVue()
-  localVue.use(Quasar, { components: ['QBtn'] })
-  const wrapper2 = mount(QButton, {
-    localVue
-  })
-  const vm2 = wrapper2.vm
-  const button = wrapper2.find('button')
+  const button = wrapper.find('button')
   button.trigger('click')
-  t.is(vm2.counter, 1)
+  t.is(vm.counter, 1)
 })
