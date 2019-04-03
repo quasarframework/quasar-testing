@@ -107,6 +107,10 @@ We have included the optional ability to place your test code inside your vue fi
 
 > You may notice that your IDE doesn't know how to parse the test block, so go into the `<test/>` block, press `<alt> + <enter>`, select 'inject language or reference' and select `javascript`. This will grant `<test/>` blocks autocomplete.
 
+#### Options
+You can choose to install Wallaby.js to do inline testing. Although it is not freeware, it is an amazing tool and comes highly recommended. https://wallabyjs.com
+You can choose to install Majestic, which is a UI interface to see how your tests are doing. https://github.com/Raathigesh/majestic
+
 ### [AVA](https://github.com/avajs/ava)
 
 ```shell
