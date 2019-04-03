@@ -7,6 +7,7 @@ jest.setTimeout(1000)
 
 global.Promise = require('promise')
 
+/*
 import chai from 'chai'
 // Make sure chai and jasmine ".not" play nice together
 // https://medium.com/@RubenOostinga/combining-chai-and-jest-matchers-d12d1ffd0303
@@ -43,6 +44,7 @@ global.expect = (actual) => {
   return combinedMatchers
 }
 Object.keys(originalExpect).forEach(key => (global.expect[key] = originalExpect[key]))
+*/
 
 // do this to make sure we don't get multiple hits from both webpacks when running SSR
 setTimeout(()=>{
