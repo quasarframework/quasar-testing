@@ -32,6 +32,10 @@ module.exports = function () {
       required: true,
       message: 'Jest Unit testing will now be installed. Please choose additional options:',
       choices: [
+	      {
+		      name: 'extra "scripts" in your package.json',
+		      value: 'scripts'
+	      },
         {
           name: 'SFC webpack <test> loader',
           value: 'SFC'
@@ -41,8 +45,8 @@ module.exports = function () {
           value: 'wallabyjs'
         },
 	      {
-		      name: 'extra "scripts" in your package.json',
-		      value: 'scripts'
+		      name: 'Install Majestic UI',
+		      value: 'majestic'
 	      }
       ]
     }
