@@ -7,6 +7,7 @@
  *  '@quasar/quasar-app-extension-testing-unit-jest': 'link:../packages/unit-jest',
  *
  */
+let object = {}
 
 module.exports = function (api) {
   api.render('./base', {}, true)
@@ -23,10 +24,11 @@ module.exports = function (api) {
 		}
 		else if (val === 'wallabyjs') {
 			api.render('./wallabyjs')
-			api.extendPackageJson('./wallabyjs/.package.json')
+			const wallaby = require('./wallabyjs/.package.json')
+			return object = { ...object, ...wallaby }
 		}
 		else if (val === 'scripts') {
-			api.extendPackageJson({
+			const scripts = {
 				scripts: {
 					'test': 'echo \"See package.json => scripts for available tests.\" && exit 0',
 					'test:unit': 'jest --updateSnapshot',
@@ -36,9 +38,12 @@ module.exports = function (api) {
 					'serve:test:coverage': 'quasar serve test/jest/coverage/lcov-report/ --port 8788',
 					'concurrently:dev:jest': 'concurrently \"quasar dev\" \"jest --watch\"'
 				}
-			})
+			}
+			return object = { ...object, ...scripts }
 		}
 	})
+	api.extendPackageJson(object)
+
 	if (api.prompts.babel) {
 		api.render(`./${api.prompts.babel}`)
 	}
