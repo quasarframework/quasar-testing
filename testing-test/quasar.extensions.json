@@ -2,40 +2,15 @@
   "@quasar/testing-unit-jest": {
     "babel": "babelrc",
     "options": [
-      "SFC",
       "scripts",
-      "wallabyjs"
-    ]
-  },
-  "@quasar/testing-unit-ava": {
-    "babel": "babelrc",
-    "options": [
       "SFC",
-      "wallabyjs"
+      "wallabyjs",
+      "majestic"
     ]
-  },
-  "@quasar/testing-e2e-cypress": {
-    "options": []
-  },
-  "@quasar/testing-e2e-webdriver": {
-    "options": [
-      "scripts"
-    ]
-  },
-  "@quasar/testing-quality": {
-    "options": []
-  },
-  "@quasar/testing-security": {
-    "options": []
   },
   "@quasar/testing": {
     "harnesses": [
-      "unit-jest",
-      "unit-ava",
-      "e2e-cypress",
-      "e2e-webdriver",
-      "quality",
-      "security"
+      "unit-jest"
     ]
   }
 }

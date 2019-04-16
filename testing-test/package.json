@@ -27,15 +27,16 @@
     "test:e2e:electron": "wdio ./test/webdriver/config/wdio.electron.conf.js",
     "selenium:install": "selenium-standalone install",
     "selenium:start": "selenium-standalone start",
-    "electron-chromedriver": "./node_modules/electron-chromedriver/bin/chromedriver --port=9515 --url-base=wd/hub --verbose"
+    "electron-chromedriver": "./node_modules/electron-chromedriver/bin/chromedriver --port=9515 --url-base=wd/hub --verbose",
+    "test:unit:ui": "majestic"
   },
   "dependencies": {
-    "@quasar/extras": "^1.0.0",
-    "quasar": "^1.0.0-beta.11",
-    "vue-template-compiler": "2.6.9"
+    "@quasar/extras": "^1.1.1",
+    "quasar": "^1.0.0-beta.17",
+    "vue-template-compiler": "2.6.10"
   },
   "devDependencies": {
-    "@quasar/app": "^1.0.0-beta.12",
+    "@quasar/app": "^1.0.0-beta.18",
     "@quasar/quasar-app-extension-testing": "link:../packages/testing",
     "@quasar/quasar-app-extension-testing-e2e-cypress": "link:../packages/e2e-cypress",
     "@quasar/quasar-app-extension-testing-e2e-webdriver": "link:../packages/e2e-webdriver",
@@ -49,7 +50,8 @@
     "eslint-loader": "^2.1.1",
     "eslint-plugin-vue": "^5.0.0",
     "strip-ansi": "=3.0.1",
-    "wallaby-vue-compiler": "^1.0.3"
+    "wallaby-vue-compiler": "^1.0.3",
+    "majestic": "^1.2.24"
   },
   "engines": {
     "node": ">= 8.9.0",
