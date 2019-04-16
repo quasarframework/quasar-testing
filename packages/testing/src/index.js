@@ -1,6 +1,6 @@
-module.exports = function(api) {
+module.exports = async function(api) {
   // TODO async handler
-  api.registerCommand('test', ({ args: rawArgs, params: args }) => {
+  api.registerCommand('test', async ({ args: rawArgs, params: args }) => {
     const execa = require('execa')
     const readline = require('readline')
     const chalk = require('chalk')
@@ -98,7 +98,7 @@ module.exports = function(api) {
 
       // Pipe output to console
       devServer.stdout.pipe(process.stdout)
-      devServer.stdout.on('data', rawData => {
+      devServer.stdout.on('data', async rawData => {
         const doneRegex = /App URL\.{11} (https?:\/\/localhost:\d{4}\/)/
         const data = stripAnsi(rawData.toString())
         if (/ERROR {2}Failed to compile with \d* errors/.test(data)) {
@@ -107,7 +107,7 @@ module.exports = function(api) {
           throw new Error('The Quasar dev server failed to start.')
         } else if (doneRegex.test(data)) {
           // Dev server is ready
-          startTests(
+          await startTests(
             // The dev server url
             data.match(doneRegex)[1],
             killDevServer
@@ -116,7 +116,7 @@ module.exports = function(api) {
       })
     } else {
       // Just run tests without dev server
-      startTests()
+      await startTests()
     }
 
     async function startTests(serverUrl, callback) {
