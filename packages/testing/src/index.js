@@ -1,4 +1,5 @@
-module.exports = function(api, ctx) {
+module.exports = function(api) {
+  // TODO async handler
   api.registerCommand('test', ({ args: rawArgs, params: args }) => {
     const execa = require('execa')
     const readline = require('readline')

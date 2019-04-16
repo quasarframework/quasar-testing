@@ -5,10 +5,10 @@
  * API: https://github.com/quasarframework/quasar/blob/master/app/lib/app-extension/IndexAPI.js
  */
 
-module.exports = function(api, ctx) {
+module.exports = function(api) {
   api.prompts.options.forEach(val => {
     if (val === 'SFC') {
-      api.chainWebpack((chain, invoke) => {
+      api.chainWebpack((chain) => {
         chain.module
           .rule('ava')
           .test(/\.ava$/)
