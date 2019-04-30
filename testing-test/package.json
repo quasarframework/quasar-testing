@@ -1,0 +1,68 @@
+{
+  "name": "testing-demo",
+  "version": "1.0.0-alpha.1",
+  "license": "MIT",
+  "description": "A Quasar Framework app",
+  "productName": "testing-demo",
+  "cordovaId": "org.cordova.quasar.app",
+  "author": "Daniel Thompson-Yvetot",
+  "private": true,
+  "scripts": {
+    "lint": "eslint --ext .js,.vue src",
+    "test": "echo \"See package.json => scripts for available tests.\" && exit 0",
+    "test:unit": "jest --updateSnapshot",
+    "test:unit:coverage": "jest --coverage",
+    "test:unit:watch": "jest --watch",
+    "serve:test:coverage": "quasar serve test/jest/coverage/lcov-report/ --port 8788",
+    "test:e2e": "wdio ./test/webdriver/config/wdio.conf.js",
+    "test:e2e:CI": "cypress run",
+    "serve:test:lighthouse": "quasar serve test/lighthouse/reports/ --port 8789",
+    "audit:snyk": "snyk test --json > ./test/audits/snyk.json",
+    "audit:node_modules": "yarn audit --json > ./test/audits/node_modules_audit.json",
+    "audit:licenses": "nlf --summary detail > ./test/audits/licenses.txt",
+    "audit:lighthouse": "lighthouse http://localhost:3000 view --output-path=./test/lighthouse/reports/index.html --config-path=./test/lighthouse/configs/full-config.js",
+    "test:unit:watchAll": "jest --watchAll",
+    "concurrently:dev:jest": "concurrently \"quasar dev\" \"jest --watch\"",
+    "test:e2e:appium": "wdio ./test/webdriver/config/wdio.appium.conf.js",
+    "test:e2e:electron": "wdio ./test/webdriver/config/wdio.electron.conf.js",
+    "selenium:install": "selenium-standalone install",
+    "selenium:start": "selenium-standalone start",
+    "electron-chromedriver": "./node_modules/electron-chromedriver/bin/chromedriver --port=9515 --url-base=wd/hub --verbose",
+    "test:unit:ui": "majestic"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.1.1",
+    "fs-extra": "^7.0.1",
+    "pretty-bytes": "^5.2.0",
+    "quasar": "^1.0.0-beta.20",
+    "vue-template-compiler": "2.6.10"
+  },
+  "devDependencies": {
+    "@quasar/app": "^1.0.0-beta.21",
+    "@quasar/quasar-app-extension-testing": "link:../packages/testing",
+    "@quasar/quasar-app-extension-testing-e2e-cypress": "link:../packages/e2e-cypress",
+    "@quasar/quasar-app-extension-testing-e2e-webdriver": "link:../packages/e2e-webdriver",
+    "@quasar/quasar-app-extension-testing-quality": "^1.0.0-beta.6",
+    "@quasar/quasar-app-extension-testing-security": "link:../packages/security",
+    "@quasar/quasar-app-extension-testing-unit-ava": "link:../packages/unit-ava",
+    "@quasar/quasar-app-extension-testing-unit-jest": "link:../packages/unit-jest",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.10.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-vue": "^5.0.0",
+    "majestic": "^1.2.24",
+    "strip-ansi": "=3.0.1",
+    "wallaby-vue-compiler": "^1.0.3"
+  },
+  "engines": {
+    "node": ">= 8.9.0",
+    "npm": ">= 5.6.0",
+    "yarn": ">= 1.6.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ]
+}
