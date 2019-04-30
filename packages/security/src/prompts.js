@@ -1,12 +1,3 @@
-/**
- * Quasar App Extension prompts script
- *
- * Inquirer prompts
- * (answers are available as "api.prompts" in the other scripts)
- * https://www.npmjs.com/package/inquirer#question
- *
- */
-
 module.exports = function () {
   return [
     {
@@ -15,9 +6,13 @@ module.exports = function () {
       required: true,
       message: 'Please choose the following options:',
       choices: [
+	      {
+		      name: 'install the OWASP ZAP Heads Up Display',
+		      value: 'zap_local',
+	      },
         {
-          name: 'extra "scripts" in your package.json',
-          value: 'scripts'
+          name: 'use your Global ZAP (not yet available)',
+          value: 'zap_global',
         }
       ]
     }
