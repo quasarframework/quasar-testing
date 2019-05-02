@@ -1293,10 +1293,10 @@
   resolved "https://registry.npmjs.org/@positron/stack-trace/-/stack-trace-1.0.0.tgz#14fcc712a530038ef9be1ce6952315a839f466a8"
   integrity sha1-FPzHEqUwA475vhzmlSMVqDn0Zqg=
 
-"@quasar/app@^1.0.0-beta.21":
-  version "1.0.0-beta.21"
-  resolved "https://registry.npmjs.org/@quasar/app/-/app-1.0.0-beta.21.tgz#b1bad16ff539c616a58a06b2370febcfcff05b12"
-  integrity sha512-nIvwF/Kkelc3AqBtEk3bOWmuK0hj+V09yKxQOF+pZz5NKJi2tSOdsjfJEqGL8jzIeXTzjr4B/NwXY7WvARhVsA==
+"@quasar/app@^1.0.0-beta.22":
+  version "1.0.0-beta.22"
+  resolved "https://registry.npmjs.org/@quasar/app/-/app-1.0.0-beta.22.tgz#f6d6f3cace2656f7e5ca4038c0b7a35df63ac4c4"
+  integrity sha512-4bXYUIZeAb3ZFQ/KS25jaWx07sb/KyxoUZNouQmy2pTJr8PA4yshF+Auy4YrHpm4VuSlXrgNtAMVomY/h8DYhA==
   dependencies:
     "@quasar/babel-preset-app" "1.0.2"
     "@vue/preload-webpack-plugin" "1.1.0"

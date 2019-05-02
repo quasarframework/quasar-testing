@@ -14,7 +14,7 @@
     "test:unit:coverage": "jest --coverage",
     "test:unit:watch": "jest --watch",
     "serve:test:coverage": "quasar serve test/jest/coverage/lcov-report/ --port 8788",
-    "test:e2e": "wdio ./test/webdriver/config/wdio.conf.js",
+    "test:e2e": "cypress open",
     "test:e2e:CI": "cypress run",
     "serve:test:lighthouse": "quasar serve test/lighthouse/reports/ --port 8789",
     "audit:snyk": "snyk test --json > ./test/audits/snyk.json",
@@ -38,7 +38,7 @@
     "vue-template-compiler": "2.6.10"
   },
   "devDependencies": {
-    "@quasar/app": "^1.0.0-beta.21",
+    "@quasar/app": "^1.0.0-beta.22",
     "@quasar/quasar-app-extension-testing": "link:../packages/testing",
     "@quasar/quasar-app-extension-testing-e2e-cypress": "link:../packages/e2e-cypress",
     "@quasar/quasar-app-extension-testing-e2e-webdriver": "link:../packages/e2e-webdriver",

@@ -10,12 +10,18 @@
   },
   "@quasar/testing": {
     "harnesses": [
-      "unit-jest"
+      "e2e-cypress",
+      "security"
     ]
   },
   "@quasar/testing-security": {
     "options": [
       "zap_local"
+    ]
+  },
+  "@quasar/testing-e2e-cypress": {
+    "options": [
+      "scripts"
     ]
   }
 }

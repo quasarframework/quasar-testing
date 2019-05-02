@@ -1,5 +1,11 @@
 {
   "unit-jest": {
     "runnerCommand": "jest"
+  },
+  "e2e-cypress": {
+    "runnerCommand": "cypress run --config baseUrl=${serverUrl}"
+  },
+  "security-zap": {
+    "runnerCommand": "bash ./zap/ZAP_D-2019-04-29/zap.sh -daemon -host 127.0.0.1 -port 7777 -hud -nostdout"
   }
 }
