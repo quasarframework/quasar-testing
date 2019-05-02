@@ -94,7 +94,7 @@ module.exports = async function (api) {
 
 							    api.extendJsonFile('quasar.testing.json', {
 								    'security-zap': {
-									    runnerCommand: 'bash ./zap/'+ zip.getEntries()[0].entryName.toString() +'zap.sh -daemon -host 127.0.0.1 -port 77777 -hud -nostdout -driver firefox -url ${serverUrl}'
+									    runnerCommand: 'bash ./zap/'+ zip.getEntries()[0].entryName.toString() +'zap.sh -daemon -host 127.0.0.1 -port 77777 -hud -nostdout' // -driver firefox -url ${serverUrl}
 								    }
 							    })
 
@@ -141,7 +141,7 @@ module.exports = async function (api) {
 
 								    api.extendJsonFile('quasar.testing.json', {
 									    'zap': {
-										    runnerCommand: 'bash ./zap/'+ zip.getEntries()[0].entryName.toString() +'zap.sh -daemon -host 127.0.0.1 -port 77777  -hud -nostdout -driver firefox -url ${serverUrl}'
+										    runnerCommand: 'bash ./zap/'+ zip.getEntries()[0].entryName.toString() +'zap.sh -daemon -host 127.0.0.1 -port 77777  -hud -nostdout' //  -driver firefox -url ${serverUrl}
 									    }
 								    })
 							    })
