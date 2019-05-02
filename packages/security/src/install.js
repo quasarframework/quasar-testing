@@ -27,8 +27,13 @@ function humanStorageSize (bytes) {
 }
 
 
-module.exports = function (api) {
-  api.prompts.options.forEach((val) => {
+function unzip (file) {
+
+}
+
+module.exports = async function (api) {
+
+  const cmd = await api.prompts.options.forEach((val) => {
     if (val === 'zap_local') {
 	    axios.get('https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions.xml')
 	    .then(function (response) {
@@ -82,15 +87,17 @@ module.exports = function (api) {
 						    fs.ensureDir('./zap')
 						    .then(() => {
 							    process.stdout.write('SHA1 checksum of existing zip matches published value.\n')
-							    process.stdout.write('Overwriting existing directory to mainain consistency.\n')
+							    process.stdout.write('Overwriting existing directory to maintain consistency.\n')
 
 							    const zip = new AdmZip(fileName)
 							    zip.extractAllTo("./zap/", true)
 
-							    // register ./zap/ZAP_D-2019-04-29
-							    let zipFolder = fileName.split('_')
-							    zipFolder = zipFolder[0] + '_' + zipFolder[2]
-							    console.log('./zap/'+zipFolder.split('.')[0]+'/zap.sh -daemon ')
+							    api.extendJsonFile('quasar.testing.json', {
+								    'security-zap': {
+									    runnerCommand: 'bash ./zap/'+ zip.getEntries()[0].entryName.toString() +'zap.sh -daemon -host 127.0.0.1 -port 77777 -hud -nostdout -driver firefox -url ${serverUrl}'
+								    }
+							    })
+
 						    })
 					    } else {
 						    process.stdout.write('SHA1 checksum does not match, downloading again.\n')
@@ -121,25 +128,22 @@ module.exports = function (api) {
 					    result.data.on('data', (chunk) => {
 						    dataLength += chunk.length
 						    fileHash.update(chunk)
-						    // if zip unzip
-						    process.stdout.write(`Downloaded:     ${humanStorageSize(parseInt(dataLength))}              \r`)
+						    process.stdout.write(`  Downloaded =>  ${humanStorageSize(parseInt(dataLength))}              \r`)
 					    })
 					    result.data.on('end', () => {
 						    if (fileHash.digest('hex') === hash.split(':')[1]) {
-							    process.stdout.write('SHA1 checksum of download matches published value.            \n')
+							    process.stdout.write('SHA1 checksum of download matches published value.            \n\n')
 
 							    fs.ensureDir('./zap')
 							    .then(() => {
 								    const zip = new AdmZip(fileName)
 								    zip.extractAllTo("./zap/", true)
 
-								    /*
-										const unzip = zlib.unzip(),
-											r = fs.createReadStream(fileName),
-											w = fs.createWriteStream('./zap/')
-											r.pipe(unzip).pipe(w)
-										*/
-
+								    api.extendJsonFile('quasar.testing.json', {
+									    'zap': {
+										    runnerCommand: 'bash ./zap/'+ zip.getEntries()[0].entryName.toString() +'zap.sh -daemon -host 127.0.0.1 -port 77777  -hud -nostdout -driver firefox -url ${serverUrl}'
+									    }
+								    })
 							    })
 							    .catch(err => {
 								    console.error(err)
@@ -152,8 +156,6 @@ module.exports = function (api) {
 				    })
 			    }
 		    }) // end fileExists
-
-
 	    })
 	    .catch(err => {
 		    console.log('Could not install ZAPROXY at this time.')
@@ -166,4 +168,6 @@ module.exports = function (api) {
     }
   })
 	// api.render('./base')
+
+
 }
