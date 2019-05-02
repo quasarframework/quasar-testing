@@ -36,7 +36,7 @@ module.exports = function() {
           value: 'quality'
         },
         {
-          name: 'Security Testing',
+          name: 'Security Testing (OWASP ZAP HUD)',
           value: 'security'
         }
       ]

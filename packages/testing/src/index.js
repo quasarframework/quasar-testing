@@ -11,7 +11,10 @@ module.exports = async function(api) {
       ? require(testingConfigPath)
       : {}
 
-    if ((!args.unit && !args.e2e) || args.unit === true || args.e2e === true) {
+    // this is to prevent multiple spawns of e.g. cypress or zap during HMR
+    let serviceLock = null
+
+    if ((!args.unit && !args.e2e && !args.security) || args.unit === true || args.e2e === true) {
       console.log(
         chalk`{bgRed  ERROR: } Please specify what test runners to use. e.g. quasar test --unit jest or quasar test --e2e cypress.`
       )
@@ -27,6 +30,8 @@ module.exports = async function(api) {
 
     args.unit = (args.unit || '').split(',')
     args.e2e = (args.e2e || '').split(',')
+    args.security = (args.security || '').split(',')
+
     args.unit.forEach(runner => {
       if (runner === '') {
         args.unit.splice(args.unit.indexOf(runner), 1)
@@ -55,8 +60,22 @@ module.exports = async function(api) {
       }
     })
 
-    // If --dev was passed or e2e tests are being run
-    if (args.dev != null || args.e2e.length > 0) {
+	  args.security.forEach(runner => {
+		  if (runner === '') {
+			  args.security.splice(args.security.indexOf(runner), 1)
+			  return
+		  }
+		  if (!testingConfig[`security-${runner.split(' ')[0]}`]) {
+			  // TODO: install instructions for non-scoped extension
+			  console.error(
+				  chalk`You tried to run tests with {bold ${runner}}, but it is not installed. Please install @quasar/quasar-app-extension-security-${runner} with {bold quasar ext --add @quasar/security-${runner}}`
+			  )
+			  process.exit(1)
+		  }
+	  })
+
+    // If --dev was passed or e2e / security tests are being run
+    if (args.dev != null || args.e2e.length > 0 || args.security.length > 0) {
       // Start dev server
       // TODO: use interactive output
       if (args.dev === true || typeof args.dev === 'undefined' ) args.dev = 'spa'
@@ -107,11 +126,14 @@ module.exports = async function(api) {
           throw new Error('The Quasar dev server failed to start.')
         } else if (doneRegex.test(data)) {
           // Dev server is ready
-          await startTests(
-            // The dev server url
-            data.match(doneRegex)[1],
-            killDevServer
-          )
+	        // Only ever spawn one instance of zap
+	        if (serviceLock !== true) {
+		        await startTests(
+			        // The dev server url
+			        data.match(doneRegex)[1],
+			        killDevServer
+		        )
+	        }
         }
       })
     } else {
@@ -134,6 +156,7 @@ module.exports = async function(api) {
           )
           const { runnerCommand: runnerCommandString } =
             testingConfig[`${type}-${runner}`] || runner
+
           const runnerCommandArgs = runnerCommandString
             // Set server url
             .replace('${serverUrl}', serverUrl)
@@ -160,10 +183,16 @@ module.exports = async function(api) {
       for (const runner of args.e2e) {
         await runTest(runner, 'e2e')
       }
+	    for (const runner of args.security) {
+	    	serviceLock = true
+		    await runTest(runner, 'security')
+	    }
       failedRunners.forEach(runner => {
-        console.error(
-          chalk`{bgRed FAILED TESTS: } Tests with ${runner} did not pass.`
-        )
+      	if (!args.security) {
+		      console.error(
+			      chalk`{bgRed FAILED TESTS: } Tests with ${runner} did not pass.`
+		      )
+	      }
       })
       if (callback) {
         // Exit with code 1 if some tests failed
