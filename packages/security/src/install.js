@@ -1,9 +1,9 @@
 const et = require('elementtree'),
   axios = require('axios'),
-	fs = require('fs-extra'),
-	platform = require('platform-detect'),
+  fs = require('fs-extra'),
+  platform = require('platform-detect'),
   crypto = require('crypto'),
-	AdmZip = require('adm-zip')
+  AdmZip = require('adm-zip')
 
 const units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
 
@@ -16,14 +16,14 @@ const units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
  */
 
 function humanStorageSize (bytes) {
-	let u = 0
+  let u = 0
 
-	while (parseInt(bytes, 10) >= 1024 && u < units.length - 1) {
+  while (parseInt(bytes, 10) >= 1024 && u < units.length - 1) {
 		bytes /= 1024
 		++u
-	}
+  }
 
-	return `${bytes.toFixed(1)} ${units[u]}`
+  return `${bytes.toFixed(1)} ${units[u]}`
 }
 
 
@@ -35,8 +35,8 @@ module.exports = async function (api) {
 
   const cmd = await api.prompts.options.forEach((val) => {
     if (val === 'zap_local') {
-	    axios.get('https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions.xml')
-	    .then(function (response) {
+      axios.get('https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions.xml')
+      .then(function (response) {
 		    const source = et.parse(response.data.toString())
 		    let route = null, fileName, size, hash, forceDownload
 
@@ -71,11 +71,11 @@ module.exports = async function (api) {
 
 		    fs.pathExists(fileName, (err, exists) => {
 
-		    	if (err) {
+		      if (err) {
 		    		console.log(err)
 			    }
 
-		    	if (exists && route !== null) {
+		      if (exists && route !== null) {
 		    		console.log('File exists, comparing checksum with published value')
 				    const fileHashLocal = crypto.createHash('sha1')
 				    const reader = fs.createReadStream(fileName)
@@ -156,18 +156,18 @@ module.exports = async function (api) {
 				    })
 			    }
 		    }) // end fileExists
-	    })
-	    .catch(err => {
+      })
+      .catch(err => {
 		    console.log('Could not install ZAPROXY at this time.')
-	    })
+      })
     } else if (val === 'scripts') {
-	    api.extendPackageJson({
+      api.extendPackageJson({
 		    scripts: {
 		    }
-	    })
+      })
     }
   })
-	// api.render('./base')
+  // api.render('./base')
 
 
 }
