@@ -40,7 +40,7 @@ module.exports = async function(api) {
       if (!testingConfig[`unit-${runner.split(' ')[0]}`]) {
         // TODO: install instructions for non-scoped extension
         console.error(
-          chalk`You tried to run tests with {bold ${runner}}, but it is not installed. Please install @quasar/quasar-app-extension-unit-${runner} with {bold quasar ext --add @quasar/unit-${runner}}`
+          chalk`You tried to run tests with {bold ${runner}}, but it is not installed. Please install @quasar/quasar-app-extension-unit-${runner} with {bold quasar ext --add @quasar/testing-unit-${runner}}`
         )
         process.exit(1)
       }
@@ -54,25 +54,25 @@ module.exports = async function(api) {
       if (!testingConfig[`e2e-${runner.split(' ')[0]}`]) {
         // TODO: install instructions for non-scoped extension
         console.error(
-          chalk`You tried to run tests with {bold ${runner}}, but it is not installed. Please install @quasar/quasar-app-extension-e2e-${runner} with {bold quasar ext --add @quasar/e2e-${runner}}`
+          chalk`You tried to run tests with {bold ${runner}}, but it is not installed. Please install @quasar/quasar-app-extension-e2e-${runner} with {bold quasar ext --add @quasar/testing-e2e-${runner}}`
         )
         process.exit(1)
       }
     })
 
-	  args.security.forEach(runner => {
-		  if (runner === '') {
-			  args.security.splice(args.security.indexOf(runner), 1)
-			  return
-		  }
-		  if (!testingConfig[`security-${runner.split(' ')[0]}`]) {
-			  // TODO: install instructions for non-scoped extension
-			  console.error(
-				  chalk`You tried to run tests with {bold ${runner}}, but it is not installed. Please install @quasar/quasar-app-extension-security-${runner} with {bold quasar ext --add @quasar/security-${runner}}`
-			  )
-			  process.exit(1)
-		  }
-	  })
+    args.security.forEach(runner => {
+      if (runner === '') {
+        args.security.splice(args.security.indexOf(runner), 1)
+        return
+      }
+      if (!testingConfig[`security-${runner.split(' ')[0]}`]) {
+        // TODO: install instructions for non-scoped extension
+        console.error(
+          chalk`You tried to run security tests with {bold ${runner}}, but it is not installed. Please install @quasar/quasar-app-extension-security with {bold quasar ext --add @quasar/testing-security}`
+        )
+        process.exit(1)
+      }
+    })
 
     // If --dev was passed or e2e / security tests are being run
     if (args.dev != null || args.e2e.length > 0 || args.security.length > 0) {
@@ -126,14 +126,14 @@ module.exports = async function(api) {
           throw new Error('The Quasar dev server failed to start.')
         } else if (doneRegex.test(data)) {
           // Dev server is ready
-	        // Only ever spawn one instance of zap
-	        if (serviceLock !== true) {
-		        await startTests(
-			        // The dev server url
-			        data.match(doneRegex)[1],
-			        killDevServer
-		        )
-	        }
+          // Only ever spawn one instance of zap
+          if (serviceLock !== true) {
+            await startTests(
+              // The dev server url
+              data.match(doneRegex)[1],
+              killDevServer
+            )
+          }
         }
       })
     } else {
@@ -183,16 +183,16 @@ module.exports = async function(api) {
       for (const runner of args.e2e) {
         await runTest(runner, 'e2e')
       }
-	    for (const runner of args.security) {
-	    	serviceLock = true
-		    await runTest(runner, 'security')
-	    }
+      for (const runner of args.security) {
+        serviceLock = true
+        await runTest(runner, 'security')
+      }
       failedRunners.forEach(runner => {
-      	if (!args.security) {
-		      console.error(
-			      chalk`{bgRed FAILED TESTS: } Tests with ${runner} did not pass.`
-		      )
-	      }
+        if (!args.security) {
+          console.error(
+            chalk`{bgRed FAILED TESTS: } Tests with ${runner} did not pass.`
+          )
+        }
       })
       if (callback) {
         // Exit with code 1 if some tests failed
