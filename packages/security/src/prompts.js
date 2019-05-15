@@ -15,6 +15,23 @@ module.exports = function () {
           value: 'zap_global',
         }
       ]
-    }
+    },
+	  {
+		  name: 'zapbrowser',
+		  type: 'list',
+		  required: true,
+		  message: 'Please choose the browser to launch for ZAP testing:',
+		  choices: [
+			  {
+				  name: 'Firefox',
+				  value: 'Firefox'
+			  },
+			  {
+				  name: 'Chrome',
+				  value: 'Chrome'
+			  }
+		  ],
+		  default: 'Firefox'
+	  }
   ]
 }
