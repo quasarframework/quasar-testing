@@ -9054,11 +9054,6 @@ prettier@1.16.3:
   resolved "https://registry.npmjs.org/prettier/-/prettier-1.16.3.tgz#8c62168453badef702f34b45b6ee899574a6a65d"
   integrity sha512-kn/GU6SMRYPxUakNXhpP0EedT/KmaPzr0H5lIsDogrykbaxOpOfAFfk5XA7DZrJyMAv1wlMV3CPcZruGXVVUZw==
 
-pretty-bytes@^5.2.0:
-  version "5.2.0"
-  resolved "https://registry.npmjs.org/pretty-bytes/-/pretty-bytes-5.2.0.tgz#96c92c6e95a0b35059253fb33c03e260d40f5a1f"
-  integrity sha512-ujANBhiUsl9AhREUDUEY1GPOharMGm8x8juS7qOHybcLi7XsKfrYQ88hSly1l2i0klXHTDYrlL8ihMCG55Dc3w==
-
 pretty-format@^24.5.0:
   version "24.5.0"
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-24.5.0.tgz#cc69a0281a62cd7242633fc135d6930cd889822d"
@@ -11655,14 +11650,6 @@ vue-template-compiler@^2.5.17:
     de-indent "^1.0.2"
     he "^1.1.0"
 
-vue-template-compiler@^2.6.6:
-  version "2.6.6"
-  resolved "https://registry.npmjs.org/vue-template-compiler/-/vue-template-compiler-2.6.6.tgz#a807acbf3d51971d3721d75ecb1b927b517c1a02"
-  integrity sha512-OakxDGyrmMQViCjkakQFbDZlG0NibiOzpLauOfyCUVRQc9yPmTqpiz9nF0VeA+dFkXegetw0E5x65BFhhLXO0A==
-  dependencies:
-    de-indent "^1.0.2"
-    he "^1.1.0"
-
 vue-template-es2015-compiler@^1.6.0, vue-template-es2015-compiler@^1.8.2:
   version "1.8.2"
   resolved "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.8.2.tgz#dd73e80ba58bb65dd7a8aa2aeef6089cf6116f2a"
@@ -11695,13 +11682,6 @@ walker@~1.0.5:
   integrity sha1-L3+bj9ENZ3JisYqITijRlhjgKPs=
   dependencies:
     makeerror "1.0.x"
-
-wallaby-vue-compiler@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.npmjs.org/wallaby-vue-compiler/-/wallaby-vue-compiler-1.0.4.tgz#d8dd72ce23ac30f2fd498eee5a8a63ccb9f4088b"
-  integrity sha512-53nfNi2Rxg+lHVWYjXnlyEuixnTDdMxGam0gHb6jyx4JI2AldInRKoLkokb4WBqK2Zl3dY69eLUmpvoGL3ALug==
-  dependencies:
-    vue-template-compiler "^2.6.6"
 
 wcwidth@^1.0.0, wcwidth@^1.0.1:
   version "1.0.1"
