@@ -77,7 +77,7 @@ module.exports = async function (api) {
 
           if (exists && route !== null) {
             console.log('File exists, comparing checksum with published value')
-            const fileHashLocal = crypto.createHash('sha1')
+            const fileHashLocal = crypto.createHash('sha256')
             const reader = fs.createReadStream(fileName)
             reader.on('data', (chunk) => {
               fileHashLocal.update(chunk)
@@ -86,7 +86,7 @@ module.exports = async function (api) {
               if (fileHashLocal.digest('hex') === hash.split(':')[1]) {
                 fs.ensureDir('./zap')
                 .then(() => {
-                  process.stdout.write('SHA1 checksum of existing zip matches published value.\n')
+                  process.stdout.write('SHA256 checksum of existing zip matches published value.\n')
                   process.stdout.write('Overwriting existing directory to maintain consistency.\n')
 
                   const zip = new AdmZip(fileName)
