@@ -1384,10 +1384,10 @@
     babel-plugin-dynamic-import-node "2.2.0"
     core-js "2.6.5"
 
-"@quasar/extras@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/@quasar/extras/-/extras-1.1.1.tgz#f514bf5108c5de964949aaa336ba65266a25fd88"
-  integrity sha512-n9aQ9N9GBaRF15v3Rm5QDoeLOHFzjQ874f+54TthWmaQvx/8DV6fG/bwLgA6AjLUIZJs3ogm4J1KqWO+4zSg1g==
+"@quasar/extras@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.npmjs.org/@quasar/extras/-/extras-1.1.2.tgz#8b3a5faa52a824ffe53d233b9dffa2de15377f37"
+  integrity sha512-gas3jD/ArAtRNwUgvosUNl8ueWZJD4ULd7n6nWrWIH3I+I3A1u3CJbwVlsR1czlY7eawMFXmhJ3KKnx3IbkASg==
 
 "@quasar/quasar-app-extension-testing-e2e-cypress@link:../packages/e2e-cypress":
   version "0.0.0"
@@ -1406,9 +1406,16 @@
     nlf "2.0.1"
     snyk "^1.130.0"
 
-"@quasar/quasar-app-extension-testing-security@link:../packages/security":
-  version "0.0.0"
-  uid ""
+"@quasar/quasar-app-extension-testing-security@^1.0.0-alpha.6":
+  version "1.0.0-alpha.6"
+  resolved "https://registry.npmjs.org/@quasar/quasar-app-extension-testing-security/-/quasar-app-extension-testing-security-1.0.0-alpha.6.tgz#1f1a135f0333b9931b06ef1ff8c997b763666412"
+  integrity sha512-5TvRqn8C9p1Wbct3BkvUXx76DAQBPyfdJsdfcIb73awhygp1CPAsgZjEkiT1g+KygJ9NXhqAQ7/IsxXNBeg4Qg==
+  dependencies:
+    adm-zip "^0.4.13"
+    axios "^0.18.0"
+    elementtree "^0.1.7"
+    platform-detect "^1.2.0"
+    snyk "^1.130.0"
 
 "@quasar/quasar-app-extension-testing-unit-ava@link:../packages/unit-ava":
   version "0.0.0"
@@ -1418,9 +1425,14 @@
   version "0.0.0"
   uid ""
 
-"@quasar/quasar-app-extension-testing@link:../packages/testing":
-  version "0.0.0"
-  uid ""
+"@quasar/quasar-app-extension-testing@^1.0.0-rc.8":
+  version "1.0.0-rc.8"
+  resolved "https://registry.npmjs.org/@quasar/quasar-app-extension-testing/-/quasar-app-extension-testing-1.0.0-rc.8.tgz#2853dc4e3268a5121af191dfd45de28e49d4691b"
+  integrity sha512-DP/6UaRDXBMKpSKAZOlFEJgeRFth8I3qBIqIWH4MtO5MQHDSHSHXlvXoGrfCTa4XSzyc8KxU6F5r+ID1L5eOFA==
+  dependencies:
+    chalk "^2.4.2"
+    execa "^1.0.0"
+    strip-ansi "^5.0.0"
 
 "@snyk/dep-graph@1.4.0":
   version "1.4.0"
