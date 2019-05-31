@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-testing-e2e-webdriver",
-  "version": "1.0.0-beta.8",
+  "version": "1.0.0-beta.9",
   "license": "MIT",
   "description": "A Quasar App Extension for Webdriver e2e",
   "author": "Daniel Thompson-Yvetot",
@@ -28,6 +28,6 @@
     "wdio-spec-reporter": "0.1.5"
   },
   "devDependencies": {
-    "snyk": "^1.124.0"
+    "snyk": "^1.170.0"
   }
 }
