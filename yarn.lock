@@ -1853,16 +1853,6 @@
     universal-user-agent "^2.0.0"
     url-template "^2.0.8"
 
-"@snyk/dep-graph@1.4.0":
-  version "1.4.0"
-  resolved "https://registry.npmjs.org/@snyk/dep-graph/-/dep-graph-1.4.0.tgz#0d0971c3ef3238a74112ed5d81c782a6a292575a"
-  integrity sha512-dz4Fo4L9sN0Rt8hMe+zMYZ4mAiljtyIeWvujLyCxhIT5iHSlceUYlba5TDsOFuKyuZKkuhVjORWY1oFEuRzCcA==
-  dependencies:
-    graphlib "^2.1.5"
-    lodash "^4"
-    source-map-support "^0.5.9"
-    tslib "^1.9.3"
-
 "@snyk/dep-graph@1.4.1":
   version "1.4.1"
   resolved "https://registry.npmjs.org/@snyk/dep-graph/-/dep-graph-1.4.1.tgz#035e96224d12d260388d00abc46da02fb9d92d94"
@@ -2120,7 +2110,7 @@ ansi-escapes@^1.0.0:
   resolved "https://registry.npmjs.org/ansi-escapes/-/ansi-escapes-1.4.0.tgz#d3a8a83b319aa67793662b13e761c7911422306e"
   integrity sha1-06ioOzGapneTZisT52HHkRQiMG4=
 
-ansi-escapes@^3.0.0, ansi-escapes@^3.1.0, ansi-escapes@^3.2.0:
+ansi-escapes@^3.0.0, ansi-escapes@^3.2.0:
   version "3.2.0"
   resolved "https://registry.npmjs.org/ansi-escapes/-/ansi-escapes-3.2.0.tgz#8780b98ff9dbf5638152d1f1fe5c1d7b4442976b"
   integrity sha512-cBhpre4ma+U0T1oM5fXg7Dy1Jw7zzwv7lt/GoCpr+hDQJoYnKVPLL4dCvSEFMmQurOQvSrwT7SL/DAlhBI97RQ==
@@ -4015,11 +4005,6 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-data-uri-to-buffer@1:
-  version "1.2.0"
-  resolved "https://registry.npmjs.org/data-uri-to-buffer/-/data-uri-to-buffer-1.2.0.tgz#77163ea9c20d8641b4707e8f18abdf9a78f34835"
-  integrity sha512-vKQ9DTQPN1FLYiiEEOQ6IBGFqvjCa5rSK3cWMy/Nespm5d/x3dGFT9UBZnkLxCwua/IXBi2TYnwTEpsOvhC4UQ==
-
 data-uri-to-buffer@2:
   version "2.0.1"
   resolved "https://registry.npmjs.org/data-uri-to-buffer/-/data-uri-to-buffer-2.0.1.tgz#ca8f56fe38b1fd329473e9d1b4a9afcd8ce1c045"
@@ -4058,7 +4043,7 @@ de-indent@^1.0.2:
   resolved "https://registry.npmjs.org/de-indent/-/de-indent-1.0.2.tgz#b2038e846dc33baa5796128d0804b455b8c1e21d"
   integrity sha1-sgOOhG3DO6pXlhKNCAS0VbjB4h0=
 
-debug@2, debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.8:
+debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.8:
   version "2.6.9"
   resolved "https://registry.npmjs.org/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
   integrity sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==
@@ -4072,7 +4057,7 @@ debug@3.1.0, debug@=3.1.0:
   dependencies:
     ms "2.0.0"
 
-debug@3.2.6, debug@^3, debug@^3.1.0, debug@^3.2.5, debug@^3.2.6:
+debug@3.2.6, debug@^3.1.0, debug@^3.2.5, debug@^3.2.6:
   version "3.2.6"
   resolved "https://registry.npmjs.org/debug/-/debug-3.2.6.tgz#e83d17de16d8a7efb7717edbe5fb10135eee629b"
   integrity sha512-mel+jf7nrtEl5Pn1Qx46zARXKDpBbvzezse7p7LqINmdoIk8PYP5SySaxEmYv6TZ0JyEKA1hsCId6DIhgITtWQ==
@@ -4293,13 +4278,6 @@ dir-glob@^2.0.0:
   integrity sha512-f9LBi5QWzIW3I6e//uxZoLBlUt9kcp66qo0sSCxL6YZKc75R1c4MFCoe/LaZiBGmgujvQdxc5Bn3QhfyvK5Hsw==
   dependencies:
     path-type "^3.0.0"
-
-dockerfile-ast@0.0.12:
-  version "0.0.12"
-  resolved "https://registry.npmjs.org/dockerfile-ast/-/dockerfile-ast-0.0.12.tgz#6f25f6ad55eeecdd297ab68b08be1b32e64b5aeb"
-  integrity sha512-cIV8oXkAxpIuN5XgG0TGg07nLDgrj4olkfrdT77OTA3VypscsYHBUg/FjHxW9K3oA+CyH4Th/qtoMgTVpzSobw==
-  dependencies:
-    vscode-languageserver-types "^3.5.0"
 
 dockerfile-ast@0.0.16:
   version "0.0.16"
@@ -4740,7 +4718,7 @@ extend-shallow@^3.0.0, extend-shallow@^3.0.2:
     assign-symbols "^1.0.0"
     is-extendable "^1.0.1"
 
-extend@3, extend@~3.0.2:
+extend@~3.0.2:
   version "3.0.2"
   resolved "https://registry.npmjs.org/extend/-/extend-3.0.2.tgz#f8b1136b4071fbd8eb140aff858b1019ec2915fa"
   integrity sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==
@@ -5202,18 +5180,6 @@ get-stream@^4.0.0, get-stream@^4.1.0:
   integrity sha512-GMat4EJ5161kIy2HevLlr4luNjBgvmj413KaQA7jt4V8B4RDsfpHk7WQ9GVqfYyyx8OS/L66Kox+rJRNklLK7w==
   dependencies:
     pump "^3.0.0"
-
-get-uri@2.0.2:
-  version "2.0.2"
-  resolved "https://registry.npmjs.org/get-uri/-/get-uri-2.0.2.tgz#5c795e71326f6ca1286f2fc82575cd2bab2af578"
-  integrity sha512-ZD325dMZOgerGqF/rF6vZXyFGTAay62svjQIT+X/oU2PtxYpFxvSkbsdi+oxIrsNxlZVd4y8wUDqkaExWTI/Cw==
-  dependencies:
-    data-uri-to-buffer "1"
-    debug "2"
-    extend "3"
-    file-uri-to-path "1"
-    ftp "~0.3.10"
-    readable-stream "2"
 
 get-uri@^2.0.0:
   version "2.0.3"
@@ -5805,7 +5771,7 @@ init-package-json@^1.10.3:
     validate-npm-package-license "^3.0.1"
     validate-npm-package-name "^3.0.0"
 
-inquirer@^3.0.0, inquirer@^3.3.0, inquirer@~3.3.0:
+inquirer@^3.3.0, inquirer@~3.3.0:
   version "3.3.0"
   resolved "https://registry.npmjs.org/inquirer/-/inquirer-3.3.0.tgz#9dd2f2ad765dcab1ff0443b491442a20ba227dc9"
   integrity sha512-h+xtnyk4EwKvFWHrUYsWErEVR+igKtLdchu+o0Z1RL7VU/jVMFbYir2bp6bAj8efFNxWqHX0dIss6fJQ+/+qeQ==
@@ -5883,7 +5849,7 @@ ip-regex@^2.1.0:
   resolved "https://registry.npmjs.org/ip-regex/-/ip-regex-2.1.0.tgz#fa78bf5d2e6913c911ce9f819ee5146bb6d844e9"
   integrity sha1-+ni/XS5pE8kRzp+BnuUUa7bYROk=
 
-ip@^1.1.4, ip@^1.1.5:
+ip@^1.1.5:
   version "1.1.5"
   resolved "https://registry.npmjs.org/ip/-/ip-1.1.5.tgz#bdded70114290828c0a039e72ef25f5aaec4354a"
   integrity sha1-vd7XARQpCCjAoDnnLvJfWq7ENUo=
@@ -6752,7 +6718,7 @@ js-tokens@^3.0.2:
   resolved "https://registry.npmjs.org/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
   integrity sha1-mGbfOVECEw449/mWvOtlRDIJwls=
 
-js-yaml@^3.10.0, js-yaml@^3.12.0, js-yaml@^3.13.1:
+js-yaml@^3.10.0, js-yaml@^3.13.1:
   version "3.13.1"
   resolved "https://registry.npmjs.org/js-yaml/-/js-yaml-3.13.1.tgz#aff151b30bfdfa8e49e05da22e7415e9dfa37847"
   integrity sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==
@@ -8353,7 +8319,7 @@ opn@4.0.2:
     object-assign "^4.0.1"
     pinkie-promise "^2.0.0"
 
-opn@^5.4.0, opn@^5.5.0:
+opn@^5.5.0:
   version "5.5.0"
   resolved "https://registry.npmjs.org/opn/-/opn-5.5.0.tgz#fc7164fab56d235904c51c3b27da6758ca3b9bfc"
   integrity sha512-PqHpggC9bLV0VeWcdKhkpxY+3JTzetLSqTCWL/z/tFIbI6G8JCjondXklT1JinczLz2Xib62sSp0T/gKT4KksA==
@@ -8544,20 +8510,6 @@ p-waterfall@^1.0.0:
   integrity sha1-ftlLPOszMngjU69qrhGqn8I1uwA=
   dependencies:
     p-reduce "^1.0.0"
-
-pac-proxy-agent@^2.0.1:
-  version "2.0.2"
-  resolved "https://registry.npmjs.org/pac-proxy-agent/-/pac-proxy-agent-2.0.2.tgz#90d9f6730ab0f4d2607dcdcd4d3d641aa26c3896"
-  integrity sha512-cDNAN1Ehjbf5EHkNY5qnRhGPUCp6SnpyVof5fRzN800QV1Y2OkzbH9rmjZkbBRa8igof903yOnjIl6z0SlAhxA==
-  dependencies:
-    agent-base "^4.2.0"
-    debug "^3.1.0"
-    get-uri "^2.0.0"
-    http-proxy-agent "^2.1.0"
-    https-proxy-agent "^2.2.1"
-    pac-resolver "^3.0.0"
-    raw-body "^2.2.0"
-    socks-proxy-agent "^3.0.0"
 
 pac-proxy-agent@^3.0.0:
   version "3.0.0"
@@ -9132,20 +9084,6 @@ proxy-addr@~2.0.5:
     forwarded "~0.1.2"
     ipaddr.js "1.9.0"
 
-proxy-agent@2.3.1:
-  version "2.3.1"
-  resolved "https://registry.npmjs.org/proxy-agent/-/proxy-agent-2.3.1.tgz#3d49d863d46cf5f37ca8394848346ea02373eac6"
-  integrity sha512-CNKuhC1jVtm8KJYFTS2ZRO71VCBx3QSA92So/e6NrY6GoJonkx3Irnk4047EsCcswczwqAekRj3s8qLRGahSKg==
-  dependencies:
-    agent-base "^4.2.0"
-    debug "^3.1.0"
-    http-proxy-agent "^2.1.0"
-    https-proxy-agent "^2.2.1"
-    lru-cache "^4.1.2"
-    pac-proxy-agent "^2.0.1"
-    proxy-from-env "^1.0.0"
-    socks-proxy-agent "^3.0.0"
-
 proxy-agent@^3.1.0:
   version "3.1.0"
   resolved "https://registry.npmjs.org/proxy-agent/-/proxy-agent-3.1.0.tgz#3cf86ee911c94874de4359f37efd9de25157c113"
@@ -9387,7 +9325,7 @@ read@1, read@~1.0.1:
   dependencies:
     mute-stream "~0.0.4"
 
-"readable-stream@1 || 2", readable-stream@2, readable-stream@^2.0.0, readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.5, readable-stream@^2.0.6, readable-stream@^2.1.5, readable-stream@^2.2.2, readable-stream@^2.3.0, readable-stream@^2.3.5, readable-stream@^2.3.6, readable-stream@~2.3.6:
+"readable-stream@1 || 2", readable-stream@^2.0.0, readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.5, readable-stream@^2.0.6, readable-stream@^2.1.5, readable-stream@^2.2.2, readable-stream@^2.3.0, readable-stream@^2.3.5, readable-stream@^2.3.6, readable-stream@~2.3.6:
   version "2.3.6"
   resolved "https://registry.npmjs.org/readable-stream/-/readable-stream-2.3.6.tgz#b11c27d88b8ff1fbe070643cf94b0c79ae1b0aaf"
   integrity sha512-tQtKA9WIAhBF3+VLAseyMqZeBjW0AHJoxOtYqSUZNJxauErmLbVm2FW1y+J/YA9dUrAC39ITejlZWhVIwawkKw==
@@ -9444,13 +9382,6 @@ realpath-native@^1.1.0:
   integrity sha512-wlgPA6cCIIg9gKz0fgAPjnzh4yR/LnXovwuo9hvyGvx3h8nX4+/iLZplfUWasXpqD8BdnGnP5njOFjkUwPzvjA==
   dependencies:
     util.promisify "^1.0.0"
-
-recursive-readdir@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.npmjs.org/recursive-readdir/-/recursive-readdir-2.2.2.tgz#9946fb3274e1628de6e36b2f6714953b4845094f"
-  integrity sha512-nRCcW9Sj7NuZwa2XvH9co8NPeXUBhZP7CRKJtU+cS6PW9FpCIFoI5ib0NT1ZrbNuPoRy0ylyCaUL8Gih4LSyFg==
-  dependencies:
-    minimatch "3.0.4"
 
 redent@^1.0.0:
   version "1.0.0"
@@ -10115,11 +10046,6 @@ smart-buffer@4.0.2:
   resolved "https://registry.npmjs.org/smart-buffer/-/smart-buffer-4.0.2.tgz#5207858c3815cc69110703c6b94e46c15634395d"
   integrity sha512-JDhEpTKzXusOqXZ0BUIdH+CjFdO/CR3tLlf5CN34IypI+xMmXW1uB16OOY8z3cICbJlDAVJzNbwBhNO0wt9OAw==
 
-smart-buffer@^1.0.13:
-  version "1.1.15"
-  resolved "https://registry.npmjs.org/smart-buffer/-/smart-buffer-1.1.15.tgz#7f114b5b65fab3e2a35aa775bb12f0d1c649bf16"
-  integrity sha1-fxFLW2X6s+KjWqd1uxLw0cZJvxY=
-
 snapdragon-node@^2.0.1:
   version "2.1.1"
   resolved "https://registry.npmjs.org/snapdragon-node/-/snapdragon-node-2.1.1.tgz#6c175f86ff14bdb0724563e8f3c1b021a286853b"
@@ -10150,7 +10076,7 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
-snyk-config@2.2.1, snyk-config@^2.2.1:
+snyk-config@^2.2.1:
   version "2.2.1"
   resolved "https://registry.npmjs.org/snyk-config/-/snyk-config-2.2.1.tgz#bdacf79193158ec659bdcc4194140fd8d3772f9d"
   integrity sha512-eCsFKHHE4J2DpD/1NzAtCmkmVDK310OXRtmoW0RlLnld1ESprJ5A/QRJ5Zxx1JbA8gjuwERY5vfUFA8lEJeopA==
@@ -10158,16 +10084,6 @@ snyk-config@2.2.1, snyk-config@^2.2.1:
     debug "^3.1.0"
     lodash "^4.17.11"
     nconf "^0.10.0"
-
-snyk-docker-plugin@1.22.0:
-  version "1.22.0"
-  resolved "https://registry.npmjs.org/snyk-docker-plugin/-/snyk-docker-plugin-1.22.0.tgz#4eb5887934860a60e150d9ebb417ebb071f5cddb"
-  integrity sha512-bykxNtfeWQNFjF6gv8u8w+TOa4fdr+teLm+DkvYlWkdlvaw5m4yywRI5USve4X6S9p4G+Fw4/wfjXx7LgCcxrQ==
-  dependencies:
-    debug "^3"
-    dockerfile-ast "0.0.12"
-    semver "^5.6.0"
-    tslib "^1"
 
 snyk-docker-plugin@1.25.0:
   version "1.25.0"
@@ -10187,15 +10103,6 @@ snyk-go-parser@1.0.2:
     toml "^3.0.0"
     tslib "^1.9.3"
 
-snyk-go-plugin@1.6.1:
-  version "1.6.1"
-  resolved "https://registry.npmjs.org/snyk-go-plugin/-/snyk-go-plugin-1.6.1.tgz#fad24de943a587d676af9408e5b3976d6b20267d"
-  integrity sha512-hFOMyznfcMzF1HaZP18VmjQSqK/jBOowh0lpJY4UqmaQSZyJury3Ax+44O9oVUJi8lb8A4g7RVbxhlWl6bIqlA==
-  dependencies:
-    graphlib "^2.1.1"
-    tmp "0.0.33"
-    toml "^2.3.2"
-
 snyk-go-plugin@1.7.2:
   version "1.7.2"
   resolved "https://registry.npmjs.org/snyk-go-plugin/-/snyk-go-plugin-1.7.2.tgz#d93c068e4965a3c5f5edb0f45cfa27a165c310f4"
@@ -10205,13 +10112,6 @@ snyk-go-plugin@1.7.2:
     graphlib "^2.1.1"
     snyk-go-parser "1.0.2"
     tmp "0.0.33"
-
-snyk-gradle-plugin@2.1.3:
-  version "2.1.3"
-  resolved "https://registry.npmjs.org/snyk-gradle-plugin/-/snyk-gradle-plugin-2.1.3.tgz#cd8dbcbad4b9a1f6cf8dc2f29245505312ae647e"
-  integrity sha512-xti5Uox0NLPO89O/MQd9qgnlynNtO2eXSukzyjONeGgueyNv6I7FQnUvHtVj6IUCBPlMP8c5D7bQmlFfemz8ZA==
-  dependencies:
-    clone-deep "^0.3.0"
 
 snyk-gradle-plugin@2.11.2:
   version "2.11.2"
@@ -10233,11 +10133,6 @@ snyk-module@1.9.1, snyk-module@^1.6.0, snyk-module@^1.9.1:
     debug "^3.1.0"
     hosted-git-info "^2.7.1"
 
-snyk-mvn-plugin@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.npmjs.org/snyk-mvn-plugin/-/snyk-mvn-plugin-2.0.1.tgz#c52d5320e34ff3ab6d50d8b9549a4b32243ed6ae"
-  integrity sha512-TBrdcFXHdYuRYFCvpyUeFC+mCi6SOV3vdxgHrP7JRNnJwO8PYaKCObLJyhpRWa8IaHv/8CjJTmnEbWIh7BPHAA==
-
 snyk-mvn-plugin@2.3.0:
   version "2.3.0"
   resolved "https://registry.npmjs.org/snyk-mvn-plugin/-/snyk-mvn-plugin-2.3.0.tgz#a76cfc0041ecc4333f2c6f6f72138f1e4621da24"
@@ -10245,18 +10140,6 @@ snyk-mvn-plugin@2.3.0:
   dependencies:
     lodash "4.17.11"
     tslib "1.9.3"
-
-snyk-nodejs-lockfile-parser@1.11.0:
-  version "1.11.0"
-  resolved "https://registry.npmjs.org/snyk-nodejs-lockfile-parser/-/snyk-nodejs-lockfile-parser-1.11.0.tgz#4af8c36e876627c49f0b563e334b6db07ad3d4af"
-  integrity sha512-eTdq5VcaHJwGoApejebTChi5hRcIDdNbO6lMwncS0zz9ZxXskoQ0C+VMdep8ELmJa0Gcz6es1sSkABPZs7frrg==
-  dependencies:
-    "@yarnpkg/lockfile" "^1.0.2"
-    graphlib "^2.1.5"
-    lodash "^4.17.11"
-    source-map-support "^0.5.7"
-    tslib "^1.9.3"
-    uuid "^3.3.2"
 
 snyk-nodejs-lockfile-parser@1.13.0:
   version "1.13.0"
@@ -10281,31 +10164,12 @@ snyk-nuget-plugin@1.10.0:
     snyk-paket-parser "1.4.3"
     xml2js "^0.4.17"
 
-snyk-nuget-plugin@1.7.2:
-  version "1.7.2"
-  resolved "https://registry.npmjs.org/snyk-nuget-plugin/-/snyk-nuget-plugin-1.7.2.tgz#35ae0a0c68bfc68c6c52710bebd037ff765d1f9a"
-  integrity sha512-zmYD9veH7OeIqGnZHiGv8c8mKtmYrxo2o7P4lNUkpHdCMMsar7moRJxGgO9WlcIrwAGjIhMdP9fUvJ+jVDEteQ==
-  dependencies:
-    debug "^3.1.0"
-    jszip "^3.1.5"
-    lodash "^4.17.10"
-    snyk-paket-parser "1.4.3"
-    xml2js "^0.4.17"
-
 snyk-paket-parser@1.4.3:
   version "1.4.3"
   resolved "https://registry.npmjs.org/snyk-paket-parser/-/snyk-paket-parser-1.4.3.tgz#380ae8c5fb598f81c110f6b645c728c9cc50b7a5"
   integrity sha512-6m736zGVoeT/zS9KEtlmqTSPEPjAfLe8iYoQ3AwbyxDhzuLY49lTaV67MyZtGwjhi1x4KBe+XOgeWwyf6Avf/A==
   dependencies:
     tslib "^1.9.3"
-
-snyk-php-plugin@1.5.2:
-  version "1.5.2"
-  resolved "https://registry.npmjs.org/snyk-php-plugin/-/snyk-php-plugin-1.5.2.tgz#277512f6f2bbb87ae0c6f4859cef44591f732b30"
-  integrity sha512-s/s9s7mslHjLnzin2BNLGdy/s6tNBfJ4/T/d9JBjsjIwdJFaUKY/ciWwBLNaWt2Aqtyr3DiUcqg3j/pwTKhEDg==
-  dependencies:
-    debug "^3.1.0"
-    lodash "^4.17.5"
 
 snyk-php-plugin@1.5.3:
   version "1.5.3"
@@ -10314,21 +10178,6 @@ snyk-php-plugin@1.5.3:
   dependencies:
     debug "^3.1.0"
     lodash "^4.17.5"
-
-snyk-policy@1.13.3:
-  version "1.13.3"
-  resolved "https://registry.npmjs.org/snyk-policy/-/snyk-policy-1.13.3.tgz#83e71ca51c471b9ad01c0e323f13307787a5636d"
-  integrity sha512-6J2a+Wt9zgvTtCwi4x8rLtkDQzFNPqubfIgs3aR35ZsEXPwI4XHGo0cxnJPDriqncp2JK72vnRpNfIZ7v0L1Mw==
-  dependencies:
-    debug "^3.1.0"
-    email-validator "^2.0.4"
-    js-yaml "^3.12.0"
-    lodash.clonedeep "^4.5.0"
-    semver "^5.6.0"
-    snyk-module "^1.9.1"
-    snyk-resolve "^1.0.1"
-    snyk-try-require "^1.3.1"
-    then-fs "^2.0.0"
 
 snyk-policy@1.13.5:
   version "1.13.5"
@@ -10349,13 +10198,6 @@ snyk-python-plugin@1.10.1:
   version "1.10.1"
   resolved "https://registry.npmjs.org/snyk-python-plugin/-/snyk-python-plugin-1.10.1.tgz#db85448240857ba5f400efe4f856e16a38cad584"
   integrity sha512-1UAYRBTgnHgzPyX/PUAh9Wb9Udp6Q162IAfftK9uhN1o+KVN3RzsP/jeR0MhOXqECu7f4eABUv4rh+bn25/3hw==
-  dependencies:
-    tmp "0.0.33"
-
-snyk-python-plugin@1.9.1:
-  version "1.9.1"
-  resolved "https://registry.npmjs.org/snyk-python-plugin/-/snyk-python-plugin-1.9.1.tgz#f8f7897f7068c434560cf43200d306fe91cf806d"
-  integrity sha512-4R040DBK77NSfSy3rCndmrv85YlLrKZU1ct59oZSoGb1PYdCi8kXRuq50UpSgasp6YR0yJxT22T38hNOAjTtVw==
   dependencies:
     tmp "0.0.33"
 
@@ -10409,11 +10251,6 @@ snyk-resolve@1.0.1, snyk-resolve@^1.0.0, snyk-resolve@^1.0.1:
     debug "^3.1.0"
     then-fs "^2.0.0"
 
-snyk-sbt-plugin@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.npmjs.org/snyk-sbt-plugin/-/snyk-sbt-plugin-2.0.1.tgz#f302dc5f265b3f8b8ee5b968c7d0ef36a65d6f65"
-  integrity sha512-AsGGMP0W3mlKygXUI5jjt54qWFttZEXT1A40+u21p8rZPXLZprwnd+QH9pZDd04d9W9aofGvON8NJeOn9KS39Q==
-
 snyk-sbt-plugin@2.2.0:
   version "2.2.0"
   resolved "https://registry.npmjs.org/snyk-sbt-plugin/-/snyk-sbt-plugin-2.2.0.tgz#77c07e8d9ed041a55629dbea39c909db3faf11c2"
@@ -10435,51 +10272,6 @@ snyk-try-require@1.3.1, snyk-try-require@^1.1.1, snyk-try-require@^1.3.1:
     lodash.clonedeep "^4.3.0"
     lru-cache "^4.0.0"
     then-fs "^2.0.0"
-
-snyk@1.135.1:
-  version "1.135.1"
-  resolved "https://registry.npmjs.org/snyk/-/snyk-1.135.1.tgz#e5ed20c99e541e28b40283729dba47e0db280b9f"
-  integrity sha512-xHljRnMb7gtqy42tVTWhuSJKVooLXrc08s1zPiBAssvME8GZXIUb0bs+DHmsE5MjoY3CyuTLbdmbSNUGJGS4QA==
-  dependencies:
-    "@snyk/dep-graph" "1.4.0"
-    "@snyk/gemfile" "1.2.0"
-    abbrev "^1.1.1"
-    ansi-escapes "^3.1.0"
-    chalk "^2.4.1"
-    configstore "^3.1.2"
-    debug "^3.1.0"
-    diff "^4.0.1"
-    get-uri "2.0.2"
-    inquirer "^3.0.0"
-    lodash "^4.17.11"
-    needle "^2.2.4"
-    opn "^5.4.0"
-    os-name "^3.0.0"
-    proxy-agent "2.3.1"
-    proxy-from-env "^1.0.0"
-    recursive-readdir "^2.2.2"
-    semver "^5.6.0"
-    snyk-config "2.2.1"
-    snyk-docker-plugin "1.22.0"
-    snyk-go-plugin "1.6.1"
-    snyk-gradle-plugin "2.1.3"
-    snyk-module "1.9.1"
-    snyk-mvn-plugin "2.0.1"
-    snyk-nodejs-lockfile-parser "1.11.0"
-    snyk-nuget-plugin "1.7.2"
-    snyk-php-plugin "1.5.2"
-    snyk-policy "1.13.3"
-    snyk-python-plugin "1.9.1"
-    snyk-resolve "1.0.1"
-    snyk-resolve-deps "4.0.2"
-    snyk-sbt-plugin "2.0.1"
-    snyk-tree "^1.0.0"
-    snyk-try-require "1.3.1"
-    source-map-support "^0.5.10"
-    tempfile "^2.0.0"
-    then-fs "^2.0.0"
-    update-notifier "^2.5.0"
-    uuid "^3.3.2"
 
 snyk@^1.170.0:
   version "1.170.0"
@@ -10526,14 +10318,6 @@ snyk@^1.170.0:
     update-notifier "^2.5.0"
     uuid "^3.3.2"
 
-socks-proxy-agent@^3.0.0:
-  version "3.0.1"
-  resolved "https://registry.npmjs.org/socks-proxy-agent/-/socks-proxy-agent-3.0.1.tgz#2eae7cf8e2a82d34565761539a7f9718c5617659"
-  integrity sha512-ZwEDymm204mTzvdqyUqOdovVr2YRd2NYskrYrF2LXyZ9qDiMAoFESGK8CRphiO7rtbo2Y757k2Nia3x2hGtalA==
-  dependencies:
-    agent-base "^4.1.0"
-    socks "^1.1.10"
-
 socks-proxy-agent@^4.0.0, socks-proxy-agent@^4.0.1:
   version "4.0.2"
   resolved "https://registry.npmjs.org/socks-proxy-agent/-/socks-proxy-agent-4.0.2.tgz#3c8991f3145b2799e70e11bd5fbc8b1963116386"
@@ -10541,14 +10325,6 @@ socks-proxy-agent@^4.0.0, socks-proxy-agent@^4.0.1:
   dependencies:
     agent-base "~4.2.1"
     socks "~2.3.2"
-
-socks@^1.1.10:
-  version "1.1.10"
-  resolved "https://registry.npmjs.org/socks/-/socks-1.1.10.tgz#5b8b7fc7c8f341c53ed056e929b7bf4de8ba7b5a"
-  integrity sha1-W4t/x8jzQcU+0FbpKbe/Tei6e1o=
-  dependencies:
-    ip "^1.1.4"
-    smart-buffer "^1.0.13"
 
 socks@~2.3.2:
   version "2.3.2"
@@ -10576,7 +10352,7 @@ source-map-resolve@^0.5.0, source-map-resolve@^0.5.2:
     source-map-url "^0.4.0"
     urix "^0.1.0"
 
-source-map-support@^0.5.10, source-map-support@^0.5.11, source-map-support@^0.5.3, source-map-support@^0.5.5, source-map-support@^0.5.6, source-map-support@^0.5.7, source-map-support@^0.5.8, source-map-support@^0.5.9:
+source-map-support@^0.5.11, source-map-support@^0.5.3, source-map-support@^0.5.5, source-map-support@^0.5.6, source-map-support@^0.5.7, source-map-support@^0.5.8, source-map-support@^0.5.9:
   version "0.5.12"
   resolved "https://registry.npmjs.org/source-map-support/-/source-map-support-0.5.12.tgz#b4f3b10d51857a5af0138d3ce8003b201613d599"
   integrity sha512-4h2Pbvyy15EE02G+JOZpUCmqWJuqrs+sEkzewTm++BPi7Hvn/HwcqLAcNxYAyI0x13CpPPn+kMjl+hplXMHITQ==
@@ -11198,11 +10974,6 @@ toidentifier@1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/toidentifier/-/toidentifier-1.0.0.tgz#7e1be3470f1e77948bc43d94a3c8f4d7752ba553"
   integrity sha512-yaOH/Pk/VEhBWWTlhI+qXxDFXlejDGcQipMlyxda9nthulaxLZUNcUqFxokp0vcYnvteJln5FNQDRrxj3YcbVw==
-
-toml@^2.3.2:
-  version "2.3.6"
-  resolved "https://registry.npmjs.org/toml/-/toml-2.3.6.tgz#25b0866483a9722474895559088b436fd11f861b"
-  integrity sha512-gVweAectJU3ebq//Ferr2JUY4WKSDe5N+z0FvjDncLGyHmIDoxgY/2Ie4qfEIDm4IS7OA6Rmdm7pdEEdMcV/xQ==
 
 toml@^3.0.0:
   version "3.0.0"

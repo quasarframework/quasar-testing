@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-testing",
-  "version": "1.0.0-rc.8",
+  "version": "1.0.0-rc.9",
   "license": "MIT",
   "description": "A Quasar App Extension for managing Test Harnesses",
   "author": "Daniel Thompson-Yvetot",
@@ -26,6 +26,6 @@
     "strip-ansi": "^5.0.0"
   },
   "devDependencies": {
-    "snyk": "1.135.1"
+    "snyk": "^1.170.0"
   }
 }
