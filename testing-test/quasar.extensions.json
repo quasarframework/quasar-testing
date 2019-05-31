@@ -4,13 +4,7 @@
     "options": [
       "scripts",
       "SFC",
-      "wallabyjs",
-      "majestic"
-    ]
-  },
-  "@quasar/testing": {
-    "harnesses": [
-      "security"
+      "wallabyjs"
     ]
   },
   "@quasar/testing-e2e-cypress": {
@@ -23,5 +17,10 @@
       "zap_local"
     ],
     "zapbrowser": "Chrome"
+  },
+  "@quasar/testing": {
+    "harnesses": [
+      "unit-jest"
+    ]
   }
 }

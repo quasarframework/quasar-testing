@@ -5,46 +5,27 @@
 
 import { mount, createLocalVue, shallowMount } from '@vue/test-utils'
 import QBUTTON from './demo/QBtn-demo.vue'
+import * as All from 'quasar'
 // import langEn from 'quasar/lang/en-us' // change to any language you wish! => this breaks wallaby :(
+const { Quasar, date } = All
 
-import {
-  Quasar,
-  QLayout,
-  QPage,
-  QPageContainer,
-  QBtn,
-  date
-} from 'quasar'
+const components = Object.keys(All).reduce((object, key) => {
+  const val = All[key]
+  if (val && val.component && val.component.name != null) {
+    object[key] = val
+  }
+  return object
+}, {})
 
 describe('Mount Quasar', () => {
-  let localVue
-  let wrapper
-  let vm
-  let shallowWrapper
-  let vmShallow
+  const localVue = createLocalVue()
+  localVue.use(Quasar, { components }) // , lang: langEn
 
-  beforeEach(() => {
-    // const { Quasar, date } = All
-
-    localVue = createLocalVue()
-
-    localVue.use(Quasar, { components: { QLayout, QPage, QPageContainer, QBtn } }) // , lang: langEn
-
-    wrapper = mount(QBUTTON, {
-      localVue
-    })
-    shallowWrapper = shallowMount(QBUTTON, {
-      localVue
-    })
-    vm = wrapper.vm
-    vmShallow = shallowWrapper.vm
+  const wrapper = mount(QBUTTON, {
+    localVue
   })
+  const vm = wrapper.vm
 
-  afterEach(() => {
-    localVue = null
-    wrapper = null
-    vm = null
-  })
   it('passes the sanity check and creates a wrapper', () => {
     expect(wrapper.isVueInstance()).toBe(true)
   })
@@ -66,9 +47,9 @@ describe('Mount Quasar', () => {
   })
 
   it('correctly updates data when button is pressed', () => {
-    const button = shallowWrapper.find('q-btn')
+    const button = wrapper.find('button')
     button.trigger('click')
-    expect(vmShallow.counter).toBe(1)
+    expect(vm.counter).toBe(1)
   })
 
   it('formats a date without throwing exception', () => {
