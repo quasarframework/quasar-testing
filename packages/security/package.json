@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-testing-security",
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-alpha.8",
   "license": "MIT",
   "description": "A Quasar App Extension for Application Security, using OWASP ZAP",
   "author": "Daniel Thompson-Yvetot",
@@ -19,9 +19,9 @@
   },
   "dependencies": {
     "adm-zip": "^0.4.13",
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "elementtree": "^0.1.7",
     "platform-detect": "^1.2.0",
-    "snyk": "^1.130.0"
+    "snyk": "^1.170.0"
   }
 }
