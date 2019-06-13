@@ -2010,7 +2010,7 @@
     dom-event-types "^1.0.0"
     lodash "^4.17.4"
 
-"@yarnpkg/lockfile@^1.0.2":
+"@yarnpkg/lockfile@*", "@yarnpkg/lockfile@^1.0.2":
   version "1.1.0"
   resolved "https://registry.npmjs.org/@yarnpkg/lockfile/-/lockfile-1.1.0.tgz#e77a97fbd345b76d83245edcd17d393b1b41fb31"
   integrity sha512-GpSwvyXOcOOlV70vbnzjj4fW5xW/FdUF6nQEt1ENy7m4ZCczi1+/buVUPAqmGfqznsORNFzUMjctTIp8a9tuCQ==
@@ -9877,6 +9877,11 @@ semver@^6.0.0, semver@^6.1.0:
   resolved "https://registry.npmjs.org/semver/-/semver-6.1.1.tgz#53f53da9b30b2103cd4f15eab3a18ecbcb210c9b"
   integrity sha512-rWYq2e5iYW+fFe/oPPtYJxYgjBm8sC4rmoGdUOgBB7VnwKt6HrL793l2voH1UlsyYZpJ4g0wfjnTEO1s1NP2eQ==
 
+semver@^6.1.1:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-6.1.1.tgz#53f53da9b30b2103cd4f15eab3a18ecbcb210c9b"
+  integrity sha512-rWYq2e5iYW+fFe/oPPtYJxYgjBm8sC4rmoGdUOgBB7VnwKt6HrL793l2voH1UlsyYZpJ4g0wfjnTEO1s1NP2eQ==
+
 semver@~5.3.0:
   version "5.3.0"
   resolved "https://registry.npmjs.org/semver/-/semver-5.3.0.tgz#9b2ce5d3de02d17c6012ad326aa6b4d0cf54f94f"
@@ -11829,6 +11834,13 @@ yargs@~1.2.6:
   integrity sha1-nHtKgv1dWVsr8Xq23MQxNUMv40s=
   dependencies:
     minimist "^0.1.0"
+
+yarn-lockfile@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/yarn-lockfile/-/yarn-lockfile-1.1.1.tgz#3e58898c601f3d2511e2b2abb4638088918849e9"
+  integrity sha512-IxrY3PqAoensmJ6a+klUMQnpfF9REjUJcCgyHs9GKK97RMl8jnvVrbJx5S7dmkC+X8DI03mzWuoeTjrnIfQ3dA==
+  dependencies:
+    "@yarnpkg/lockfile" "*"
 
 yauzl@2.10.0, yauzl@^2.10.0, yauzl@^2.7.0:
   version "2.10.0"

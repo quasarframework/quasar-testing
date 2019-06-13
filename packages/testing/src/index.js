@@ -74,8 +74,8 @@ module.exports = async function(api) {
       }
     })
 
-    // If --dev was passed or e2e / security tests are being run
-    if (args.dev != null || args.e2e.length > 0 || args.security.length > 0) {
+    // If --dev was passed or e2e / security-zap tests are being run
+    if (args.dev != null || args.e2e.length > 0 || args.security.includes('zap')) {
       // Start dev server
       // TODO: use interactive output
       if (args.dev === true || typeof args.dev === 'undefined' ) args.dev = 'spa'
@@ -157,24 +157,51 @@ module.exports = async function(api) {
           const { runnerCommand: runnerCommandString } =
             testingConfig[`${type}-${runner}`] || runner
 
-          const runnerCommandArgs = runnerCommandString
-            // Set server url
-            .replace('${serverUrl}', serverUrl)
-            .split(' ')
-          // Remove first arg, that is the command
-          const runnerCommand = runnerCommandArgs.shift()
-          // Mix user args and runner args
-          const finalArgs = [...runnerCommandArgs, ...userArgs]
-          console.log('$', runner, finalArgs.join(' '))
-          const testRunner = execa(runnerCommand, finalArgs, {
-            stdio: 'inherit'
-          })
-          testRunner.on('exit', code => {
-            if (code !== 0) {
-              failedRunners.push(runner)
+          // Has the user defined a function to run?
+          if (runnerCommandString.startsWith('script:')) {
+            const scriptToRun = runnerCommandString.replace('script:', '')
+            console.log(chalk` {green app:extension:} Running ${scriptToRun}`)
+
+            try {
+              let fn = require(scriptToRun)
+              if (typeof fn === 'function') {
+                fn(api, resolve)
+              } else {
+                console.log(chalk`  {bold
+                {bgRed Script does not export function.}
+                Expecting \`module.exports = (api, resolve) => \{ \}\`
+                Skipping test.
+                }`)
+                resolve()
+              }
+            } catch (e) {
+              console.log(chalk`  {bold
+                {bgRed Invalid script defined.}
+                Script not found.
+                Skipping test.
+                }`)
+              resolve()
             }
-            resolve()
-          })
+          } else {
+            const runnerCommandArgs = runnerCommandString
+            // Set server url
+                .replace('${serverUrl}', serverUrl)
+                .split(' ')
+            // Remove first arg, that is the command
+            const runnerCommand = runnerCommandArgs.shift()
+            // Mix user args and runner args
+            const finalArgs = [...runnerCommandArgs, ...userArgs]
+            console.log('$', runner, finalArgs.join(' '))
+            const testRunner = execa(runnerCommand, finalArgs, {
+              stdio: 'inherit'
+            })
+            testRunner.on('exit', code => {
+              if (code !== 0) {
+                failedRunners.push(runner)
+              }
+              resolve()
+            })
+          }
         })
 
       for (const runner of args.unit) {

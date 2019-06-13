@@ -38,6 +38,10 @@ module.exports = function() {
         {
           name: 'Security Testing (OWASP ZAP HUD)',
           value: 'security'
+        },
+        {
+          name: 'Security Anti-Vulnerability',
+          value: 'security-antivuln'
         }
       ]
     }
