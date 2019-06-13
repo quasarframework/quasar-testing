@@ -1,19 +1,20 @@
 {
   "name": "@quasar/quasar-app-extension-testing-security-antivuln",
   "version": "1.0.0-alpha.1",
-  "description": "A Quasar App Extension for checking no packages are vulnerability threats",
-  "author": "webnoob <allangaunt@gmail.com>",
   "license": "MIT",
+  "description": "A Quasar App Extension for checking that no packages are vulnerability threats",
+  "author": "webnoob <allangaunt@gmail.com>",
   "main": "src/index.js",
-  "scripts": {
-    "test": "echo \"No test specified\" && exit 0"
-  },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/quasarframework/quasar-testing"
   },
-  "bugs": "",
-  "homepage": "",
+  "scripts": {
+    "test": "snyk test && echo \"No test specified\" && exit 0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
     "node": ">= 8.9.0",
     "npm": ">= 5.6.0",
@@ -21,6 +22,10 @@
   },
   "dependencies": {
     "semver": "^6.1.1",
-    "yarn-lockfile": "^1.1.1"
+    "yarn-lockfile": "^1.1.1",
+    "fs-extra": "^8.0.1"
+  },
+  "devDependencies": {
+    "snyk": "^1.178.1"
   }
 }
