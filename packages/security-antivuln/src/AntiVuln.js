@@ -1,6 +1,6 @@
 const axios = require('axios')
 const path = require('path')
-const fs = require('fs')
+const fs = require('fs-extra')
 const lockfile = require('@yarnpkg/lockfile')
 const semver = require('semver')
 const chalk = require('chalk')
@@ -25,13 +25,22 @@ module.exports = class AntiVuln {
   Url: {bgGreen ${advisoryPackage.url}}
   Detail: {green ${advisoryPackage.overview}}
  }
- `
+`
     )
   }
 
   // This will return just the package name from the package string i.e
   // @ava/babel-plugin-throws-helper@^3.0.0 will return "babel-plugin-throws-helper"
   // @ava/babel-plugin-throws-helper will return "babel-plugin-throws-helper"
+
+	/**
+	 * Get the package from the key provided
+	 * @example
+	 * // returns "babel-plugin-throws-helper"
+	 * getPackageFromKey('@ava/babel-plugin-throws-helper@^3.0.0')
+	 * @param {String} key
+	 * @returns {*|string}
+	 */
   getPackageFromKey (key) {
     let result = key
     if (result[0] === '@') result = key.substring(1)
