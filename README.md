@@ -177,6 +177,10 @@ The `Lighthouse` tool can help you identify issues with your PWA app, but only i
 
 `Node License Finder (nlf)` is a free tool you can use to catalog all the licenses of the hundreds of open-source projects you are using in your project.
 
+### Security Auditing
+
+Dependency Scanning using [Anti-Vulnerability Scanner](https://github.com/quasarframework/quasar-testing/blob/dev/packages/security-antivuln/README.md)
+
 ### Where is `%_my_darling_%` harness?
 
 There will be more and more test-harnesses coming as time permits. If you would like to help us add official harnesses, please get in touch on Discord. Do not merely make a PR, as there are several people working in private forks and it is likely that the harness you are interested in may already be in some stage of development.
@@ -289,6 +293,7 @@ Contributions to this repository are highly desirable. Before you make a PR, ple
 
 - [nothingismagick](https://github.com/nothingismagick)
 - [nklayman](https://github.com/nklayman)
+- [Allan Gaunt](https://github.com/webnoob)
 - [andreiTn](https://github.com/andreiTn)
 - [fansanelli](https://github.com/fansanelli)
 - mgibson91

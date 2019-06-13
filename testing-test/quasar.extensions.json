@@ -20,7 +20,15 @@
   },
   "@quasar/testing": {
     "harnesses": [
-      "unit-jest"
+      "unit-jest",
+      "security-antivuln"
+    ]
+  },
+  "@quasar/testing-security-antivuln": {
+    "options": [
+      "runOnDev",
+      "runOnBuild",
+      "strict"
     ]
   }
 }

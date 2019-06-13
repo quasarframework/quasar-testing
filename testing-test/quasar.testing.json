@@ -7,5 +7,8 @@
   },
   "security-zap": {
     "runnerCommand": "bash ./zap/ZAP_D-2019-05-15/zap.sh -daemon -port 7777 -hud -nostdout -hudurl ${serverUrl} -hudbrowser Firefox"
+  },
+  "security-antivuln": {
+    "runnerCommand": "script:../../security-antivuln/src/runner.js"
   }
 }
