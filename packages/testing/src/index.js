@@ -175,12 +175,17 @@ module.exports = async function(api) {
                 resolve()
               }
             } catch (e) {
-              console.log(chalk`  {bold
-                {bgRed Invalid script defined.}
-                Script not found.
-                Skipping test.
-                }`)
-              resolve()
+              if (e.code === 'MODULE_NOT_FOUND') {
+                console.log(chalk`  {bold
+                  {bgRed Invalid script defined.}
+                  Script not found.
+                  Skipping test.
+                  }`)
+                resolve()
+              } else {
+                console.log(e)
+                process.exit(0)
+              }
             }
           } else {
             const runnerCommandArgs = runnerCommandString
