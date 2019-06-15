@@ -1,8 +1,9 @@
 @quasar/testing-security-antivuln
 ===
 
-> This testing app extension will scan your installed dependencies (the entire chain) and compare them with the list of 
-> advisories found here: https://www.npmjs.com/advisories warning you if any are unsafe.
+> This testing app extension utilizes the [Quasar AntiVuln package](#https://github.com/quasarframework/quasar-testing/tree/dev/packages/security-antivuln-module) and will scan your installed dependencies 
+> (the entire chain) comparing them with the list of advisories found here: https://www.npmjs.com/advisories warning 
+> you if any are unsafe.
 
 # Install
 Installation *should* be done via the `@quasar/testing` mono repo using 
@@ -55,7 +56,7 @@ quasar test --security antivuln
 
 And you will see output similar to (albeit with a little more color):
 
-```powershell
+```bash
 Security Alert: [high] [ids-enterprise]
   Type: Cross-Site Scripting
   Advisory Version: <4.18.2

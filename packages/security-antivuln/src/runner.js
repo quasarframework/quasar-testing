@@ -1,7 +1,7 @@
-const AntiVuln = require('./AntiVuln')
+const AntiVuln = require('@quasar/security-antivuln').antiVulnLib
 
 module.exports = (api, resolve) => {
-  const antiVuln = new AntiVuln(api)
+  const antiVuln = AntiVuln(api.appDir)
   antiVuln.run().then(() => {
     resolve()
   }).catch(() => {

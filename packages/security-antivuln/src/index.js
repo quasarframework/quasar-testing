@@ -5,11 +5,11 @@
  * API: https://github.com/quasarframework/quasar/blob/master/app/lib/app-extension/IndexAPI.js
  */
 
-const AntiVuln = require('./AntiVuln')
+const AntiVuln = require('@quasar/security-antivuln').antiVulnLib
 
 module.exports = async function (api) {
   try {
-    const antiVuln = new AntiVuln(api)
+    const antiVuln = AntiVuln(api.appDir)
     if (
       (api.ctx.dev && api.prompts.options.includes('runOnDev')) ||
       (api.ctx.prod && api.prompts.options.includes('runOnBuild'))
