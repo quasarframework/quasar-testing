@@ -3,7 +3,15 @@ import { createLocalVue, shallowMount } from 'test-utils'
 
 import Vuex from 'vuex'
 import VueRouter from 'vue-router'
-import Quasar, { Cookies } from 'quasar'
+import * as All from 'quasar'
+const { Quasar, cookies } = All
+const components = Object.keys(All).reduce((object, key) => {
+  const val = All[key]
+  if (val && val.component && val.component.name != null) {
+    object[key] = val
+  }
+  return object
+}, {})
 
 const mockSsrContext = () => {
   return {
@@ -23,7 +31,7 @@ export const mountQuasar = (component, options = {}) => {
 
   localVue.use(Vuex)
   localVue.use(VueRouter)
-  localVue.use(Quasar)
+  localVue.use(Quasar, { components })
   const store = new Vuex.Store({})
   const router = new VueRouter()
 
