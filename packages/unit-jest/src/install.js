@@ -38,7 +38,11 @@ function __mergeDeep(...sources) {
 }
 
 // make sure the object exists
-let extendPackageJson = {}
+let extendPackageJson = {
+  devDependencies: {
+    'eslint-plugin-jest': '^23.8.2'
+  }
+}
 
 module.exports = function (api) {
   api.render('./base', {}, true)

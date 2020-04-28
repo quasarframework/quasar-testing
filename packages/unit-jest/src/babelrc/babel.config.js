@@ -1,3 +1,4 @@
+/* eslint-env node */
 const fs = require('fs-extra')
 let extend = undefined
 
