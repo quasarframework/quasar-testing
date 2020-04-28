@@ -20,6 +20,9 @@ module.exports = function (api) {
         scripts: {
           "test:e2e": "cypress open",
           "test:e2e:CI": "cypress run"
+        },
+        devDependencies: {
+          'eslint-plugin-cypress': '^2.10.3'
         }
       })
     }
