@@ -33,8 +33,12 @@ module.exports = function () {
       message: 'Jest Unit testing will now be installed. Please choose additional options:',
       choices: [
 	      {
-		      name: 'extra "scripts" in your package.json',
+		      name: 'Extra "scripts" in your package.json',
 		      value: 'scripts'
+        },
+        {
+		      name: 'TypeScript support',
+		      value: 'typescript'
 	      },
         {
           name: 'SFC webpack <test> loader',

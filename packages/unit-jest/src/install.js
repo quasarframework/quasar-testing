@@ -45,13 +45,15 @@ let extendPackageJson = {
 }
 
 module.exports = function (api) {
-  api.render('./base', {}, true)
-
   api.extendJsonFile('quasar.testing.json', {
     'unit-jest': {
       runnerCommand: 'jest'
     }
   })
+  
+  api.render('./base', {}, true)
+
+  api.render(`./${ api.prompts.options.includes('typescript') ? '' : 'no-' }typescript`)
 
   api.prompts.options.forEach((val) => {
     if (val === 'SFC') {
@@ -84,6 +86,24 @@ module.exports = function (api) {
         }
       }
       return extendPackageJson = __mergeDeep(extendPackageJson, scripts)
+    }
+    else if (val === 'typescript') {
+      // We'll need to specify additional "types" for global objects
+      //  until Quasar UI is written natively with TS
+      //  or we move typings into a `@types/quasar` package
+      // This happens because the preset must use "types: ['quasar']",
+      //  check details into `@quasar/app/tsconfig-preset.json` 
+      api.extendJsonFile('tsconfig.json', {
+        compilerOptions: {
+          // TODO: this should actually work out-of-the-box the same option
+          //  is provided into tsconfig-preset, but "vue-jest"
+          //  doesn't process inherited tsconfig due to its usage of a very old package.
+          // Every should be solved when "vue-jest" v4 (which will use "ts-jest") will be released.
+          // See: https://github.com/vuejs/vue-jest/issues/144#issuecomment-621290457
+          esModuleInterop: true,
+          types: ['quasar', 'jest']
+        }
+      })
     }
   })
   api.extendPackageJson(extendPackageJson)
