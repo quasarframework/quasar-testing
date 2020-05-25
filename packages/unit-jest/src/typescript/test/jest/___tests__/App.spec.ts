@@ -35,9 +35,6 @@ describe('Mount Quasar', () => {
   const wrapper = mount(QBtnDemo, { localVue });
   const vm = wrapper.vm;
 
-  it('passes the sanity check and creates a wrapper', () => {
-    expect(wrapper.isVueInstance()).toBe(true);
-  });
 
   it('has a created hook', () => {
     expect(typeof vm.increment).toBe('function');
@@ -59,12 +56,5 @@ describe('Mount Quasar', () => {
     const button = wrapper.find('button');
     button.trigger('click');
     expect(vm.counter).toBe(1);
-  });
-
-  it('formats a date without throwing exception', () => {
-    // test will automatically fail if an exception is thrown
-    // MMMM and MMM require that a language is 'installed' in Quasar
-    const formattedString = date.formatDate(Date.now(), 'YYYY MMMM MMM DD');
-    console.log('formattedString', formattedString);
   });
 });

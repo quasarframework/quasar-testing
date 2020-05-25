@@ -15,9 +15,10 @@ const factory = (propsData: any = {}) => {
 };
 
 describe('QBtnDemo', () => {
-  test('is a Vue instance', () => {
+  // DUMMY test, you should remove this and add your own tests
+  test('mounts without errors', () => {
     const wrapper = factory(); // <= when no props are needed
     // const wrapper = factory({ propName: propValue }); <= when props are needed
-    expect(wrapper.isVueInstance()).toBeTruthy();
+    expect(wrapper).toBeTruthy();
   });
 });
