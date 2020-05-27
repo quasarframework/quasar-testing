@@ -21,7 +21,9 @@
     "yarn": ">= 1.6.0"
   },
   "dependencies": {
-    "cypress": "^3.3.1"
+    "cypress": "^4.6.0",
+    "start-server-and-test": "^1.11.0",
+    "cross-env": "^7.0.2"
   },
   "devDependencies": {
     "snyk": "^1.170.0"

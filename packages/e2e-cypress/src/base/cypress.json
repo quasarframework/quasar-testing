@@ -6,13 +6,5 @@
   "screenshotsFolder": "test/cypress/screenshots",
   "supportFile": "test/cypress/support/index.js",
   "videosFolder": "test/cypress/videos",
-  "video": true,
-  "json.schemas": [
-    {
-      "fileMatch": [
-        "cypress.json"
-      ],
-      "url": "https://on.cypress.io/cypress.schema.json"
-    }
-  ]
+  "video": true
 }
