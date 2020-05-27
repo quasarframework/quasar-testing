@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-testing-e2e-cypress",
-  "version": "1.0.0-beta.11",
+  "version": "1.0.0-beta.12",
   "license": "MIT",
   "description": "A Quasar App Extension for Cypress e2e",
   "author": "Daniel Thompson-Yvetot",
@@ -21,9 +21,9 @@
     "yarn": ">= 1.6.0"
   },
   "dependencies": {
+    "cross-env": "^7.0.2",
     "cypress": "^4.6.0",
-    "start-server-and-test": "^1.11.0",
-    "cross-env": "^7.0.2"
+    "start-server-and-test": "^1.11.0"
   },
   "devDependencies": {
     "snyk": "^1.170.0"
