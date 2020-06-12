@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "cross-env": "^7.0.2",
-    "cypress": "^4.6.0",
+    "cypress": "^4.8.0",
     "start-server-and-test": "^1.11.0"
   },
   "devDependencies": {
