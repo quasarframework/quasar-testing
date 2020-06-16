@@ -40,7 +40,7 @@ module.exports = async function(api) {
       if (!testingConfig[`unit-${runner.split(' ')[0]}`]) {
         // TODO: install instructions for non-scoped extension
         console.error(
-          chalk`You tried to run tests with {bold ${runner}}, but it is not installed. Please install @quasar/quasar-app-extension-unit-${runner} with {bold quasar ext --add @quasar/testing-unit-${runner}}`
+          chalk`You tried to run tests with {bold ${runner}}, but it is not installed. Please install @quasar/quasar-app-extension-unit-${runner} with {bold quasar ext add @quasar/testing-unit-${runner}}`
         )
         process.exit(1)
       }
@@ -54,7 +54,7 @@ module.exports = async function(api) {
       if (!testingConfig[`e2e-${runner.split(' ')[0]}`]) {
         // TODO: install instructions for non-scoped extension
         console.error(
-          chalk`You tried to run tests with {bold ${runner}}, but it is not installed. Please install @quasar/quasar-app-extension-e2e-${runner} with {bold quasar ext --add @quasar/testing-e2e-${runner}}`
+          chalk`You tried to run tests with {bold ${runner}}, but it is not installed. Please install @quasar/quasar-app-extension-e2e-${runner} with {bold quasar ext add @quasar/testing-e2e-${runner}}`
         )
         process.exit(1)
       }
@@ -68,7 +68,7 @@ module.exports = async function(api) {
       if (!testingConfig[`security-${runner.split(' ')[0]}`]) {
         // TODO: install instructions for non-scoped extension
         console.error(
-          chalk`You tried to run security tests with {bold ${runner}}, but it is not installed. Please install @quasar/quasar-app-extension-security with {bold quasar ext --add @quasar/testing-security}`
+          chalk`You tried to run security tests with {bold ${runner}}, but it is not installed. Please install @quasar/quasar-app-extension-security with {bold quasar ext add @quasar/testing-security}`
         )
         process.exit(1)
       }
