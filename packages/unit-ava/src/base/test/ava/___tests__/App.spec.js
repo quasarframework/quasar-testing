@@ -11,7 +11,7 @@ const wrapper = mount(QButton, {
 const vm = wrapper.vm
 
 test('passes the sanity check and creates a wrapper', t => {
-  t.true(wrapper.isVueInstance())
+  t.truthy(wrapper)
 })
 
 test('has a created hook', t => {
