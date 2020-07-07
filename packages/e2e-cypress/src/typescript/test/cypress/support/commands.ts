@@ -32,6 +32,24 @@ declare namespace Cypress {
      * @example cy.dataCy('greeting')
      */
     dataCy(value: string): Chainable<Element>;
+
+    /**
+     * Custom command to test being on a given route.
+     * @example cy.testRoute('home')
+     */
+    testRoute(value: string): void;
+
+    /**
+     * Persist current local storage data.
+     * @example cy.saveLocalStorage()
+     */
+    saveLocalStorage(): void;
+
+    /**
+     * Restore saved data to local storage.
+     * @example cy.restoreLocalStorage()
+     */
+    restoreLocalStorage(): void;
   }
 }
 
@@ -43,7 +61,7 @@ Cypress.Commands.add('dataCy', (value: string) => {
   return cy.get(`[data-cy=${value}]`);
 });
 
-Cypress.Commands.add('testRoute', route => {
+Cypress.Commands.add('testRoute', (route: string) => {
   cy.location().should(loc => {
     expect(loc.hash).to.contain(route);
   });

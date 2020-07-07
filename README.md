@@ -108,6 +108,7 @@ We have included the optional ability to place your test code inside your vue fi
 > You may notice that your IDE doesn't know how to parse the test block, so go into the `<test/>` block, press `<alt> + <enter>`, select 'inject language or reference' and select `javascript`. This will grant `<test/>` blocks autocomplete.
 
 #### Options
+
 You can choose to install Wallaby.js to do inline testing. Although it is not freeware, it is an amazing tool and comes highly recommended. https://wallabyjs.com
 You can choose to install Majestic, which is a UI interface to see how your tests are doing. https://github.com/Raathigesh/majestic
 
@@ -137,7 +138,7 @@ We have included the optional ability to place your test code inside your vue fi
 
 ## e2e Testing
 
-We recommend testing webapps with Cypress - but if you are building for multiple platforms (electron, cordova and web), then it's a good idea to use webdriver.io.
+We recommend testing webapps with Cypress if you target Chrome-based browsers (Chrome, Edge, Electron) or Firefox - but if you want to test Safari, IE or Cordova apps, then you should consider using webdriver.io.
 
 ### [Cypress](https://www.cypress.io/)
 
@@ -147,7 +148,11 @@ $ quasar ext add @quasar/testing-e2e-cypress
 
 > You must have a running dev server in order to run integration tests. Be sure to either set the `"baseUrl"` in the `/cypress.json` file or use the `test` command provided by the base `@quasar/testing` extension.
 
-We actually recommend installing Cypress globally, because otherwise it is a pretty large package to weigh down the already [heaviest thing in the universe](https://i.redd.it/tfugj4n3l6ez.png).
+We provide you some custom commands out-of-the-box, expecially:
+
+- `dataCy`: implements the [selection best practice](https://docs.cypress.io/guides/references/best-practices.html#Selecting-Elements) to avoid brittle tests, `cy.dataCy('my-data-id')` is equivalent to `cy.get('[data-cy=my-data-id]')`;
+- `testRoute`: checks the current page by testing if the URL hash contains the provided string, used as `cy.testRoute('home')`;
+- `saveLocalStorage`/`restoreLocalStorage`: save and restore local storage between tests, used as `cy.saveLocalStorage()` or `cy.restoreLocalStorage()`.
 
 ### [WebDriver.io](https://webdriver.io/) (wdio)
 

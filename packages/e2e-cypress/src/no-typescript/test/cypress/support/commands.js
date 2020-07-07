@@ -28,6 +28,12 @@ Cypress.Commands.add("dataCy", (value) => {
   return cy.get(`[data-cy=${value}]`);
 });
 
+Cypress.Commands.add("testRoute", (route) => {
+  cy.location().should((loc) => {
+    expect(loc.hash).to.contain(route);
+  });
+});
+
 // these two commands let you persist local storage between tests
 const LOCAL_STORAGE_MEMORY = {};
 
@@ -40,11 +46,5 @@ Cypress.Commands.add("saveLocalStorage", () => {
 Cypress.Commands.add("restoreLocalStorage", () => {
   Object.keys(LOCAL_STORAGE_MEMORY).forEach((key) => {
     localStorage.setItem(key, LOCAL_STORAGE_MEMORY[key]);
-  });
-});
-
-Cypress.Commands.add("testRoute", (route) => {
-  cy.location().should((loc) => {
-    expect(loc.hash).to.contain(route);
   });
 });
