@@ -39,7 +39,7 @@ declare namespace Cypress {
 //  more robust with respect to codebase changes
 // TODO: remove when https://github.com/cypress-io/cypress/issues/7510 is released
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
-Cypress.Commands.add('dataCy', value => {
+Cypress.Commands.add('dataCy', (value: string) => {
   return cy.get(`[data-cy=${value}]`);
 });
 
@@ -55,6 +55,7 @@ const LOCAL_STORAGE_MEMORY: Record<string, any> = {};
 
 Cypress.Commands.add('saveLocalStorage', () => {
   Object.keys(localStorage).forEach(key => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     LOCAL_STORAGE_MEMORY[key] = localStorage[key];
   });
 });
