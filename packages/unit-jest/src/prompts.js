@@ -34,7 +34,8 @@ module.exports = function () {
       choices: [
 	      {
 		      name: 'Extra "scripts" in your package.json',
-		      value: 'scripts'
+          value: 'scripts',
+          checked: true
         },
         {
 		      name: 'TypeScript support',
