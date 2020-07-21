@@ -6,7 +6,7 @@ import QBtnDemo from './demo/QBtn-demo';
 
 // import langEn from 'quasar/lang/en-us' // change to any language you wish! => this breaks wallaby :(
 
-const { Quasar, date } = All;
+const { Quasar } = All;
 
 function isComponent(value: unknown): value is VueConstructor {
   return (
