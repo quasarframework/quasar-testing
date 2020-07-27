@@ -1,4 +1,3 @@
-import VueCompositionApi from '@vue/composition-api';
 import { createLocalVue, shallowMount, mount, Wrapper } from '@vue/test-utils';
 import { Cookies, Quasar, QuasarPluginOptions } from 'quasar';
 import Vue, { ComponentOptions, PluginObject } from 'vue';
@@ -29,6 +28,7 @@ interface QuasarMountOptions {
   // We'll check if the situation gets better with Vue3 typings
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   propsData?: Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   plugins?: PluginObject<any>[];
 }
 
