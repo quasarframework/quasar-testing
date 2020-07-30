@@ -9,9 +9,9 @@ This AE is meant to manage Quasar and Jest integration for you, both for JS and 
 We have included:
 
 - a preset configuration file (`jest.config.js`);
-- a setup file with some common pattern you may want to enable (`/test/jest/jest.setup.js`);
-- `mountQuasar` and `mountFactory` helpers which wraps `mount`/`shallowMount` "@vue/test-utils";
-- two example components (`App.spec` using Vue native `mount` helper, `QBtnDemo` using `mountQuasar` and DFC fashion);
+- a setup file with some common patterns you may want to enable (`/test/jest/jest.setup.js`);
+- `mountQuasar` and `mountFactory` helpers which wrap `mount`/`shallowMount` "@vue/test-utils";
+- two example components (`App.spec` using Vue native `mount` helper, `QBtnDemo` using `mountQuasar` and [Double File Component](#double-file-components-dfc) fashion);
 - some useful `package.json` scripts;
 - Babel integration;
 - TypeScript support.
@@ -19,7 +19,7 @@ We have included:
 ## mountQuasar(component, options)
 
 Quasar packs quite a lot of features and configuring correctly `mount`/`shallowMount` to work on Quasar CLI projects isn't trivial.
-This function incapsulate the configuration needed to bring you up-and-running.
+This function incapsulates the configuration needed to bring you up-and-running.
 
 Usage:
 
@@ -51,15 +51,15 @@ The second parameter accepts a configuration object with the following propertie
 - `mount` (object): the configuration object you'd usually provide to `mount` or `shallowMount` helpers;
 - `mount.shallow` (boolean): determine which mount helper should be used between `mount` or `shallowMount`, the latter is used by default;
 - `quasar` (object): Quasar plugin configuration options, you'll mainly use this to register the Quasar components which must be stubbed;
-- `ssr` (boolean): wheter SSR mocks shall be added or not;
+- `ssr` (boolean): whether SSR mocks shall be added or not;
 - `cookies` (object): provide cookies which must be present while testing;
 - `propsData` (object): initial props of the component;
 - `plugins` (array): Vue plugins which must be added to the localVue instance (eg. `Vuex`, `VueRouter`, `VueCompositionApi`, etc).
 
 ## mountFactory(component, options)
 
-Most of the times `mountQuasar` configuration will be the same for all tests inside a test-suite, while initial props will change.
-`mountFactory` address this scenario: it accepts the same parameters as `mountQuasar`, but returns a function accepting a `propsData` object and returning a wrapper instance.
+Most of the time `mountQuasar` configuration will be the same for all tests inside a test-suite, while initial props will change.
+`mountFactory` addresses this scenario: it accepts the same parameters as `mountQuasar`, but returns a function accepting a `propsData` object and returning a wrapper instance.
 
 Usage:
 
@@ -84,7 +84,7 @@ describe("BookshelfComponent", () => {
 
 ## AE Options
 
-We have included the optional ability to place your test code inside your vue files, should you choose to do so. It will be rendered by webpack HMR. To run these tests, run `$ quasar test --unit jest --dev` (require you to use `@quasar/app-extension-testing` to manage testing harnesses).
+We have included the optional ability to place your test code inside your vue files, should you choose to do so. It will be rendered by webpack HMR. To run these tests, run `$ quasar test --unit jest --dev` (requires you to use `@quasar/app-extension-testing` to manage testing harnesses).
 
 ```
 <test lang="jest">
