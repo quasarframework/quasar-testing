@@ -1,3 +1,5 @@
+const esModules = ['quasar/lang', 'lodash-es'].join('|');
+
 module.exports = {
   globals: {
     __DEV__: true,
@@ -48,6 +50,6 @@ module.exports = {
     // '.*\\.vue$': '<rootDir>/node_modules/@quasar/quasar-app-extension-testing-unit-jest/node_modules/vue-jest',
     // '.*\\.js$': '<rootDir>/node_modules/@quasar/quasar-app-extension-testing-unit-jest/node_modules/babel-jest'
   },
-  transformIgnorePatterns: ["<rootDir>/node_modules/(?!quasar/lang)"],
+  transformIgnorePatterns: [`<rootDir>/node_modules/(?!(${esModules}))`],
   snapshotSerializers: ["<rootDir>/node_modules/jest-serializer-vue"],
 };

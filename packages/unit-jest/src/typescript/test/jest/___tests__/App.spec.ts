@@ -18,7 +18,7 @@ function isComponent(value: unknown): value is VueConstructor {
 
 const components = Object.keys(All).reduce<{ [index: string]: VueConstructor }>(
   (object, key) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
     const val = (All as any)[key];
     if (isComponent(val)) {
       object[key] = val;
@@ -34,7 +34,6 @@ describe('Mount Quasar', () => {
 
   const wrapper = mount(QBtnDemo, { localVue });
   const vm = wrapper.vm;
-
 
   it('has a created hook', () => {
     expect(typeof vm.increment).toBe('function');
@@ -54,6 +53,7 @@ describe('Mount Quasar', () => {
 
   it('correctly updates data when button is pressed', () => {
     const button = wrapper.find('button');
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     button.trigger('click');
     expect(vm.counter).toBe(1);
   });

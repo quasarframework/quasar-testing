@@ -10,11 +10,13 @@ We have included:
 
 - a preset configuration file (`jest.config.js`);
 - a setup file with some common patterns you may want to enable (`/test/jest/jest.setup.js`);
-- `mountQuasar` and `mountFactory` helpers which wrap `mount`/`shallowMount` "@vue/test-utils";
+- `mountQuasar` and `mountFactory` helpers which wrap `mount`/`shallowMount` from "@vue/test-utils";
 - two example components (`App.spec` using Vue native `mount` helper, `QBtnDemo` using `mountQuasar` and [Double File Component](#double-file-components-dfc) fashion);
 - some useful `package.json` scripts;
 - Babel integration;
 - TypeScript support.
+
+This AE is a wrapper around official "@vue/test-utils" package, you won't be able to use this or understand most of the documentation if you haven't read [the official documentation](https://vue-test-utils.vuejs.org/).
 
 ## mountQuasar(component, options)
 
@@ -48,13 +50,12 @@ describe("BookComponent", () => {
 
 The second parameter accepts a configuration object with the following properties
 
-- `mount` (object): the configuration object you'd usually provide to `mount` or `shallowMount` helpers;
-- `mount.shallow` (boolean): determine which mount helper should be used between `mount` or `shallowMount`, the latter is used by default;
+- `mount` (object): the configuration object you'd usually provide to `mount` or `shallowMount` helpers.
+- `mount.type` (`full` | `shallow`): determine which mount helper should be used between `mount` or `shallowMount`, the latter is used by default.
+- `mount.localVue` (Vue instance): the isolated Vue instance which must be used for the tests, if none is provided a clean one will be generated automatically. The latter is the more common scenario, most of the time you won't need to specify it.
 - `quasar` (object): Quasar plugin configuration options, you'll mainly use this to register the Quasar components which must be stubbed;
-- `ssr` (boolean): whether SSR mocks shall be added or not;
-- `cookies` (object): provide cookies which must be present while testing;
-- `propsData` (object): initial props of the component;
-- `plugins` (array): Vue plugins which must be added to the localVue instance (eg. `Vuex`, `VueRouter`, `VueCompositionApi`, etc).
+- `propsData` (object): initial props of the component, will be merged (with precedence) with `mount.propsData`;
+- `plugins` (array | multidimensional array): Vue plugins which must be added to the localVue instance (eg. `VueCompositionAPI`). If your plugin needs options, you can provide it as an array where the first element is the plugin itself and following elements are the options (eg. `[VueCompositionAPI, {...}]`).
 
 ## mountFactory(component, options)
 
@@ -97,6 +98,121 @@ You can choose to install Wallaby.js to do inline testing. Although it is not fr
 You can choose to install Majestic, which is a UI interface to see how your tests are doing. https://github.com/Raathigesh/majestic
 
 ## Caveats
+
+### Mock i18n
+
+If you're using `VueI18n`, you may want to mock translations. You can easily create Jest mocks for all translation functions and provide them into `options.mocks`.
+
+```ts
+import { mountFactory } from "app/test/jest/utils";
+import BookshelfComponent from "./BookshelfComponent";
+
+const $t = jest.fn();
+$t.mockReturnValue(""); // <= will always provide an empty string
+const $tc = jest.fn();
+const $n = jest.fn();
+const $d = jest.fn();
+
+const factory = mountFactory(BookshelfComponent, {
+  mount: {
+    mocks: { $t, $tc, $n, $d },
+  },
+});
+
+describe("BookshelfComponent", () => {
+  // ...
+});
+```
+
+### Testing QPage components
+
+`QPage` usually only work when placed inside a `QLayout` component because the latter provide some references to other layout components.
+You can use `qLayoutInjections` helper function to get an injection stub which will allow you to test `QPage`s in isolation.
+
+```ts
+import { mountFactory, qLayoutInjections } from "app/test/jest/utils";
+import BookshelfPage from "./BookshelfPage";
+
+const factory = mountFactory(BookshelfPage, {
+  mount: {
+    provide: qLayoutInjections(),
+  },
+});
+
+describe("BookshelfPage", () => {
+  // ...
+});
+```
+
+### Use with VueRouter
+
+You can use VueRouter adding it to a custom `localVue` instance you later provide into `options.mount.localVue`.
+
+```ts
+import { mountFactory } from "app/test/jest/utils";
+import VueRouter from "vue-router";
+import BookshelfPage from "./BookshelfPage";
+import { createLocalVue } from "@vue/test-utils";
+
+const localVue = createLocalVue();
+localVue.use(VueRouter);
+
+const factory = mountFactory(BookshelfPage, {
+  mount: {
+    localVue,
+    router: new VueRouter(),
+  },
+});
+
+describe("BookshelfPage", () => {
+  // ...
+});
+```
+
+### Use with Vuex
+
+You can use Vuex adding it to a custom `localVue` instance you later provide into `options.mount.localVue`.
+
+```ts
+import { mountFactory } from "app/test/jest/utils";
+import Vuex from "vuex";
+import BookshelfPage from "./BookshelfPage";
+import { createLocalVue } from "@vue/test-utils";
+
+const localVue = createLocalVue();
+localVue.use(Vuex);
+
+const factory = mountFactory(BookshelfPage, {
+  mount: {
+    localVue,
+    store: new Vuex({}),
+  },
+});
+
+describe("BookshelfPage", () => {
+  // ...
+});
+```
+
+### SSR context
+
+You could need an SSR context if your component uses `Cookies` plugin, `Platform` plugin or `preFetch` feature and you want to test how it behaves into SSR mode. In those cases, you can get a mock via `ssrContextMock`.
+
+### Cookies
+
+If you're testing `Cookies` usage into your app, you can use `setCookies` helper function. \
+If the test involves SSR mode, you can use `ssrContextMock` helper function to get a mock of the SSR context and provide it to `setCookies`.
+
+```ts
+import { getCookies, ssrContextMock } from "app/test/jest/utils";
+
+const cookies = {
+  // ...
+};
+
+setCookies(cookies);
+setCookies(cookies, ssrContextMock());
+```
 
 ### TypeScript limitations
 

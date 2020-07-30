@@ -1,37 +1,39 @@
+const esModules = ['quasar/lang', 'lodash-es'].join('|');
+
 /* eslint-env node */
 module.exports = {
   globals: {
-    __DEV__: true,
+    __DEV__: true
   },
-  setupFilesAfterEnv: ["<rootDir>/test/jest/jest.setup.ts"],
+  setupFilesAfterEnv: ['<rootDir>/test/jest/jest.setup.ts'],
   // noStackTrace: true,
   // bail: true,
   // cache: false,
   // verbose: true,
   // watch: true,
   collectCoverage: true,
-  coverageDirectory: "<rootDir>/test/jest/coverage",
+  coverageDirectory: '<rootDir>/test/jest/coverage',
   collectCoverageFrom: [
-    "<rootDir>/src/**/*.vue",
-    "<rootDir>/src/**/*.js",
-    "<rootDir>/src/**/*.ts",
-    "<rootDir>/src/**/*.jsx",
-    "<rootDir>/src/**/*.tsx",
+    '<rootDir>/src/**/*.vue',
+    '<rootDir>/src/**/*.js',
+    '<rootDir>/src/**/*.ts',
+    '<rootDir>/src/**/*.jsx',
+    '<rootDir>/src/**/*.tsx'
   ],
-  coveragePathIgnorePatterns: ["/node_modules/", ".d.ts$"],
+  coveragePathIgnorePatterns: ['/node_modules/', '.d.ts$'],
   coverageThreshold: {
     global: {
       //  branches: 50,
       //  functions: 50,
       //  lines: 50,
       //  statements: 50
-    },
+    }
   },
   testMatch: [
     // Matches tests in any subfolder of 'src' or into 'test/jest/__tests__'
     // Matches all files with extension 'js', 'jsx', 'ts' and 'tsx'
-    "<rootDir>/test/jest/__tests__/**/*.(spec|test).+(ts|js)?(x)",
-    "<rootDir>/src/**/*.jest.(spec|test).+(ts|js)?(x)",
+    '<rootDir>/test/jest/__tests__/**/*.(spec|test).+(ts|js)?(x)',
+    '<rootDir>/src/**/*.jest.(spec|test).+(ts|js)?(x)'
   ],
   // Extension-less imports of components are resolved to .ts files by TS,
   //  grating correct type-checking in test files.
@@ -40,29 +42,31 @@ module.exports = {
   //  in the same folder.
   // This guarantee a great dev experience both for testing and type-checking.
   // See https://github.com/vuejs/vue-jest/issues/188#issuecomment-620750728
-  moduleFileExtensions: ["vue", "js", "jsx", "json", "ts", "tsx"],
+  moduleFileExtensions: ['vue', 'js', 'jsx', 'json', 'ts', 'tsx'],
   moduleNameMapper: {
-    "^quasar$": "<rootDir>/node_modules/quasar/dist/quasar.common.js",
-    "^~/(.*)$": "<rootDir>/$1",
-    "^src/(.*)$": "<rootDir>/src/$1",
-    "^app/(.*)$": "<rootDir>/$1",
-    "^components/(.*)$": "<rootDir>/src/components/$1",
-    "^layouts/(.*)$": "<rootDir>/src/layouts/$1",
-    "^pages/(.*)$": "<rootDir>/src/pages/$1",
-    "^assets/(.*)$": "<rootDir>/src/assets/$1",
-    "^boot/(.*)$": "<rootDir>/src/boot/$1",
-    ".*css$": "<rootDir>/test/jest/utils/stub.css",
+    '^quasar$': '<rootDir>/node_modules/quasar/dist/quasar.common.js',
+    '^~/(.*)$': '<rootDir>/$1',
+    '^src/(.*)$': '<rootDir>/src/$1',
+    '^app/(.*)$': '<rootDir>/$1',
+    '^components/(.*)$': '<rootDir>/src/components/$1',
+    '^layouts/(.*)$': '<rootDir>/src/layouts/$1',
+    '^pages/(.*)$': '<rootDir>/src/pages/$1',
+    '^assets/(.*)$': '<rootDir>/src/assets/$1',
+    '^boot/(.*)$': '<rootDir>/src/boot/$1',
+    '.*css$': '<rootDir>/test/jest/utils/stub.css'
   },
   transform: {
-    "^.+\\.(ts|js|html)$": "ts-jest",
+    // See https://jestjs.io/docs/en/configuration.html#transformignorepatterns-array-string
+    [`^(${esModules}).+\\.js$`]: 'babel-jest',
+    '^.+\\.(ts|js|html)$': 'ts-jest',
     // vue-jest uses find-babel-file, which searches by this order:
     //  (async) .babelrc, .babelrc.js, package.json, babel.config.js
     //  (sync) .babelrc, .babelrc.js, babel.config.js, package.json
     // https://github.com/tleunen/find-babel-config/issues/33
-    ".*\\.vue$": "vue-jest",
-    ".+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$":
-      "jest-transform-stub",
+    '.*\\.vue$': 'vue-jest',
+    '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$':
+      'jest-transform-stub'
   },
-  transformIgnorePatterns: ["<rootDir>/node_modules/(?!quasar/lang)"],
-  snapshotSerializers: ["<rootDir>/node_modules/jest-serializer-vue"],
+  transformIgnorePatterns: [`<rootDir>/node_modules/(?!(${esModules}))`],
+  snapshotSerializers: ['<rootDir>/node_modules/jest-serializer-vue']
 };
