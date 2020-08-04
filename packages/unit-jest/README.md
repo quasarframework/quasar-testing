@@ -70,7 +70,7 @@ import { QBtn } from "quasar"; // <= cherry pick only the components you actuall
 import BookshelfComponent from "./BookshelfComponent"; // <= note the absence of `.vue` extension, here we are importing the JS/TS part of a Double File Component
 
 const factory = mountFactory(BookshelfComponent, {
-  // mount: { shallow: false } <= uncomment this line to use `mount`; `shallowMount` is used by default as it will stub all **registered** components found into the template
+  // mount: { type: 'full' } <= uncomment this line to use `mount`; `shallowMount` is used by default as it will stub all **registered** components found into the template
   quasar: { components: { QBtn } },
 });
 
