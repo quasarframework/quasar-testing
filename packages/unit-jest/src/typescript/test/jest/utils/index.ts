@@ -46,6 +46,30 @@ interface QuasarMountOptions {
   plugins?: (VuePlugin | [VuePlugin, ...VuePluginOptions])[];
 }
 
+function createLocalVueForQuasar({ quasar, plugins }: QuasarMountOptions) {
+  const localVue = createLocalVue();
+
+  // Quasar skips installation if it already went through it, but this applies to different Vue instances too
+  // Here we reset the installation flag to allow the plugin to be correctly installed on another Vue instance
+  Quasar.__qInstalled = undefined;
+  localVue.use(Quasar, quasar);
+
+  (plugins ?? []).forEach(pluginDescriptor => {
+    if (!Array.isArray(pluginDescriptor)) {
+      pluginDescriptor = [pluginDescriptor];
+    }
+
+    const [plugin, ...options] = pluginDescriptor;
+    localVue.use(plugin, ...options);
+  });
+
+  // (options.bootFunctions ?? []).forEach(bootFn => {
+  //   bootFn({ app, store, router, Vue: localVue, ssrContext });
+  // });
+
+  return localVue;
+}
+
 // We cannot infer component type from `shallowMount` using `Parameters<typeof shallowMount>`
 //  because it has overloads but the last signature isn't the most general one, while `Parameters<...>`
 //  will automatically resolve to the last signature thinking it's the most generic one.
@@ -63,18 +87,7 @@ export function mountQuasar<V extends Vue>(
   component: any,
   options: QuasarMountOptions = {}
 ): Wrapper<V> {
-  const localVue = options.mount?.localVue ?? createLocalVue();
-
-  localVue.use(Quasar, options.quasar);
-
-  (options.plugins ?? []).forEach(pluginDescriptor => {
-    if (!Array.isArray(pluginDescriptor)) {
-      pluginDescriptor = [pluginDescriptor];
-    }
-
-    const [plugin, ...options] = pluginDescriptor;
-    localVue.use(plugin, ...options);
-  });
+  const localVue = options.mount?.localVue ?? createLocalVueForQuasar(options);
 
   const mountFn = options.mount?.type === 'full' ? mount : shallowMount;
 
@@ -99,6 +112,14 @@ export function mountFactory<V extends Vue>(
 ): (propsData?: QuasarMountOptions['propsData']) => Wrapper<V>;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function mountFactory(component: any, options: QuasarMountOptions = {}) {
+  if (!options.mount || !options.mount.localVue) {
+    options.mount = {
+      ...options.mount,
+      // Cache localVue instance, as options cannot change anymore at this point
+      localVue: createLocalVueForQuasar(options)
+    };
+  }
+
   return (propsData?: QuasarMountOptions['propsData']) =>
     mountQuasar(component, {
       ...options,
