@@ -37,9 +37,9 @@ describe('Mount Quasar', () => {
     expect(defaultData2.counter).toBe(0)
   })
 
-  it('correctly updates data when button is pressed', () => {
+  it('correctly updates data when button is pressed', async () => {
     const button = wrapper.find('button')
-    button.trigger('click')
+    await button.trigger('click')
     expect(vm.counter).toBe(1)
   })
 })
