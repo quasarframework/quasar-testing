@@ -53,7 +53,7 @@ module.exports = {
     '^pages/(.*)$': '<rootDir>/src/pages/$1',
     '^assets/(.*)$': '<rootDir>/src/assets/$1',
     '^boot/(.*)$': '<rootDir>/src/boot/$1',
-    '.*css$': '<rootDir>/test/jest/utils/stub.css'
+    '.*css$': '@quasar/quasar-app-extension-testing-unit-jest/stub.css'
   },
   transform: {
     // See https://jestjs.io/docs/en/configuration.html#transformignorepatterns-array-string

@@ -1,4 +1,4 @@
-import { mountFactory } from 'app/test/jest/utils';
+import { mountFactory } from '@quasar/quasar-app-extension-testing-unit-jest';
 import { QBtn } from 'quasar'; // <= cherry pick only the components you actually use
 import QBtnDemo from './demo/QBtn-demo';
 

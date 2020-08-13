@@ -10,7 +10,7 @@ We have included:
 
 - a preset configuration file (`jest.config.js`);
 - a setup file with some common patterns you may want to enable (`/test/jest/jest.setup.js`);
-- `mountQuasar` and `mountFactory` helpers which wrap `mount`/`shallowMount` from "@vue/test-utils";
+- `mountQuasar` and `mountFactory` helpers which wrap mount functions from "@vue/test-utils";
 - two example components (`App.spec` using Vue native `mount` helper, `QBtnDemo` using `mountQuasar` and [Double File Component](#double-file-components-dfc) fashion);
 - some useful `package.json` scripts;
 - Babel integration;
@@ -26,7 +26,7 @@ This function incapsulates the configuration needed to bring you up-and-running.
 Usage:
 
 ```ts
-import { mountQuasar } from "app/test/jest/utils";
+import { mountQuasar } from "@quasar/quasar-app-extension-testing-unit-jest";
 import { QBtn } from "quasar"; // <= cherry pick only the components you actually use
 import BookComponent from "./BookComponent"; // <= note the absence of `.vue` extension, here we are importing the JS/TS part of a Double File Component
 
@@ -65,7 +65,7 @@ Most of the time `mountQuasar` configuration will be the same for all tests insi
 Usage:
 
 ```ts
-import { mountFactory } from "app/test/jest/utils";
+import { mountFactory } from "@quasar/quasar-app-extension-testing-unit-jest";
 import { QBtn } from "quasar"; // <= cherry pick only the components you actually use
 import BookshelfComponent from "./BookshelfComponent"; // <= note the absence of `.vue` extension, here we are importing the JS/TS part of a Double File Component
 
@@ -104,7 +104,7 @@ You can choose to install Majestic, which is a UI interface to see how your test
 If you're using `VueI18n`, you may want to mock translations. You can easily create Jest mocks for all translation functions and provide them into `options.mocks`.
 
 ```ts
-import { mountFactory } from "app/test/jest/utils";
+import { mountFactory } from "@quasar/quasar-app-extension-testing-unit-jest";
 import BookshelfComponent from "./BookshelfComponent";
 
 const $t = jest.fn();
@@ -130,7 +130,10 @@ describe("BookshelfComponent", () => {
 You can use `qLayoutInjections` helper function to get an injection stub which will allow you to test `QPage`s in isolation.
 
 ```ts
-import { mountFactory, qLayoutInjections } from "app/test/jest/utils";
+import {
+  mountFactory,
+  qLayoutInjections,
+} from "@quasar/quasar-app-extension-testing-unit-jest";
 import BookshelfPage from "./BookshelfPage";
 
 const factory = mountFactory(BookshelfPage, {
@@ -149,7 +152,7 @@ describe("BookshelfPage", () => {
 You can use VueRouter adding it to a custom `localVue` instance you later provide into `options.mount.localVue`.
 
 ```ts
-import { mountFactory } from "app/test/jest/utils";
+import { mountFactory } from "@quasar/quasar-app-extension-testing-unit-jest";
 import VueRouter from "vue-router";
 import BookshelfPage from "./BookshelfPage";
 import { createLocalVue } from "@vue/test-utils";
@@ -174,7 +177,7 @@ describe("BookshelfPage", () => {
 You can use Vuex adding it to a custom `localVue` instance you later provide into `options.mount.localVue`.
 
 ```ts
-import { mountFactory } from "app/test/jest/utils";
+import { mountFactory } from "@quasar/quasar-app-extension-testing-unit-jest";
 import Vuex from "vuex";
 import BookshelfPage from "./BookshelfPage";
 import { createLocalVue } from "@vue/test-utils";
@@ -204,7 +207,10 @@ If you're testing `Cookies` usage into your app, you can use `setCookies` helper
 If the test involves SSR mode, you can use `ssrContextMock` helper function to get a mock of the SSR context and provide it to `setCookies`.
 
 ```ts
-import { getCookies, ssrContextMock } from "app/test/jest/utils";
+import {
+  getCookies,
+  ssrContextMock,
+} from "@quasar/quasar-app-extension-testing-unit-jest";
 
 const cookies = {
   // ...

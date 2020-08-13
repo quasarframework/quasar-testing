@@ -9,6 +9,9 @@
     "url": "https://github.com/quasarframework/quasar-testing"
   },
   "scripts": {
+    "build": "rm -rf dist && tsc --declaration --declarationDir dist/types && copyfiles -f src/helpers/stub.css dist",
+    "deploy:beta": "yarn build && yarn publish --tag beta",
+    "deploy:latest": "yarn build && yarn publish --tag latest",
     "test:unit": "jest",
     "test:unit:watch": "jest --watch",
     "test": "snyk test && echo \"No test specified\" && exit 0"
@@ -16,7 +19,11 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "src/index.js",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "typings": "dist/types/index.d.ts",
   "engines": {
     "node": ">= 8.9.0",
     "npm": ">= 5.6.0",
@@ -42,6 +49,10 @@
     "vue-jest": "^3.0.6"
   },
   "devDependencies": {
-    "snyk": "^1.180.1"
+    "copyfiles": "^2.3.0",
+    "quasar": "^1.12.13",
+    "snyk": "^1.180.1",
+    "typescript": "^3.9.7",
+    "vue": "^2.6.11"
   }
 }
