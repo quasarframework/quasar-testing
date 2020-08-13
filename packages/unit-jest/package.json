@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-testing-unit-jest",
-  "version": "1.1.0-beta.4",
+  "version": "1.1.0-beta.5",
   "license": "MIT",
   "description": "A Quasar App Extension for running Jest tests",
   "author": "Daniel Thompson-Yvetot",
@@ -19,9 +19,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": [
-    "dist"
-  ],
   "main": "dist/index.js",
   "typings": "dist/types/index.d.ts",
   "engines": {
