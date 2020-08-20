@@ -91,12 +91,11 @@ module.exports = async function(api) {
         if (!e.killed) throw new Error(e)
       })
 
-      const killDevServer = hasFailed => {
-        if (!devServer) {
-          process.exit(hasFailed ? 1 : 0)
+      const beforeExit = hasFailed => {
+        if (devServer) {
+          devServer.kill()
         }
-
-        devServer.kill()
+        process.exit(hasFailed ? 1 : 0)
       }
 
       // Kill dev server on exit
@@ -131,14 +130,18 @@ module.exports = async function(api) {
             await startTests(
               // The dev server url
               data.match(doneRegex)[1],
-              killDevServer
+              beforeExit
             )
           }
         }
       })
     } else {
       // Just run tests without dev server
-      await startTests()
+      await startTests(
+        // ignore the dev server url
+        undefined,
+        beforeExit
+      )
     }
 
     async function startTests(serverUrl, callback) {
