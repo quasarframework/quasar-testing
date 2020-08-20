@@ -99,8 +99,8 @@ module.exports = async function(api) {
       }
 
       // Kill dev server on exit
-      process.on('SIGINT', killDevServer)
-      process.on('SIGTERM', killDevServer)
+      process.on('SIGINT', beforeExit)
+      process.on('SIGTERM', beforeExit)
 
       // Handle Ctrl+C on Windows
       if (process.platform === 'win32') {
