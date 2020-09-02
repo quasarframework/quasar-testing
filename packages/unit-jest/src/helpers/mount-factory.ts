@@ -2,7 +2,7 @@ import { Wrapper } from "@vue/test-utils";
 import Vue, { ComponentOptions } from "vue";
 import { VueClass, QuasarMountOptions } from "./models";
 import { createLocalVueForQuasar } from "./create-local-quasar";
-import { mountQuasar } from "./mount-quasar";
+import { mountWrapper } from "./mount-wrapper";
 
 export function mountFactory<V extends Vue>(
   component: VueClass<V>,
@@ -14,16 +14,11 @@ export function mountFactory<V extends Vue>(
 ): (propsData?: QuasarMountOptions["propsData"]) => Wrapper<V>;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function mountFactory(component: any, options: QuasarMountOptions = {}) {
-  if (!options.mount || !options.mount.localVue) {
-    options.mount = {
-      ...options.mount,
-      // Cache localVue instance, as options cannot change anymore at this point
-      localVue: createLocalVueForQuasar(options),
-    };
-  }
+  // Cache localVue instance, as options cannot change anymore at this point
+  const localVue = createLocalVueForQuasar(options);
 
   return (propsData?: QuasarMountOptions["propsData"]) =>
-    mountQuasar(component, {
+    mountWrapper(localVue, component, {
       ...options,
       propsData: { ...options.propsData, ...propsData },
     });

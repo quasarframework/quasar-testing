@@ -2,8 +2,8 @@ import { createLocalVue } from "@vue/test-utils";
 import { Quasar } from "quasar";
 import { QuasarMountOptions } from "./models";
 
-export function createLocalVueForQuasar({ quasar, plugins }: QuasarMountOptions): ReturnType<typeof createLocalVue> {
-    const localVue = createLocalVue();
+export function createLocalVueForQuasar({ quasar, plugins, mount }: QuasarMountOptions): ReturnType<typeof createLocalVue> {
+    const localVue = mount?.localVue ?? createLocalVue();
 
     // Quasar skips installation if it already went through it, but this applies to different Vue instances too
     // Here we reset the installation flag to allow the plugin to be correctly installed on another Vue instance
