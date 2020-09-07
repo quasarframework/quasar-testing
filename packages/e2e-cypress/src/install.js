@@ -73,6 +73,26 @@ module.exports = function (api) {
         }
       }
       return extendPackageJson = __mergeDeep(extendPackageJson, scripts)
+    } else if(val === 'typescript') {
+      const tsconfig = require(`${api.appDir}/tsconfig.json`)
+      
+      const exclude = []
+      
+      if (!tsconfig.exclude || !tsconfig.exclude.includes("test/cypress")) {
+        // Prevent clash of global Jest and Cypress types on Cypress tests
+        exclude.push("test/cypress")
+      }
+
+      // Specifying "exclude" property, if not already present, will overwrite the preset option
+      // We copy over the preset values to assure they are considered too
+      if (!tsconfig.exclude || tsconfig.exclude.length === 0) {
+        const { readFileSync } = require('fs')
+        const { parse } = require('json5')
+        const tsconfigPreset = parse(readFileSync(`${api.appDir}/node_modules/@quasar/app/tsconfig-preset.json`, { encoding: 'utf8' }))
+        exclude.push(...tsconfigPreset.exclude)
+      }
+
+      api.extendJsonFile("tsconfig.json", { exclude })
     }
   })
   
