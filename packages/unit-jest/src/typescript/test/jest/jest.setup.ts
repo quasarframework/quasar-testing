@@ -5,6 +5,7 @@ jest.setTimeout(1000)
 // jest speedup when errors are part of the game
 // Error.stackTraceLimit = 0
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 global.Promise = require('promise')
 
 /*

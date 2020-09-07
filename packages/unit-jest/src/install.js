@@ -88,11 +88,24 @@ module.exports = function (api) {
       return extendPackageJson = __mergeDeep(extendPackageJson, scripts)
     }
     else if (val === 'typescript') {
-      // We'll need to specify additional "types" for global objects
-      //  until Quasar UI is written natively with TS
-      //  or we move typings into a `@types/quasar` package
-      // This happens because the preset must use "types: ['quasar']",
-      //  check details into `@quasar/app/tsconfig-preset.json` 
+      const tsconfig = require(`${api.appDir}/tsconfig.json`)
+
+      const types = []
+      
+      if (!tsconfig.compilerOptions.types || !tsconfig.compilerOptions.types.includes("jest")) {
+        // Enable global Jest typings
+        types.push("jest")
+      }
+
+      // Specifying "compilerOptions.types" property, if not already present, will overwrite the preset option
+      // We copy over the preset values to assure they are considered too
+      if (!tsconfig.compilerOptions.types || tsconfig.compilerOptions.types.length === 0) {
+        const { readFileSync } = require('fs')
+        const { parse } = require('json5')
+        const tsconfigPreset = parse(readFileSync(`${api.appDir}/node_modules/@quasar/app/tsconfig-preset.json`, { encoding: 'utf8' }))
+        types.push(...tsconfigPreset.compilerOptions.types)
+      }
+
       api.extendJsonFile('tsconfig.json', {
         compilerOptions: {
           // TODO: this should actually work out-of-the-box the same option
@@ -101,7 +114,7 @@ module.exports = function (api) {
           // Every should be solved when "vue-jest" v4 (which will use "ts-jest") will be released.
           // See: https://github.com/vuejs/vue-jest/issues/144#issuecomment-621290457
           esModuleInterop: true,
-          types: ['quasar', 'jest']
+          types
         }
       })
     }

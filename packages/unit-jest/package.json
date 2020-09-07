@@ -39,6 +39,7 @@
     "jest": "^26.4.2",
     "jest-serializer-vue": "^2.0.2",
     "jest-transform-stub": "^2.0.0",
+    "json5": "^2.1.3",
     "loader-utils": "^1.2.3",
     "promise": "^8.1.0",
     "regenerator-runtime": "^0.13.7",
