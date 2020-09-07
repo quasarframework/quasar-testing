@@ -10,6 +10,8 @@
   },
   "main": "src/index.js",
   "scripts": {
+    "deploy:beta": "yarn publish --tag beta",
+    "deploy:latest": "yarn publish --tag latest",
     "test": "snyk test && echo \"No test specified\" && exit 0"
   },
   "publishConfig": {
