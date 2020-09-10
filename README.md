@@ -78,39 +78,7 @@ This will remove the associated node module and its dependencies, but it will no
 
 ### [Jest](https://jestjs.io/)
 
-We recommend using Jest 24. There are many, many reasons for this. Just take our word for it.
-
-```shell
-$ quasar ext add @quasar/testing-unit-jest
-```
-
-We have included:
-
-- a configuration file `jest.config.js`
-- `/test/jest/jest.setup.js`
-- `.babelrc` file
-- a `quasar` scaffolding helper
-- a 'validity' test that makes sure quasar is initiatable
-
-> If you are not using git or mercurial to manage your code, jest --watch will not work because jest uses version-control to track which files can be looked at. This leaves you with two options:
->
-> 1. run `git init` in your project directory (or permit the installer to do it for you)
-> 2. use the alternative `--watchAll` flag for Jest - which will probably have a performance hit - make sure you are ignoring all the folders possible in your Jest configuration.
-
-We have included the optional ability to place your test code inside your vue files, should you choose to do so. It will be rendered by webpack HMR. To run these tests, run `$ quasar test --unit jest --dev`.
-
-```
-<test lang="jest">
-  /* your complete test file here */
-</test>
-```
-
-> You may notice that your IDE doesn't know how to parse the test block, so go into the `<test/>` block, press `<alt> + <enter>`, select 'inject language or reference' and select `javascript`. This will grant `<test/>` blocks autocomplete.
-
-#### Options
-
-You can choose to install Wallaby.js to do inline testing. Although it is not freeware, it is an amazing tool and comes highly recommended. https://wallabyjs.com
-You can choose to install Majestic, which is a UI interface to see how your tests are doing. https://github.com/Raathigesh/majestic
+[Check out Jest AE documentation](packages/unit-jest/README.md)
 
 ### [AVA](https://github.com/avajs/ava)
 
@@ -142,17 +110,7 @@ We recommend testing webapps with Cypress if you target Chrome-based browsers (C
 
 ### [Cypress](https://www.cypress.io/)
 
-```shell
-$ quasar ext add @quasar/testing-e2e-cypress
-```
-
-> You must have a running dev server in order to run integration tests. Be sure to either set the `"baseUrl"` in the `/cypress.json` file or use the `test` command provided by the base `@quasar/testing` extension.
-
-We provide you some custom commands out-of-the-box, expecially:
-
-- `dataCy`: implements the [selection best practice](https://docs.cypress.io/guides/references/best-practices.html#Selecting-Elements) to avoid brittle tests, `cy.dataCy('my-data-id')` is equivalent to `cy.get('[data-cy=my-data-id]')`;
-- `testRoute`: checks the current page by testing if the URL hash contains the provided string, used as `cy.testRoute('home')`;
-- `saveLocalStorage`/`restoreLocalStorage`: save and restore local storage between tests, used as `cy.saveLocalStorage()` or `cy.restoreLocalStorage()`.
+[Check out Cypress AE documentation](packages/e2e-cypress/README.md)
 
 ### [WebDriver.io](https://webdriver.io/) (wdio)
 
