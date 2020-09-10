@@ -4,15 +4,17 @@
 
 # **`@quasar/testing`**
 
-This is the monorepo for integrating the test-runner of your choice into your Quasar-Framework app v1.0 and above.
-
-> ### WARNING
->
-> This app extension has been updated to work with changes that will be released with `@quasar/app - 1.0.0-beta.9`. If you have not upgraded to at least `1.0.0-beta.9` this app extension will not work.
+This is the monorepo for integrating the test-runner of your choice into your Quasar app.
 
 ## High level overview
 
-You can install multiple pre-rigged testing harnesses (test runners) to your existent 1.0+ Quasar application by running a simple command. This command will pull and install a node module (with dependencies) into your project's `package.json`, place necessary configuration files as appropriate and if you so choose, it will also add script commands that expose some of the functionality of the respective harness. You can add multiple harnesses and even use them for your continuous integration pipelines - as appropriate.
+You can install multiple pre-rigged testing harnesses (test runners) to your existent Quasar application by running a simple command which will:
+
+- install the harness NPM package into your project;
+- scaffold necessary configuration files;
+- add script commands, if you so choose, which expose some functionality of the respective harness.
+
+You can add multiple harnesses and even use them for your continuous integration pipelines.
 
 Testing is not in and of itself hard. The most complicated part is setting up the testing harness. The trick lies in knowing what to test. If you are new to testing, it is absolutely imperative that you familiarize yourself with some of the concepts and patterns. There are some links for further reading at the end of this document page.
 
@@ -44,9 +46,7 @@ $ quasar test --unit jest --dev="-m pwa"
 
 If you ever need to review your choices you can take a look at `quasar.extensions.json`.
 
-If you don't want to install the base package, you don't have to do so. You can install each test harness app extension individually. They are completely standalone.
-
-**NOTE: Before 1.0.0-rc.0, the command to run the test is `quasar run @quasar/testing test -- [args for command here]`**
+> If you don't want to install tha base package or have any problems with it whatsoever, you can install each test harness app extension individually as they are completely standalone.
 
 ## Updating / Resetting
 
