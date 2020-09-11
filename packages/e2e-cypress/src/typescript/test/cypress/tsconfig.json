@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    // TODO: https://github.com/cypress-io/cypress/issues/8477
+    "sourceMap": false,
+    // If you enabled IE support while creating the project, root tsconfig target is set to ES5 instead
+    // Cypress tests and support files are written in ES6 and this option enforce the right target regardless of root configuration
+    "target": "es6",
+    // Importing "cypress" types into project-root tsconfig won't work for unknown reasons,
+    //  using folder-local tsconfig is better to avoid globals conflicts (eg. with Jest)
+    "types": ["cypress"]
+  },
+  // Reset excluded files list, as it excluded Cypress files in the first place
+  //  and other exclusions do not apply into tests nested folder
+  "exclude": []
+}

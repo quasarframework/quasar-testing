@@ -38,16 +38,22 @@ function __mergeDeep(...sources) {
 }
 
 // make sure the object exists
-let extendPackageJson = {}
+let extendPackageJson = {
+  devDependencies: {
+    'eslint-plugin-jest': '^23.8.2'
+  }
+}
 
 module.exports = function (api) {
-  api.render('./base', {}, true)
-
   api.extendJsonFile('quasar.testing.json', {
     'unit-jest': {
       runnerCommand: 'jest'
     }
   })
+  
+  api.render('./base', {}, true)
+
+  api.render(`./${ api.prompts.options.includes('typescript') ? '' : 'no-' }typescript`)
 
   api.prompts.options.forEach((val) => {
     if (val === 'SFC') {
@@ -80,6 +86,37 @@ module.exports = function (api) {
         }
       }
       return extendPackageJson = __mergeDeep(extendPackageJson, scripts)
+    }
+    else if (val === 'typescript') {
+      const tsconfig = require(`${api.appDir}/tsconfig.json`)
+
+      const types = []
+      
+      if (!tsconfig.compilerOptions.types || !tsconfig.compilerOptions.types.includes("jest")) {
+        // Enable global Jest typings
+        types.push("jest")
+      }
+
+      // Specifying "compilerOptions.types" property, if not already present, will overwrite the preset option
+      // We copy over the preset values to assure they are considered too
+      if (!tsconfig.compilerOptions.types || tsconfig.compilerOptions.types.length === 0) {
+        const { readFileSync } = require('fs')
+        const { parse } = require('json5')
+        const tsconfigPreset = parse(readFileSync(`${api.appDir}/node_modules/@quasar/app/tsconfig-preset.json`, { encoding: 'utf8' }))
+        types.push(...tsconfigPreset.compilerOptions.types)
+      }
+
+      api.extendJsonFile('tsconfig.json', {
+        compilerOptions: {
+          // TODO: this should actually work out-of-the-box the same option
+          //  is provided into tsconfig-preset, but "vue-jest"
+          //  doesn't process inherited tsconfig due to its usage of a very old package.
+          // Every should be solved when "vue-jest" v4 (which will use "ts-jest") will be released.
+          // See: https://github.com/vuejs/vue-jest/issues/144#issuecomment-621290457
+          esModuleInterop: true,
+          types
+        }
+      })
     }
   })
   api.extendPackageJson(extendPackageJson)

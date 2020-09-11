@@ -4,15 +4,17 @@
 
 # **`@quasar/testing`**
 
-This is the monorepo for integrating the test-runner of your choice into your Quasar-Framework app v1.0 and above.
-
-> ### WARNING
->
-> This app extension has been updated to work with changes that will be released with `@quasar/app - 1.0.0-beta.9`. If you have not upgraded to at least `1.0.0-beta.9` this app extension will not work.
+This is the monorepo for integrating the test-runner of your choice into your Quasar app.
 
 ## High level overview
 
-You can install multiple pre-rigged testing harnesses (test runners) to your existent 1.0+ Quasar application by running a simple command. This command will pull and install a node module (with dependencies) into your project's `package.json`, place necessary configuration files as appropriate and if you so choose, it will also add script commands that expose some of the functionality of the respective harness. You can add multiple harnesses and even use them for your continuous integration pipelines - as appropriate.
+You can install multiple pre-rigged testing harnesses (test runners) to your existent Quasar application by running a simple command which will:
+
+- install the harness NPM package into your project;
+- scaffold necessary configuration files;
+- add script commands, if you so choose, which expose some functionality of the respective harness.
+
+You can add multiple harnesses and even use them for your continuous integration pipelines.
 
 Testing is not in and of itself hard. The most complicated part is setting up the testing harness. The trick lies in knowing what to test. If you are new to testing, it is absolutely imperative that you familiarize yourself with some of the concepts and patterns. There are some links for further reading at the end of this document page.
 
@@ -44,9 +46,7 @@ $ quasar test --unit jest --dev="-m pwa"
 
 If you ever need to review your choices you can take a look at `quasar.extensions.json`.
 
-If you don't want to install the base package, you don't have to do so. You can install each test harness app extension individually. They are completely standalone.
-
-**NOTE: Before 1.0.0-rc.0, the command to run the test is `quasar run @quasar/testing test -- [args for command here]`**
+> If you don't want to install tha base package or have any problems with it whatsoever, you can install each test harness app extension individually as they are completely standalone.
 
 ## Updating / Resetting
 
@@ -78,38 +78,7 @@ This will remove the associated node module and its dependencies, but it will no
 
 ### [Jest](https://jestjs.io/)
 
-We recommend using Jest 24. There are many, many reasons for this. Just take our word for it.
-
-```shell
-$ quasar ext add @quasar/testing-unit-jest
-```
-
-We have included:
-
-- a configuration file `jest.config.js`
-- `/test/jest/jest.setup.js`
-- `.babelrc` file
-- a `quasar` scaffolding helper
-- a 'validity' test that makes sure quasar is initiatable
-
-> If you are not using git or mercurial to manage your code, jest --watch will not work because jest uses version-control to track which files can be looked at. This leaves you with two options:
->
-> 1. run `git init` in your project directory (or permit the installer to do it for you)
-> 2. use the alternative `--watchAll` flag for Jest - which will probably have a performance hit - make sure you are ignoring all the folders possible in your Jest configuration.
-
-We have included the optional ability to place your test code inside your vue files, should you choose to do so. It will be rendered by webpack HMR. To run these tests, run `$ quasar test --unit jest --dev`.
-
-```
-<test lang="jest">
-  /* your complete test file here */
-</test>
-```
-
-> You may notice that your IDE doesn't know how to parse the test block, so go into the `<test/>` block, press `<alt> + <enter>`, select 'inject language or reference' and select `javascript`. This will grant `<test/>` blocks autocomplete.
-
-#### Options
-You can choose to install Wallaby.js to do inline testing. Although it is not freeware, it is an amazing tool and comes highly recommended. https://wallabyjs.com
-You can choose to install Majestic, which is a UI interface to see how your tests are doing. https://github.com/Raathigesh/majestic
+[Check out Jest AE documentation](packages/unit-jest/README.md)
 
 ### [AVA](https://github.com/avajs/ava)
 
@@ -137,17 +106,11 @@ We have included the optional ability to place your test code inside your vue fi
 
 ## e2e Testing
 
-We recommend testing webapps with Cypress - but if you are building for multiple platforms (electron, cordova and web), then it's a good idea to use webdriver.io.
+We recommend testing webapps with Cypress if you target Chrome-based browsers (Chrome, Edge, Electron) or Firefox - but if you want to test Safari, IE or Cordova apps, then you should consider using webdriver.io.
 
 ### [Cypress](https://www.cypress.io/)
 
-```shell
-$ quasar ext add @quasar/testing-e2e-cypress
-```
-
-> You must have a running dev server in order to run integration tests. Be sure to either set the `"baseUrl"` in the `/cypress.json` file or use the `test` command provided by the base `@quasar/testing` extension.
-
-We actually recommend installing Cypress globally, because otherwise it is a pretty large package to weigh down the already [heaviest thing in the universe](https://i.redd.it/tfugj4n3l6ez.png).
+[Check out Cypress AE documentation](packages/e2e-cypress/README.md)
 
 ### [WebDriver.io](https://webdriver.io/) (wdio)
 

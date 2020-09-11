@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "strict": true,
+    "outDir": "dist",
+    "sourceMap": true,
+    "target": "es6",
+    "moduleResolution": "node",
+    "module": "commonjs"
+  },
+  "include": ["src/helpers"]
+}
