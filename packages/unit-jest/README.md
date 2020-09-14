@@ -85,15 +85,63 @@ describe("BookshelfComponent", () => {
 
 ## AE Options
 
+### SFC Test code block
+
 We have included the optional ability to place your test code inside your vue files, should you choose to do so. It will be rendered by webpack HMR. To run these tests, run `$ quasar test --unit jest --dev` (requires you to use `@quasar/app-extension-testing` to manage testing harnesses).
 
-```
+```vue
 <test lang="jest">
   /* your complete test file here */
 </test>
 ```
 
+#### Syntax highlighting
+
+You may notice that your IDE doesn't know how to parse the test block. Follow the instructions below to enable syntax highlighting and/or autocomplete in your specific IDE.
+
+##### Webstorm
+
+- Go to the `<test/>` block, press `<Alt> + <Enter>`
+- Select `inject language or reference`
+- Then select `javascript`
+  - This will grant `<test/>` blocks autocomplete
+  
+##### VS Code
+
+The [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur) VS Code extension is required.
+If you don't already have the Vetur extension installed:
+- Launch VS Code Quick Open (`<Ctrl> + <P>`)
+- Paste the following command `ext install octref.vetur` then press `<Enter>`
+
+Once you have the Vetur extension installed, you need to configure the custom code block in Vetur.
+
+- Press `<Ctrl> + <Comma>` to launch the _settings editor_ window
+- In the search field type `Custom Blocks` to narrow the focus down to `Vetur > Grammar > Custom Blocks`
+- Click `Edit in settings.json`
+  - This will populate the settings file with the existing configuration block and we will add the following:
+
+```json5
+  "vetur.grammar.customBlocks": {
+    "test": "js",
+    // ... existing block definitions
+  }
+```
+
+_Note: If you're using TypeScript you can set the language to `ts` instead of `js`._
+
+- Save the changes to `settings.json` (`<Ctrl> + <S>`)
+- Launch _'Show All Commands'_ (`<Ctrl> + <Shift> + <P>` or `F1`) and paste `Vetur: Generate grammar` then press `<Enter>`
+  - This will regenerate the Vetur grammar file to include the new custom block definition
+- Launch _'Show All Commands'_ again (`<Ctrl> + <Shift> + <P>` or `F1`) and paste `Reload Window` then press `<Enter>`
+  - This will reload VS Code and apply the new syntax highlighting
+
+---
+
+### Wallaby.js
+
 You can choose to install Wallaby.js to do inline testing. Although it is not freeware, it is an amazing tool and comes highly recommended. https://wallabyjs.com
+
+### Majestic
 
 You can choose to install Majestic, which is a UI interface to see how your tests are doing. https://github.com/Raathigesh/majestic
 
@@ -257,15 +305,3 @@ We are open to contributions and will try to solve this problem when switching t
 
 `jest --watch` will not work if you don't have a version control system (Git, Mercurial) in place, as jest relies on it to track which files should be watched for changes.
 Alternatively you can use `jest --watchAll`, but be aware there will be a performance impact and you should ignore all folders not containing tests into your Jest configuration.
-
-### Custom <test> blocks autocomplete and syntax highlight
-
-You may notice that your IDE doesn't know how to parse the test blocks into your SFCs.
-To fix this:
-
-- go into a `<test/>` block;
-- press your quickfix shortcut (`<alt> + <enter>`, `<ctrl> + <.>` or whichever your IDE provides you);
-- select "inject language or reference"
-- select `javascript`.
-
-This will grant `<test/>` blocks autocomplete and syntax highlight.
