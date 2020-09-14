@@ -64,6 +64,18 @@ Be careful though, reinstalling will overwrite ALL existing files (including con
 $ quasar ext invoke @quasar/testing-unit-jest
 ```
 
+### Upgrading from v1 to v2 or other major version
+If you are using npm for package management, you'll need to force a major version upgrade before updating
+```shell
+npm install --save-dev @quasar/quasar-app-extension-testing-unit-jest@2.0.0
+```
+Once this is run, you can update/reset the extension as before
+```shell
+quasar ext add @quasar/testing-unit-jest
+```
+
+Since there are major changes, in order not to miss out on new config, you may consider first ensuring your source control is clean, then answer (y) and "Overwrite all" when being requested to reinstall existing files and configuration. Then individually `git diff` all changes manually to see what changes you want to keep or merge in
+
 ## Removing
 
 If you want to remove the testing harness, you can run:
