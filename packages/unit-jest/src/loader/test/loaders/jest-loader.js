@@ -7,7 +7,7 @@ module.exports = function (source) {
 
   const filename = path.parse(this.resourcePath).name
 
-  const extension = (options && options.extension) || '_jest.spec.js'
+  const extension = (options && options.extension) || '.jest.spec.js'
   const dir = `${this.context}/__tests__`
   console.log(`Created test file: ${filename}`)
   if (!fs.existsSync(dir)){
