@@ -224,6 +224,10 @@ module.exports = async function(api) {
       if (callback) {
         // Exit with code 1 if some tests failed
         callback(failedRunners.length > 0)
+      } else {
+        if (failedRunners.length > 0) {
+          process.exit(1)
+        }
       }
     }
   })
