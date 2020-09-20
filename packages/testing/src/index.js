@@ -215,7 +215,7 @@ module.exports = async function(api) {
         await runTest(runner, 'security')
       }
       failedRunners.forEach(runner => {
-        if (!args.security) {
+        if (args.security.length === 0) {
           console.error(
             chalk`{bgRed FAILED TESTS: } Tests with ${runner} did not pass.`
           )
