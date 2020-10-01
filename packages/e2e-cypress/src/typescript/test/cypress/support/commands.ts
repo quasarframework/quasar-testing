@@ -54,9 +54,7 @@ declare namespace Cypress {
 }
 
 // Find elements by "data-cy" attribute, making your tests
-//  more robust with respect to codebase changes
-// TODO: remove when https://github.com/cypress-io/cypress/issues/7510 is released
-// eslint-disable-next-line @typescript-eslint/no-misused-promises
+// more robust with respect to codebase changes
 Cypress.Commands.add('dataCy', (value: string) => {
   return cy.get(`[data-cy=${value}]`);
 });
