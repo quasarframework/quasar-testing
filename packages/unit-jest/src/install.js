@@ -40,7 +40,7 @@ function __mergeDeep(...sources) {
 // make sure the object exists
 let extendPackageJson = {
   devDependencies: {
-    'eslint-plugin-jest': '^23.8.2'
+    'eslint-plugin-jest': '^24.1.0'
   }
 }
 
