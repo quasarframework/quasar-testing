@@ -68,8 +68,8 @@ module.exports = function (api) {
           // "http-get" must be used because "webpack-dev-server" won't answer
           //  HEAD requests which are performed by default by the underlying "wait-on"
           // See https://github.com/bahmutov/start-server-and-test#note-for-webpack-dev-server-users 
-          "test:e2e": "cross-env E2E_TEST=true start-test 'quasar dev' http-get://localhost:8080 'cypress open'",
-          "test:e2e:ci": "cross-env E2E_TEST=true start-test 'quasar dev' http-get://localhost:8080 'cypress run'"
+          "test:e2e": "cross-env E2E_TEST=true start-test \"quasar dev\" http-get://localhost:8080 \"cypress open\"",
+          "test:e2e:ci": "cross-env E2E_TEST=true start-test \"quasar dev\" http-get://localhost:8080 \"cypress run\""
         }
       }
       return extendPackageJson = __mergeDeep(extendPackageJson, scripts)
