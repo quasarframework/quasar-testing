@@ -9,7 +9,10 @@
   "homepage": "http://quasar-framework.org",
   "dependencies": {},
   "devDependencies": {
-    "lerna": "^3.14.1"
+    "eslint": "^7.13.0",
+    "eslint-config-prettier": "^6.15.0",
+    "lerna": "^3.14.1",
+    "prettier": "^2.1.2"
   },
   "engines": {
     "node": ">= 8.9.0",
@@ -20,6 +23,8 @@
     "url": "https://github.com/quasarframework/quasar-testing/issues"
   },
   "scripts": {
+    "lint": "eslint \"packages/*/src/*.js\" --fix",
+    "format": "prettier --write \"packages/*/src/*.js\"",
     "build": "yarn && lerna clean && lerna link && lerna bootstrap",
     "publish": "lerna publish",
     "audit:snyk": "lerna run test"

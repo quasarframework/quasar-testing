@@ -7,7 +7,6 @@
  *
  */
 
-
 module.exports = function () {
   return [
     {
@@ -18,42 +17,43 @@ module.exports = function () {
       choices: [
         {
           name: 'Overwrite babel.config.js and use additional .babelrc',
-          value: 'babelrc'
+          value: 'babelrc',
         },
         {
           name: 'Do nothing, I will manage myself',
-          value: false
+          value: false,
         },
-      ]
+      ],
     },
     {
       name: 'options',
       type: 'checkbox',
       required: true,
-      message: 'Jest Unit testing will now be installed. Please choose additional options:',
+      message:
+        'Jest Unit testing will now be installed. Please choose additional options:',
       choices: [
-	      {
-		      name: 'Extra "scripts" in your package.json',
+        {
+          name: 'Extra "scripts" in your package.json',
           value: 'scripts',
-          checked: true
+          checked: true,
         },
         {
-		      name: 'TypeScript support',
-		      value: 'typescript'
-	      },
+          name: 'TypeScript support',
+          value: 'typescript',
+        },
         {
           name: 'SFC webpack <test> loader',
-          value: 'SFC'
+          value: 'SFC',
         },
         {
           name: 'Install Wallaby.js',
-          value: 'wallabyjs'
+          value: 'wallabyjs',
         },
-	      {
-		      name: 'Install Majestic UI',
-		      value: 'majestic'
-	      }
-      ]
-    }
-  ]
-}
+        {
+          name: 'Install Majestic UI',
+          value: 'majestic',
+        },
+      ],
+    },
+  ];
+};

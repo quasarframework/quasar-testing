@@ -5,10 +5,10 @@
  * API: https://github.com/quasarframework/quasar/blob/master/app/lib/app-extension/IndexAPI.js
  */
 
-module.exports = function(api) {
+module.exports = function (api) {
   api.extendQuasarConf((conf, api) => {
     if (process.env.E2E_TEST) {
-      conf.devServer.open = false
+      conf.devServer.open = false;
 
       // If TS is enabled and fork-ts-checker manages ESLint type-checking
       //  it must be instructed to use local tsconfig instead of the root level one,
@@ -16,12 +16,12 @@ module.exports = function(api) {
       // Note that eslint "parserOptions" options should be overrided to point to the same tsconfig
       //  or type errors won't be emitted (only linting ones will)
       if (
-        api.prompts.options.includes("typescript") &&
+        api.prompts.options.includes('typescript') &&
         conf.supportTS.tsCheckerConfig &&
         conf.supportTS.tsCheckerConfig.eslint
       ) {
-        conf.supportTS.tsCheckerConfig.tsconfig = "test/cypress/tsconfig.json"
+        conf.supportTS.tsCheckerConfig.tsconfig = 'test/cypress/tsconfig.json';
       }
     }
-  })
-}
+  });
+};

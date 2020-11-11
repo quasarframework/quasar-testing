@@ -13,8 +13,8 @@ module.exports = function () {
         {
           name: 'use your Global ZAP (not yet available)',
           value: 'zap_global',
-        }
-      ]
+        },
+      ],
     },
     {
       name: 'zapbrowser',
@@ -24,14 +24,14 @@ module.exports = function () {
       choices: [
         {
           name: 'Firefox',
-          value: 'Firefox'
+          value: 'Firefox',
         },
         {
           name: 'Chrome',
-          value: 'Chrome'
-        }
+          value: 'Chrome',
+        },
       ],
-      default: 'Firefox'
-    }
-  ]
-}
+      default: 'Firefox',
+    },
+  ];
+};

@@ -7,7 +7,7 @@
  *
  */
 
-module.exports = function() {
+module.exports = function () {
   return [
     {
       name: 'harnesses',
@@ -17,33 +17,33 @@ module.exports = function() {
       choices: [
         {
           name: 'Jest Unit Testing',
-          value: 'unit-jest'
+          value: 'unit-jest',
         },
         {
           name: 'AVA Unit Testing',
-          value: 'unit-ava'
+          value: 'unit-ava',
         },
         {
           name: 'Cypress e2e Testing',
-          value: 'e2e-cypress'
+          value: 'e2e-cypress',
         },
         {
           name: 'Webdriver e2e Testing',
-          value: 'e2e-webdriver'
+          value: 'e2e-webdriver',
         },
         {
           name: 'Quality Testing',
-          value: 'quality'
+          value: 'quality',
         },
         {
           name: 'Security Testing (OWASP ZAP HUD)',
-          value: 'security'
+          value: 'security',
         },
         {
           name: 'Security Anti-Vulnerability',
-          value: 'security-antivuln'
-        }
-      ]
-    }
-  ]
-}
+          value: 'security-antivuln',
+        },
+      ],
+    },
+  ];
+};

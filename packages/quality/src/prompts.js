@@ -13,13 +13,14 @@ module.exports = function () {
       name: 'options',
       type: 'checkbox',
       required: true,
-      message: 'Lighthouse, snyk and nlf will be installed. Please choose the following options:',
+      message:
+        'Lighthouse, snyk and nlf will be installed. Please choose the following options:',
       choices: [
         {
           name: 'extra "scripts" in your package.json',
-          value: 'scripts'
-        }
-      ]
-    }
-  ]
-}
+          value: 'scripts',
+        },
+      ],
+    },
+  ];
+};

@@ -5,34 +5,30 @@
  *
  */
 
-module.exports = async function(api) {
-  const execa = require('execa')
+module.exports = async function (api) {
+  const execa = require('execa');
 
-  api.render('./base')
+  api.render('./base');
 
-  const addOrInvoke = process.argv.indexOf('invoke') > -1 ? 'invoke' : 'add'
+  const addOrInvoke = process.argv.indexOf('invoke') > -1 ? 'invoke' : 'add';
 
   for (const harness of api.prompts.harnesses) {
     try {
       const code = await execa(
         'quasar',
-        [
-          'ext',
-          addOrInvoke,
-          `@quasar/testing-${harness}`
-        ],
+        ['ext', addOrInvoke, `@quasar/testing-${harness}`],
         {
           stdio: 'inherit',
-          cwd: api.resolve.app('.')
-        }
-      )
+          cwd: api.resolve.app('.'),
+        },
+      );
       if (code.code !== 0) {
-        console.error(`Extension ${harness} failed to install.`)
-        if (addOrInvoke === 'invoke') console.log('Extra debug:\n', code)
-        process.exit(1)
+        console.error(`Extension ${harness} failed to install.`);
+        if (addOrInvoke === 'invoke') console.log('Extra debug:\n', code);
+        process.exit(1);
       }
     } catch (e) {
-      console.error(`Extension ${harness} failed to install:`, e)
+      console.error(`Extension ${harness} failed to install:`, e);
     }
   }
-}
+};

@@ -7,7 +7,7 @@
  *
  */
 
-module.exports = function() {
+module.exports = function () {
   return [
     {
       name: 'babel',
@@ -17,13 +17,13 @@ module.exports = function() {
       choices: [
         {
           name: 'Overwrite babel.config.js and use additional .babelrc',
-          value: 'babelrc'
+          value: 'babelrc',
         },
         {
           name: 'Do nothing, I will manage myself',
-          value: false
-        }
-      ]
+          value: false,
+        },
+      ],
     },
     {
       name: 'options',
@@ -34,17 +34,17 @@ module.exports = function() {
       choices: [
         {
           name: 'SFC webpack <test> loader',
-          value: 'SFC'
+          value: 'SFC',
         },
         {
           name: 'Install Wallaby.js',
-          value: 'wallabyjs'
+          value: 'wallabyjs',
         },
-	      {
-		      name: 'extra "scripts" in your package.json',
-		      value: 'scripts'
-	      }
-      ]
-    }
-  ]
-}
+        {
+          name: 'extra "scripts" in your package.json',
+          value: 'scripts',
+        },
+      ],
+    },
+  ];
+};

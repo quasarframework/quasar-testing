@@ -9,11 +9,12 @@ module.exports = function (api) {
   api.prompts.options.forEach((val) => {
     if (val === 'SFC') {
       api.chainWebpack((chain) => {
-        chain.module.rule('jest')
-        .test(/\.jest$/)
-        .use('jest')
-        .loader(require.resolve(`${api.appDir}/test/loaders/jest-loader.js`))
-      })
+        chain.module
+          .rule('jest')
+          .test(/\.jest$/)
+          .use('jest')
+          .loader(require.resolve(`${api.appDir}/test/loaders/jest-loader.js`));
+      });
     }
-  })
-}
+  });
+};

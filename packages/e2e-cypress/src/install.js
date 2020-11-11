@@ -14,51 +14,53 @@
  */
 
 function __mergeDeep(...sources) {
-  let result = {}
+  let result = {};
   for (const source of sources) {
     if (source instanceof Array) {
       if (!(result instanceof Array)) {
-        result = []
+        result = [];
       }
-      result = [...result, ...source]
+      result = [...result, ...source];
     } else if (source instanceof Object) {
       for (let [key, value] of Object.entries(source)) {
         if (value instanceof Object && key in result) {
-          value = __mergeDeep(result[key], value)
+          value = __mergeDeep(result[key], value);
         }
-        result = { ...result, [key]: value }
+        result = { ...result, [key]: value };
       }
     }
   }
-  return result
+  return result;
 }
 
 // make sure the object exists
 let extendPackageJson = {
   devDependencies: {
-    'eslint-plugin-cypress': '^2.11.1'
-  }
-}
+    'eslint-plugin-cypress': '^2.11.1',
+  },
+};
 
 module.exports = function (api) {
-  api.render('./base')
+  api.render('./base');
 
-  api.render(`./${ api.prompts.options.includes('typescript') ? '' : 'no-' }typescript`)
+  api.render(
+    `./${api.prompts.options.includes('typescript') ? '' : 'no-'}typescript`,
+  );
 
   api.extendJsonFile('quasar.testing.json', {
     'e2e-cypress': {
-      runnerCommand: 'cypress run --config baseUrl=${serverUrl}'
-    }
-  })
+      runnerCommand: 'cypress run --config baseUrl=${serverUrl}',
+    },
+  });
 
   api.extendJsonFile('.vscode/settings.json', {
-    "json.schemas": [
+    'json.schemas': [
       {
-        fileMatch: ["cypress.json"],
-        url: "https://on.cypress.io/cypress.schema.json"
-      }
-    ]
-  })
+        fileMatch: ['cypress.json'],
+        url: 'https://on.cypress.io/cypress.schema.json',
+      },
+    ],
+  });
 
   api.prompts.options.forEach((val) => {
     if (val === 'scripts') {
@@ -67,34 +69,41 @@ module.exports = function (api) {
           // We use cross-env to set a flag which the extension will catch preventing "quasar dev" to open a window
           // "http-get" must be used because "webpack-dev-server" won't answer
           //  HEAD requests which are performed by default by the underlying "wait-on"
-          // See https://github.com/bahmutov/start-server-and-test#note-for-webpack-dev-server-users 
-          "test:e2e": "cross-env E2E_TEST=true start-test \"quasar dev\" http-get://localhost:8080 \"cypress open\"",
-          "test:e2e:ci": "cross-env E2E_TEST=true start-test \"quasar dev\" http-get://localhost:8080 \"cypress run\""
-        }
-      }
-      return extendPackageJson = __mergeDeep(extendPackageJson, scripts)
-    } else if(val === 'typescript') {
-      const tsconfig = require(`${api.appDir}/tsconfig.json`)
-      
-      const exclude = []
-      
-      if (!tsconfig.exclude || !tsconfig.exclude.includes("test/cypress")) {
+          // See https://github.com/bahmutov/start-server-and-test#note-for-webpack-dev-server-users
+          'test:e2e':
+            'cross-env E2E_TEST=true start-test "quasar dev" http-get://localhost:8080 "cypress open"',
+          'test:e2e:ci':
+            'cross-env E2E_TEST=true start-test "quasar dev" http-get://localhost:8080 "cypress run"',
+        },
+      };
+      return (extendPackageJson = __mergeDeep(extendPackageJson, scripts));
+    } else if (val === 'typescript') {
+      const tsconfig = require(`${api.appDir}/tsconfig.json`);
+
+      const exclude = [];
+
+      if (!tsconfig.exclude || !tsconfig.exclude.includes('test/cypress')) {
         // Prevent clash of global Jest and Cypress types on Cypress tests
-        exclude.push("test/cypress")
+        exclude.push('test/cypress');
       }
 
       // Specifying "exclude" property, if not already present, will overwrite the preset option
       // We copy over the preset values to assure they are considered too
       if (!tsconfig.exclude || tsconfig.exclude.length === 0) {
-        const { readFileSync } = require('fs')
-        const { parse } = require('json5')
-        const tsconfigPreset = parse(readFileSync(`${api.appDir}/node_modules/@quasar/app/tsconfig-preset.json`, { encoding: 'utf8' }))
-        exclude.push(...tsconfigPreset.exclude)
+        const { readFileSync } = require('fs');
+        const { parse } = require('json5');
+        const tsconfigPreset = parse(
+          readFileSync(
+            `${api.appDir}/node_modules/@quasar/app/tsconfig-preset.json`,
+            { encoding: 'utf8' },
+          ),
+        );
+        exclude.push(...tsconfigPreset.exclude);
       }
 
-      api.extendJsonFile("tsconfig.json", { exclude })
+      api.extendJsonFile('tsconfig.json', { exclude });
     }
-  })
-  
-  api.extendPackageJson(extendPackageJson)
-}
+  });
+
+  api.extendPackageJson(extendPackageJson);
+};

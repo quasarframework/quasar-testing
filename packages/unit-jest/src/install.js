@@ -18,92 +18,107 @@
  */
 
 function __mergeDeep(...sources) {
-  let result = {}
+  let result = {};
   for (const source of sources) {
     if (source instanceof Array) {
       if (!(result instanceof Array)) {
-        result = []
+        result = [];
       }
-      result = [...result, ...source]
+      result = [...result, ...source];
     } else if (source instanceof Object) {
       for (let [key, value] of Object.entries(source)) {
         if (value instanceof Object && key in result) {
-          value = __mergeDeep(result[key], value)
+          value = __mergeDeep(result[key], value);
         }
-        result = { ...result, [key]: value }
+        result = { ...result, [key]: value };
       }
     }
   }
-  return result
+  return result;
 }
 
 // make sure the object exists
 let extendPackageJson = {
   devDependencies: {
-    'eslint-plugin-jest': '^24.1.0'
-  }
-}
+    'eslint-plugin-jest': '^24.1.0',
+  },
+};
 
 module.exports = function (api) {
   api.extendJsonFile('quasar.testing.json', {
     'unit-jest': {
-      runnerCommand: 'jest'
-    }
-  })
-  
-  api.render('./base', {}, true)
+      runnerCommand: 'jest',
+    },
+  });
 
-  api.render(`./${ api.prompts.options.includes('typescript') ? '' : 'no-' }typescript`)
+  api.render('./base', {}, true);
+
+  api.render(
+    `./${api.prompts.options.includes('typescript') ? '' : 'no-'}typescript`,
+  );
 
   api.prompts.options.forEach((val) => {
     if (val === 'SFC') {
-      api.render('./loader')
-    }
-    else if (val === 'wallabyjs') {
-      api.render('./wallabyjs')
-      const wallaby = require('./wallabyjs/.package.json')
-      return extendPackageJson = __mergeDeep(extendPackageJson, wallaby)
-    }
-    else if (val === 'majestic') {
-      const majestic = require('./majestic/.package.json')
+      api.render('./loader');
+    } else if (val === 'wallabyjs') {
+      api.render('./wallabyjs');
+      const wallaby = require('./wallabyjs/.package.json');
+      return (extendPackageJson = __mergeDeep(extendPackageJson, wallaby));
+    } else if (val === 'majestic') {
+      const majestic = require('./majestic/.package.json');
       const majesticScripts = {
         scripts: {
-          'test:unit:ui': 'majestic'
-        }
-      }
-      return extendPackageJson = __mergeDeep(extendPackageJson, majestic, majesticScripts)
-    }
-    else if (val === 'scripts') {
+          'test:unit:ui': 'majestic',
+        },
+      };
+      return (extendPackageJson = __mergeDeep(
+        extendPackageJson,
+        majestic,
+        majesticScripts,
+      ));
+    } else if (val === 'scripts') {
       const scripts = {
         scripts: {
-          'test': 'echo \"See package.json => scripts for available tests.\" && exit 0',
+          test:
+            'echo "See package.json => scripts for available tests." && exit 0',
           'test:unit': 'jest --updateSnapshot',
           'test:unit:coverage': 'jest --coverage',
           'test:unit:watch': 'jest --watch',
           'test:unit:watchAll': 'jest --watchAll',
-          'serve:test:coverage': 'quasar serve test/jest/coverage/lcov-report/ --port 8788',
-          'concurrently:dev:jest': 'concurrently \"quasar dev\" \"jest --watch\"'
-        }
-      }
-      return extendPackageJson = __mergeDeep(extendPackageJson, scripts)
-    }
-    else if (val === 'typescript') {
-      const tsconfig = require(`${api.appDir}/tsconfig.json`)
+          'serve:test:coverage':
+            'quasar serve test/jest/coverage/lcov-report/ --port 8788',
+          'concurrently:dev:jest': 'concurrently "quasar dev" "jest --watch"',
+        },
+      };
+      return (extendPackageJson = __mergeDeep(extendPackageJson, scripts));
+    } else if (val === 'typescript') {
+      const tsconfig = require(`${api.appDir}/tsconfig.json`);
 
-      const types = []
-      
-      if (!tsconfig.compilerOptions.types || !tsconfig.compilerOptions.types.includes("jest")) {
+      const types = [];
+
+      if (
+        !tsconfig.compilerOptions.types ||
+        !tsconfig.compilerOptions.types.includes('jest')
+      ) {
         // Enable global Jest typings
-        types.push("jest")
+        types.push('jest');
       }
 
       // Specifying "compilerOptions.types" property, if not already present, will overwrite the preset option
       // We copy over the preset values to assure they are considered too
-      if (!tsconfig.compilerOptions.types || tsconfig.compilerOptions.types.length === 0) {
-        const { readFileSync } = require('fs')
-        const { parse } = require('json5')
-        const tsconfigPreset = parse(readFileSync(`${api.appDir}/node_modules/@quasar/app/tsconfig-preset.json`, { encoding: 'utf8' }))
-        types.push(...tsconfigPreset.compilerOptions.types)
+      if (
+        !tsconfig.compilerOptions.types ||
+        tsconfig.compilerOptions.types.length === 0
+      ) {
+        const { readFileSync } = require('fs');
+        const { parse } = require('json5');
+        const tsconfigPreset = parse(
+          readFileSync(
+            `${api.appDir}/node_modules/@quasar/app/tsconfig-preset.json`,
+            { encoding: 'utf8' },
+          ),
+        );
+        types.push(...tsconfigPreset.compilerOptions.types);
       }
 
       api.extendJsonFile('tsconfig.json', {
@@ -114,14 +129,14 @@ module.exports = function (api) {
           // Every should be solved when "vue-jest" v4 (which will use "ts-jest") will be released.
           // See: https://github.com/vuejs/vue-jest/issues/144#issuecomment-621290457
           esModuleInterop: true,
-          types
-        }
-      })
+          types,
+        },
+      });
     }
-  })
-  api.extendPackageJson(extendPackageJson)
+  });
+  api.extendPackageJson(extendPackageJson);
 
   if (api.prompts.babel) {
-    api.render(`./${api.prompts.babel}`)
+    api.render(`./${api.prompts.babel}`);
   }
-}
+};
