@@ -44,7 +44,6 @@
     "@quasar/quasar-app-extension-testing-e2e-webdriver": "link:../packages/e2e-webdriver",
     "@quasar/quasar-app-extension-testing-quality": "link:../packages/quality",
     "@quasar/quasar-app-extension-testing-security": "link:../packages/security",
-    "@quasar/quasar-app-extension-testing-security-antivuln": "link:../packages/security-antivuln",
     "@quasar/quasar-app-extension-testing-unit-ava": "link:../packages/unit-ava",
     "@quasar/quasar-app-extension-testing-unit-jest": "link:../packages/unit-jest",
     "@vue/eslint-config-standard": "^4.0.0",

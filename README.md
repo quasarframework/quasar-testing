@@ -65,11 +65,15 @@ $ quasar ext invoke @quasar/testing-unit-jest
 ```
 
 ### Upgrading from v1 to v2 or other major version
+
 If you are using npm for package management, you'll need to force a major version upgrade before updating
+
 ```shell
 npm install --save-dev @quasar/quasar-app-extension-testing-unit-jest@2.0.0
 ```
+
 Once this is run, you can update/reset the extension as before
+
 ```shell
 quasar ext add @quasar/testing-unit-jest
 ```
@@ -151,10 +155,6 @@ The `Lighthouse` tool can help you identify issues with your PWA app, but only i
 `Snyk` is a tool for identifying node modules that have security implications. Running this regularly will keep you alerted to issues that may be stemming from repositories you use.
 
 `Node License Finder (nlf)` is a free tool you can use to catalog all the licenses of the hundreds of open-source projects you are using in your project.
-
-### Security Auditing
-
-Dependency Scanning using [Anti-Vulnerability Scanner](https://github.com/quasarframework/quasar-testing/blob/dev/packages/security-antivuln/README.md)
 
 ### Where is `%_my_darling_%` harness?
 

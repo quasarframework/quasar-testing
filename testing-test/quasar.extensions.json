@@ -1,34 +1,16 @@
 {
   "@quasar/testing-unit-jest": {
     "babel": "babelrc",
-    "options": [
-      "scripts",
-      "SFC",
-      "wallabyjs"
-    ]
+    "options": ["scripts", "SFC", "wallabyjs"]
   },
   "@quasar/testing-e2e-cypress": {
-    "options": [
-      "scripts"
-    ]
+    "options": ["scripts"]
   },
   "@quasar/testing-security": {
-    "options": [
-      "zap_local"
-    ],
+    "options": ["zap_local"],
     "zapbrowser": "Chrome"
   },
   "@quasar/testing": {
-    "harnesses": [
-      "unit-jest",
-      "security-antivuln"
-    ]
-  },
-  "@quasar/testing-security-antivuln": {
-    "options": [
-      "runOnDev",
-      "runOnBuild",
-      "strict"
-    ]
+    "harnesses": ["unit-jest"]
   }
 }
