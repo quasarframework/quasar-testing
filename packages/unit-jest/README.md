@@ -50,12 +50,14 @@ describe("BookComponent", () => {
 
 The second parameter accepts a configuration object with the following properties
 
-- `mount` (object): the configuration object you'd usually provide to `mount` or `shallowMount` helpers.
-- `mount.type` (`full` | `shallow`): determine which mount helper should be used between `mount` or `shallowMount`, the latter is used by default.
-- `mount.localVue` (Vue instance): the isolated Vue instance which must be used for the tests, if none is provided a clean one will be generated automatically. The latter is the more common scenario, most of the time you won't need to specify it.
-- `quasar` (object): Quasar plugin configuration options, you'll mainly use this to register the Quasar components which must be stubbed;
-- `propsData` (object): initial props of the component, will be merged (with precedence) with `mount.propsData`;
-- `plugins` (array | multidimensional array): Vue plugins which must be added to the localVue instance (eg. `VueCompositionAPI`). If your plugin needs options, you can provide it as an array where the first element is the plugin itself and following elements are the options (eg. `[VueCompositionAPI, {...}]`).
+| Name             | Type                                                       | Default                                   | Description                                                                                                                                                                                                                                                                  |
+| ---------------- | ---------------------------------------------------------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `mount`          | Object                                                     | `{}`                                      | The [configuration object](https://vue-test-utils.vuejs.org/api/options.html#context) you'd usually provide to `mount` or `shallowMount` helpers                                                                                                                             |
+| `mount.type`     | `full` or `shallow`                                        | `shallow`                                 | Determine which mount helper should be used between `mount` or `shallowMount`                                                                                                                                                                                                |
+| `mount.localVue` | Vue instance                                               | Clean instance by `createLocalVue` helper | Same as corresponding [mount option](https://vue-test-utils.vuejs.org/api/options.html#localvue), except it generates a new one automatically if not provided. Most of the time you won't need to specify it                                                                 |
+| `quasar`         | Object                                                     | None                                      | Quasar plugin configuration options, you'll mainly use this to register Quasar components to stub                                                                                                                                                                            |
+| `propsData`      | Object                                                     | None                                      | Initial props for the component, will be merged (with precedence) with `mount.propsData`                                                                                                                                                                                     |
+| `plugins`        | Array of `VuePlugin` or `[VuePlugin, ...VuePluginOptions]` | `[]`                                      | Vue plugins which must be added to the localVue instance (eg. `VueCompositionAPI`). If your plugin needs options, you can provide it as an array where the first element is the plugin itself and following elements are the options (eg. `[VueCompositionAPI, ...options]`) |
 
 ## mountFactory(component, options)
 
@@ -105,11 +107,12 @@ You may notice that your IDE doesn't know how to parse the test block. Follow th
 - Select `inject language or reference`
 - Then select `javascript`
   - This will grant `<test/>` blocks autocomplete
-  
+
 ##### VS Code
 
 The [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur) VS Code extension is required.
 If you don't already have the Vetur extension installed:
+
 - Launch VS Code Quick Open (`<Ctrl> + <P>`)
 - Paste the following command `ext install octref.vetur` then press `<Enter>`
 
