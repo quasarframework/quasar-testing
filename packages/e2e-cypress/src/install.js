@@ -40,6 +40,9 @@ let extendPackageJson = {
   },
 };
 
+const ciCommand =
+  'cross-env E2E_TEST=true start-test "quasar dev" http-get://localhost:8080 "cypress run"';
+
 module.exports = function (api) {
   api.render('./base');
 
@@ -49,7 +52,7 @@ module.exports = function (api) {
 
   api.extendJsonFile('quasar.testing.json', {
     'e2e-cypress': {
-      runnerCommand: 'cypress run --config baseUrl=${serverUrl}',
+      runnerCommand: ciCommand,
     },
   });
 
@@ -72,8 +75,7 @@ module.exports = function (api) {
           // See https://github.com/bahmutov/start-server-and-test#note-for-webpack-dev-server-users
           'test:e2e':
             'cross-env E2E_TEST=true start-test "quasar dev" http-get://localhost:8080 "cypress open"',
-          'test:e2e:ci':
-            'cross-env E2E_TEST=true start-test "quasar dev" http-get://localhost:8080 "cypress run"',
+          'test:e2e:ci': ciCommand,
         },
       };
       return (extendPackageJson = __mergeDeep(extendPackageJson, scripts));

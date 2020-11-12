@@ -21,12 +21,11 @@
     "yarn": ">= 1.8.0"
   },
   "dependencies": {
-    "chalk": "^2.4.2",
-    "execa": "^1.0.0",
-    "strip-ansi": "^5.0.0"
+    "chalk": "^4.1.0",
+    "execa": "^4.1.0",
+    "strip-ansi": "^6.0.0"
   },
   "devDependencies": {
     "snyk": "^1.180.1"
   }
 }
-

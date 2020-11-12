@@ -37,6 +37,8 @@ function __mergeDeep(...sources) {
   return result;
 }
 
+const ciCommand = 'jest --ci';
+
 // make sure the object exists
 let extendPackageJson = {
   devDependencies: {
@@ -47,7 +49,7 @@ let extendPackageJson = {
 module.exports = function (api) {
   api.extendJsonFile('quasar.testing.json', {
     'unit-jest': {
-      runnerCommand: 'jest',
+      runnerCommand: ciCommand,
     },
   });
 
@@ -82,6 +84,7 @@ module.exports = function (api) {
           test:
             'echo "See package.json => scripts for available tests." && exit 0',
           'test:unit': 'jest --updateSnapshot',
+          'test:unit:ci': ciCommand,
           'test:unit:coverage': 'jest --coverage',
           'test:unit:watch': 'jest --watch',
           'test:unit:watchAll': 'jest --watchAll',

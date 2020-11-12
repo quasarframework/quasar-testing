@@ -78,34 +78,40 @@ module.exports = async function (api) {
       }
     });
 
-    // If --dev was passed or e2e / security-zap tests are being run
+    const killProcess = (hasFailed) => {
+      process.exit(hasFailed ? 1 : 0);
+    };
+
+    // If --dev was passed or e2e-webdriver / security-zap tests are being run
+    // Cypress already spawns it's dev server
+    // TODO: use start-test for all harnesses needing quasar devServer running?
     if (
       args.dev != null ||
-      args.e2e.length > 0 ||
+      args.e2e.includes('webdriver') ||
       args.security.includes('zap')
     ) {
       // Start dev server
       // TODO: use interactive output
-      if (args.dev === true || typeof args.dev === 'undefined')
+      if (args.dev === true || typeof args.dev === 'undefined') {
         args.dev = 'spa';
+      }
 
       args.dev = args.dev.split(' ');
       const devServer = execa('quasar', ['dev', ...args.dev], {
         cwd: api.resolve.app('.'),
         env: { FORCE_COLOR: true },
       });
-      devServer;
       devServer.catch((e) => {
         // Throw error if it wasn't killed manually
         if (!e.killed) throw new Error(e);
       });
 
       const killDevServer = (hasFailed) => {
-        if (!devServer) {
-          process.exit(hasFailed ? 1 : 0);
+        if (devServer) {
+          devServer.kill();
         }
 
-        devServer.kill();
+        killProcess(hasFailed);
       };
 
       // Kill dev server on exit
@@ -147,7 +153,7 @@ module.exports = async function (api) {
       });
     } else {
       // Just run tests without dev server
-      await startTests();
+      await startTests(undefined, killProcess);
     }
 
     async function startTests(serverUrl, callback) {
@@ -192,17 +198,18 @@ module.exports = async function (api) {
               resolve();
             }
           } else {
-            const runnerCommandArgs = runnerCommandString
-              // Set server url
-              .replace('${serverUrl}', serverUrl)
-              .split(' ');
-            // Remove first arg, that is the command
-            const runnerCommand = runnerCommandArgs.shift();
-            // Mix user args and runner args
-            const finalArgs = [...runnerCommandArgs, ...userArgs];
-            console.log('$', runner, finalArgs.join(' '));
-            const testRunner = execa(runnerCommand, finalArgs, {
+            // Compose a classic shell command and run it through execa.command
+            // This is done because parsing arguments containing spaces
+            //  and enclosed with escaped quotes (eg `--myArg \"My arg\"`)
+            //  is a major pain point
+            const runnerCommand =
+              runnerCommandString.replace('${serverUrl}', serverUrl) +
+              userArgs.join(' ');
+            console.log('$', runnerCommand);
+            const testRunner = execa.command(runnerCommand, {
               stdio: 'inherit',
+              shell: true,
+              preferLocal: true,
             });
             testRunner.on('exit', (code) => {
               if (code !== 0) {
@@ -230,10 +237,8 @@ module.exports = async function (api) {
           );
         }
       });
-      if (callback) {
-        // Exit with code 1 if some tests failed
-        callback(failedRunners.length > 0);
-      }
+
+      callback(failedRunners.length > 0);
     }
   });
 };
