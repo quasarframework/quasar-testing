@@ -8,8 +8,6 @@
 module.exports = async function (api) {
   const execa = require('execa');
 
-  api.render('./base');
-
   const addOrInvoke = process.argv.indexOf('invoke') > -1 ? 'invoke' : 'add';
 
   for (const harness of api.prompts.harnesses) {
