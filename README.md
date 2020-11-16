@@ -6,89 +6,108 @@
 
 This is the monorepo for integrating the test-runner of your choice into your Quasar app.
 
-## High level overview
-
-You can install multiple pre-rigged testing harnesses (test runners) to your existent Quasar application by running a simple command which will:
+You can install multiple pre-rigged testing harnesses (test runners) to your Quasar application, each one will:
 
 - install the harness NPM package into your project;
 - scaffold necessary configuration files;
 - add script commands, if you so choose, which expose some functionality of the respective harness.
 
-You can add multiple harnesses and even use them for your continuous integration pipelines.
+> App Extensions (such as these testing harnesses) only work with Quasar CLI, not with Vue CLI, nor by directly installing packages via a package manager as npm or yarn. Use `quasar ext add ...` or the installation step won't be executed and configuration files won't be copied over.
 
 Testing is not in and of itself hard. The most complicated part is setting up the testing harness. The trick lies in knowing what to test. If you are new to testing, it is absolutely imperative that you familiarize yourself with some of the concepts and patterns. There are some links for further reading at the end of this document page.
+
+The Test Driven Design approach will help you to write better (and fewer) tests. Even though it may seem like it slows you down to some degree, this habit pays its dividends on the long term drastically reducing the number of public bugs and the project maintenance effort. Think of tests like insurance for your code that always pays out. On the other hand, not everything is worth being tested, or is worth being tested only at an higher level (eg. using an E2E tests instead of unit tests).
 
 <div class="text-center">
   <div class="h3">REMEMBER</div>
   <div class="h5">Test the functionality, not the function</div>
 </div>
 
-## Installing
+## Table of contents
 
-```shell
-$ cd your-quasar-project
-$ quasar ext add @quasar/testing
-```
+- [Donations](#donations)
+- [Installation](#installation)
+- [Removal](#removal)
+- [Reset](#reset)
+- [Upgrade](#upgrade)
+- Provided App Extensions
+  - [Testing Harnesses Manager](packages/testing/README.md)
+  - Unit testing
+    - [Jest](packages/unit-jest/README.md)
+    - [Ava](#ava) (**not up to date**)
+  - E2E testing
+    - [Cypress](packages/e2e-cypress/README.md)
+    - [WebDriver.io](#webdriverio-wdio) (**not up to date, WIP**)
+  - [Quality Auditing](#quality-auditing) (**not up to date**)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
 
-This creates a `test` folder to hold all of your test related files and adds several new configuration files to the root folder of your project:
+## Donations
 
-- `quasar.testing.json` => records the commands relevant to respective harnesses
-- `quasar.extensions.json` => individual extension options
+The Quasar team spend a considerabile amount of time studying, coding and maintaining App Extensions which save literally thousands of developers hours, days or weeks of work.
 
-The lightweight extension installer will ask you which testing harnesses you want to install. Then it will install the respective extensions for these harnesses, which you can configure as you like. It is how multiple testing harnesses are ideally managed within a Quasar project.
+Does your business or personal projects depend on these App Extensions? How much time did we save you until now? Consider [donating](https://github.com/sponsors/rstoenescu) to help us maintain them and allow us to create new ones!
 
-It will provide you with a new `quasar test` command that you can use to execute test-runners - and even your HMR dev environment at the same time. This approach can, for example, be quite helpful if you need to pass quasar.ctx to the test runner...
+## Installation
 
-```
-# Example to run jest && dev server in pwa mode
-$ quasar test --unit jest --dev="-m pwa"
-```
+You can add test harnesses:
 
-If you ever need to review your choices you can take a look at `quasar.extensions.json`.
+- in a centralized way via the [Testing Harnesses Manager](packages/testing/README.md);
+- using an "a-la-carte" approach, checking each harness documentation.
 
-> If you don't want to install tha base package or have any problems with it whatsoever, you can install each test harness app extension individually as they are completely standalone.
+You can add multiple harnesses and even use them into your continuous integration pipelines.
 
-## Updating / Resetting
+## Removal
 
-**Note: All the examples use the unit-jest package. However, the process is the same for [other packages](https://github.com/quasarframework/quasar-testing/tree/dev/packages) as well.**
-
-If you mess up your configuration and need to reset - or just want the latest Quasar-approved packages, this would be the way to do it:
-
-```shell
-$ quasar ext add @quasar/testing-unit-jest
-```
-
-Be careful though, reinstalling will overwrite ALL existing files (including configurations) if you tell it to. Also, it will install the new packages (if there are any). To prevent installing new or updated node modules, you may do this:
-
-```shell
-$ quasar ext invoke @quasar/testing-unit-jest
-```
-
-### Upgrading from v1 to v2 or other major version
-
-If you are using npm for package management, you'll need to force a major version upgrade before updating
-
-```shell
-npm install --save-dev @quasar/quasar-app-extension-testing-unit-jest@2.0.0
-```
-
-Once this is run, you can update/reset the extension as before
-
-```shell
-quasar ext add @quasar/testing-unit-jest
-```
-
-Since there are major changes, in order not to miss out on new config, you may consider first ensuring your source control is clean, then answer (y) and "Overwrite all" when being requested to reinstall existing files and configuration. Then individually `git diff` all changes manually to see what changes you want to keep or merge in
-
-## Removing
-
-If you want to remove the testing harness, you can run:
+You can remove a testing harness running:
 
 ```shell
 $ quasar ext remove @quasar/testing-unit-jest
 ```
 
-This will remove the associated node module and its dependencies, but it will not delete or modify any files.
+This will remove the associated NPM package and run the Quasar App Extensions uninstall hook.
+If not done into the AE uninstall hook, the removal won't delete test or configuration files.
+
+## Reset
+
+If you mess up your configuration and need to reset, or just want to check out if there has been any changes into new versions configuration, you should run:
+
+```shell
+$ quasar ext add @quasar/testing-unit-jest
+```
+
+Be careful though, this will overwrite ALL existing files (including configurations) if you allow it to. Make sure to have some kind of version control in place before proceeding. This operation will also upgrade the NPM package and its dependencies.
+
+To prevent installing new or updated dependencies, you should run:
+
+```shell
+$ quasar ext invoke @quasar/testing-unit-jest
+```
+
+## Upgrade
+
+You can upgrade a testing harness and its dependencies by updating its related NPM package.
+
+```
+$ yarn add -D @quasar/quasar-app-extension-testing-unit-jest
+```
+
+This won't change existing test or configuration files.
+
+### Upgrade to a new major version with NPM
+
+When upgrading between major versions, since there are major changes, we suggest you to remove and re-add the AE, to obtain lastest configuration files too.
+Ensure your source control is clean before proceeding, then answer (y) and "Overwrite all" when prompted to overwrite existing files and individually `git diff` all changes manually to check out which changes you want to keep and which you want to revert.
+
+```shell
+$ quasar ext remove @quasar/testing-unit-jest
+$ quasar ext add @quasar/testing-unit-jest
+```
+
+## Testing Harnesses Manager
+
+[Check out Testing Harnesses Manager AE documentation](packages/testing/README.md)
 
 ## Unit Testing
 
@@ -156,57 +175,51 @@ The `Lighthouse` tool can help you identify issues with your PWA app, but only i
 
 `Node License Finder (nlf)` is a free tool you can use to catalog all the licenses of the hundreds of open-source projects you are using in your project.
 
-### Where is `%_my_darling_%` harness?
+## Contributing
 
-There will be more and more test-harnesses coming as time permits. If you would like to help us add official harnesses, please get in touch on Discord. Do not merely make a PR, as there are several people working in private forks and it is likely that the harness you are interested in may already be in some stage of development.
+Setup the monorepo locally:
 
-## Contents
+- fork this repository on GitHub
+- clone it locally (`git clone https://github.com/<YOUR-GITHUB-HANDLE>/quasar-testing.git`)
+- move into the monorepo folder (`cd quasar-testing`)
+- install dependencies (`yarn install`)
+- move into the folder of the harness you want to work on (`cd packages/e2e-cypress`)
+- if the harness require a build step (eg. Jest AE), run the build command (`yarn build`)
 
-The packages in this repo are designed to be installed only by the Quasar framework. They follow the following naming convention:
+Create a project where to test the harnesses, **OUTSIDE `quasar-testing` folder**:
+
+- open another terminal
+- create a new clean Quasar project (`quasar create <my-test-project>`)
+- locally install the harness NPM package (`yarn add -D ../quasar-testing/packages/e2e-cypress`)
+- invoke the App Extension (`quasar ext invoke @quasar/testing-e2e-cypress`)
+
+Read the [App Extensions development docs](https://quasar.dev/app-extensions/development-guide/introduction).
+
+---
+
+The packages in this repo follow the following naming convention:
 
 - @quasar/app-extension-testing-unit-\*
 - @quasar/app-extension-testing-e2e-\*
 - @quasar/app-extension-testing-quality
 
-Because of the way that Quasar internally maps extensions (pruning "app-extension-"), the `ava` test-runner would be `@quasar/testing-unit-ava`.
+Quasar internally maps extensions (pruning "app-extension-") when running `quasar ext ...` commands, eg. `ava` test-runner AE id would be `@quasar/testing-unit-ava`.
 
-> Although you could probably install them all with yarn, it is highly recommended to follow the normal approach of using the quasar CLI because of the template files copied over. Furthermore, this will only work with the CLI for Quasar 1.0, not with vue-cli. If you are interested in breaking the warranty, if you were only interested in integrating the node_module dependencies from ava and spectron into your app, technically you could merely run:
+There will be more and more test-harnesses coming as time permits. If you would like to help us add official harnesses, please open an issue or get in touch on Quasar Discord server #testing channel.
 
-```shell
-$ yarn add @quasar/quasar-app-extension-testing
-$ yarn add @quasar/quasar-app-extension-testing-unit-ava
-$ yarn add @quasar/quasar-app-extension-testing-e2e-cypress
-```
+Avoid opening PRs without getting in touch with us, as we may refuse to merge integrations we cannot commit to maintain.
+In these cases, we encourage you to publish and maintain the new integration AE on your own. We'll try to help you getting started and link your integration on this README :)
 
-The test-driven-design approach will also help you to write better (and fewer) tests. Even though it may seem like it slows you down to some degree, this habit of great programmers pays its dividends when other developers accidentally change the interface. Think of tests like insurance for your code that always pays out.
+## Roadmap
 
-## Development
-
-Clone this repository and run `yarn init`.
-
-Then create a 1.0 Quasar app. Go into the package.json and add this line:
-
-```
-    "@quasar/quasar-app-extension-testing-unit-jest": "link:../%path_to_quasar-testing%/packages/unit-%_your-harness_%",
-```
-
-Then run `yarn` and finally:
-
-```shell
-$ quasar ext invoke @quasar/testing-unit-%_your-harness_%
-```
-
-Please consult the forthcoming documentation about how to create app extensions at the main Quasar docs - or learn by copying.
-
-## Integration Roadmap
-
-Test harnesses currently verified to have valid "integration" are checked off in the following list:
+Test harnesses currently verified to have valid "integration" are checked off in the following list.
+We won't commit to any deadline for integrations of new harnesses.
 
 ### UNIT
 
 - [x] [ava](https://github.com/avajs/ava)
 - [ ] [jasmine 3](https://jasmine.github.io/)
-- [x] [jest 24](https://facebook.github.io/jest/)
+- [x] [jest 26](https://facebook.github.io/jest/)
 - [ ] [tap](https://github.com/tapjs/node-tap)
 - [ ] [tape](https://github.com/substack/tape)
 - [ ] [mocha-webpack](https://github.com/zinserjan/mocha-webpack)
@@ -221,7 +234,7 @@ Test harnesses currently verified to have valid "integration" are checked off in
 - [ ] [spectron](https://github.com/electron/spectron) (electron)
 - [ ] [testcafe](https://github.com/DevExpress/testcafe)
 - [ ] [testee](https://github.com/bitovi/testee)
-- [x] [webdriver.io](http://webdriver.io/) (wdio - multi tenant)
+- [x] [webdriver.io](http://webdriver.io/) (wdio - multi tenant) - Not ready for production
 
 ### QUALITY
 
@@ -246,8 +259,10 @@ Test harnesses currently verified to have valid "integration" are checked off in
 
 ### Tutorials
 
+- [Introduction to TDD](https://www.computer.org/csdl/magazine/so/2007/03/s3024/13rRUygT7kK)
+- [Overview of JavaScript testing 2020](https://medium.com/welldone-software/an-overview-of-javascript-testing-7ce7298b9870)
 - [Unit Testing Vue Router with Jest](https://medium.com/js-dojo/unit-testing-vue-router-1d091241312)
-- ... add your suggestions here
+- [Jest tests debugging](https://artsy.github.io/blog/2018/08/24/How-to-debug-jest-tests/)
 
 ### Documentation
 
