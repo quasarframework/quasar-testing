@@ -6,6 +6,6 @@ export function ssrContextMock() {
     res: {
       setHeader: () => undefined,
     },
-    url: "",
+    url: '',
   };
 }

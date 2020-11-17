@@ -1,6 +1,6 @@
-import type { mount } from "@vue/test-utils";
-import { QuasarPluginOptions } from "quasar";
-import Vue, { PluginFunction, PluginObject } from "vue";
+import type { mount } from '@vue/test-utils';
+import { QuasarPluginOptions } from 'quasar';
+import Vue, { PluginFunction, PluginObject } from 'vue';
 
 /**
  * Utility type to declare an extended Vue constructor
@@ -31,7 +31,7 @@ export interface QuasarMountOptions {
   // @vue/test-utils "mount" and "shallowMount" options signature are the same on v1.0.3
   // If they'll diverge in future, it should be possible to model a discriminated union over "type" property
   mount?: {
-    type?: "full" | "shallow";
+    type?: 'full' | 'shallow';
   } & VueMountOptions;
   quasar?: Partial<QuasarPluginOptions>;
   // TODO: due to Vue components overcomplicated typings and multiple flavours it doesn't seem possible

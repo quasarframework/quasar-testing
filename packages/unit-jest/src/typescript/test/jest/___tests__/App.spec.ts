@@ -25,7 +25,7 @@ const components = Object.keys(All).reduce<{ [index: string]: VueConstructor }>(
     }
     return object;
   },
-  {}
+  {},
 );
 
 describe('Mount Quasar', () => {
