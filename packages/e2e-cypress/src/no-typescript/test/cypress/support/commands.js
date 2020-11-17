@@ -24,11 +24,11 @@
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-Cypress.Commands.add("dataCy", (value) => {
+Cypress.Commands.add('dataCy', (value) => {
   return cy.get(`[data-cy=${value}]`);
 });
 
-Cypress.Commands.add("testRoute", (route) => {
+Cypress.Commands.add('testRoute', (route) => {
   cy.location().should((loc) => {
     expect(loc.hash).to.contain(route);
   });
@@ -37,13 +37,13 @@ Cypress.Commands.add("testRoute", (route) => {
 // these two commands let you persist local storage between tests
 const LOCAL_STORAGE_MEMORY = {};
 
-Cypress.Commands.add("saveLocalStorage", () => {
+Cypress.Commands.add('saveLocalStorage', () => {
   Object.keys(localStorage).forEach((key) => {
     LOCAL_STORAGE_MEMORY[key] = localStorage[key];
   });
 });
 
-Cypress.Commands.add("restoreLocalStorage", () => {
+Cypress.Commands.add('restoreLocalStorage', () => {
   Object.keys(LOCAL_STORAGE_MEMORY).forEach((key) => {
     localStorage.setItem(key, LOCAL_STORAGE_MEMORY[key]);
   });
