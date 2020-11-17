@@ -39,6 +39,23 @@ Testing configuration for a project with only Jest harness installed will be:
 }
 ```
 
+If you chose to add package.json scripts during your harnesses installation, you can directly reference those scripts into the testing configuration to keep a single source of truth.
+
+Testing configuration for a project with Jest and Cypress harnesses installed, both with package.json scripts:
+
+```json
+// quasar.testing.json
+
+{
+  "e2e-cypress": {
+    "runnerCommand": "yarn test:e2e:ci"
+  },
+  "unit-jest": {
+    "runnerCommand": "yarn test:unit:ci"
+  }
+}
+```
+
 You can spawn out an HMR dev environment by using `--dev` flag, but it's better to rely on every harness script in many cases. Options you provide to `--dev` will be added to the dev server options. This approach can be useful if you need to test a particular Quasar mode:
 
 ```sh
