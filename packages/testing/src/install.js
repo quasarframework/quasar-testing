@@ -20,7 +20,7 @@ module.exports = async function (api) {
           cwd: api.resolve.app('.'),
         },
       );
-      if (code.code !== 0) {
+      if (code.exitCode !== 0) {
         console.error(`Extension ${harness} failed to install.`);
         if (addOrInvoke === 'invoke') console.log('Extra debug:\n', code);
         process.exit(1);
