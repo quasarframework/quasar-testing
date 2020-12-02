@@ -14,8 +14,6 @@
 
 // cypress/plugins/index.js
 
-const pluginConfig = (/*on, config*/) => {
+module.exports = (/*on, config*/) => {
   //
 };
-
-export default pluginConfig;
