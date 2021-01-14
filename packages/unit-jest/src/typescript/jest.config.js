@@ -71,9 +71,6 @@ module.exports = {
     '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$':
       'jest-transform-stub',
   },
-  transformIgnorePatterns: [
-    `<rootDir>/node_modules/(?!(${esModules}))`, // Normal Quasar project
-    `<rootDir>/../../node_modules/(?!(${esModules}))`, // Lerna monorepo setup
-  ],
+  transformIgnorePatterns: [`node_modules/(?!(${esModules}))`],
   snapshotSerializers: ['<rootDir>/node_modules/jest-serializer-vue'],
 };

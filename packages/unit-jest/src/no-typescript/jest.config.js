@@ -53,9 +53,6 @@ module.exports = {
     // '.*\\.vue$': '@quasar/quasar-app-extension-testing-unit-jest/node_modules/vue-jest',
     // '.*\\.js$': '@quasar/quasar-app-extension-testing-unit-jest/node_modules/babel-jest'
   },
-  transformIgnorePatterns: [
-    `<rootDir>/node_modules/(?!(${esModules}))`, // Normal Quasar project
-    `<rootDir>/../../node_modules/(?!(${esModules}))`, // Lerna monorepo setup
-  ],
+  transformIgnorePatterns: [`node_modules/(?!(${esModules}))`],
   snapshotSerializers: ['jest-serializer-vue'],
 };
