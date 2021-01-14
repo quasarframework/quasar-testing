@@ -37,10 +37,9 @@ module.exports = {
   ],
   moduleFileExtensions: ['vue', 'js', 'jsx', 'json'],
   moduleNameMapper: {
-    '^vue$': '<rootDir>/node_modules/vue/dist/vue.common.js',
-    '^test-utils$':
-      '<rootDir>/node_modules/@vue/test-utils/dist/vue-test-utils.js',
-    '^quasar$': '<rootDir>/node_modules/quasar/dist/quasar.common.js',
+    '^vue$': 'vue/dist/vue.common.js',
+    '^test-utils$': '@vue/test-utils/dist/vue-test-utils.js',
+    '^quasar$': 'quasar/dist/quasar.common.js',
     '^~/(.*)$': '<rootDir>/$1',
     '^src/(.*)$': '<rootDir>/src/$1',
     '.*css$': '@quasar/quasar-app-extension-testing-unit-jest/stub.css',
@@ -50,10 +49,13 @@ module.exports = {
     '.*\\.js$': 'babel-jest',
     '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$':
       'jest-transform-stub',
-    // use these if NPM is being flaky
-    // '.*\\.vue$': '<rootDir>/node_modules/@quasar/quasar-app-extension-testing-unit-jest/node_modules/vue-jest',
-    // '.*\\.js$': '<rootDir>/node_modules/@quasar/quasar-app-extension-testing-unit-jest/node_modules/babel-jest'
+    // use these if NPM is being flaky, care as hosting could interfere with these
+    // '.*\\.vue$': '@quasar/quasar-app-extension-testing-unit-jest/node_modules/vue-jest',
+    // '.*\\.js$': '@quasar/quasar-app-extension-testing-unit-jest/node_modules/babel-jest'
   },
-  transformIgnorePatterns: [`<rootDir>/node_modules/(?!(${esModules}))`],
-  snapshotSerializers: ['<rootDir>/node_modules/jest-serializer-vue'],
+  transformIgnorePatterns: [
+    `<rootDir>/node_modules/(?!(${esModules}))`, // Normal Quasar project
+    `<rootDir>/../../node_modules/(?!(${esModules}))`, // Lerna monorepo setup
+  ],
+  snapshotSerializers: ['jest-serializer-vue'],
 };

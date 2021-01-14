@@ -48,7 +48,7 @@ module.exports = {
   // See https://github.com/vuejs/vue-jest/issues/188#issuecomment-620750728
   moduleFileExtensions: ['vue', 'js', 'jsx', 'json', 'ts', 'tsx'],
   moduleNameMapper: {
-    '^quasar$': '<rootDir>/node_modules/quasar/dist/quasar.common.js',
+    '^quasar$': 'quasar/dist/quasar.common.js',
     '^~/(.*)$': '<rootDir>/$1',
     '^src/(.*)$': '<rootDir>/src/$1',
     '^app/(.*)$': '<rootDir>/$1',
@@ -71,6 +71,9 @@ module.exports = {
     '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$':
       'jest-transform-stub',
   },
-  transformIgnorePatterns: [`<rootDir>/node_modules/(?!(${esModules}))`],
+  transformIgnorePatterns: [
+    `<rootDir>/node_modules/(?!(${esModules}))`, // Normal Quasar project
+    `<rootDir>/../../node_modules/(?!(${esModules}))`, // Lerna monorepo setup
+  ],
   snapshotSerializers: ['<rootDir>/node_modules/jest-serializer-vue'],
 };
