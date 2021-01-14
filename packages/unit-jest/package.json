@@ -3,7 +3,10 @@
   "version": "2.1.0",
   "license": "MIT",
   "description": "A Quasar App Extension for running Jest tests",
-  "author": "Daniel Thompson-Yvetot",
+  "contributors": [
+    "Paolo Caleffi",
+    "Daniel Thompson-Yvetot"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/quasarframework/quasar-testing"
