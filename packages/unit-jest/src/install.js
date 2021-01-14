@@ -116,10 +116,9 @@ module.exports = function (api) {
         const { readFileSync } = require('fs');
         const { parse } = require('json5');
         const tsconfigPreset = parse(
-          readFileSync(
-            `${api.appDir}/node_modules/@quasar/app/tsconfig-preset.json`,
-            { encoding: 'utf8' },
-          ),
+          readFileSync(require.resolve('@quasar/app/tsconfig-preset.json'), {
+            encoding: 'utf8',
+          }),
         );
         types.push(...tsconfigPreset.compilerOptions.types);
       }
