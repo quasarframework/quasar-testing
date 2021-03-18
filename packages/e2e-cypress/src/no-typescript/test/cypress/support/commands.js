@@ -24,9 +24,17 @@
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('dataCy', (value) => {
-  return cy.get(`[data-cy=${value}]`);
-});
+Cypress.Commands.add(
+  'dataCy',
+  {
+    prevSubject: 'optional',
+  },
+  (subject, value) => {
+    return cy.get(`[data-cy=${value}]`, {
+      withinSubject: subject,
+    });
+  },
+);
 
 Cypress.Commands.add('testRoute', (route) => {
   cy.location().should((loc) => {

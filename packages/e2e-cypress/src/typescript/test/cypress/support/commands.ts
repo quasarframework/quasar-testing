@@ -55,9 +55,17 @@ declare namespace Cypress {
 
 // Find elements by "data-cy" attribute, making your tests
 //  more robust with respect to codebase changes
-Cypress.Commands.add('dataCy', (value: string) => {
-  return cy.get(`[data-cy=${value}]`);
-});
+Cypress.Commands.add(
+  'dataCy',
+  {
+    prevSubject: 'optional',
+  },
+  (subject: JQuery<HTMLElement> | undefined, value: string) => {
+    return cy.get(`[data-cy=${value}]`, {
+      withinSubject: subject,
+    });
+  },
+);
 
 Cypress.Commands.add('testRoute', (route: string) => {
   cy.location().should((loc) => {
