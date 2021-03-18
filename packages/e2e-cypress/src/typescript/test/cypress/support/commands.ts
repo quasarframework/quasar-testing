@@ -61,7 +61,13 @@ Cypress.Commands.add('dataCy', (value: string) => {
 
 Cypress.Commands.add('testRoute', (route: string) => {
   cy.location().should((loc) => {
-    expect(loc.hash).to.contain(route);
+    if (loc.hash.length > 0) {
+      // Vue-Router in hash mode
+      expect(loc.hash).to.contain(route);
+    } else {
+      // Vue-Router in history mode
+      expect(loc.pathname).to.contain(route);
+    }
   });
 });
 
