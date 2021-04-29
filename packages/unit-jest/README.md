@@ -239,7 +239,7 @@ localVue.use(Vuex);
 const factory = mountFactory(BookshelfPage, {
   mount: {
     localVue,
-    store: new Vuex({}),
+    store: new Vuex.Store({}),
   },
 });
 
