@@ -10,13 +10,38 @@ This AE is meant to manage Quasar and Cypress integration for you, both for JS a
 
 We have included some custom commands out-of-the-box:
 
-| Name                  | Usage                      | Description                                                                                                                                                                                              |
-| --------------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dataCy`              | `cy.dataCy('my-data-id')`  | Implements the [selection best practice](https://docs.cypress.io/guides/references/best-practices.html#Selecting-Elements) which avoids brittle tests, is equivalent to `cy.get('[data-cy=my-data-id]')` |
-| `testRoute`           | `cy.testRoute('home')`     | Checks the current page by testing if the URL hash contains the provided string                                                                                                                          |
-| `saveLocalStorage`    | `cy.saveLocalStorage()`    | Save local storage data to be used in subsequent tests                                                                                                                                                   |
-| `restoreLocalStorage` | `cy.restoreLocalStorage()` | Restore previously saved local storage data                                                                                                                                                              |
+| Name                  | Usage                                                       | Description                                                                                                                                                                                              |
+| --------------------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dataCy`              | `cy.dataCy('my-data-id')`                                   | Implements the [selection best practice](https://docs.cypress.io/guides/references/best-practices.html#Selecting-Elements) which avoids brittle tests, is equivalent to `cy.get('[data-cy=my-data-id]')` |
+| `testRoute`           | `cy.testRoute('home')` \| `cy.testRoute('books/*/pages/*')` | Tests if the current URL matches the provided string using [`minimatch`](https://docs.cypress.io/api/utilities/minimatch). Leading `#`, if using router hash mode, and `/` are automatically prepended.  |
+| `saveLocalStorage`    | `cy.saveLocalStorage()`                                     | Save local storage data to be used in subsequent tests                                                                                                                                                   |
+| `restoreLocalStorage` | `cy.restoreLocalStorage()`                                  | Restore previously saved local storage data                                                                                                                                                              |
 
 You must have a running dev server in order to run integration tests. The scripts added by this AE automatically take care of this: `yarn test:e2e` and `yarn test:e2e:ci` will launch `quasar dev` when starting up the tests and kill it when cypress process ends.
 
 This AE is a wrapper around Cypress, you won't be able to use this or understand most of the documentation if you haven't read [the official documentation](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html).
+
+### Caveats
+
+#### Assertions on Quasar input components
+
+Some Cypress assertions, as `.should('be.checked')` for checkboxes and radio buttons, rely on the presence of a native DOM element, which many Quasar input components don't add by default for a better performance.
+When testing those components with Cypress, you must set `name` attribute to force Quasar to add the underlying native inputs.
+
+Since native inputs are deep down into the DOM of the input component, you should create your own helper to access them.
+Here's an example of how you could do it for radio buttons:
+
+```ts
+// Custom command returning the native input inside the Quasar component
+function dataCyRadio(dataCyId: string) {
+  return cy.dataCy(dataCyId).then(($quasarRadio) => {
+    return cy.get('input:radio', {
+      withinSubject: $quasarRadio,
+    });
+  });
+}
+
+// "force" option is needed as the native input is hidden
+dataCyRadio('my-radio-button').check({ force: true });
+dataCyRadio('my-radio-button').should('not.be.checked');
+```

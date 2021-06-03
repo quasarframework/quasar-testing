@@ -36,7 +36,7 @@ function __mergeDeep(...sources) {
 // make sure the object exists
 let extendPackageJson = {
   devDependencies: {
-    'eslint-plugin-cypress': '^2.11.1',
+    'eslint-plugin-cypress': '^2.11.3',
   },
 };
 
@@ -44,8 +44,8 @@ const ciCommand =
   'cross-env E2E_TEST=true start-test "quasar dev" http-get://localhost:8080 "cypress run"';
 
 module.exports = function (api) {
-  api.compatibleWith('quasar', '<2.0.0');
-  api.compatibleWith('@quasar/app', '<3.0.0');
+  api.compatibleWith('quasar', '^2.0.0-beta.19');
+  api.compatibleWith('@quasar/app', '^3.0.0-beta.28');
 
   api.render('./base');
 
