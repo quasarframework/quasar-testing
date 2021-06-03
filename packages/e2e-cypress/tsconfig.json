@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "strict": true,
+    "outDir": "dist",
+    "sourceMap": true,
+    "target": "esnext",
+    "moduleResolution": "node",
+    "module": "esnext",
+    "types": ["cypress"]
+  },
+  "include": ["src/helpers"]
+}
