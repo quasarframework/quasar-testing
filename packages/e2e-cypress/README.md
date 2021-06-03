@@ -1,7 +1,7 @@
 ## [Cypress](https://www.cypress.io/)
 
 ```shell
-$ quasar ext add @quasar/testing-e2e-cypress
+$ quasar ext add @quasar/testing-e2e-cypress@beta
 ```
 
 This AE is meant to manage Quasar and Cypress integration for you, both for JS and TS.
