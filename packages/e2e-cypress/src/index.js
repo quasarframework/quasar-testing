@@ -20,7 +20,11 @@ module.exports = function (api) {
         conf.supportTS.tsCheckerConfig &&
         conf.supportTS.tsCheckerConfig.eslint
       ) {
-        conf.supportTS.tsCheckerConfig.tsconfig = 'test/cypress/tsconfig.json';
+        conf.supportTS.tsCheckerConfig.typescript = Object.assign(
+          {},
+          conf.supportTS.tsCheckerConfig.typescript,
+          { configFile: 'test/cypress/tsconfig.json' },
+        );
       }
     }
   });
