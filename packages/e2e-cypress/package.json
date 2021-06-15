@@ -29,14 +29,11 @@
   },
   "dependencies": {
     "cross-env": "^7.0.3",
-    "cypress": "^7.4.0",
+    "cypress": "^7.5.0",
     "json5": "^2.2.0",
-    "start-server-and-test": "^1.12.3"
+    "start-server-and-test": "^1.12.5"
   },
   "devDependencies": {
-    "eslint": "^7.27.0",
-    "eslint-config-prettier": "^8.3.0",
-    "prettier": "^2.3.0",
     "snyk": "^1.170.0"
   }
 }
