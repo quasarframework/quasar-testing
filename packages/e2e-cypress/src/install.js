@@ -44,13 +44,15 @@ const ciCommand =
   'cross-env E2E_TEST=true start-test "quasar dev" http-get://localhost:8080 "cypress run"';
 
 module.exports = function (api) {
-  api.compatibleWith('quasar', '^2.0.0-beta.19');
-  api.compatibleWith('@quasar/app', '^3.0.0-beta.28');
+  api.compatibleWith('quasar', '^2.0.0-rc.2');
+  api.compatibleWith('@quasar/app', '^3.0.0-rc.2');
 
-  api.render('./base');
+  api.render('./templates/base');
 
   api.render(
-    `./${api.prompts.options.includes('typescript') ? '' : 'no-'}typescript`,
+    `./templates/${
+      api.prompts.options.includes('typescript') ? '' : 'no-'
+    }typescript`,
   );
 
   api.extendJsonFile('quasar.testing.json', {
