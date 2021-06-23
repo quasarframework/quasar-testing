@@ -19,6 +19,20 @@ You must have a running dev server in order to run integration tests. The script
 
 This AE is a wrapper around Cypress, you won't be able to use this or understand most of the documentation if you haven't read [the official documentation](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html).
 
+### Upgrade from Cypress AE v3 / Quasar v1
+
+- Remove `"sourceMap": false` and related comment from `tests/cypress/tsconfig.json` if it's present, as this has been fixed in a previous version of Cypress
+- Remove `"target": "es6"` and related comment from `tests/cypress/tsconfig.json`, as Vue3 (and so Quasar v2) won't support IE11
+- Replace the code for Quasar custom commands into `tests/cypress/support/commands.[js/ts]` with following lines, as they're now exported directly by the package
+
+```ts
+// DO NOT REMOVE
+// Imports Quasar Cypress AE predefined commands
+import '@quasar/quasar-app-extension-testing-e2e-cypress';
+```
+
+- Check out [Cypress 7.0 migration guide](https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-7-0)
+
 ### Caveats
 
 #### Assertions on Quasar input components
