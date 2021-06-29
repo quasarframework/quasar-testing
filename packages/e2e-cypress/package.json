@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "cross-env": "^7.0.3",
-    "cypress": "^7.5.0",
+    "cypress": "^7.6.0",
     "json5": "^2.2.0",
     "start-server-and-test": "^1.12.5"
   },

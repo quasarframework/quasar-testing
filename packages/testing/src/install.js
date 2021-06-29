@@ -6,8 +6,8 @@
  */
 
 module.exports = async function (api) {
-  api.compatibleWith('quasar', '^2.0.0-rc.2');
-  api.compatibleWith('@quasar/app', '^3.0.0-rc.2');
+  api.compatibleWith('quasar', '^2.0.0');
+  api.compatibleWith('@quasar/app', '^3.0.0');
 
   const execa = require('execa');
 
@@ -17,7 +17,7 @@ module.exports = async function (api) {
     try {
       const code = await execa(
         'quasar',
-        ['ext', addOrInvoke, `@quasar/testing-${harness}`],
+        ['ext', addOrInvoke, `@quasar/testing-${harness}@beta`],
         {
           stdio: 'inherit',
           cwd: api.resolve.app('.'),

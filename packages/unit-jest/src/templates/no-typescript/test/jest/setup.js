@@ -1,13 +1,3 @@
-// No console.log() / setTimeout
-// console.log = jest.fn(() => { throw new Error('Do not use console.log() in production') })
-jest.setTimeout(1000);
-
-// jest speedup when errors are part of the game
-// Error.stackTraceLimit = 0
-
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-global.Promise = require('promise');
-
 /*
 import chai from 'chai'
 // Make sure chai and jasmine ".not" play nice together
@@ -19,7 +9,7 @@ Object.defineProperty(chai.Assertion.prototype, 'not', {
     Object.assign(this, this.assignedNot)
     return originalNot.apply(this)
   },
-  set(newNot) { 
+  set(newNot) {
     this.assignedNot = newNot
     return newNot
   }

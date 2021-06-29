@@ -18,6 +18,31 @@ We have included:
 
 This AE is a wrapper around official "@vue/test-utils" package, you won't be able to use this or understand most of the documentation if you haven't read [the official documentation](https://vue-test-utils.vuejs.org/).
 
+### Upgrade from Jest AE v2 / Quasar v1
+
+<!-- TODO: remove quasar mapping in jest.config -->
+
+#### Goodbye `mountQuasar`, hello `installQuasarPlugin`
+
+Since the new VTU `mount` helper comes with improved typings and supports out-of-the-box many options we were doing ourselves into `mountQuasar`, the existence of a Quasar-specific helper don't quite make sense anymore.
+
+<!-- TODO: -->
+
+#### (Optional) Import Jest helpers from `@jest/globals`
+
+We suggest you to switch from Jest globals to their ESM-imported counterparts (especially if you use TypeScript), as this will avoid the global scope pollution and simplify integrating Jest with other testing tools.
+If you choose to proceed on this path, then:
+
+- Uninstall Jest global types running `yarn remove @types/jest`
+- Remove `jest` value from `compilerOptions.types` property into `tsconfig.json`. If only `quasar` remains in that array, remove `compilerOptions.type` altogheter as it's already provided by `@quasar/app/tsconfig-preset`
+- Update all your test files import all the globals you need from `@jest/globals` package, eg. `import { describe, expect, jest, it, test } from "@jest/globals"`
+- Check out [Vue Test Utils 2.0 migration guide](https://next.vue-test-utils.vuejs.org/migration/)
+
+#### Misc
+
+- Remove `"esModuleInterop": true` from `tsconfig.json`, as Vue Test Utils now supports tsconfig `extends` property and will infer `esModuleInterop` value from `@quasar/app/tsconfig-preset`
+- Remove `global.Promise = require('promise')` from `test/jest/jest.setup.ts`, since a polyfill isn't needed anymore due to the new minimum Node version being v12
+
 ### mountQuasar(component, options)
 
 Quasar packs quite a lot of features and configuring correctly `mount`/`shallowMount` to work on Quasar CLI projects isn't trivial.
@@ -38,7 +63,7 @@ describe('BookComponent', () => {
           QBtn,
         },
       },
-      propsData: {
+      props: {
         prop1: 'value',
       },
     });
@@ -56,13 +81,13 @@ The second parameter accepts a configuration object with the following propertie
 | `mount.type`     | `full` or `shallow`                                        | `shallow`                                 | Determine which mount helper should be used between `mount` or `shallowMount`                                                                                                                                                                                                |
 | `mount.localVue` | Vue instance                                               | Clean instance by `createLocalVue` helper | Same as corresponding [mount option](https://vue-test-utils.vuejs.org/api/options.html#localvue), except it generates a new one automatically if not provided. Most of the time you won't need to specify it                                                                 |
 | `quasar`         | Object                                                     | None                                      | Quasar plugin configuration options, you'll mainly use this to register Quasar components to stub                                                                                                                                                                            |
-| `propsData`      | Object                                                     | None                                      | Initial props for the component, will be merged (with precedence) with `mount.propsData`                                                                                                                                                                                     |
+| `props`          | Object                                                     | None                                      | Initial props for the component, will be merged (with precedence) with `mount.props`                                                                                                                                                                                         |
 | `plugins`        | Array of `VuePlugin` or `[VuePlugin, ...VuePluginOptions]` | `[]`                                      | Vue plugins which must be added to the localVue instance (eg. `VueCompositionAPI`). If your plugin needs options, you can provide it as an array where the first element is the plugin itself and following elements are the options (eg. `[VueCompositionAPI, ...options]`) |
 
 ### mountFactory(component, options)
 
 Most of the time `mountQuasar` configuration will be the same for all tests inside a test-suite, while initial props will change.
-`mountFactory` addresses this scenario: it accepts the same parameters as `mountQuasar`, but returns a function accepting a `propsData` object and returning a wrapper instance.
+`mountFactory` addresses this scenario: it accepts the same parameters as `mountQuasar`, but returns a function accepting a `props` object and returning a wrapper instance.
 
 Usage:
 
@@ -88,6 +113,8 @@ describe('BookshelfComponent', () => {
 ### AE Options
 
 #### SFC Test code block
+
+<!-- TODO: remove -->
 
 We have included the optional ability to place your test code inside your vue files, should you choose to do so. It will be rendered by webpack HMR. To run these tests, run `$ quasar test --unit jest --dev` (requires you to use `@quasar/app-extension-testing` to manage testing harnesses).
 
@@ -298,9 +325,11 @@ export default {
 <style scoped></style>
 ```
 
-##### `propsData` autocomplete
+##### `props` autocomplete
 
-The configuration object `propsData` property isn't currently typed after the component instance props.
+<!-- TODO: -->
+
+The configuration object `props` property isn't currently typed after the component instance props.
 This is due to Vue components complicated typings and multiple flavours, as we still haven't found the way to both extract props typings AND get a correctly typed wrapper instance for all flavours: Composition, Class and Options API all have different and partially incompatible types.
 We are open to contributions and will try to solve this problem when switching to Vue 3, which should have easier typings.
 

@@ -8,7 +8,7 @@ module.exports = {
       pug: { doctype: 'html' },
     },
   },
-  setupFilesAfterEnv: ['<rootDir>/test/jest/jest.setup.js'],
+  setupFilesAfterEnv: ['<rootDir>/test/jest/setup.js'],
   // noStackTrace: true,
   // bail: true,
   // cache: false,
@@ -37,9 +37,6 @@ module.exports = {
   ],
   moduleFileExtensions: ['vue', 'js', 'jsx', 'json'],
   moduleNameMapper: {
-    '^vue$': 'vue/dist/vue.common.js',
-    '^test-utils$': '@vue/test-utils/dist/vue-test-utils.js',
-    '^quasar$': 'quasar/dist/quasar.common.js',
     '^~/(.*)$': '<rootDir>/$1',
     '^src/(.*)$': '<rootDir>/src/$1',
     '.*css$': '@quasar/quasar-app-extension-testing-unit-jest/stub.css',

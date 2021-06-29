@@ -31,14 +31,14 @@ The Test Driven Design approach will help you to write better (and fewer) tests.
 - [Reset](#reset)
 - [Upgrade](#upgrade)
 - Provided App Extensions
-  - [Testing Harnesses Manager](packages/testing/README.md)
+  - [Testing Harnesses Manager](packages/testing/README.md) (**Supports Quasar v2**)
   - Unit testing
-    - [Jest](packages/unit-jest/README.md)
-    - [Ava](#ava) (**not up to date**)
+    - [Jest](packages/unit-jest/README.md) (**Supports Quasar v1**)
+    - [Ava](#ava) (**deprecated, not up to date**)
   - E2E testing
-    - [Cypress](packages/e2e-cypress/README.md)
-    - [WebDriver.io](#webdriverio-wdio) (**not up to date, WIP**)
-  - [Quality Auditing](#quality-auditing) (**not up to date**)
+    - [Cypress](packages/e2e-cypress/README.md) (**Supports Quasar v2**)
+    - [WebDriver.io](#webdriverio-wdio) (**deprecated, not up to date, WIP**)
+  - [Quality Auditing](#quality-auditing) (**deprecated, not up to date**)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
@@ -84,6 +84,15 @@ To prevent installing new or updated dependencies, you should run:
 ```shell
 $ quasar ext invoke @quasar/testing-unit-jest
 ```
+
+<!-- TODO: Add section for upgrade to Qv2 -->
+<!--
+  TODO: Add explanations on how to use test-projects
+  - regenerate projects if needed
+  - yarn build package
+  - yarn add -D package
+  - quasar ext invoke package
+-->
 
 ## Upgrade
 
@@ -217,9 +226,9 @@ We won't commit to any deadline for integrations of new harnesses.
 
 ### UNIT
 
-- [x] [ava](https://github.com/avajs/ava)
+- [ ] [ava](https://github.com/avajs/ava)
 - [ ] [jasmine 3](https://jasmine.github.io/)
-- [x] [jest 26](https://facebook.github.io/jest/)
+- [x] [jest 27](https://facebook.github.io/jest/)
 - [ ] [tap](https://github.com/tapjs/node-tap)
 - [ ] [tape](https://github.com/substack/tape)
 - [ ] [mocha-webpack](https://github.com/zinserjan/mocha-webpack)
@@ -234,13 +243,13 @@ We won't commit to any deadline for integrations of new harnesses.
 - [ ] [spectron](https://github.com/electron/spectron) (electron)
 - [ ] [testcafe](https://github.com/DevExpress/testcafe)
 - [ ] [testee](https://github.com/bitovi/testee)
-- [x] [webdriver.io](http://webdriver.io/) (wdio - multi tenant) - Not ready for production
+- [ ] [webdriver.io](http://webdriver.io/) (wdio - multi tenant)
 
 ### QUALITY
 
-- [x] [lighthouse 3.0](https://github.com/GoogleChrome/lighthouse)
-- [x] [snyk](https://snyk.io/test)
-- [x] [nlf](https://github.com/iandotkelly/nlf) (Node license finder)
+- [ ] [lighthouse 3.0](https://github.com/GoogleChrome/lighthouse)
+- [ ] [snyk](https://snyk.io/test)
+- [ ] [nlf](https://github.com/iandotkelly/nlf) (Node license finder)
 - [ ] [import-cost](https://github.com/wix/import-cost/tree/master/packages/import-cost) (custom)
 - [ ] [bundlesize](https://github.com/siddharthkp/bundlesize) (custom)
 - [ ] [webpagetest](https://www.webpagetest.org/)
@@ -281,6 +290,7 @@ Contributions to this repository are highly desirable. Before you make a PR, ple
 
 ## Contributors
 
+- [callo](https://github.com/nothingismagick)
 - [nothingismagick](https://github.com/nothingismagick)
 - [nklayman](https://github.com/nklayman)
 - [Allan Gaunt](https://github.com/webnoob)
