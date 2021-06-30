@@ -23,9 +23,9 @@ This AE is a wrapper around Cypress, you won't be able to use this or understand
 
 ### Upgrade from Cypress AE v3 / Quasar v1
 
-- Remove `"sourceMap": false` and related comment from `tests/cypress/tsconfig.json` if it's present, as this has been fixed in a previous version of Cypress
-- Remove `"target": "es6"` and related comment from `tests/cypress/tsconfig.json`, as Vue3 (and so Quasar v2) won't support IE11
-- Replace the code for Quasar custom commands into `tests/cypress/support/commands.[js/ts]` with following lines, as they're now exported directly by the package
+- Remove `"sourceMap": false` and related comment from `test/cypress/tsconfig.json` if it's present, as this has been fixed in a previous version of Cypress
+- Remove `"target": "es6"` and related comment from `test/cypress/tsconfig.json`, as Vue3 (and so Quasar v2) won't support IE11
+- Replace the code for Quasar custom commands into `test/cypress/support/commands.[js/ts]` with following lines, as they're now exported directly by the package
 
 ```ts
 // DO NOT REMOVE
