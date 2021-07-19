@@ -33,6 +33,22 @@ This AE is a wrapper around Cypress, you won't be able to use this or understand
 import '@quasar/quasar-app-extension-testing-e2e-cypress';
 ```
 
+- Update your usages of `testRoute` command, as it's now using [`Cypress.minimatch`](https://docs.cypress.io/api/utilities/minimatch) instead of just checking if the hash/pathname contains the provided string.
+
+```ts
+// URL to match: shelfs/123/books
+
+// OLD way, too general:
+testRoute('shelfs');
+// or
+testRoute('books');
+// or even
+testRoute('123/books');
+
+// NEW way
+testRoute('shelfs/*/books');
+```
+
 - Check out [Cypress 7.0 migration guide](https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-7-0)
 
 ### Caveats
