@@ -6,8 +6,8 @@
  */
 
 module.exports = async function (api) {
-  api.compatibleWith('quasar', '^2.0.0-rc.2');
-  api.compatibleWith('@quasar/app', '^3.0.0-rc.2');
+  api.compatibleWith('quasar', '^2.0.0');
+  api.compatibleWith('@quasar/app', '^3.0.0');
 
   const execa = require('execa');
 

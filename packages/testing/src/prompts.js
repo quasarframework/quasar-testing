@@ -13,31 +13,12 @@ module.exports = function () {
       name: 'harnesses',
       type: 'checkbox',
       required: false,
-      message: 'Please choose which testing harnesses to install:',
+      message:
+        'Please choose which testing harnesses to install (only Qv2-compatible harnesses are shown):',
       choices: [
         {
-          name: 'Jest Unit Testing',
-          value: 'unit-jest',
-        },
-        {
-          name: 'AVA Unit Testing',
-          value: 'unit-ava',
-        },
-        {
           name: 'Cypress e2e Testing',
-          value: 'e2e-cypress',
-        },
-        {
-          name: 'Webdriver e2e Testing',
-          value: 'e2e-webdriver',
-        },
-        {
-          name: 'Quality Testing',
-          value: 'quality',
-        },
-        {
-          name: 'Security Testing (OWASP ZAP HUD)',
-          value: 'security',
+          value: 'e2e-cypress@beta',
         },
       ],
     },
