@@ -13,6 +13,8 @@ This AE is meant to centralize the management of all testing harnesses.
 When added (or re-added) it will let you choose which testing harnesses you want and install them.
 It will provide a new `quasar test` command which you can use to run your tests.
 
+It will only show currently maintained AEs which are compatible with Quasar v2.
+
 ### `quasar test`
 
 You can use `quasar test` command like
@@ -22,8 +24,8 @@ You can use `quasar test` command like
 $ quasar test --unit jest
 # Execute Cypress tests
 $ quasar test --e2e cypress
-# Execute Jest, Cypress and Security tests
-$ quasar test --unit jest --e2e cypress --security
+# Execute Jest and Cypress tests
+$ quasar test --unit jest --e2e cypress
 ```
 
 Commands to be run are stored into the testing configuration file, `quasar.testing.json`, and will be executed verbatim.
