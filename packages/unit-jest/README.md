@@ -1,274 +1,148 @@
 ## [Jest](https://jestjs.io/)
 
 ```shell
-$ quasar ext add @quasar/testing-unit-jest
+$ quasar ext add @quasar/testing-unit-jest@alpha
 ```
+
+> This package is in `alpha` phase, the public API may still change as we collect the community feedback.
+> Notice that we rely on `vue-test-utils` (currently in RC phase) and `vue-jest` (currently in alpha phase) and may not release the `stable` version of this package until those packages are released as `stable` too
 
 This AE is meant to manage Quasar and Jest integration for you, both for JS and TS.
 
 We have included:
 
 - a preset configuration file (`jest.config.js`);
-- a setup file with some common patterns you may want to enable (`/test/jest/jest.setup.js`);
-- `mountQuasar` and `mountFactory` helpers which wrap mount functions from "@vue/test-utils";
-- two example components (`App.spec` using Vue native `mount` helper, `QBtnDemo` using `mountQuasar` and [Double File Component](#double-file-components-dfc) fashion);
+- an `installQuasarPlugin` function to help you setup and configure the test Quasar instance on a per-test-suite basis;
+- an example component (`MyButton.vue`) and related example test (`MyButton.spec`);
 - some useful `package.json` scripts;
 - Babel integration;
+- Majestic integration;
 - TypeScript support.
 
-This AE is a wrapper around official "@vue/test-utils" package, you won't be able to use this or understand most of the documentation if you haven't read [the official documentation](https://vue-test-utils.vuejs.org/).
+This AE is a lightweight add-on to "@vue/test-utils" package, which helps you test Vue components which rely on some Quasar features.
+Please check out ["@vue/test-utils" official documentation](https://vue-test-utils.vuejs.org/) to learn how to test Vue components.
 
-### mountQuasar(component, options)
+### Upgrade from Jest AE v2 / Quasar v1
 
-Quasar packs quite a lot of features and configuring correctly `mount`/`shallowMount` to work on Quasar CLI projects isn't trivial.
-This function incapsulates the configuration needed to bring you up-and-running.
+#### Goodbye `mountQuasar`/`mountFactory`, hello `installQuasarPlugin`
+
+Since the new VTU `mount` helper comes with improved typings and supports out-of-the-box many options of the old `mountQuasar`, the existence of a Quasar-specific helpers don't quite make sense anymore.
+
+They have been replaced by the `installQuasarPlugin` helper, which you should call at the very top of your test files.
+
+#### Import Jest helpers from `@jest/globals` (Optional, but recommended)
+
+We suggest you to switch from Jest globals to their ESM-imported counterparts (especially if you use TypeScript), as this will avoid the global scope pollution and simplify integrating Jest with other testing tools.
+If you choose to proceed on this path, then:
+
+- Uninstall Jest global types running `yarn remove @types/jest`
+- Remove `jest` value from `compilerOptions.types` property into `tsconfig.json`. If only `quasar` remains in that array, remove `compilerOptions.type` altogether as it's already provided by `@quasar/app/tsconfig-preset`
+- Update all your test files to import all globals you need from `@jest/globals` package, eg. `import { describe, expect, jest, it, test } from "@jest/globals"`
+- Check out [Vue Test Utils 2.0 migration guide](https://next.vue-test-utils.vuejs.org/migration/)
+
+#### Misc
+
+- Remove `"esModuleInterop": true` from `tsconfig.json`, as Vue Test Utils now supports tsconfig `extends` property and will infer `esModuleInterop` value from `@quasar/app/tsconfig-preset`
+- If you never touched `test/jest/jest.setup` file since you installed this AE, you can now safely delete it and the related `setupFilesAfterEnv` property into `jest.config.js`. It's main purpose was to apply a `Promise` polyfill, which isn't needed anymore due to the new minimum Node version being v12
+- Remove `'^quasar$'`, `'^vue$'` and `'^test-utils$'` mappings from your `jest.config.js`, if present, as they're not needed anymore
+
+#### Removed options and WIP features
+
+We removed some nice-to-have options present in the old AE version in order to release sooner a first public alpha for you to try out.
+Some of them will come back with time, some others were pretty clunky and won't probably be migrated.
+
+As far as we know, **the ability to add tests directly into the SFC** isn't really used, as it still requires an intermediate step to extract those tests into `.spec` files anyway.
+We don't plan to migrate it, unless many people ask for it and someone from the community steps up to enhance this feature DX.
+
+**Wallaby support** has been dropped. We plan to explore this feature again in some time, but a better path would be to discuss with Wallaby team for them to integrate Quasar CLI into their own [automatic configurator](https://wallabyjs.com/docs/intro/config.html#automatic-configuration) as is already the case for other CLIs.
+
+**setCookies** helper has been temporarly removed, but we plan to add it back
+
+### installQuasarPlugin(options)
+
+Call this helper at top of your test files, it will configure `@vue/test-utils` to setup Quasar plugin every time `mount`/`shallowMount` is called.
+It will also restore the original configuration after all tests completed.
 
 Usage:
 
-```ts
-import { mountQuasar } from '@quasar/quasar-app-extension-testing-unit-jest';
-import { QBtn } from 'quasar'; // <= cherry pick only the components you actually use
-import BookComponent from './BookComponent'; // <= note the absence of `.vue` extension, here we are importing the JS/TS part of a Double File Component
+````ts
+import { describe, expect, it } from '@jest/globals';
+import { installQuasarPlugin } from '@quasar/quasar-app-extension-testing-unit-jest';
+import { mount } from '@vue/test-utils';
+import BookComponent from './BookComponent.vue';
+
+/*
+ * You can provide a config object as param like such:
+ *
+ * ```ts
+ * installQuasarPlugin({ plugins: { Dialog } });
+ * ```
+ */
+installQuasarPlugin();
 
 describe('BookComponent', () => {
-  test('mounts without errors', () => {
-    const wrapper = mountQuasar(BookComponent, {
-      quasar: {
-        components: {
-          QBtn,
-        },
-      },
-      propsData: {
-        prop1: 'value',
-      },
-    });
+  it('mounts without errors', () => {
+    const wrapper = mount(MyButton);
 
     expect(wrapper).toBeTruthy();
   });
 });
-```
-
-The second parameter accepts a configuration object with the following properties:
-
-| Name             | Type                                                       | Default                                   | Description                                                                                                                                                                                                                                                                  |
-| ---------------- | ---------------------------------------------------------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `mount`          | Object                                                     | `{}`                                      | The [configuration object](https://vue-test-utils.vuejs.org/api/options.html#context) you'd usually provide to `mount` or `shallowMount` helpers                                                                                                                             |
-| `mount.type`     | `full` or `shallow`                                        | `shallow`                                 | Determine which mount helper should be used between `mount` or `shallowMount`                                                                                                                                                                                                |
-| `mount.localVue` | Vue instance                                               | Clean instance by `createLocalVue` helper | Same as corresponding [mount option](https://vue-test-utils.vuejs.org/api/options.html#localvue), except it generates a new one automatically if not provided. Most of the time you won't need to specify it                                                                 |
-| `quasar`         | Object                                                     | None                                      | Quasar plugin configuration options, you'll mainly use this to register Quasar components to stub                                                                                                                                                                            |
-| `propsData`      | Object                                                     | None                                      | Initial props for the component, will be merged (with precedence) with `mount.propsData`                                                                                                                                                                                     |
-| `plugins`        | Array of `VuePlugin` or `[VuePlugin, ...VuePluginOptions]` | `[]`                                      | Vue plugins which must be added to the localVue instance (eg. `VueCompositionAPI`). If your plugin needs options, you can provide it as an array where the first element is the plugin itself and following elements are the options (eg. `[VueCompositionAPI, ...options]`) |
-
-### mountFactory(component, options)
-
-Most of the time `mountQuasar` configuration will be the same for all tests inside a test-suite, while initial props will change.
-`mountFactory` addresses this scenario: it accepts the same parameters as `mountQuasar`, but returns a function accepting a `propsData` object and returning a wrapper instance.
-
-Usage:
-
-```ts
-import { mountFactory } from '@quasar/quasar-app-extension-testing-unit-jest';
-import { QBtn } from 'quasar'; // <= cherry pick only the components you actually use
-import BookshelfComponent from './BookshelfComponent'; // <= note the absence of `.vue` extension, here we are importing the JS/TS part of a Double File Component
-
-const factory = mountFactory(BookshelfComponent, {
-  // mount: { type: 'full' } <= uncomment this line to use `mount`; `shallowMount` is used by default as it will stub all **registered** components found into the template
-  quasar: { components: { QBtn } },
-});
-
-describe('BookshelfComponent', () => {
-  test('mounts without errors', () => {
-    const wrapper = factory(); // <= when no props are needed
-    // const wrapper = factory({ propName: propValue }); <= when props are needed
-    expect(wrapper).toBeTruthy();
-  });
-});
-```
+````
 
 ### AE Options
 
-#### SFC Test code block
-
-We have included the optional ability to place your test code inside your vue files, should you choose to do so. It will be rendered by webpack HMR. To run these tests, run `$ quasar test --unit jest --dev` (requires you to use `@quasar/app-extension-testing` to manage testing harnesses).
-
-```vue
-<test lang="jest">
-  /* your complete test file here */
-</test>
-```
-
-##### Syntax highlighting
-
-You may notice that your IDE doesn't know how to parse the test block. Follow the instructions below to enable syntax highlighting and/or autocomplete in your specific IDE.
-
-###### Webstorm
-
-- Go to the `<test/>` block, press `<Alt> + <Enter>`
-- Select `inject language or reference`
-- Then select `javascript`
-  - This will grant `<test/>` blocks autocomplete
-
-###### VS Code
-
-The [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur) VS Code extension is required.
-If you don't already have the Vetur extension installed:
-
-- Launch VS Code Quick Open (`<Ctrl> + <P>`)
-- Paste the following command `ext install octref.vetur` then press `<Enter>`
-
-Once you have the Vetur extension installed, you need to configure the custom code block in Vetur.
-
-- Press `<Ctrl> + <Comma>` to launch the _settings editor_ window
-- In the search field type `Custom Blocks` to narrow the focus down to `Vetur > Grammar > Custom Blocks`
-- Click `Edit in settings.json`
-  - This will populate the settings file with the existing configuration block and we will add the following:
-
-```json5
-  "vetur.grammar.customBlocks": {
-    "test": "js",
-    // ... existing block definitions
-  }
-```
-
-_Note: If you're using TypeScript you can set the language to `ts` instead of `js`._
-
-- Save the changes to `settings.json` (`<Ctrl> + <S>`)
-- Launch _'Show All Commands'_ (`<Ctrl> + <Shift> + <P>` or `F1`) and paste `Vetur: Generate grammar` then press `<Enter>`
-  - This will regenerate the Vetur grammar file to include the new custom block definition
-- Launch _'Show All Commands'_ again (`<Ctrl> + <Shift> + <P>` or `F1`) and paste `Reload Window` then press `<Enter>`
-  - This will reload VS Code and apply the new syntax highlighting
-
----
-
-#### Wallaby.js
-
-You can choose to install Wallaby.js to do inline testing. Although it is not freeware, it is an amazing tool and comes highly recommended. https://wallabyjs.com
-
 #### Majestic
 
-You can choose to install Majestic, which is a UI interface to see how your tests are doing. https://github.com/Raathigesh/majestic
+You can choose to install [Majestic](https://github.com/Raathigesh/majestic), which is a UI interface to see how your tests are doing.
 
 ### Caveats
 
 #### Mock i18n
 
-If you're using `VueI18n`, you may want to mock translations. You can easily create Jest mocks for all translation functions and provide them into `options.mocks`.
+If you're using `vue-i18n`, you may want to mock translations. You can easily create Jest mocks for all translation functions and provide them into `options.mocks`.
 
 ```ts
-import { mountFactory } from '@quasar/quasar-app-extension-testing-unit-jest';
+import { describe, it, jest } from '@jest/globals';
+import { config, mount } from '@vue/test-utils';
 import BookshelfComponent from './BookshelfComponent';
 
 const $t = jest.fn();
-$t.mockReturnValue(''); // <= will always provide an empty string
-const $tc = jest.fn();
-const $n = jest.fn();
-const $d = jest.fn();
+$t.mockReturnValue(''); // <= will always return an empty string
 
-const factory = mountFactory(BookshelfComponent, {
-  mount: {
-    mocks: { $t, $tc, $n, $d },
-  },
-});
+// Global mock
+config.global.mocks.$t = $t;
 
 describe('BookshelfComponent', () => {
-  // ...
+  it('should mount with translations mock', () => {
+    // Local mock
+    const wrapper = mount(BookshelfComponent, {
+      global: { mocks: { $t } },
+    });
+
+    // ...
+  });
 });
 ```
 
 #### Testing QPage components
 
 `QPage` usually only work when placed inside a `QLayout` component because the latter provide some references to other layout components.
-You can use `qLayoutInjections` helper function to get an injection stub which will allow you to test `QPage`s in isolation.
+You can use `qLayoutInjections` helper function to get stubs you can provide to allow you to test `QPage`s in isolation.
 
 ```ts
-import {
-  mountFactory,
-  qLayoutInjections,
-} from '@quasar/quasar-app-extension-testing-unit-jest';
+import { qLayoutInjections } from '@quasar/quasar-app-extension-testing-unit-jest';
+import { mount } from '@vue/test-utils';
 import BookshelfPage from './BookshelfPage';
 
-const factory = mountFactory(BookshelfPage, {
-  mount: {
-    provide: qLayoutInjections(),
-  },
-});
-
 describe('BookshelfPage', () => {
-  // ...
+  it('should mount a page with mocked layout', () => {
+    const wrapper = mount(BookshelfPage, {
+      global: { provide: qLayoutInjections() },
+    });
+
+    // ...
+  });
 });
-```
-
-#### Use with VueRouter
-
-You can use VueRouter adding it to a custom `localVue` instance you later provide into `options.mount.localVue`.
-
-```ts
-import { mountFactory } from '@quasar/quasar-app-extension-testing-unit-jest';
-import VueRouter from 'vue-router';
-import BookshelfPage from './BookshelfPage';
-import { createLocalVue } from '@vue/test-utils';
-
-const localVue = createLocalVue();
-localVue.use(VueRouter);
-
-const factory = mountFactory(BookshelfPage, {
-  mount: {
-    localVue,
-    router: new VueRouter(),
-  },
-});
-
-describe('BookshelfPage', () => {
-  // ...
-});
-```
-
-#### Use with Vuex
-
-You can use Vuex adding it to a custom `localVue` instance you later provide into `options.mount.localVue`.
-
-```ts
-import { mountFactory } from '@quasar/quasar-app-extension-testing-unit-jest';
-import Vuex from 'vuex';
-import BookshelfPage from './BookshelfPage';
-import { createLocalVue } from '@vue/test-utils';
-
-const localVue = createLocalVue();
-localVue.use(Vuex);
-
-const factory = mountFactory(BookshelfPage, {
-  mount: {
-    localVue,
-    store: new Vuex.Store({}),
-  },
-});
-
-describe('BookshelfPage', () => {
-  // ...
-});
-```
-
-#### SSR context
-
-You could need an SSR context if your component uses `Cookies` plugin, `Platform` plugin or `preFetch` feature and you want to test how it behaves into SSR mode. In those cases, you can get a mock via `ssrContextMock`.
-
-#### Cookies
-
-If you're testing `Cookies` usage into your app, you can use `setCookies` helper function. \
-If the test involves SSR mode, you can use `ssrContextMock` helper function to get a mock of the SSR context and provide it to `setCookies`.
-
-```ts
-import {
-  getCookies,
-  ssrContextMock,
-} from '@quasar/quasar-app-extension-testing-unit-jest';
-
-const cookies = {
-  // ...
-};
-
-setCookies(cookies);
-setCookies(cookies, ssrContextMock());
 ```
 
 #### TypeScript limitations
@@ -283,10 +157,12 @@ To allow correct inference of the component type, you shall separate the `<scrip
 
 ```ts
 // BookComponent.ts
-export default {
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   name: 'BookComponent',
   // ...
-};
+});
 ```
 
 ```html
@@ -297,12 +173,6 @@ export default {
 
 <style scoped></style>
 ```
-
-##### `propsData` autocomplete
-
-The configuration object `propsData` property isn't currently typed after the component instance props.
-This is due to Vue components complicated typings and multiple flavours, as we still haven't found the way to both extract props typings AND get a correctly typed wrapper instance for all flavours: Composition, Class and Options API all have different and partially incompatible types.
-We are open to contributions and will try to solve this problem when switching to Vue 3, which should have easier typings.
 
 #### Jest watch mode
 

@@ -42,15 +42,7 @@ module.exports = function () {
           value: 'typescript',
         },
         {
-          name: 'SFC webpack <test> loader',
-          value: 'SFC',
-        },
-        {
-          name: 'Install Wallaby.js',
-          value: 'wallabyjs',
-        },
-        {
-          name: 'Install Majestic UI',
+          name: 'Use Majestic UI as Jest tests GUI',
           value: 'majestic',
         },
       ],

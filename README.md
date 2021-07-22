@@ -31,14 +31,14 @@ The Test Driven Design approach will help you to write better (and fewer) tests.
 - [Reset](#reset)
 - [Upgrade](#upgrade)
 - Provided App Extensions
-  - [Testing Harnesses Manager](packages/testing/README.md)
+  - [Testing Harnesses Manager](packages/testing/README.md) (**Supports Quasar v2**)
   - Unit testing
-    - [Jest](packages/unit-jest/README.md)
-    - [Ava](#ava) (**not up to date**)
+    - [Jest](packages/unit-jest/README.md) (**Supports Quasar v2**)
+    - [Ava](#ava) (**deprecated, not up to date**)
   - E2E testing
-    - [Cypress](packages/e2e-cypress/README.md)
-    - [WebDriver.io](#webdriverio-wdio) (**not up to date, WIP**)
-  - [Quality Auditing](#quality-auditing) (**not up to date**)
+    - [Cypress](packages/e2e-cypress/README.md) (**Supports Quasar v2**)
+    - [WebDriver.io](#webdriverio-wdio) (**deprecated, not up to date, WIP**)
+  - [Quality Auditing](#quality-auditing) (**deprecated, not up to date**)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
@@ -281,6 +281,7 @@ Contributions to this repository are highly desirable. Before you make a PR, ple
 
 ## Contributors
 
+- [ilcallo](https://github.com/ilcallo)
 - [nothingismagick](https://github.com/nothingismagick)
 - [nklayman](https://github.com/nklayman)
 - [Allan Gaunt](https://github.com/webnoob)
