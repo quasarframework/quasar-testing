@@ -3,12 +3,15 @@
  */
 export function qLayoutInjections() {
   return {
-    pageContainer: true,
-    layout: {
+    // pageContainerKey
+    _q_pc_: true,
+    // layoutKey
+    _q_l_: {
       header: {},
       right: {},
       footer: {},
       left: {},
+      isContainer: { value: false },
     },
   };
 }

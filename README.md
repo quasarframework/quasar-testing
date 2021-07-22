@@ -289,6 +289,7 @@ Contributions to this repository are highly desirable. Before you make a PR, ple
 
 ## Contributors
 
+- [ilcallo](https://github.com/ilcallo)
 - [nothingismagick](https://github.com/nothingismagick)
 - [nklayman](https://github.com/nklayman)
 - [Allan Gaunt](https://github.com/webnoob)

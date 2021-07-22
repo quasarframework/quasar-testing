@@ -5,16 +5,6 @@
  * API: https://github.com/quasarframework/quasar/blob/master/app/lib/app-extension/IndexAPI.js
  */
 
-module.exports = function (api) {
-  api.prompts.options.forEach((val) => {
-    if (val === 'SFC') {
-      api.chainWebpack((chain) => {
-        chain.module
-          .rule('jest')
-          .test(/\.jest$/)
-          .use('jest')
-          .loader(require.resolve(`${api.appDir}/test/loaders/jest-loader.js`));
-      });
-    }
-  });
+module.exports = function (/* api */) {
+  //
 };

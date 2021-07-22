@@ -4,12 +4,12 @@ const esModules = ['quasar/lang', 'lodash-es'].join('|');
 module.exports = {
   globals: {
     __DEV__: true,
-    // TODO: Remove if resolved natively https://github.com/vuejs/vue-jest/issues/175
+    // TODO: Remove if resolved natively
+    // See https://github.com/vuejs/vue-jest/issues/175
     'vue-jest': {
       pug: { doctype: 'html' },
     },
   },
-  setupFilesAfterEnv: ['<rootDir>/test/jest/jest.setup.ts'],
   // noStackTrace: true,
   // bail: true,
   // cache: false,
@@ -48,7 +48,6 @@ module.exports = {
   // See https://github.com/vuejs/vue-jest/issues/188#issuecomment-620750728
   moduleFileExtensions: ['vue', 'js', 'jsx', 'json', 'ts', 'tsx'],
   moduleNameMapper: {
-    '^quasar$': 'quasar/dist/quasar.common.js',
     '^~/(.*)$': '<rootDir>/$1',
     '^src/(.*)$': '<rootDir>/src/$1',
     '^app/(.*)$': '<rootDir>/$1',

@@ -1,5 +1,4 @@
-export * from './mount-quasar';
-export * from './mount-factory';
+export * from './install-quasar-plugin';
 export * from './layout-injections';
 export * from './ssr-context-mock';
-export * from './set-cookies';
+// export * from './set-cookies';
