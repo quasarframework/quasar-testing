@@ -3,12 +3,12 @@ const esModules = ['quasar/lang', 'lodash-es'].join('|');
 module.exports = {
   globals: {
     __DEV__: true,
-    // TODO: Remove if resolved natively https://github.com/vuejs/vue-jest/issues/175
+    // TODO: Remove if resolved natively
+    // See https://github.com/vuejs/vue-jest/issues/175
     'vue-jest': {
       pug: { doctype: 'html' },
     },
   },
-  setupFilesAfterEnv: ['<rootDir>/test/jest/jest.setup.js'],
   // noStackTrace: true,
   // bail: true,
   // cache: false,
@@ -37,11 +37,14 @@ module.exports = {
   ],
   moduleFileExtensions: ['vue', 'js', 'jsx', 'json'],
   moduleNameMapper: {
-    '^vue$': 'vue/dist/vue.common.js',
-    '^test-utils$': '@vue/test-utils/dist/vue-test-utils.js',
-    '^quasar$': 'quasar/dist/quasar.common.js',
     '^~/(.*)$': '<rootDir>/$1',
     '^src/(.*)$': '<rootDir>/src/$1',
+    '^app/(.*)$': '<rootDir>/$1',
+    '^components/(.*)$': '<rootDir>/src/components/$1',
+    '^layouts/(.*)$': '<rootDir>/src/layouts/$1',
+    '^pages/(.*)$': '<rootDir>/src/pages/$1',
+    '^assets/(.*)$': '<rootDir>/src/assets/$1',
+    '^boot/(.*)$': '<rootDir>/src/boot/$1',
     '.*css$': '@quasar/quasar-app-extension-testing-unit-jest/stub.css',
   },
   transform: {
