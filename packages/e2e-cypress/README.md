@@ -4,9 +4,9 @@
 $ quasar ext add @quasar/testing-e2e-cypress@beta
 ```
 
-This AE is meant to manage Quasar and Cypress integration for you, both for JS and TS.
+This AE manages Quasar and Cypress integration for you, both for JavaScript and TypeScript.
 
-We have included some custom commands out-of-the-box:
+Some custom commands are included out-of-the-box:
 
 | Name                  | Usage                                                       | Description                                                                                                                                                                                              |
 | --------------------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
