@@ -13,6 +13,7 @@
   },
   "scripts": {
     "build": "rm -rf dist && tsc --declaration --declarationDir dist/types && copyfiles -f src/helpers/stub.css dist",
+    "deploy:alpha": "yarn build && yarn publish --tag alpha",
     "deploy:beta": "yarn build && yarn publish --tag beta",
     "deploy:latest": "yarn build && yarn publish --tag latest",
     "test:unit": "jest",
