@@ -35,7 +35,7 @@ describe('MyButton', () => {
     const wrapper = shallowMount(MyButton);
     const { vm } = wrapper;
 
-    // Should be `wrapper.findComponent(QBtn)`, will be fixed in next Quasar version
+    // Should be `wrapper.findComponent(QBtn)`, will be fixed in next Quasar release
     // eslint-disable-next-line
     const button = wrapper.findComponent<QBtn>({ name: QBtn.name! });
     await button.trigger('click');

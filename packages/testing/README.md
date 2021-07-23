@@ -5,7 +5,7 @@
 > Since it has been released as stable under "latest" tag, you'll need to use "qv1" tag to install the Quasar v1 version
 
 ```shell
-$ quasar ext add @quasar/testing@qv1
+$ quasar ext add @quasar/testing@beta
 ```
 
 This AE is meant to centralize the management of all testing harnesses.
