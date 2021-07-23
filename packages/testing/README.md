@@ -1,7 +1,7 @@
 ## Testing Harnesses Manager
 
 ```shell
-$ quasar ext add @quasar/testing
+$ quasar ext add @quasar/testing@beta
 ```
 
 This AE is meant to centralize the management of all testing harnesses.
