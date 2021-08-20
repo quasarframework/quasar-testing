@@ -39,12 +39,13 @@ Hi! I’m really excited that you are interested in contributing to Quasar. Befo
 - It's OK to have multiple small commits as you work on the PR - we will let GitHub automatically squash it before merging.
 
 - If you are adding a new test-runner:
- - Please make an issue before you make a pull request. Maybe someone else has some good ideas for you or there is previous work that you can adapt.
- - Ensure that the test-runner actually works in a real quasar project.
- - Write an example test that passes the "baseline.spec.vue" file with deep coverage.
- - If you need to make additions to the host package.json, follow the format in the package_template.json
+- Please make an issue before you make a pull request. Maybe someone else has some good ideas for you or there is previous work that you can adapt.
+- Ensure that the test-runner actually works in a real quasar project.
+- Write an example test that passes the "baseline.spec.vue" file with deep coverage.
+- If you need to make additions to the host package.json, follow the format in the package_template.json
 
 - If adding new feature:
+
   - Provide convincing reason to add this feature. Ideally you should open a suggestion issue first and have it greenlighted before working on it.
 
 - If fixing a bug:
@@ -53,24 +54,23 @@ Hi! I’m really excited that you are interested in contributing to Quasar. Befo
 
 ## Development Setup
 
-You will need [Node.js](http://nodejs.org) **version 4+** along [NPM](https://docs.npmjs.com/getting-started/installing-node).
+Use the Quasar CLI to create a new Quasar project to test out the changes you'll be doing on testing packages, eg. `quasar create my-example-project`
 
-After cloning the repo, run:
+Clone this monorepo locally, then run `yarn install` at root level
+Move into the package you're interested into, eg `cd packages/unit-jest`, and start hacking!
+When you're ready to test your changes:
 
-``` bash
-$ npm install
-```
+- run `yarn build`, if that package has a build step
+- run `rm -rf node_modules`, to avoid undebuggable runtime errors due to dependency chain pollution. See https://github.com/yarnpkg/yarn/issues/2822 for more info, remember to rerun `yarn install` when coming back for more changes
+
+Then move to your example project:
+
+- install the dependency locally, eg. `yarn add -D <path of testing repo>/packages/unit-jest`
+- invoke the AE to trigger the installation process, eg. `quasar ext invoke @quasar/testing-unit-jest`. You can skip this if you didn't change anything into `prompts.js` and `install.js` AE files
+- try out the new features you added!
 
 ## Project Structure
 
-- **`bin`**: executables
-
-  - **`wrappers`**: code for wrappers
-
-  - **`quasar`**: entry point for CLI
-
-  - **`quasar-*`**: entry point for CLI command
-
-- **`lib`**: utilities used by CLI
-
-- **`lists`**: list of templates available which **gets downloaded directly from Github repo at runtime** by CLI
+All folders inside `packages` folder represent a single testing App Extension.
+Please check out AEs [introduction](https://quasar.dev/app-extensions/introduction) and [development guide](https://quasar.dev/app-extensions/development-guide/introduction) for minimum knownledge on how to work with them and their folder structure.
+All files meant to be scaffolded are stored into a `template` folder inside each AE folder
