@@ -57,6 +57,7 @@ testRoute('shelfs/*/books');
 
 Some Cypress assertions, as `.should('be.checked')` for checkboxes and radio buttons, rely on the presence of a native DOM element, which many Quasar input components don't add by default for a better performance.
 When testing those components with Cypress, you must set `name` attribute to force Quasar to add the underlying native inputs.
+Also note that those Cypress assertions will only work when the input is inside a QForm, as otherwise Quasar skips updating the native `checked` DOM property.
 
 Since native inputs are deep down into the DOM of the input component, you should create your own helper to access them.
 Here's an example of how you could do it for radio buttons:
