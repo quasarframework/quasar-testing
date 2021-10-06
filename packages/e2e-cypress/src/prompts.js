@@ -25,6 +25,11 @@ module.exports = function () {
           name: 'enable TypeScript support',
           value: 'typescript',
         },
+        {
+          name: 'setup Cypress for component testing',
+          value: 'cct',
+          checked: true,
+        },
       ],
     },
   ];

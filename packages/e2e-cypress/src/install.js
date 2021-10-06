@@ -82,6 +82,9 @@ module.exports = function (api) {
         'test:e2e:ci': ciCommand,
       },
     };
+    if (api.prompts.options.includes('cct')) {
+      scripts.scripts['test:unit'] = 'cross-env E2E_TEST=true cypress open-ct';
+    }
     extendPackageJson = __mergeDeep(extendPackageJson, scripts);
   }
 
