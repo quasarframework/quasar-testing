@@ -1,6 +1,5 @@
-import { afterAll } from '@jest/globals';
 import { config } from '@vue/test-utils';
-import { cloneDeep } from 'lodash-es';
+import cloneDeep from 'clone-deep';
 import { Quasar, QuasarPluginOptions } from 'quasar';
 import { ssrContextMock } from './ssr-context-mock';
 
@@ -12,7 +11,7 @@ export function installQuasarPlugin(options?: Partial<QuasarPluginOptions>) {
   // won't have those defaults applied
   config.global.plugins.unshift([Quasar, options, ssrContextMock()]);
 
-  afterAll(() => {
+  after(() => {
     config.global = globalConfigBackup;
   });
 }
