@@ -1,4 +1,6 @@
-export async function generateWebpackConfig(mode: string = 'spa') {
+export async function generateWebpackConfig(
+  mode: string = 'spa',
+): Promise<{ renderer: Record<string, any> }> {
   const extensionRunner = require('@quasar/app/lib/app-extension/extensions-runner');
   const getQuasarCtx = require('@quasar/app/lib/helpers/get-quasar-ctx');
 
@@ -21,7 +23,7 @@ export async function generateWebpackConfig(mode: string = 'spa') {
     await quasarConfFile.prepare();
   } catch (e) {
     console.error(e);
-    return;
+    return { renderer: {} };
   }
   await quasarConfFile.compile();
   return quasarConfFile.webpackConf;
