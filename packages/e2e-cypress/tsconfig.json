@@ -6,7 +6,9 @@
     "sourceMap": true,
     "target": "esnext",
     "moduleResolution": "node",
-    "module": "esnext",
+    "esModuleInterop": true,
+    // "module": "esnext",
+    "module": "commonjs",
     "types": ["cypress"]
   },
   "include": ["src/helpers"]
