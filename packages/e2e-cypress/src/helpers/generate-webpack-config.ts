@@ -1,3 +1,5 @@
+/// <reference types="node" />
+
 export async function generateWebpackConfig(
   mode: string = 'spa',
 ): Promise<{ renderer: Record<string, any> }> {
