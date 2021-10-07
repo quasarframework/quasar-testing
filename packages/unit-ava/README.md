@@ -1,3 +1,0 @@
-# Quasar CLI Extension
-
-> WIP

@@ -1,8 +1,0 @@
-{
-  "devDependencies": {
-    "@babel/core": "^7.4.0",
-    "babel-core": "^6.26.3",
-    "wallaby-vue-compiler": "^1.0.3",
-    "vue-jest": "^3.0.0"
-  }
-}
