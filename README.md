@@ -34,11 +34,9 @@ The Test Driven Design approach will help you to write better (and fewer) tests.
   - [Testing Harnesses Manager](packages/testing/README.md) (**Supports Quasar v2**)
   - Unit testing
     - [Jest](packages/unit-jest/README.md) (**Supports Quasar v2**)
-    - [Ava](#ava) (**deprecated, not up to date**)
   - E2E testing
     - [Cypress](packages/e2e-cypress/README.md) (**Supports Quasar v2**)
-    - [WebDriver.io](#webdriverio-wdio) (**deprecated, not up to date, WIP**)
-  - [Quality Auditing](#quality-auditing) (**deprecated, not up to date**)
+  - [Quality Auditing](#quality-auditing) (**not up to date**)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
@@ -114,52 +112,13 @@ $ quasar ext add @quasar/testing-unit-jest
 ### [Jest](https://jestjs.io/)
 
 [Check out Jest AE documentation](packages/unit-jest/README.md)
+## E2E Testing
 
-### [AVA](https://github.com/avajs/ava)
-
-```shell
-$ quasar ext add @quasar/testing-unit-ava
-```
-
-We have included:
-
-- a configuration file `ava.config.js`
-- `/test/ava/setup.js`
-- `babel.config.js` file
-- a `quasar` scaffolding helper
-- a 'validity' test that makes sure quasar is initiatable
-
-We have included the optional ability to place your test code inside your vue files, should you choose to do so. It will be rendered by webpack HMR. To run these tests, run `$ quasar test --unit ava --dev`.
-
-```
-<test lang="ava">
-  /* your complete test file here */
-</test>
-```
-
-> You may notice that your IDE doesn't know how to parse the test block, so go into the `<test/>` block, press `<alt> + <enter>`, select 'inject language or reference' and select `javascript`. This will grant `<test/>` blocks autocomplete.
-
-## e2e Testing
-
-We recommend testing webapps with Cypress if you target Chrome-based browsers (Chrome, Edge, Electron) or Firefox - but if you want to test Safari, IE or Cordova apps, then you should consider using webdriver.io.
+We recommend testing webapps with Cypress if you target Chrome-based browsers (Chrome, Edge, Electron) or Firefox - but if you want to test Safari or Cordova/Capacitor apps, then you should consider using webdriver.io.
 
 ### [Cypress](https://www.cypress.io/)
 
 [Check out Cypress AE documentation](packages/e2e-cypress/README.md)
-
-### [WebDriver.io](https://webdriver.io/) (wdio)
-
-```shell
-$ quasar ext add @quasar/testing-e2e-wdio
-$ yarn selenium:install && selenium:start
-```
-
-**WIP** - please help battle test this harness.
-FYI: we're using webdriver 4.0 for the moment because wdio requires it. If you need to use webdriver 5, please get in touch and we can create another app-extension.
-
-Prior Work:
-https://github.com/fansanelli/quasar-webdriver/blob
-https://github.com/NodeJunkie/quasar-webdriver/tree/feat/BackportToQuasar%231
 
 ### Quality Auditing
 
@@ -175,41 +134,6 @@ The `Lighthouse` tool can help you identify issues with your PWA app, but only i
 
 `Node License Finder (nlf)` is a free tool you can use to catalog all the licenses of the hundreds of open-source projects you are using in your project.
 
-## Contributing
-
-Setup the monorepo locally:
-
-- fork this repository on GitHub
-- clone it locally (`git clone https://github.com/<YOUR-GITHUB-HANDLE>/quasar-testing.git`)
-- move into the monorepo folder (`cd quasar-testing`)
-- install dependencies (`yarn install`)
-- move into the folder of the harness you want to work on (`cd packages/e2e-cypress`)
-- if the harness require a build step (eg. Jest AE), run the build command (`yarn build`)
-
-Create a project where to test the harnesses, **OUTSIDE `quasar-testing` folder**:
-
-- open another terminal
-- create a new clean Quasar project (`quasar create <my-test-project>`)
-- locally install the harness NPM package (`yarn add -D ../quasar-testing/packages/e2e-cypress`)
-- invoke the App Extension (`quasar ext invoke @quasar/testing-e2e-cypress`)
-
-Read the [App Extensions development docs](https://quasar.dev/app-extensions/development-guide/introduction).
-
----
-
-The packages in this repo follow the following naming convention:
-
-- @quasar/app-extension-testing-unit-\*
-- @quasar/app-extension-testing-e2e-\*
-- @quasar/app-extension-testing-quality
-
-Quasar internally maps extensions (pruning "app-extension-") when running `quasar ext ...` commands, eg. `ava` test-runner AE id would be `@quasar/testing-unit-ava`.
-
-There will be more and more test-harnesses coming as time permits. If you would like to help us add official harnesses, please open an issue or get in touch on Quasar Discord server #testing channel.
-
-Avoid opening PRs without getting in touch with us, as we may refuse to merge integrations we cannot commit to maintain.
-In these cases, we encourage you to publish and maintain the new integration AE on your own. We'll try to help you getting started and link your integration on this README :)
-
 ## Roadmap
 
 Test harnesses currently verified to have valid "integration" are checked off in the following list.
@@ -217,7 +141,7 @@ We won't commit to any deadline for integrations of new harnesses.
 
 ### UNIT
 
-- [x] [ava](https://github.com/avajs/ava)
+- [ ] [ava](https://github.com/avajs/ava)
 - [ ] [jasmine 3](https://jasmine.github.io/)
 - [x] [jest 26](https://facebook.github.io/jest/)
 - [ ] [tap](https://github.com/tapjs/node-tap)
@@ -234,7 +158,7 @@ We won't commit to any deadline for integrations of new harnesses.
 - [ ] [spectron](https://github.com/electron/spectron) (electron)
 - [ ] [testcafe](https://github.com/DevExpress/testcafe)
 - [ ] [testee](https://github.com/bitovi/testee)
-- [x] [webdriver.io](http://webdriver.io/) (wdio - multi tenant) - Not ready for production
+- [ ] [webdriver.io](http://webdriver.io/)
 
 ### QUALITY
 
@@ -277,7 +201,8 @@ We won't commit to any deadline for integrations of new harnesses.
 
 ## Contributing
 
-Contributions to this repository are highly desirable. Before you make a PR, please open an issue, create a fork and PR. See the [Contribution Guidelines](./.github/CONTRIBUTING.md) for more details. Please note: Project coordination takes place on the [Discord server](https://discord.gg/5TDhbDg).
+Contributions to this repository are highly desirable, see the [Contribution Guidelines](./.github/CONTRIBUTING.md) for more details.
+Please note: project coordination takes place on the [Discord server](https://discord.gg/5TDhbDg).
 
 ## Contributors
 

@@ -53,17 +53,36 @@ Hi! I’m really excited that you are interested in contributing to Quasar. Befo
   - Provide detailed description of the bug in the PR. Live demo preferred.
 
 ## Development Setup
+As a first step, read the [App Extensions development docs](https://quasar.dev/app-extensions/development-guide/introduction) to get the gist of how the file structure works.
+
+The packages in this repo follow the following naming convention:
+
+- @quasar/app-extension-testing-unit-\*
+- @quasar/app-extension-testing-e2e-\*
+- @quasar/app-extension-testing-quality
+
+Quasar internally maps extensions (pruning "app-extension-") when running `quasar ext ...` commands, eg. `jest` test-runner AE id would be `@quasar/testing-unit-jest`.
+
+If you would like to help us add official harnesses, please open an issue or get in touch on Quasar Discord server #testing channel.
+Avoid opening PRs without getting in touch with us, as we may refuse to merge integrations we cannot commit to maintain.
+In these cases, we encourage you to publish and maintain the new integration AE on your own.
+We'll try to help you getting started and link your integration on this README :)
+
+---
+ 
+### Setup
 
 Use the Quasar CLI to create a new Quasar project to test out the changes you'll be doing on testing packages, eg. `quasar create my-example-project`
 
-Clone this monorepo locally, then run `yarn install` at root level
+Fork this monorepo and clone it locally via `git clone https://github.com/<YOUR-GITHUB-HANDLE>/quasar-testing.git`
+Move into the monorepo folder (`cd quasar-testing`) and run `yarn install` at root level
 Move into the package you're interested into, eg `cd packages/unit-jest`, and start hacking!
 When you're ready to test your changes:
 
 - run `yarn build`, if that package has a build step
 - run `rm -rf node_modules`, to avoid undebuggable runtime errors due to dependency chain pollution. See https://github.com/yarnpkg/yarn/issues/2822 for more info, remember to rerun `yarn install` when coming back for more changes
 
-Then move to your example project:
+Then move to your example project (**it must be OUTSIDE `quasar-testing` folder**):
 
 - install the dependency locally, eg. `yarn add -D <path of testing repo>/packages/unit-jest`
 - invoke the AE to trigger the installation process, eg. `quasar ext invoke @quasar/testing-unit-jest`. You can skip this if you didn't change anything into `prompts.js` and `install.js` AE files
