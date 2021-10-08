@@ -13,7 +13,7 @@
 // the project's config changing)
 
 // cypress/plugins/index.ts
-import { generateWebpackConfig } from '@quasar/quasar-app-extension-testing-e2e-cypress';
+import generateWebpackConfig from 'app/test/cypress/helpers/generateWebpackConfig';
 import { startDevServer } from '@cypress/webpack-dev-server';
 
 const pluginConfig: Cypress.PluginConfig = (on, config) => {

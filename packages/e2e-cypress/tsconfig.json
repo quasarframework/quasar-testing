@@ -7,9 +7,8 @@
     "target": "esnext",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    // "module": "esnext",
     "module": "commonjs",
-    "types": ["cypress"]
+    "types": ["cypress", "node"]
   },
   "include": ["src/helpers"]
 }

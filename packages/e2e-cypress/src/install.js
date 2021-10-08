@@ -52,15 +52,21 @@ module.exports = function (api) {
 
   api.render('./templates/base');
 
+  const extension = api.prompts.options.includes('typescript') ? 'ts' : 'js';
+  const cct = api.prompts.options.includes('cct') ? 'cct' : '';
+
+  api.renderFile(
+    `./templates/configs/cypress-${cct}-${extension}.json`,
+    'cypress.json',
+  );
+
   api.render(
     `./templates/${
       api.prompts.options.includes('typescript') ? '' : 'no-'
     }typescript`,
   );
 
-  if (api.prompts.options.includes('cct')) {
-    api.render('./templates/cct');
-  }
+  if (api.prompts.options.includes('cct')) api.render('./templates/cct');
 
   api.extendJsonFile('quasar.testing.json', {
     'e2e-cypress': {
