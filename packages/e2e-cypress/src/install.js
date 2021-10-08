@@ -37,11 +37,14 @@ function __mergeDeep(...sources) {
 let extendPackageJson = {
   devDependencies: {
     'eslint-plugin-cypress': '^2.11.3',
+    '@cypress/vue': '^3.0.3',
+    '@cypress/webpack-dev-server': '^1.6.0',
   },
 };
 
-const ciCommand =
+const ciCommandE2e =
   'cross-env E2E_TEST=true start-test "quasar dev" http-get://localhost:8080 "cypress run"';
+const ciCommandUnit = 'cypress run-ct';
 
 module.exports = function (api) {
   api.compatibleWith('quasar', '^2.0.0');
@@ -55,9 +58,16 @@ module.exports = function (api) {
     }typescript`,
   );
 
+  if (api.prompts.options.includes('cct')) {
+    api.render('./templates/cct');
+  }
+
   api.extendJsonFile('quasar.testing.json', {
     'e2e-cypress': {
-      runnerCommand: ciCommand,
+      runnerCommand: ciCommandE2e,
+    },
+    'unit-cypress': {
+      runnerCommand: ciCommandUnit,
     },
   });
 
@@ -79,11 +89,12 @@ module.exports = function (api) {
         // See https://github.com/bahmutov/start-server-and-test#note-for-webpack-dev-server-users
         'test:e2e':
           'cross-env E2E_TEST=true start-test "quasar dev" http-get://localhost:8080 "cypress open"',
-        'test:e2e:ci': ciCommand,
+        'test:e2e:ci': ciCommandE2e,
       },
     };
     if (api.prompts.options.includes('cct')) {
-      scripts.scripts['test:unit'] = 'cross-env E2E_TEST=true cypress open-ct';
+      scripts.scripts['test:unit'] = 'cypress open-ct';
+      scripts.scripts['test:unit:ci'] = ciCommandUnit;
     }
     extendPackageJson = __mergeDeep(extendPackageJson, scripts);
   }
