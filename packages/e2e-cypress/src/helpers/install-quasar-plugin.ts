@@ -2,15 +2,10 @@ import { config } from '@vue/test-utils';
 import cloneDeep from 'clone-deep';
 import { Quasar, QuasarPluginOptions } from 'quasar';
 import { ssrContextMock } from './ssr-context-mock';
-// Change this if you have a different entrypoint for the main scss.
-import 'src/css/app.scss';
-// Quasar styles
-import 'quasar/src/css/index.sass';
 
-// ICON SETS
-// If you use multiple or different icon-sets then the default, be sure to import them here.
-import 'quasar/dist/icon-set/material-icons.umd.prod';
-import '@quasar/extras/material-icons/material-icons.css';
+// Had the css imports here for styling with CCT but as this file is exported along with commands
+// the cypress E2E tests fail because they don't have loaders for css in place.
+// So somehow this code is also evaluated when only importing { registerCommands } from the AE.
 
 export function installQuasarPlugin(options?: Partial<QuasarPluginOptions>) {
   const globalConfigBackup = cloneDeep(config.global);

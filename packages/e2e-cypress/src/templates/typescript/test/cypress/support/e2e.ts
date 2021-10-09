@@ -16,25 +16,6 @@
 // Import commands.ts using ES2015 syntax:
 import './commands';
 
-import { installQuasarPlugin } from '@quasar/quasar-app-extension-testing-e2e-cypress';
-import { Dialog } from 'quasar';
-// Example to import i18n from boot and use as plugin
-// import { i18n } from 'src/boot/i18n';
-import { config } from '@vue/test-utils';
-
-// You can modify the global config here for all tests or pass in the configuration per test
-// For example use the actual i18n instance or mock it
-// config.global.plugins.push(i18n);
-config.global.mocks = {
-  $t: () => '',
-};
-
-// Overwrite the transition and transition-group stubs which are stubbed by test-utils by default.
-// We do want transitions to show when doing visual testing :)
-config.global.stubs = {};
-
-installQuasarPlugin({ plugins: { Dialog } });
-
 const resizeObserverLoopError = 'ResizeObserver loop limit exceeded';
 
 Cypress.on('uncaught:exception', (err) => {

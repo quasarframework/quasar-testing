@@ -1,3 +1,6 @@
+// Had to setup a separate file for the types, otherwise there were typescript/eslint errors in the editor.
+import './command-types';
+
 export const registerCommands = () => {
   const dataCy = (subject: JQuery<HTMLElement> | undefined, value: string) => {
     return cy.get(`[data-cy=${value}]`, {

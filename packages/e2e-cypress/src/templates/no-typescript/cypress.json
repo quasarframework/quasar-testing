@@ -2,13 +2,15 @@
   "baseUrl": "http://localhost:8080/",
   "fixturesFolder": "test/cypress/fixtures",
   "integrationFolder": "test/cypress/integration",
-  "pluginsFile": "test/cypress/plugins/index.ts",
+  "pluginsFile": "test/cypress/plugins/e2e.js",
   "screenshotsFolder": "test/cypress/screenshots",
-  "supportFile": "test/cypress/support/index.ts",
+  "supportFile": "test/cypress/support/e2e.js",
   "videosFolder": "test/cypress/videos",
   "video": true,
   "component": {
     "componentFolder": "src",
-    "testFiles": "**/*.spec.ts"
+    "testFiles": "**/*.spec.js",
+    "supportFile": "test/cypress/support/unit.js",
+    "pluginsFile": "test/cypress/plugins/unit.js"
   }
 }

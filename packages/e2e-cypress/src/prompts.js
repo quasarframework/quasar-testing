@@ -30,6 +30,12 @@ module.exports = function () {
           value: 'cct',
           checked: true,
         },
+        // Is there a way to make this conditional?
+        {
+          name: 'add examples for component testing under `src/components`',
+          value: 'examples',
+          checked: true,
+        },
       ],
     },
   ];
