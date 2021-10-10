@@ -13,8 +13,8 @@
 // the project's config changing)
 
 // cypress/plugins/index.js
-import generateWebpackConfig from 'app/test/cypress/helpers/generateWebpackConfig';
-import { startDevServer } from '@cypress/webpack-dev-server';
+const generateWebpackConfig = require('./../helpers/generateWebpackConfig');
+const { startDevServer } = require('@cypress/webpack-dev-server');
 
 module.exports = (on, config) => {
   on('dev-server:start', async (options) => {
