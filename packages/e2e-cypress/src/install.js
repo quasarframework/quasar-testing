@@ -57,7 +57,12 @@ module.exports = function (api) {
   );
 
   if (api.prompts.options.includes('cct')) {
-    api.render('./templates/cct');
+    api.render('./templates/cct/base');
+    api.render(
+      `./templates/cct/examples-${
+        api.prompts.options.includes('typescript') ? 'ts' : 'js'
+      }`,
+    );
   }
 
   api.extendJsonFile('quasar.testing.json', {
