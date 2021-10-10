@@ -28,13 +28,6 @@ module.exports = function () {
         {
           name: 'setup Cypress for component testing',
           value: 'cct',
-          checked: true,
-        },
-        // Is there a way to make this conditional?
-        {
-          name: 'add examples for component testing under `src/components`',
-          value: 'examples',
-          checked: true,
         },
       ],
     },

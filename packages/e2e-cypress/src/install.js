@@ -37,8 +37,6 @@ function __mergeDeep(...sources) {
 let extendPackageJson = {
   devDependencies: {
     'eslint-plugin-cypress': '^2.11.3',
-    '@cypress/vue': '^3.0.3',
-    '@cypress/webpack-dev-server': '^1.6.0',
   },
 };
 
@@ -59,15 +57,7 @@ module.exports = function (api) {
   );
 
   if (api.prompts.options.includes('cct')) {
-    api.render('./templates/cct/base');
-
-    if (api.prompts.options.includes('examples')) {
-      const extension = api.prompts.options.includes('typescript')
-        ? 'ts'
-        : 'js';
-      api.render('./templates/cct/examples');
-      api.render(`./templates/cct/examples-${extension}`);
-    }
+    api.render('./templates/cct');
   }
 
   api.extendJsonFile('quasar.testing.json', {

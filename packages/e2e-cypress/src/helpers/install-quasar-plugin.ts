@@ -1,5 +1,5 @@
 import { config } from '@vue/test-utils';
-import cloneDeep from 'clone-deep';
+import { cloneDeep } from 'lodash-es';
 import { Quasar, QuasarPluginOptions } from 'quasar';
 import { ssrContextMock } from './ssr-context-mock';
 
