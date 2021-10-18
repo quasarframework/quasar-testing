@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-testing-unit-jest",
-  "version": "3.0.0-alpha.3",
+  "version": "3.0.0-alpha.4",
   "license": "MIT",
   "description": "A Quasar App Extension for running Jest tests",
   "contributors": [
