@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
   name: 'QuasarTooltip',
   setup() {
     const showTooltip = ref(true);
@@ -19,5 +19,5 @@ export default {
       showTooltip,
     };
   },
-};
+});
 </script>

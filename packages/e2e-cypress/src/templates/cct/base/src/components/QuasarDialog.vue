@@ -15,8 +15,9 @@
 
 <script>
 import { useDialogPluginComponent } from 'quasar';
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
   props: {
     message: {
       type: String,
@@ -61,5 +62,5 @@ export default {
       onCancelClick: onDialogCancel,
     };
   },
-};
+});
 </script>

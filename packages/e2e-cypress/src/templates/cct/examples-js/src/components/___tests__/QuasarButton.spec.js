@@ -1,5 +1,5 @@
 import { mount } from '@cypress/vue';
-import QuasarButton from './../QuasarButton.vue';
+import QuasarButton from '../QuasarButton.vue';
 
 describe('QuasarButton', () => {
   it('renders a message', () => {

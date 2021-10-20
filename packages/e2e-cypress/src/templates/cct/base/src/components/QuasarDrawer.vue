@@ -1,6 +1,6 @@
 <template>
   <q-drawer
-    v-model="drawerLeft"
+    v-model="showDrawer"
     show-if-above
     :width="200"
     :breakpoint="700"
@@ -16,14 +16,16 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
   name: 'QuasarDrawer',
   setup() {
+    const showDrawer = ref(true);
+
     return {
-      drawerLeft: ref(true),
+      showDrawer,
     };
   },
-};
+});
 </script>

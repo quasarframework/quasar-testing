@@ -1,5 +1,5 @@
 import { mount } from '@cypress/vue';
-import QuasarTooltip from './../QuasarTooltip.vue';
+import QuasarTooltip from '../QuasarTooltip.vue';
 
 describe('QuasarTooltip', () => {
   it('should show a tooltip', () => {
