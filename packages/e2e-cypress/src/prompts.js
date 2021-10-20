@@ -26,7 +26,7 @@ module.exports = function () {
           value: 'typescript',
         },
         {
-          name: 'setup Cypress for component testing',
+          name: 'setup Cypress Component Testing',
           value: 'cct',
         },
       ],
