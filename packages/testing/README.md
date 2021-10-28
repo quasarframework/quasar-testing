@@ -2,6 +2,9 @@
 
 ```shell
 $ quasar ext add @quasar/testing
+
+# For Quasar v1.x.x use version 1
+$ quasar ext add @quasar/testing@1
 ```
 
 This AE is meant to centralize the management of all testing harnesses.
