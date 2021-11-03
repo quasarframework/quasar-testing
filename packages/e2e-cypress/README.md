@@ -1,5 +1,7 @@
 ## [Cypress](https://www.cypress.io/)
 
+> You’re looking at Quasar v2 testing docs. If you're searching for Quasar v1 docs, head [here](https://testing.quasar.dev/packages/e2e-cypress/)
+
 ```shell
 $ quasar ext add @quasar/testing-e2e-cypress@beta
 ```

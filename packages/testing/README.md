@@ -1,7 +1,9 @@
 ## Testing Harnesses Manager
 
+> You’re looking at Quasar v2 testing docs. If you're searching for Quasar v1 docs, head [here](https://testing.quasar.dev/packages/testing/)
+
 ```shell
-$ quasar ext add @quasar/testing@beta
+$ quasar ext add @quasar/testing
 ```
 
 This AE is meant to centralize the management of all testing harnesses.
