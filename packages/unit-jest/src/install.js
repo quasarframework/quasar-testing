@@ -37,7 +37,7 @@ let extendPackageJson = {
 };
 
 module.exports = function (api) {
-  api.compatibleWith('quasar', '^2.0.0');
+  api.compatibleWith('quasar', '^2.0.4');
   api.compatibleWith('@quasar/app', '^3.0.0');
 
   api.extendJsonFile('quasar.testing.json', {
