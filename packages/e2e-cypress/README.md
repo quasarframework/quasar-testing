@@ -1,5 +1,7 @@
 ## [Cypress](https://www.cypress.io/)
 
+> You're looking at Quasar v1 Cypress AE docs. While the AE migration to support Quasar v2 is in progress, you can find the documentation for Quasar v2 version [here](https://github.com/quasarframework/quasar-testing/tree/next/packages/e2e-cypress)
+
 ```shell
 $ quasar ext add @quasar/testing-e2e-cypress
 ```

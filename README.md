@@ -4,6 +4,10 @@
 
 # **`@quasar/testing`**
 
+> You're looking at Quasar v1 testing docs. While AEs migration to support Quasar v2 is in progress, you can find the documentation for Quasar v2 versions [here](https://github.com/quasarframework/quasar-testing/tree/next)
+>
+> Check out the migration status [here](https://github.com/quasarframework/quasar/discussions/10341)
+
 This is the monorepo for integrating the test-runner of your choice into your Quasar app.
 
 You can install multiple pre-rigged testing harnesses (test runners) to your Quasar application, each one will:
@@ -34,10 +38,10 @@ The Test Driven Design approach will help you to write better (and fewer) tests.
   - [Testing Harnesses Manager](packages/testing/README.md)
   - Unit testing
     - [Jest](packages/unit-jest/README.md)
-    - [Ava](#ava) (**not up to date**)
+    - [Ava](#ava) (**DEPRECATED**)
   - E2E testing
     - [Cypress](packages/e2e-cypress/README.md)
-    - [WebDriver.io](#webdriverio-wdio) (**not up to date, WIP**)
+    - [WebDriver.io](#webdriverio-wdio) (**DEPRECATED**)
   - [Quality Auditing](#quality-auditing) (**not up to date**)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
@@ -115,7 +119,9 @@ $ quasar ext add @quasar/testing-unit-jest
 
 [Check out Jest AE documentation](packages/unit-jest/README.md)
 
-### [AVA](https://github.com/avajs/ava)
+### [AVA](https://github.com/avajs/ava) **DEPRECATED**
+
+> You're looking at Quasar v1 AVA AE docs. This AE has been deprecated and won't be migrated to support Quasar v2, you can find the announcement [here](https://github.com/quasarframework/quasar/discussions/10341)
 
 ```shell
 $ quasar ext add @quasar/testing-unit-ava
@@ -147,7 +153,9 @@ We recommend testing webapps with Cypress if you target Chrome-based browsers (C
 
 [Check out Cypress AE documentation](packages/e2e-cypress/README.md)
 
-### [WebDriver.io](https://webdriver.io/) (wdio)
+### [WebDriver.io](https://webdriver.io/) (wdio) **DEPRECATED**
+
+> You're looking at Quasar v1 WebDriver.io AE docs. This AE has been deprecated and won't be migrated to support Quasar v2, you can find the announcement [here](https://github.com/quasarframework/quasar/discussions/10341)
 
 ```shell
 $ quasar ext add @quasar/testing-e2e-wdio
@@ -217,7 +225,7 @@ We won't commit to any deadline for integrations of new harnesses.
 
 ### UNIT
 
-- [x] [ava](https://github.com/avajs/ava)
+- [x] [ava](https://github.com/avajs/ava) **DEPRECATED**
 - [ ] [jasmine 3](https://jasmine.github.io/)
 - [x] [jest 26](https://facebook.github.io/jest/)
 - [ ] [tap](https://github.com/tapjs/node-tap)
@@ -234,7 +242,7 @@ We won't commit to any deadline for integrations of new harnesses.
 - [ ] [spectron](https://github.com/electron/spectron) (electron)
 - [ ] [testcafe](https://github.com/DevExpress/testcafe)
 - [ ] [testee](https://github.com/bitovi/testee)
-- [x] [webdriver.io](http://webdriver.io/) (wdio - multi tenant) - Not ready for production
+- [x] [webdriver.io](http://webdriver.io/) **DEPRECATED**
 
 ### QUALITY
 
