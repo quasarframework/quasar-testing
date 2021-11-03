@@ -6,6 +6,9 @@
  */
 
 module.exports = async function (api) {
+  api.compatibleWith('quasar', '<2.0.0');
+  api.compatibleWith('@quasar/app', '<3.0.0');
+
   const execa = require('execa');
 
   const addOrInvoke = process.argv.indexOf('invoke') > -1 ? 'invoke' : 'add';

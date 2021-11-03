@@ -44,6 +44,9 @@ const ciCommand =
   'cross-env E2E_TEST=true start-test "quasar dev" http-get://localhost:8080 "cypress run"';
 
 module.exports = function (api) {
+  api.compatibleWith('quasar', '<2.0.0');
+  api.compatibleWith('@quasar/app', '<3.0.0');
+
   api.render('./base');
 
   api.render(

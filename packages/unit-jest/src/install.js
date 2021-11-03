@@ -47,6 +47,9 @@ let extendPackageJson = {
 };
 
 module.exports = function (api) {
+  api.compatibleWith('quasar', '<2.0.0');
+  api.compatibleWith('@quasar/app', '<3.0.0');
+
   api.extendJsonFile('quasar.testing.json', {
     'unit-jest': {
       runnerCommand: ciCommand,
@@ -81,8 +84,7 @@ module.exports = function (api) {
     } else if (val === 'scripts') {
       const scripts = {
         scripts: {
-          test:
-            'echo "See package.json => scripts for available tests." && exit 0',
+          test: 'echo "See package.json => scripts for available tests." && exit 0',
           'test:unit': 'jest --updateSnapshot',
           'test:unit:ci': ciCommand,
           'test:unit:coverage': 'jest --coverage',
