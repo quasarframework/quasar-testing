@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-testing",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "license": "MIT",
   "description": "A Quasar App Extension for managing Test Harnesses",
   "author": "Daniel Thompson-Yvetot",
