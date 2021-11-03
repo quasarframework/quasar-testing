@@ -32,7 +32,7 @@ const ciCommand = 'jest --ci';
 // make sure the object exists
 let extendPackageJson = {
   devDependencies: {
-    'eslint-plugin-jest': '^24.3.6',
+    'eslint-plugin-jest': '^25.2.2',
   },
 };
 
