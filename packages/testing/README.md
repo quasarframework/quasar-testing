@@ -1,11 +1,9 @@
 ## Testing Harnesses Manager
 
-> You're looking at Quasar v1 Harnesses Manager AE docs. This AE has been migrated to support Quasar v2 and has been released as stable, you can find the documentation for the new stable release [here](https://github.com/quasarframework/quasar-testing/tree/next/packages/testing)
->
-> Since it has been released as stable under "latest" tag, you'll need to use "qv1" tag to install the Quasar v1 version
+> You’re looking at Quasar v2 testing docs. If you're searching for Quasar v1 docs, head [here](https://testing.quasar.dev/packages/testing/)
 
 ```shell
-$ quasar ext add @quasar/testing@beta
+$ quasar ext add @quasar/testing
 ```
 
 This AE is meant to centralize the management of all testing harnesses.

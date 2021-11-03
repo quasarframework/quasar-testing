@@ -4,7 +4,7 @@
 
 # **`@quasar/testing`**
 
-> You're looking at Quasar v1 testing docs. While AEs migration to support Quasar v2 is in progress, you can find the documentation for Quasar v2 versions [here](https://github.com/quasarframework/quasar-testing/tree/next)
+> You’re looking at Quasar v2 testing docs. If you're searching for Quasar v1 docs, head [here](https://testing.quasar.dev/)
 >
 > Check out the migration status [here](https://github.com/quasarframework/quasar/discussions/10341)
 
@@ -37,10 +37,10 @@ The Test Driven Design approach will help you to write better (and fewer) tests.
 - Provided App Extensions
   - [Testing Harnesses Manager](packages/testing/README.md)
   - Unit testing
-    - [Jest](packages/unit-jest/README.md) (**Supports Quasar v2**)
+    - [Jest](packages/unit-jest/README.md)
   - E2E testing
-    - [Cypress](packages/e2e-cypress/README.md) (**Supports Quasar v2**)
-  - [Quality Auditing](#quality-auditing) (**not up to date**)
+    - [Cypress](packages/e2e-cypress/README.md)
+  - [Quality Auditing](#quality-auditing) (**OUTDATED, not migrated to Qv2 yet**)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
@@ -125,7 +125,7 @@ We recommend testing webapps with Cypress if you target Chrome-based browsers (C
 
 [Check out Cypress AE documentation](packages/e2e-cypress/README.md)
 
-### Quality Auditing
+### Quality Auditing (**OUTDATED, not migrated to Qv2 yet**)
 
 ```shell
 $ quasar ext add @quasar/testing-quality
