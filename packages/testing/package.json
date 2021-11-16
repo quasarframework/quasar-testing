@@ -11,8 +11,7 @@
   "main": "src/index.js",
   "scripts": {
     "deploy:beta": "yarn publish --tag beta",
-    "deploy:latest": "yarn publish --tag latest",
-    "test": "snyk test && echo \"No test specified\" && exit 0"
+    "deploy:latest": "yarn publish --tag latest"
   },
   "publishConfig": {
     "access": "public"
@@ -26,8 +25,5 @@
     "chalk": "^4.1.1",
     "execa": "^5.1.1",
     "strip-ansi": "^6.0.0"
-  },
-  "devDependencies": {
-    "snyk": "^1.180.1"
   }
 }

@@ -17,8 +17,7 @@
     "deploy:beta": "yarn build && yarn publish --tag beta",
     "deploy:latest": "yarn build && yarn publish --tag latest",
     "test:unit": "jest",
-    "test:unit:watch": "jest --watch",
-    "test": "snyk test && echo \"No test specified\" && exit 0"
+    "test:unit:watch": "jest --watch"
   },
   "publishConfig": {
     "access": "public"
@@ -52,7 +51,6 @@
     "copyfiles": "^2.4.1",
     "quasar": "^2.0.0",
     "rimraf": "^3.0.2",
-    "snyk": "^1.180.1",
     "vue": "^3.1.2"
   }
 }

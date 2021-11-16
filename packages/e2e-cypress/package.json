@@ -17,8 +17,7 @@
     "format": "prettier --write \"src/**/*.{js,ts,vue}\" \"*.{json,md}\" \"test/**/*.{js,ts,vue}\"",
     "build": "rimraf dist && tsc --declaration --declarationDir dist/types",
     "deploy:beta": "yarn build && yarn publish --tag beta",
-    "deploy:latest": "yarn build && yarn publish --tag latest",
-    "test": "snyk test && echo \"No test specified\" && exit 0"
+    "deploy:latest": "yarn build && yarn publish --tag latest"
   },
   "publishConfig": {
     "access": "public"
@@ -30,7 +29,7 @@
     "yarn": ">= 1.17.3"
   },
   "dependencies": {
-    "@cypress/vue": "^3.0.3",
+    "@cypress/vue": "^3.0.5",
     "@cypress/webpack-dev-server": "^1.7.0",
     "cross-env": "^7.0.3",
     "cypress": "^8.0.0",
@@ -40,7 +39,6 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.177",
-    "rimraf": "^3.0.2",
-    "snyk": "^1.170.0"
+    "rimraf": "^3.0.2"
   }
 }
