@@ -21,7 +21,7 @@
     // We don't have this problem with Jest twin `installQuasarPlugin` as Jest adds a compilation step anyway and lodash-es
     // transpilation is performed in there
     "module": "commonjs",
-    "types": ["cypress", "node"],
+    "types": ["cypress"],
     "skipLibCheck": true,
     // Without this, TS won't be able to load correctly Quasar deep imports into `injectDevServer` (eg. `@quasar/app/lib/helpers/get-quasar-ctx`)
     "esModuleInterop": true

@@ -15,14 +15,14 @@
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue ./ --fix",
     "format": "prettier --write \"src/**/*.{js,ts,vue}\" \"*.{json,md}\" \"test/**/*.{js,ts,vue}\"",
-    "build": "rimraf dist && tsc --declaration --declarationDir dist/types",
+    "build": "rimraf dist && tsc --declaration",
     "deploy:beta": "yarn build && yarn publish --tag beta",
     "deploy:latest": "yarn build && yarn publish --tag latest"
   },
   "publishConfig": {
     "access": "public"
   },
-  "typings": "dist/types/index.d.ts",
+  "typings": "dist/index.d.ts",
   "engines": {
     "node": ">= 12.22.1",
     "npm": ">= 6.14.12",
