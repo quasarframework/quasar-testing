@@ -26,5 +26,5 @@
     // Without this, TS won't be able to load correctly Quasar deep imports into `injectDevServer` (eg. `@quasar/app/lib/helpers/get-quasar-ctx`)
     "esModuleInterop": true
   },
-  "include": ["src/helpers"]
+  "include": ["src/helpers/index.ts"]
 }
