@@ -32,12 +32,12 @@ const ciCommand = 'jest --ci';
 // make sure the object exists
 let extendPackageJson = {
   devDependencies: {
-    'eslint-plugin-jest': '^24.3.6',
+    'eslint-plugin-jest': '^25.2.2',
   },
 };
 
 module.exports = function (api) {
-  api.compatibleWith('quasar', '^2.0.0');
+  api.compatibleWith('quasar', '^2.0.4');
   api.compatibleWith('@quasar/app', '^3.0.0');
 
   api.extendJsonFile('quasar.testing.json', {

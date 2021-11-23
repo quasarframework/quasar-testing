@@ -1,5 +1,7 @@
 ## [Cypress](https://www.cypress.io/)
 
+> You’re looking at Quasar v2 testing docs. If you're searching for Quasar v1 docs, head [here](https://testing.quasar.dev/packages/e2e-cypress/)
+
 ```shell
 $ quasar ext add @quasar/testing-e2e-cypress@beta
 ```
@@ -19,7 +21,7 @@ You must have a running dev server in order to run integration tests. The script
 
 This AE is a wrapper around Cypress, you won't be able to use this or understand most of the documentation if you haven't read [the official documentation](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html).
 
-Since version `4.0.0-beta.5`, this AE supports [Cypress Component Testing](https://docs.cypress.io/guides/component-testing/introduction) and scaffolds by default the code to run both `e2e` and `unit` tests with Cypress.
+Since version `4.0.0-beta.6`, this AE supports [Cypress Component Testing](https://docs.cypress.io/guides/component-testing/introduction) and scaffolds by default the code to run both `e2e` and `unit` tests with Cypress.
 The name of this package will likely change from `@quasar/quasar-app-extension-testing-e2e-cypress` to `@quasar/quasar-app-extension-testing-cypress` in the future.
 
 ### Upgrade from Cypress AE v3 / Quasar v1

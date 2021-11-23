@@ -4,6 +4,10 @@
 
 # **`@quasar/testing`**
 
+> You’re looking at Quasar v2 testing docs. If you're searching for Quasar v1 docs, head [here](https://testing.quasar.dev/)
+>
+> Check out the migration status [here](https://github.com/quasarframework/quasar/discussions/10341)
+
 This is the monorepo for integrating the test-runner of your choice into your Quasar app.
 
 You can install multiple pre-rigged testing harnesses (test runners) to your Quasar application, each one will:
@@ -31,12 +35,12 @@ The Test Driven Design approach will help you to write better (and fewer) tests.
 - [Reset](#reset)
 - [Upgrade](#upgrade)
 - Provided App Extensions
-  - [Testing Harnesses Manager](packages/testing/README.md) (**Supports Quasar v2**)
+  - [Testing Harnesses Manager](packages/testing/README.md)
   - Unit testing
-    - [Jest](packages/unit-jest/README.md) (**Supports Quasar v2**)
+    - [Jest](packages/unit-jest/README.md)
   - E2E testing
-    - [Cypress](packages/e2e-cypress/README.md) (**Supports Quasar v2**)
-  - [Quality Auditing](#quality-auditing) (**not up to date**)
+    - [Cypress](packages/e2e-cypress/README.md)
+  - [Quality Auditing](#quality-auditing) (**OUTDATED, not migrated to Qv2 yet**)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
@@ -112,6 +116,7 @@ $ quasar ext add @quasar/testing-unit-jest
 ### [Jest](https://jestjs.io/)
 
 [Check out Jest AE documentation](packages/unit-jest/README.md)
+
 ## E2E Testing
 
 We recommend testing webapps with Cypress if you target Chrome-based browsers (Chrome, Edge, Electron) or Firefox - but if you want to test Safari or Cordova/Capacitor apps, then you should consider using webdriver.io.
@@ -120,7 +125,7 @@ We recommend testing webapps with Cypress if you target Chrome-based browsers (C
 
 [Check out Cypress AE documentation](packages/e2e-cypress/README.md)
 
-### Quality Auditing
+### Quality Auditing (**OUTDATED, not migrated to Qv2 yet**)
 
 ```shell
 $ quasar ext add @quasar/testing-quality
