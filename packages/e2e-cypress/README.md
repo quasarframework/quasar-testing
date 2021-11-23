@@ -19,6 +19,9 @@ You must have a running dev server in order to run integration tests. The script
 
 This AE is a wrapper around Cypress, you won't be able to use this or understand most of the documentation if you haven't read [the official documentation](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html).
 
+Since version `4.0.0-beta.5`, this AE supports [Cypress Component Testing](https://docs.cypress.io/guides/component-testing/introduction) and scaffolds by default the code to run both `e2e` and `unit` tests with Cypress.
+The name of this package will likely change from `@quasar/quasar-app-extension-testing-e2e-cypress` to `@quasar/quasar-app-extension-testing-cypress` in the future.
+
 ### Upgrade from Cypress AE v3 / Quasar v1
 
 - Remove `"sourceMap": false` and related comment from `test/cypress/tsconfig.json` if it's present, as this has been fixed in a previous version of Cypress
@@ -28,8 +31,11 @@ This AE is a wrapper around Cypress, you won't be able to use this or understand
 ```ts
 // DO NOT REMOVE
 // Imports Quasar Cypress AE predefined commands
-import '@quasar/quasar-app-extension-testing-e2e-cypress';
+import { registerCommands } from '@quasar/quasar-app-extension-testing-e2e-cypress';
+registerCommands();
 ```
+
+- remove the ["'ResizeObserver loop limit exceeded'" fix](https://github.com/quasarframework/quasar/issues/2233#issuecomment-492975745) into `test/cypress/support/index.[js/ts]` as we now apply it automatically when registering commands
 
 - Update your usages of `testRoute` command, as it's now using [`Cypress.minimatch`](https://docs.cypress.io/api/utilities/minimatch) instead of just checking if the hash/pathname contains the provided string.
 
