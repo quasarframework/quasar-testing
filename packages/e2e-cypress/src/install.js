@@ -56,15 +56,6 @@ module.exports = function (api) {
     }typescript`,
   );
 
-  if (api.prompts.options.includes('cct')) {
-    api.render('./templates/cct/base');
-    api.render(
-      `./templates/cct/examples-${
-        api.prompts.options.includes('typescript') ? 'ts' : 'js'
-      }`,
-    );
-  }
-
   api.extendJsonFile('quasar.testing.json', {
     'e2e-cypress': {
       runnerCommand: ciCommandE2e,
@@ -86,6 +77,7 @@ module.exports = function (api) {
   if (api.prompts.options.includes('scripts')) {
     const scripts = {
       scripts: {
+        test: 'echo "See package.json => scripts for available tests." && exit 0',
         // We use cross-env to set a flag which the extension will catch preventing "quasar dev" to open a window
         // "http-get" must be used because "webpack-dev-server" won't answer
         //  HEAD requests which are performed by default by the underlying "wait-on"
@@ -93,12 +85,10 @@ module.exports = function (api) {
         'test:e2e':
           'cross-env E2E_TEST=true start-test "quasar dev" http-get://localhost:8080 "cypress open"',
         'test:e2e:ci': ciCommandE2e,
+        'test:unit': 'cypress open-ct',
+        'test:unit:ci': ciCommandUnit,
       },
     };
-    if (api.prompts.options.includes('cct')) {
-      scripts.scripts['test:unit'] = 'cypress open-ct';
-      scripts.scripts['test:unit:ci'] = ciCommandUnit;
-    }
     extendPackageJson = __mergeDeep(extendPackageJson, scripts);
   }
 

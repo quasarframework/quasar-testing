@@ -1,6 +1,6 @@
 // ***********************************************************
-// This example support/index.js is processed and
-// loaded automatically before your test files.
+// This example support/index.ts is processed and
+// loaded automatically before your e2e test files.
 //
 // This is a great place to put global configuration and
 // behavior that modifies Cypress.
@@ -13,15 +13,4 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
-// Import commands.js using ES2015 syntax:
 import './commands';
-
-const resizeObserverLoopError = 'ResizeObserver loop limit exceeded';
-
-Cypress.on('uncaught:exception', (err) => {
-  if (err.message.includes(resizeObserverLoopError)) {
-    // returning false here prevents Cypress from
-    // failing the test
-    return false;
-  }
-});

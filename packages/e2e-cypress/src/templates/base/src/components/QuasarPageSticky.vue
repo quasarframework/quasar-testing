@@ -12,7 +12,10 @@ import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'QuasarPageSticky',
   props: {
-    title: String,
+    title: {
+      type: String,
+      required: true,
+    },
   },
 });
 </script>

@@ -1,6 +1,6 @@
 // ***********************************************************
-// This example support/index.js is processed and
-// loaded automatically before your test files.
+// This example support/unit.js is processed and
+// loaded automatically before your unit test files.
 //
 // This is a great place to put global configuration and
 // behavior that modifies Cypress.
@@ -13,7 +13,6 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
-// Import commands.ts using ES2015 syntax:
 import './commands';
 
 // Change this if you have a different entrypoint for the main scss.
@@ -27,10 +26,11 @@ import 'quasar/dist/icon-set/material-icons.umd.prod';
 import '@quasar/extras/material-icons/material-icons.css';
 
 import { installQuasarPlugin } from '@quasar/quasar-app-extension-testing-e2e-cypress';
+import { config } from '@vue/test-utils';
 import { Dialog } from 'quasar';
+
 // Example to import i18n from boot and use as plugin
 // import { i18n } from 'src/boot/i18n';
-import { config } from '@vue/test-utils';
 
 // You can modify the global config here for all tests or pass in the configuration per test
 // For example use the actual i18n instance or mock it
@@ -44,13 +44,3 @@ config.global.mocks = {
 config.global.stubs = {};
 
 installQuasarPlugin({ plugins: { Dialog } });
-
-const resizeObserverLoopError = 'ResizeObserver loop limit exceeded';
-
-Cypress.on('uncaught:exception', (err) => {
-  if (err.message.includes(resizeObserverLoopError)) {
-    // returning false here prevents Cypress from
-    // failing the test
-    return false;
-  }
-});

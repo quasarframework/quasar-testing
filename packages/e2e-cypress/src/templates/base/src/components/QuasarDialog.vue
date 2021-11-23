@@ -18,17 +18,17 @@ import { useDialogPluginComponent } from 'quasar';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
+  name: 'QuasarDialog',
   props: {
     message: {
       type: String,
+      required: true,
     },
   },
 
-  emits: [
-    // REQUIRED; need to specify some events that your
-    // component will emit through useDialogPluginComponent()
-    ...useDialogPluginComponent.emits,
-  ],
+  // REQUIRED; need to specify some events that your
+  // component will emit through useDialogPluginComponent()
+  emits: useDialogPluginComponent.emits,
 
   setup() {
     // REQUIRED; must be called inside of setup()

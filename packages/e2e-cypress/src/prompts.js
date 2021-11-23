@@ -14,7 +14,7 @@ module.exports = function () {
       type: 'checkbox',
       required: true,
       message:
-        'Cypress e2e Test Harness will now be installed. Please choose additional options:',
+        'Cypress e2e and unit Test Harness will now be installed. Please choose additional options:',
       choices: [
         {
           name: 'extra "scripts" in your package.json',
@@ -24,10 +24,6 @@ module.exports = function () {
         {
           name: 'enable TypeScript support',
           value: 'typescript',
-        },
-        {
-          name: 'setup Cypress Component Testing',
-          value: 'cct',
         },
       ],
     },

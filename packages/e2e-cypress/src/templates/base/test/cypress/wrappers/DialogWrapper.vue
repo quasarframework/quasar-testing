@@ -1,8 +1,9 @@
 <script>
 import { defineComponent } from 'vue';
-import { useQuasar } from 'quasar';
+import { Dialog } from 'quasar';
 
 export default defineComponent({
+  name: 'DialogWrapper',
   props: {
     component: {
       type: Object,
@@ -10,12 +11,11 @@ export default defineComponent({
     },
     componentProps: {
       type: Object,
+      default: () => ({}),
     },
   },
   setup(props) {
-    const $q = useQuasar();
-
-    $q.dialog({
+    Dialog.create({
       component: props.component,
 
       // props forwarded to your custom component

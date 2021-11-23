@@ -8,6 +8,8 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
+  name: 'LayoutContainer',
+  inheritAttrs: false,
   props: {
     component: {
       type: Object,

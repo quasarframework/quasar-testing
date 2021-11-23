@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 // Use `cy.dataCy` custom command for more robust tests
 // See https://docs.cypress.io/guides/references/best-practices.html#Selecting-Elements
 

@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 /* eslint-env node */
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
@@ -13,17 +14,20 @@
 // the project's config changing)
 
 // cypress/plugins/index.js
-const generateWebpackConfig = require('./../helpers/generateWebpackConfig');
-const { startDevServer } = require('@cypress/webpack-dev-server');
 
-module.exports = (on, config) => {
-  on('dev-server:start', async (options) => {
-    const webpackConfig = await generateWebpackConfig();
-    return startDevServer({
-      options,
-      webpackConfig: webpackConfig.renderer,
-    });
-  });
+const {
+  injectDevServer,
+} = require('@quasar/quasar-app-extension-testing-e2e-cypress/cct-dev-server');
+
+/**
+ * @type {Cypress.PluginConfig}
+ */
+module.exports = async (on, config) => {
+  // Enable component testing, you can safely remove this
+  // if you don't plan to use Cypress for unit tests
+  if (config.testingType === 'component') {
+    await injectDevServer(on, config);
+  }
 
   return config;
 };
