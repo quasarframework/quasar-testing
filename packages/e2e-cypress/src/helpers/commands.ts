@@ -70,4 +70,16 @@ export const registerCommands = () => {
       localStorage.setItem(key, LOCAL_STORAGE_MEMORY[key]);
     });
   });
+
+  // Not a command, but a common known problem with Cypress
+  // We add it here since it's needed for both e2e and unit tests
+  // Usually it should be placed into `cypress/support/index.ts` file
+  // See https://github.com/quasarframework/quasar/issues/2233#issuecomment-492975745
+  const resizeObserverLoopError = 'ResizeObserver loop limit exceeded';
+  Cypress.on('uncaught:exception', (err) => {
+    if (err.message.includes(resizeObserverLoopError)) {
+      // returning false here prevents Cypress from failing the test
+      return false;
+    }
+  });
 };
