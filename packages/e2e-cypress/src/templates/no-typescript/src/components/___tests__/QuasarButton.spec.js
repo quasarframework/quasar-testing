@@ -10,7 +10,8 @@ describe('QuasarButton', () => {
       },
     });
 
-    cy.get('.q-btn').should('contain', label);
+    cy.dataCy('button')
+      .should('contain', label)
   });
 
   it('renders another message', () => {
@@ -21,6 +22,26 @@ describe('QuasarButton', () => {
       },
     });
 
-    cy.get('.q-btn').should('contain', label);
+    cy.dataCy('button')
+      .should('contain', label)
+  });
+
+  it('should have a `positive` color', () => {
+    mount(QuasarButton);
+
+    cy.dataCy('button')
+      .should('have.backgroundColor', 'var(--q-positive)')
+      .should('have.color', 'white')
+  });
+
+  it('should emit `test` upon click', () => {
+    mount(QuasarButton);
+
+    cy.dataCy('button')
+      .click()
+      .vue()
+      .then((wrapper) => {
+          expect(wrapper.emitted('test')).to.have.length(1)
+      })
   });
 });

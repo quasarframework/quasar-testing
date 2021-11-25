@@ -1,11 +1,19 @@
 <template>
-  <q-btn label="test" color="red" rounded icon="edit"> </q-btn>
+    <q-btn
+        data-cy="button"
+        label="test emit"
+        color="positive"
+        rounded
+        icon="edit"
+        @click="$emit('test')"
+    ></q-btn>
 </template>
 
 <script>
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'QuasarButton',
+    name: 'QuasarButton',
+    emits: ['test']
 });
 </script>

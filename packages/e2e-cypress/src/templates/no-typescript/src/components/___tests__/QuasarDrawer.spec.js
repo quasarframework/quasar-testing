@@ -9,5 +9,13 @@ describe('QuasarDrawer', () => {
         component: QuasarDrawer,
       },
     });
+    cy.dataCy('drawer')
+      .should('exist')
+      .dataCy('button')
+      .should('not.be.visible')
+    cy.get('.q-scrollarea .scroll')
+      .scrollTo('bottom', {duration: 500})
+      .dataCy('button')
+      .should('be.visible')
   });
 });
