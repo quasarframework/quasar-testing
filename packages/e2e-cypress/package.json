@@ -33,7 +33,6 @@
     "@cypress/webpack-dev-server": "^1.7.0",
     "cross-env": "^7.0.3",
     "cypress": "^8.0.0",
-    "json5": "^2.2.0",
     "lodash": "^4.17.21",
     "start-server-and-test": "^1.12.6"
   },

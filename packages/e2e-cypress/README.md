@@ -6,6 +6,26 @@
 $ quasar ext add @quasar/testing-e2e-cypress@beta
 ```
 
+Add into your `.eslintrc.js` the following code:
+
+```js
+{
+  // ...
+  overrides: [
+    {
+      files: ['**/*.spec.{js,ts}'],
+      extends: [
+        // Add Cypress-specific lint rules, globals and Cypress plugin
+        // See https://github.com/cypress-io/eslint-plugin-cypress#rules
+        'plugin:cypress/recommended',
+      ],
+    },
+  ],
+}
+```
+
+---
+
 This AE manages Quasar and Cypress integration for you, both for JavaScript and TypeScript.
 
 Some custom commands are included out-of-the-box:
@@ -23,7 +43,7 @@ You must have a running dev server in order to run integration tests. The script
 This AE is a wrapper around Cypress, you won't be able to use this or understand most of the documentation if you haven't read [the official documentation](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html).
 
 Since version `4.0.0-beta.6`, this AE supports [Cypress Component Testing](https://docs.cypress.io/guides/component-testing/introduction) and scaffolds by default the code to run both `e2e` and `unit` tests with Cypress.
-The name of this package will likely change from `@quasar/quasar-app-extension-testing-e2e-cypress` to `@quasar/quasar-app-extension-testing-cypress` in the future.
+Consequentially, the name of this package will likely change from `@quasar/quasar-app-extension-testing-e2e-cypress` to `@quasar/quasar-app-extension-testing-cypress` in the future.
 
 ### Upgrade from Cypress AE v3 / Quasar v1
 
@@ -56,9 +76,30 @@ testRoute('123/books');
 testRoute('shelfs/*/books');
 ```
 
-- We went through many Cypress major versions during this AE beta phase, Cypress v6 was the latest version supported by Qv1 AE, please check out [Cypress 7](https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-7-0) and [Cypress 8](https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-8-0) migration guides
+- Since Jest can now be used without global types and Cypress can now run its own unit tests, Cypress configuration for TS codebases can be simplified:
 
-<!-- TODO:  -->
+  - remove `test/cypress/tsconfig.json` and consequentially `parserOptions` option into `test/cypress/.eslintrc.js`
+  - remove `"test/cypress"` value from `exclude` option of root `tsconfig.json`. If only `"/dist", ".quasar", "node_modules"` values remains in that array, remove `exclude` option altogether, as it's already provided by `@quasar/app/tsconfig-preset`
+
+- Add this code into your root `.eslintrc.js`
+
+```js
+{
+  // ...
+  overrides: [
+    {
+      files: ['**/*.spec.{js,ts}'],
+      extends: [
+        // Add Cypress-specific lint rules, globals and Cypress plugin
+        // See https://github.com/cypress-io/eslint-plugin-cypress#rules
+        'plugin:cypress/recommended',
+      ],
+    },
+  ],
+}
+```
+
+- We went through many Cypress major versions during this AE beta phase, Cypress v6 was the latest version supported by Qv1 AE, please check out [Cypress 7](https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-7-0) and [Cypress 8](https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-8-0) migration guides and adapt your code accordingly
 
 ### Caveats
 
