@@ -10,8 +10,7 @@ describe('QuasarButton', () => {
       },
     });
 
-    cy.dataCy('button')
-      .should('contain', label)
+    cy.dataCy('button').should('contain', label);
   });
 
   it('renders another message', () => {
@@ -22,8 +21,7 @@ describe('QuasarButton', () => {
       },
     });
 
-    cy.dataCy('button')
-      .should('contain', label)
+    cy.dataCy('button').should('contain', label);
   });
 
   it('should have a `positive` color', () => {
@@ -31,7 +29,7 @@ describe('QuasarButton', () => {
 
     cy.dataCy('button')
       .should('have.backgroundColor', 'var(--q-positive)')
-      .should('have.color', 'white')
+      .should('have.color', 'white');
   });
 
   it('should emit `test` upon click', () => {
@@ -39,9 +37,8 @@ describe('QuasarButton', () => {
 
     cy.dataCy('button')
       .click()
-      .vue()
-      .then((wrapper) => {
-          expect(wrapper.emitted('test')).to.have.length(1)
-      })
+      .should(() => {
+        expect(Cypress.vueWrapper.emitted('test')).to.have.length(1);
+      });
   });
 });

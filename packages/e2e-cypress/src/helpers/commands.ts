@@ -1,4 +1,5 @@
-import { VueWrapper } from '@vue/test-utils';
+/// <reference types="cypress" />
+/// <reference types="@cypress/vue" />
 
 declare global {
   namespace Cypress {
@@ -33,16 +34,6 @@ declare global {
             Cypress.Shadow
         >,
       ): Chainable<JQuery<E>>;
-
-      /**
-       * Custom command to get the vue wrapper from a cypress instance.
-       * @example cy.dataCy('greeting')
-       *            .vue()
-       *            .then((wrapper) => {
-       *                wrapper.
-       *            })
-       */
-      vue(): Chainable<VueWrapper<any>>;
 
       /**
        * Custom command to test being on a given route.
@@ -91,15 +82,9 @@ export const registerCommands = () => {
     },
   );
 
-  Cypress.Commands.add('vue', () => {
-    // @ts-expect-error // This is not typed by Cypress
-    return cy.wrap(Cypress.vueWrapper);
-  });
-
   Cypress.Commands.add('testRoute', (route: string) => {
     cy.location().should((loc) => {
       const usesHashModeRouter = loc.hash.length > 0;
-
       const target = usesHashModeRouter ? loc.hash : loc.pathname;
       const pattern = usesHashModeRouter ? `#/${route}` : `/${route}`;
 
@@ -111,11 +96,13 @@ export const registerCommands = () => {
     });
   });
 
+  type CssStyleProperties = Extract<keyof CSSStyleDeclaration, string>;
+
   // This is a helper function to convert assert colors correctly
   // Cypress looks at the computed color which is always rgb()
   // This makes it possible to compare `black` to `rgb(0, 0, 0)` for instance
   const compareColor =
-    (color: string, property: string) =>
+    (color: string, property: CssStyleProperties) =>
     (targetElement: JQuery<HTMLElement>) => {
       const tempElement = document.createElement('div');
       tempElement.style.color = color;
@@ -123,7 +110,6 @@ export const registerCommands = () => {
       document.body.appendChild(tempElement); // append so that `getComputedStyle` actually works
 
       const tempColor = getComputedStyle(tempElement).color;
-      // @ts-expect-error
       const targetColor = getComputedStyle(targetElement[0])[property];
 
       document.body.removeChild(tempElement); // remove it because we're done with it
@@ -131,17 +117,24 @@ export const registerCommands = () => {
       expect(tempColor).to.equal(targetColor);
     };
 
+  const COLOR_RELATED_CSS_PROPERTIES: CssStyleProperties[] = [
+    'color',
+    'backgroundColor',
+  ];
+
   // By default the `have.css` matcher will compare the computedColor, which is always a rgb() value.
   // This creates a custom matcher that you can pass any color and it will compute a rgb() value from it.
   Cypress.Commands.overwrite(
     'should',
     (originalFn, subject, expectation, ...args) => {
-      const customMatchers: Record<string, any> = {
-        'have.backgroundColor': compareColor(args[0], 'backgroundColor'),
-        'have.color': compareColor(args[0], 'color'),
-      };
+      const customMatchers = Object.fromEntries(
+        COLOR_RELATED_CSS_PROPERTIES.map((property) => [
+          `have.${property}`,
+          compareColor(args[0], property),
+        ]),
+      );
 
-      // See if the expectation is a string and if it is a member of Jest's expect
+      // See if the expectation is a string and if it is a member of our custom matchers
       if (typeof expectation === 'string' && customMatchers[expectation]) {
         return originalFn(subject, customMatchers[expectation]);
       }

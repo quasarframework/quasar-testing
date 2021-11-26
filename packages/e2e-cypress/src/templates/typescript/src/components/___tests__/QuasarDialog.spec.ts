@@ -13,18 +13,12 @@ describe('QuasarDialog', () => {
         },
       },
     });
-    cy.dataCy('dialog')
-      .should('exist')
-      .should('contain', message)
+    cy.dataCy('dialog').should('exist').should('contain', message);
   });
 
   it('should close a dialog when clikcing ok', () => {
     // The dialog is still visible from the previous test
-    cy.dataCy('dialog')
-      .should('exist')
-      .dataCy('ok-button')
-      .click();
-    cy.dataCy('dialog')
-      .should('not.exist');
+    cy.dataCy('dialog').should('exist').dataCy('ok-button').click();
+    cy.dataCy('dialog').should('not.exist');
   });
 });

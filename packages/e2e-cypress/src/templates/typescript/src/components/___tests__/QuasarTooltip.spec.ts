@@ -3,11 +3,9 @@ import QuasarTooltip from '../QuasarTooltip.vue';
 
 describe('QuasarTooltip', () => {
   it('should show a tooltip', () => {
-    mount(QuasarTooltip)
+    mount(QuasarTooltip);
 
-    cy.dataCy('button')
-      .trigger('mouseover')
-    cy.dataCy('tooltip')
-      .contains('Here I am!');
+    cy.dataCy('button').trigger('mouseover');
+    cy.dataCy('tooltip').contains('Here I am!');
   });
 });
