@@ -1,11 +1,7 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "strict": true,
     "outDir": "dist",
-    "sourceMap": true,
-    "target": "esnext",
-    "moduleResolution": "node",
     "module": "commonjs"
   },
   "include": ["src/helpers"]
