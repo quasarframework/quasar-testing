@@ -12,10 +12,16 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
-// cypress/plugins/index.ts
+import { injectDevServer } from '@quasar/quasar-app-extension-testing-e2e-cypress/cct-dev-server';
 
-const pluginConfig: Cypress.PluginConfig = (/*on, config*/) => {
-  //
+const pluginConfig: Cypress.PluginConfig = async (on, config) => {
+  // Enable component testing, you can safely remove this
+  // if you don't plan to use Cypress for unit tests
+  if (config.testingType === 'component') {
+    await injectDevServer(on, config);
+  }
+
+  return config;
 };
 
 export default pluginConfig;

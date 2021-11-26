@@ -27,8 +27,7 @@
     "lint": "eslint \"packages/*/src/*.js\" --fix",
     "format": "prettier --write \"packages/*/src/*.js\"",
     "build": "yarn && lerna clean && lerna link && lerna bootstrap",
-    "publish": "lerna publish",
-    "audit:snyk": "lerna run test"
+    "publish": "lerna publish"
   },
   "workspaces": [
     "packages/*"

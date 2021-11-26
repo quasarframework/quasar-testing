@@ -1,5 +1,5 @@
 // ***********************************************
-// This example commands.js shows you how to
+// This example commands.ts shows you how to
 // create various custom commands and overwrite
 // existing commands.
 //
@@ -26,4 +26,5 @@
 
 // DO NOT REMOVE
 // Imports Quasar Cypress AE predefined commands
-import '@quasar/quasar-app-extension-testing-e2e-cypress';
+import { registerCommands } from '@quasar/quasar-app-extension-testing-e2e-cypress';
+registerCommands();
