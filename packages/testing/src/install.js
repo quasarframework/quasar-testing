@@ -25,7 +25,9 @@ module.exports = async function (api) {
       );
       if (code.exitCode !== 0) {
         console.error(`Extension ${harness} failed to install.`);
-        if (addOrInvoke === 'invoke') console.log('Extra debug:\n', code);
+        if (addOrInvoke === 'invoke') {
+          console.log('Extra debug:\n', code);
+        }
         process.exit(1);
       }
     } catch (e) {

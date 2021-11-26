@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const opts = {
   output: ['json', 'html', 'csv'],
@@ -7,20 +7,22 @@ const opts = {
   disableCpuThrottling: true,
   chromeFlags: ['--show-paint-rects'],
   perf: true,
-  view: true
-}
+  view: true,
+};
 module.exports = {
-  passes: [{
-    recordTrace: true,
-    pauseAfterLoadMs: 4000,
-    useThrottling: true,
-    gatherers: []
-  }],
+  passes: [
+    {
+      recordTrace: true,
+      pauseAfterLoadMs: 4000,
+      useThrottling: true,
+      gatherers: [],
+    },
+  ],
   audits: [
     'first-meaningful-paint',
     'speed-index-metric',
     'estimated-input-latency',
     'first-interactive',
-    'consistently-interactive'
-  ]
-}
+    'consistently-interactive',
+  ],
+};

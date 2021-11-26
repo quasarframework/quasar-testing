@@ -86,7 +86,7 @@ module.exports = async function (api) {
     // Cypress already spawns it's dev server
     // TODO: use start-test for all harnesses needing quasar devServer running?
     if (
-      args.dev != null ||
+      args.dev !== null ||
       args.e2e.includes('webdriver') ||
       args.security.includes('zap')
     ) {
@@ -103,10 +103,13 @@ module.exports = async function (api) {
       });
       devServer.catch((e) => {
         // Throw error if it wasn't killed manually
-        if (!e.killed) throw new Error(e);
+        if (!e.killed) {
+          throw new Error(e);
+        }
       });
 
       const killDevServer = (hasFailed) => {
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (devServer) {
           devServer.kill();
         }
@@ -157,7 +160,7 @@ module.exports = async function (api) {
     }
 
     async function startTests(serverUrl, callback) {
-      let failedRunners = [];
+      const failedRunners = [];
       const runTest = (userCommand, type) =>
         new Promise((resolve) => {
           // Split runner command into command and arguments
@@ -178,7 +181,7 @@ module.exports = async function (api) {
             console.log(chalk` {green app:extension:} Running ${scriptToRun}`);
 
             try {
-              let fn = require(scriptToRun);
+              const fn = require(scriptToRun);
               if (typeof fn === 'function') {
                 fn(api, resolve);
               } else {

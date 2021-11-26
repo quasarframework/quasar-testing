@@ -1,11 +1,7 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "strict": true,
     "outDir": "dist",
-    "sourceMap": true,
-    "target": "esnext",
-    "moduleResolution": "node",
     // TODO: Cypress isn't able to process ESM dependencies yet, it supports either CommonJS or TypeScript directly
     // Consequentially, we cannot compile this to esnext module and set `type: module` into the package.json
     // See https://github.com/cypress-io/cypress/issues/16467
