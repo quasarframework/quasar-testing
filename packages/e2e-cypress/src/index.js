@@ -5,27 +5,12 @@
  * API: https://github.com/quasarframework/quasar/blob/master/app/lib/app-extension/IndexAPI.js
  */
 
+// TODO: we may be able to remove this once Cypress 9.x is reliable,
+// since 9.1 should set a process.env.CYPRESS variable
 module.exports = function (api) {
-  api.extendQuasarConf((conf, api) => {
+  api.extendQuasarConf((conf) => {
     if (process.env.E2E_TEST) {
       conf.devServer.open = false;
-
-      // If TS is enabled and fork-ts-checker manages ESLint type-checking
-      //  it must be instructed to use local tsconfig instead of the root level one,
-      //  otherwise it won't include cypress globals types (specified only on the local tsconfig)
-      // Note that eslint "parserOptions" options should be overrided to point to the same tsconfig
-      //  or type errors won't be emitted (only linting ones will)
-      if (
-        api.prompts.options.includes('typescript') &&
-        conf.supportTS.tsCheckerConfig &&
-        conf.supportTS.tsCheckerConfig.eslint
-      ) {
-        conf.supportTS.tsCheckerConfig.typescript = Object.assign(
-          {},
-          conf.supportTS.tsCheckerConfig.typescript,
-          { configFile: 'test/cypress/tsconfig.json' },
-        );
-      }
     }
   });
 };

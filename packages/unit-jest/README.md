@@ -38,7 +38,7 @@ We suggest you switch from Jest globals to their ESM-imported counterparts (espe
 If you choose to proceed on this path, then:
 
 - Uninstall Jest global types running `yarn remove @types/jest`
-- Remove `jest` value from `compilerOptions.types` property into `tsconfig.json`. If only `quasar` remains in that array, remove `compilerOptions.type` altogether, as it's already provided by `@quasar/app/tsconfig-preset`
+- Remove `jest` value from `compilerOptions.types` property into `tsconfig.json`. If only `quasar` remains in that array, remove `compilerOptions.types` altogether, as it's already provided by `@quasar/app/tsconfig-preset`
 - Update all your test files to import all globals you need from `@jest/globals` package, eg. `import { describe, expect, jest, it, test } from "@jest/globals"`
 - Check out [Vue Test Utils 2.0 migration guide](https://next.vue-test-utils.vuejs.org/migration/)
 

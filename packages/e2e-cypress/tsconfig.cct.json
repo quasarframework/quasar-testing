@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "cct-dev-server"
+  },
+  "include": ["src/helpers/cct-dev-server/index.ts"]
+}

@@ -1,0 +1,21 @@
+import { mount } from '@cypress/vue';
+import LayoutContainer from 'app/test/cypress/wrappers/LayoutContainer.vue';
+import QuasarDrawer from '../QuasarDrawer.vue';
+
+describe('QuasarDrawer', () => {
+  it('should show a drawer', () => {
+    mount(LayoutContainer, {
+      props: {
+        component: QuasarDrawer,
+      },
+    });
+    cy.dataCy('drawer')
+      .should('exist')
+      .dataCy('button')
+      .should('not.be.visible');
+    cy.get('.q-scrollarea .scroll')
+      .scrollTo('bottom', { duration: 500 })
+      .dataCy('button')
+      .should('be.visible');
+  });
+});

@@ -15,27 +15,29 @@
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue ./ --fix",
     "format": "prettier --write \"src/**/*.{js,ts,vue}\" \"*.{json,md}\" \"test/**/*.{js,ts,vue}\"",
-    "build": "rm -rf dist && tsc --declaration --declarationDir dist/types",
+    "build": "rimraf dist cct-dev-server && tsc --declaration && tsc --project tsconfig.cct.json",
     "deploy:beta": "yarn build && yarn publish --tag beta",
-    "deploy:latest": "yarn build && yarn publish --tag latest",
-    "test": "snyk test && echo \"No test specified\" && exit 0"
+    "deploy:latest": "yarn build && yarn publish --tag latest"
   },
   "publishConfig": {
     "access": "public"
   },
-  "typings": "dist/types/index.d.ts",
+  "typings": "dist/index.d.ts",
   "engines": {
     "node": ">= 12.22.1",
     "npm": ">= 6.14.12",
     "yarn": ">= 1.17.3"
   },
   "dependencies": {
+    "@cypress/vue": "^3.0.5",
+    "@cypress/webpack-dev-server": "^1.7.0",
     "cross-env": "^7.0.3",
     "cypress": "^8.0.0",
-    "json5": "^2.2.0",
+    "lodash": "^4.17.21",
     "start-server-and-test": "^1.12.6"
   },
   "devDependencies": {
-    "snyk": "^1.170.0"
+    "@types/lodash": "^4.14.177",
+    "rimraf": "^3.0.2"
   }
 }

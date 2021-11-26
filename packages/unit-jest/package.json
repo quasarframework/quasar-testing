@@ -12,13 +12,12 @@
     "url": "https://github.com/quasarframework/quasar-testing"
   },
   "scripts": {
-    "build": "rm -rf dist && tsc --declaration --declarationDir dist/types && copyfiles -f src/helpers/stub.css dist",
+    "build": "rimraf dist && tsc --declaration --declarationDir dist/types && copyfiles -f src/helpers/stub.css dist",
     "deploy:alpha": "yarn build && yarn publish --tag alpha",
     "deploy:beta": "yarn build && yarn publish --tag beta",
     "deploy:latest": "yarn build && yarn publish --tag latest",
     "test:unit": "jest",
-    "test:unit:watch": "jest --watch",
-    "test": "snyk test && echo \"No test specified\" && exit 0"
+    "test:unit:watch": "jest --watch"
   },
   "publishConfig": {
     "access": "public"
@@ -51,7 +50,7 @@
     "@types/lodash-es": "^4.17.4",
     "copyfiles": "^2.4.1",
     "quasar": "^2.0.0",
-    "snyk": "^1.180.1",
+    "rimraf": "^3.0.2",
     "vue": "^3.1.2"
   }
 }
