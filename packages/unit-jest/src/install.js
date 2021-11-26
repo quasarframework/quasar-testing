@@ -16,6 +16,7 @@ function __mergeDeep(...sources) {
       }
       result = [...result, ...source];
     } else if (source instanceof Object) {
+      // eslint-disable-next-line prefer-const
       for (let [key, value] of Object.entries(source)) {
         if (value instanceof Object && key in result) {
           value = __mergeDeep(result[key], value);

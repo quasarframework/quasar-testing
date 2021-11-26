@@ -2,6 +2,7 @@
 /// <reference types="@cypress/vue" />
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
     interface Chainer<Subject> {
       /**
@@ -134,14 +135,20 @@ export const registerCommands = () => {
       const customMatchers = Object.fromEntries(
         COLOR_RELATED_CSS_PROPERTIES.map((property) => [
           `have.${property}`,
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           compareColor(args[0], property),
         ]),
       );
 
       // See if the expectation is a string and if it is a member of our custom matchers
-      if (typeof expectation === 'string' && customMatchers[expectation]) {
+      if (
+        typeof expectation === 'string' &&
+        Object.keys(customMatchers).includes(expectation)
+      ) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
         return originalFn(subject, customMatchers[expectation]);
       }
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
       return originalFn(subject, expectation, ...args);
     },
   );
@@ -159,6 +166,7 @@ export const registerCommands = () => {
 
   Cypress.Commands.add('restoreLocalStorage', () => {
     Object.keys(LOCAL_STORAGE_MEMORY).forEach((key) => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       localStorage.setItem(key, LOCAL_STORAGE_MEMORY[key]);
     });
   });

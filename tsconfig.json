@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "strict": true,
+    "sourceMap": true,
+    "target": "esnext",
+    "moduleResolution": "node"
+  }
+}
