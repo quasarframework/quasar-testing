@@ -10,12 +10,13 @@ This AE manages Quasar and Cypress integration for you, both for JavaScript and 
 
 Some custom commands are included out-of-the-box:
 
-| Name                  | Usage                                                       | Description                                                                                                                                                                                              |
-| --------------------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dataCy`              | `cy.dataCy('my-data-id')`                                   | Implements the [selection best practice](https://docs.cypress.io/guides/references/best-practices.html#Selecting-Elements) which avoids brittle tests, is equivalent to `cy.get('[data-cy=my-data-id]')` |
-| `testRoute`           | `cy.testRoute('home')` \| `cy.testRoute('books/*/pages/*')` | Tests if the current URL matches the provided string using [`minimatch`](https://docs.cypress.io/api/utilities/minimatch). Leading `#`, if using router hash mode, and `/` are automatically prepended.  |
-| `saveLocalStorage`    | `cy.saveLocalStorage()`                                     | Save local storage data to be used in subsequent tests                                                                                                                                                   |
-| `restoreLocalStorage` | `cy.restoreLocalStorage()`                                  | Restore previously saved local storage data                                                                                                                                                              |
+| Name                                      | Usage                                                                                                                                                                       | Description                                                                                                                                                                                              |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dataCy`                                  | `cy.dataCy('my-data-id')`                                                                                                                                                   | Implements the [selection best practice](https://docs.cypress.io/guides/references/best-practices.html#Selecting-Elements) which avoids brittle tests, is equivalent to `cy.get('[data-cy=my-data-id]')` |
+| `testRoute`                               | `cy.testRoute('home')` <br /> `cy.testRoute('books/*/pages/*')`                                                                                                             | Tests if the current URL matches the provided string using [`minimatch`](https://docs.cypress.io/api/utilities/minimatch). Leading `#`, if using router hash mode, and `/` are automatically prepended.  |
+| `saveLocalStorage`                        | `cy.saveLocalStorage()`                                                                                                                                                     | Save local storage data to be used in subsequent tests                                                                                                                                                   |
+| `restoreLocalStorage`                     | `cy.restoreLocalStorage()`                                                                                                                                                  | Restore previously saved local storage data                                                                                                                                                              |
+| `should('have.[color\|backgroundColor]')` | `cy.get('foo').should('have.color', 'white')` <br /> `cy.get('foo').should('have.backgroundColor', '#000')` <br /> `cy.get('foo').should('have.color', 'var(--q-primary)')` | Provide a couple color-related custom matchers, which accept any valid CSS color format.                                                                                                                 |
 
 You must have a running dev server in order to run integration tests. The scripts added by this AE automatically take care of this: `yarn test:e2e` and `yarn test:e2e:ci` will launch `quasar dev` when starting up the tests and kill it when cypress process ends.
 
@@ -55,7 +56,9 @@ testRoute('123/books');
 testRoute('shelfs/*/books');
 ```
 
-- Check out [Cypress 7.0 migration guide](https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-7-0)
+- We went through many Cypress major versions during this AE beta phase, Cypress v6 was the latest version supported by Qv1 AE, please check out [Cypress 7](https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-7-0) and [Cypress 8](https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-8-0) migration guides
+
+<!-- TODO:  -->
 
 ### Caveats
 

@@ -5,6 +5,9 @@ declare global {
   namespace Cypress {
     interface Chainer<Subject> {
       /**
+       * `have.css` matcher compares the computedColor, which is a rgb() value.
+       * This custom matcher instead accept any valid CSS color format.
+       *
        * @example
        *    cy.get('foo').should('have.color', 'white')
        *    cy.get('foo').should('have.color', '#fff')
@@ -12,6 +15,9 @@ declare global {
        */
       (chainer: 'have.color', type: string): Chainable<Subject>;
       /**
+       * `have.css` matcher compares the computedColor, which is a rgb() value.
+       * This custom matcher instead accept any valid CSS color format.
+       *
        * @example
        *    cy.get('foo').should('have.backgroundColor', 'black')
        *    cy.get('foo').should('have.backgroundColor', '#000')
@@ -122,8 +128,6 @@ export const registerCommands = () => {
     'backgroundColor',
   ];
 
-  // By default the `have.css` matcher will compare the computedColor, which is always a rgb() value.
-  // This creates a custom matcher that you can pass any color and it will compute a rgb() value from it.
   Cypress.Commands.overwrite(
     'should',
     (originalFn, subject, expectation, ...args) => {
