@@ -6,8 +6,24 @@
     "sourceMap": true,
     "target": "esnext",
     "moduleResolution": "node",
-    "module": "esnext",
-    "types": ["cypress"]
+    // TODO: Cypress isn't able to process ESM dependencies yet, it supports either CommonJS or TypeScript directly
+    // Consequentially, we cannot compile this to esnext module and set `type: module` into the package.json
+    // See https://github.com/cypress-io/cypress/issues/16467
+    // See https://github.com/cypress-io/cypress/issues/15463
+    // This was needed since we used `lodash-es` `cloneDeep` into `installQuasarPlugin` which is released in ESM
+    // Since that's used only into testing it won't reach the developer production bundle,
+    // we switched to use `lodash` directly even if it's not tree-shaked
+    // We tried to use `@babel/register` to transpile lodash-es imports on-the-fly but that would add a lot of complexity,
+    // dependencies and reduce runtime performance
+    // I could not find a way to make TS compiler automatically transform ESM deps to CommonJS while transpiling TS files,
+    // as lodash files are JS and thus not considered into TS transpilation step
+    // See https://github.com/cypress-io/cypress/issues/7001
+    // We don't have this problem with Jest twin `installQuasarPlugin` as Jest adds a compilation step anyway and lodash-es
+    // transpilation is performed in there
+    "module": "commonjs",
+    "skipLibCheck": true,
+    // Without this, TS won't be able to load correctly Quasar deep imports into `injectDevServer` (eg. `@quasar/app/lib/helpers/get-quasar-ctx`)
+    "esModuleInterop": true
   },
-  "include": ["src/helpers"]
+  "include": ["src/helpers/index.ts"]
 }

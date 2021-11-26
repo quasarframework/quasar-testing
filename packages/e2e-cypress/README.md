@@ -6,20 +6,44 @@
 $ quasar ext add @quasar/testing-e2e-cypress@beta
 ```
 
+Add into your `.eslintrc.js` the following code:
+
+```js
+{
+  // ...
+  overrides: [
+    {
+      files: ['**/*.spec.{js,ts}'],
+      extends: [
+        // Add Cypress-specific lint rules, globals and Cypress plugin
+        // See https://github.com/cypress-io/eslint-plugin-cypress#rules
+        'plugin:cypress/recommended',
+      ],
+    },
+  ],
+}
+```
+
+---
+
 This AE manages Quasar and Cypress integration for you, both for JavaScript and TypeScript.
 
 Some custom commands are included out-of-the-box:
 
-| Name                  | Usage                                                       | Description                                                                                                                                                                                              |
-| --------------------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dataCy`              | `cy.dataCy('my-data-id')`                                   | Implements the [selection best practice](https://docs.cypress.io/guides/references/best-practices.html#Selecting-Elements) which avoids brittle tests, is equivalent to `cy.get('[data-cy=my-data-id]')` |
-| `testRoute`           | `cy.testRoute('home')` \| `cy.testRoute('books/*/pages/*')` | Tests if the current URL matches the provided string using [`minimatch`](https://docs.cypress.io/api/utilities/minimatch). Leading `#`, if using router hash mode, and `/` are automatically prepended.  |
-| `saveLocalStorage`    | `cy.saveLocalStorage()`                                     | Save local storage data to be used in subsequent tests                                                                                                                                                   |
-| `restoreLocalStorage` | `cy.restoreLocalStorage()`                                  | Restore previously saved local storage data                                                                                                                                                              |
+| Name                                      | Usage                                                                                                                                                                       | Description                                                                                                                                                                                              |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dataCy`                                  | `cy.dataCy('my-data-id')`                                                                                                                                                   | Implements the [selection best practice](https://docs.cypress.io/guides/references/best-practices.html#Selecting-Elements) which avoids brittle tests, is equivalent to `cy.get('[data-cy=my-data-id]')` |
+| `testRoute`                               | `cy.testRoute('home')` <br /> `cy.testRoute('books/*/pages/*')`                                                                                                             | Tests if the current URL matches the provided string using [`minimatch`](https://docs.cypress.io/api/utilities/minimatch). Leading `#`, if using router hash mode, and `/` are automatically prepended.  |
+| `saveLocalStorage`                        | `cy.saveLocalStorage()`                                                                                                                                                     | Save local storage data to be used in subsequent tests                                                                                                                                                   |
+| `restoreLocalStorage`                     | `cy.restoreLocalStorage()`                                                                                                                                                  | Restore previously saved local storage data                                                                                                                                                              |
+| `should('have.[color\|backgroundColor]')` | `cy.get('foo').should('have.color', 'white')` <br /> `cy.get('foo').should('have.backgroundColor', '#000')` <br /> `cy.get('foo').should('have.color', 'var(--q-primary)')` | Provide a couple color-related custom matchers, which accept any valid CSS color format.                                                                                                                 |
 
 You must have a running dev server in order to run integration tests. The scripts added by this AE automatically take care of this: `yarn test:e2e` and `yarn test:e2e:ci` will launch `quasar dev` when starting up the tests and kill it when cypress process ends.
 
 This AE is a wrapper around Cypress, you won't be able to use this or understand most of the documentation if you haven't read [the official documentation](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html).
+
+Since version `4.0.0-beta.6`, this AE supports [Cypress Component Testing](https://docs.cypress.io/guides/component-testing/introduction) and scaffolds by default the code to run both `e2e` and `unit` tests with Cypress.
+Consequentially, the name of this package will likely change from `@quasar/quasar-app-extension-testing-e2e-cypress` to `@quasar/quasar-app-extension-testing-cypress` in the future.
 
 ### Upgrade from Cypress AE v3 / Quasar v1
 
@@ -30,8 +54,11 @@ This AE is a wrapper around Cypress, you won't be able to use this or understand
 ```ts
 // DO NOT REMOVE
 // Imports Quasar Cypress AE predefined commands
-import '@quasar/quasar-app-extension-testing-e2e-cypress';
+import { registerCommands } from '@quasar/quasar-app-extension-testing-e2e-cypress';
+registerCommands();
 ```
+
+- remove the ["'ResizeObserver loop limit exceeded'" fix](https://github.com/quasarframework/quasar/issues/2233#issuecomment-492975745) into `test/cypress/support/index.[js/ts]` as we now apply it automatically when registering commands
 
 - Update your usages of `testRoute` command, as it's now using [`Cypress.minimatch`](https://docs.cypress.io/api/utilities/minimatch) instead of just checking if the hash/pathname contains the provided string.
 
@@ -49,7 +76,30 @@ testRoute('123/books');
 testRoute('shelfs/*/books');
 ```
 
-- Check out [Cypress 7.0 migration guide](https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-7-0)
+- Since Jest can now be used without global types and Cypress can now run its own unit tests, Cypress configuration for TS codebases can be simplified:
+
+  - remove `test/cypress/tsconfig.json` and consequentially `parserOptions` option into `test/cypress/.eslintrc.js`
+  - remove `"test/cypress"` value from `exclude` option of root `tsconfig.json`. If only `"/dist", ".quasar", "node_modules"` values remains in that array, remove `exclude` option altogether, as it's already provided by `@quasar/app/tsconfig-preset`
+
+- Add this code into your root `.eslintrc.js`
+
+```js
+{
+  // ...
+  overrides: [
+    {
+      files: ['**/*.spec.{js,ts}'],
+      extends: [
+        // Add Cypress-specific lint rules, globals and Cypress plugin
+        // See https://github.com/cypress-io/eslint-plugin-cypress#rules
+        'plugin:cypress/recommended',
+      ],
+    },
+  ],
+}
+```
+
+- We went through many Cypress major versions during this AE beta phase, Cypress v6 was the latest version supported by Qv1 AE, please check out [Cypress 7](https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-7-0) and [Cypress 8](https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-8-0) migration guides and adapt your code accordingly
 
 ### Caveats
 

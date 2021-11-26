@@ -6,5 +6,10 @@
   "screenshotsFolder": "test/cypress/screenshots",
   "supportFile": "test/cypress/support/index.ts",
   "videosFolder": "test/cypress/videos",
-  "video": true
+  "video": true,
+  "component": {
+    "componentFolder": "src",
+    "testFiles": "**/*.spec.ts",
+    "supportFile": "test/cypress/support/unit.ts"
+  }
 }
