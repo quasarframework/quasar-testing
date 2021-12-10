@@ -1,4 +1,4 @@
-const esModules = ['quasar/lang', 'lodash-es'].join('|');
+const esModules = ['quasar', 'quasar/lang', 'lodash-es'].join('|');
 
 /* eslint-env node */
 module.exports = {
@@ -8,6 +8,11 @@ module.exports = {
     // See https://github.com/vuejs/vue-jest/issues/175
     'vue-jest': {
       pug: { doctype: 'html' },
+    },
+    // Remove if using `const enums`
+    // See https://huafu.github.io/ts-jest/user/config/isolatedModules#example
+    'ts-jest': {
+      isolatedModules: true,
     },
   },
   // noStackTrace: true,
@@ -48,6 +53,7 @@ module.exports = {
   // See https://github.com/vuejs/vue-jest/issues/188#issuecomment-620750728
   moduleFileExtensions: ['vue', 'js', 'jsx', 'json', 'ts', 'tsx'],
   moduleNameMapper: {
+    '^quasar$': 'quasar/dist/quasar.esm.prod.js',
     '^~/(.*)$': '<rootDir>/$1',
     '^src/(.*)$': '<rootDir>/src/$1',
     '^app/(.*)$': '<rootDir>/$1',

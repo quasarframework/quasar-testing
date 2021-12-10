@@ -1,4 +1,4 @@
-const esModules = ['quasar/lang', 'lodash-es'].join('|');
+const esModules = ['quasar', 'quasar/lang', 'lodash-es'].join('|');
 
 module.exports = {
   globals: {
@@ -37,6 +37,7 @@ module.exports = {
   ],
   moduleFileExtensions: ['vue', 'js', 'jsx', 'json'],
   moduleNameMapper: {
+    '^quasar$': 'quasar/dist/quasar.esm.prod.js',
     '^~/(.*)$': '<rootDir>/$1',
     '^src/(.*)$': '<rootDir>/src/$1',
     '^app/(.*)$': '<rootDir>/$1',
