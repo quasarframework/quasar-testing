@@ -127,3 +127,34 @@ function dataCyRadio(dataCyId: string) {
 dataCyRadio('my-radio-button').check({ force: true });
 dataCyRadio('my-radio-button').should('not.be.checked');
 ```
+
+Examples for similar helpers
+
+```ts
+function dataCyCheckbox(dataCyId: string) {
+  return cy.dataCy(dataCyId).then(($quasarCheckbox) => {
+    return cy.get('input:checkbox', {
+      withinSubject: $quasarCheckbox,
+    });
+  });
+}
+```
+
+We plan to override Cypress `get` in the future to automatically manage these edge cases
+
+#### QSelect and `data-cy`
+
+QSelect automatically apply unknown props to an inner element of the component, including `data-cy`.
+This means that you need to use `cy.dataCy('trees-select').closest('.q-select')` to get the actual root element of the component.
+While this isn't important when clicking the select to open its options menu, it is if you're checking any of its attributes (eg. `aria-disabled` to see if it's enabled or not)
+
+You can define an helper to wrap this way of accessing QSelects, here's an example
+
+```ts
+function dataCySelect(dataCyId: string) {
+  return cy.dataCy(dataCyId).closest('.q-select');
+}
+```
+
+Additionally, when using `use-input` prop, the `data-cy` is mirrored on the inner native `select` too.
+This can generate confusion as `cy.dataCy('trees-select')` in those cases will return a collection and you'll need to use `.first()` or `.last()` to get respectively the component wrapper or the native input.
