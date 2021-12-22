@@ -131,42 +131,50 @@ function portalDerivateCommand<E extends Node = HTMLElement>(
 }
 
 export function registerPortalHelpers() {
-  Cypress.Commands.add('withinPortal', { prevSubject: false }, function <
-    E extends Node = HTMLElement,
-  >(selectorOrOptions: string | WithinPortalOptions, fn: WithinPortalCallback<E>) {
-    const selector =
-      typeof selectorOrOptions === 'string'
-        ? selectorOrOptions
-        : getDataCySelector(selectorOrOptions.dataCy);
+  Cypress.Commands.add(
+    'withinPortal',
+    { prevSubject: false },
+    function (selectorOrOptions, fn) {
+      const selector =
+        typeof selectorOrOptions === 'string'
+          ? selectorOrOptions
+          : getDataCySelector(selectorOrOptions.dataCy);
 
-    return (
-      cy
-        .get<E>(selector, {
-          withinSubject: Cypress.$('body'),
-        })
-        // Assert there's only one portal-based element that match the selection before continuing,
-        // avoids delay due to transitions
-        .should('have.length', 1)
-        .within(fn)
-    );
-  });
+      return (
+        cy
+          .get(selector, {
+            withinSubject: Cypress.$('body'),
+          })
+          // Assert there's only one portal-based element that match the selection before continuing,
+          // avoids delay due to transitions
+          .should('have.length', 1)
+          .within(fn)
+      );
+    },
+  );
 
-  Cypress.Commands.add('withinSelectMenu', { prevSubject: false }, function <
-    E extends Node = HTMLElement,
-  >(fnOrOptions: WithinPortalCallback<E> | WithinPortalDerivateOptions<E>) {
-    return portalDerivateCommand('.q-menu', '[role=listbox]', fnOrOptions);
-  });
+  Cypress.Commands.add(
+    'withinSelectMenu',
+    { prevSubject: false },
+    function (fnOrOptions) {
+      return portalDerivateCommand('.q-menu', '[role=listbox]', fnOrOptions);
+    },
+  );
 
-  Cypress.Commands.add('withinMenu', { prevSubject: false }, function <
-    E extends Node = HTMLElement,
-  >(fnOrOptions: WithinPortalCallback<E> | WithinPortalDerivateOptions<E>) {
-    // Without `:not([role])` this would match select options menus too
-    return portalDerivateCommand('.q-menu', ':not([role])', fnOrOptions);
-  });
+  Cypress.Commands.add(
+    'withinMenu',
+    { prevSubject: false },
+    function (fnOrOptions) {
+      // Without `:not([role])` this would match select options menus too
+      return portalDerivateCommand('.q-menu', ':not([role])', fnOrOptions);
+    },
+  );
 
-  Cypress.Commands.add('withinDialog', { prevSubject: false }, function <
-    E extends Node = HTMLElement,
-  >(fnOrOptions: WithinPortalCallback<E> | WithinPortalDerivateOptions<E>) {
-    return portalDerivateCommand('.q-dialog', '', fnOrOptions);
-  });
+  Cypress.Commands.add(
+    'withinDialog',
+    { prevSubject: false },
+    function (fnOrOptions) {
+      return portalDerivateCommand('.q-dialog', '', fnOrOptions);
+    },
+  );
 }

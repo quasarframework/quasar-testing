@@ -24,24 +24,10 @@ export function registerDataCy() {
   Cypress.Commands.add(
     'dataCy',
     { prevSubject: 'optional' },
-    (
-      subject: JQuery<HTMLElement> | undefined,
-      value: string,
-      options?: Partial<
-        Cypress.Loggable &
-          Cypress.Timeoutable &
-          Cypress.Withinable &
-          Cypress.Shadow
-      >,
-    ) => {
+    (subject, value, options) => {
       return cy.get(
         `[data-cy=${value}]`,
-        Object.assign(
-          {
-            withinSubject: subject,
-          },
-          options,
-        ),
+        Object.assign({ withinSubject: subject }, options),
       );
     },
   );

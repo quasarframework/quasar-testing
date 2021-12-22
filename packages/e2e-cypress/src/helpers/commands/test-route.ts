@@ -12,7 +12,7 @@ declare global {
 }
 
 export function registerTestRoute() {
-  Cypress.Commands.add('testRoute', (route: string) => {
+  Cypress.Commands.add('testRoute', (route) => {
     cy.location().should((loc) => {
       const usesHashModeRouter = loc.hash.length > 0;
       const target = usesHashModeRouter ? loc.hash : loc.pathname;
