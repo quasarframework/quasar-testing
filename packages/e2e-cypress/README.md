@@ -158,3 +158,12 @@ function dataCySelect(dataCyId: string) {
 
 Additionally, when using `use-input` prop, the `data-cy` is mirrored on the inner native `select` too.
 This can generate confusion as `cy.dataCy('trees-select')` in those cases will return a collection and you'll need to use `.first()` or `.last()` to get respectively the component wrapper or the native input.
+
+### Testing the AE
+
+```sh
+cd test-project
+yarn sync:cypress
+yarn test:e2e:ci
+yarn test:unit:ci
+```
