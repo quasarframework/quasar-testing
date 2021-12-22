@@ -28,52 +28,42 @@ declare global {
 
 type CssStyleProperties = Extract<keyof CSSStyleDeclaration, string>;
 
-// This is a helper function to convert assert colors correctly
-// Cypress looks at the computed color which is always rgb()
-// This makes it possible to compare `black` to `rgb(0, 0, 0)` for instance
-const compareColor =
-  (color: string, property: CssStyleProperties) =>
-  (targetElement: JQuery<HTMLElement>) => {
-    const tempElement = document.createElement('div');
-    tempElement.style.color = color;
-    tempElement.style.display = 'none'; // make sure it doesn't actually render
-    document.body.appendChild(tempElement); // append so that `getComputedStyle` actually works
-
-    const tempColor = getComputedStyle(tempElement).color;
-    const targetColor = getComputedStyle(targetElement[0])[property];
-
-    document.body.removeChild(tempElement); // remove it because we're done with it
-
-    expect(tempColor).to.equal(targetColor);
-  };
-
 const COLOR_RELATED_CSS_PROPERTIES: CssStyleProperties[] = [
   'color',
   'backgroundColor',
 ];
 
 export function registerColorAssertions() {
-  Cypress.Commands.overwrite(
-    'should',
-    (originalFn, subject, expectation, ...args) => {
-      const customMatchers = Object.fromEntries(
-        COLOR_RELATED_CSS_PROPERTIES.map((property) => [
-          `have.${property}`,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-          compareColor(args[0], property),
-        ]),
-      );
+  // Cypress looks at the computed color which is always rgb()
+  // This makes it possible to compare `black` to `rgb(0, 0, 0)` for instance
+  // Overriding `should` isn't the way to go to add new assertions,
+  // we should add them via Chai methods
+  for (const property of COLOR_RELATED_CSS_PROPERTIES) {
+    chai.Assertion.addMethod(property, function (colorValue: string) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      const targetElement: JQuery<HTMLElement> = this._obj;
 
-      // See if the expectation is a string and if it is a member of our custom matchers
-      if (
-        typeof expectation === 'string' &&
-        Object.keys(customMatchers).includes(expectation)
-      ) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
-        return originalFn(subject, customMatchers[expectation]);
-      }
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
-      return originalFn(subject, expectation, ...args);
-    },
-  );
+      const tempElement = document.createElement('div');
+      tempElement.style.color = colorValue;
+      tempElement.style.display = 'none'; // make sure it doesn't actually render
+      document.body.appendChild(tempElement); // append so that `getComputedStyle` actually works
+
+      const tempColor = getComputedStyle(tempElement).color;
+      const targetColor = getComputedStyle(targetElement[0])[property];
+
+      document.body.removeChild(tempElement); // remove it because we're done with it
+
+      expect(tempColor).to.equal(targetColor);
+
+      const actual = tempColor;
+      const expected = targetColor;
+      this.assert(
+        actual === expected,
+        `expected #{this} to have ${property} #{exp}, but got #{act} instead`,
+        `expected #{this} not to have ${property} #{exp}`,
+        expected,
+        actual,
+      );
+    });
+  }
 }
