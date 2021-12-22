@@ -1,0 +1,53 @@
+{
+  "name": "test-ts",
+  "version": "0.0.1",
+  "description": "A Quasar Framework app",
+  "productName": "Quasar App",
+  "author": "Paolo Caleffi <p.caleffi@dreamonkey.com>",
+  "private": true,
+  "scripts": {
+    "sync:cypress": "cd ../packages/e2e-cypress && yarn build:local && cd ../../test-project && yarn add -D ../packages/e2e-cypress",
+    "lint": "eslint --ext .js,.ts,.vue ./",
+    "test": "echo \"See package.json => scripts for available tests.\" && exit 0",
+    "test:e2e": "cross-env E2E_TEST=true start-test \"quasar dev\" http-get://localhost:8080 \"cypress open\"",
+    "test:e2e:ci": "cross-env E2E_TEST=true start-test \"quasar dev\" http-get://localhost:8080 \"cypress run\"",
+    "test:unit": "cypress open-ct",
+    "test:unit:ci": "cypress run-ct"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.0.0",
+    "axios": "^0.21.1",
+    "core-js": "^3.6.5",
+    "quasar": "^2.0.0",
+    "vue-i18n": "^9.0.0",
+    "vuex": "^4.0.1"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.13.14",
+    "@quasar/app": "^3.0.0",
+    "@quasar/quasar-app-extension-testing-e2e-cypress": "../packages/e2e-cypress",
+    "@types/node": "^12.20.21",
+    "@typescript-eslint/eslint-plugin": "^4.16.1",
+    "@typescript-eslint/parser": "^4.16.1",
+    "eslint": "^7.14.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-cypress": "^2.11.3",
+    "eslint-plugin-vue": "^7.0.0"
+  },
+  "browserslist": [
+    "last 10 Chrome versions",
+    "last 10 Firefox versions",
+    "last 4 Edge versions",
+    "last 7 Safari versions",
+    "last 8 Android versions",
+    "last 8 ChromeAndroid versions",
+    "last 8 FirefoxAndroid versions",
+    "last 10 iOS versions",
+    "last 5 Opera versions"
+  ],
+  "engines": {
+    "node": ">= 12.22.1",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
+  }
+}

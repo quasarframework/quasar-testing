@@ -53,6 +53,7 @@ Hi! I’m really excited that you are interested in contributing to Quasar. Befo
   - Provide detailed description of the bug in the PR. Live demo preferred.
 
 ## Development Setup
+
 As a first step, read the [App Extensions development docs](https://quasar.dev/app-extensions/development-guide/introduction) to get the gist of how the file structure works.
 
 The packages in this repo follow the following naming convention:
@@ -69,7 +70,7 @@ In these cases, we encourage you to publish and maintain the new integration AE 
 We'll try to help you getting started and link your integration on this README :)
 
 ---
- 
+
 ### Setup
 
 Use the Quasar CLI to create a new Quasar project to test out the changes you'll be doing on testing packages, eg. `quasar create my-example-project`
@@ -93,3 +94,4 @@ Then move to your example project (**it must be OUTSIDE `quasar-testing` folder*
 All folders inside `packages` folder represent a single testing App Extension.
 Please check out AEs [introduction](https://quasar.dev/app-extensions/introduction) and [development guide](https://quasar.dev/app-extensions/development-guide/introduction) for minimum knownledge on how to work with them and their folder structure.
 All files meant to be scaffolded are stored into a `template` folder inside each AE folder
+`test-project` contains a Quasar project with some automatic tests against testing AEs themself. Check out existing specific AE READMEs for additional information

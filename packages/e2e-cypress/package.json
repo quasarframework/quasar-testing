@@ -16,6 +16,7 @@
     "lint": "eslint --ext .js,.ts,.vue ./ --fix",
     "format": "prettier --write \"src/**/*.{js,ts,vue}\" \"*.{json,md}\" \"test/**/*.{js,ts,vue}\"",
     "build": "rimraf dist cct-dev-server && tsc --declaration && tsc --project tsconfig.cct.json",
+    "build:local": "yarn install && yarn build && rimraf node_modules",
     "deploy:beta": "yarn build && yarn publish --tag beta",
     "deploy:latest": "yarn build && yarn publish --tag latest"
   },
