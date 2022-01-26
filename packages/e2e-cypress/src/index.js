@@ -9,6 +9,7 @@
 // since 9.1 should set a process.env.CYPRESS variable
 module.exports = function (api) {
   api.extendQuasarConf((conf) => {
+    // TODO: https://github.com/cypress-io/cypress/issues/18805
     if (process.env.E2E_TEST) {
       conf.devServer.open = false;
     }
