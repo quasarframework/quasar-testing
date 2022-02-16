@@ -4,7 +4,7 @@
 
 # **`@quasar/testing`**
 
-> You're looking at Quasar v1 testing docs. While AEs migration to support Quasar v2 is in progress, you can find the documentation for Quasar v2 versions [here](https://github.com/quasarframework/quasar-testing/tree/next)
+> You're looking at Quasar v1 testing docs. While AEs migration to support Quasar v2 is in progress, you can find the documentation for Quasar v2 versions [here](https://github.com/quasarframework/quasar-testing/tree/dev)
 >
 > Check out the migration status [here](https://github.com/quasarframework/quasar/discussions/10341)
 
