@@ -15,6 +15,8 @@ module.exports = {
       isolatedModules: true,
     },
   },
+  // Jest assumes we are testing in node environment, specify jsdom environment instead
+  testEnvironment: 'jsdom',
   // noStackTrace: true,
   // bail: true,
   // cache: false,
