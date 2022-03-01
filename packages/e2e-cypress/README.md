@@ -80,7 +80,7 @@ testRoute('shelfs/*/books');
   - remove `test/cypress/tsconfig.json` and consequentially `parserOptions` option into `test/cypress/.eslintrc.js`
   - remove `"test/cypress"` value from `exclude` option of root `tsconfig.json`. If only `"/dist", ".quasar", "node_modules"` values remains in that array, remove `exclude` option altogether, as it's already provided by `@quasar/app/tsconfig-preset`
 
-- Add this code into your root `.eslintrc.js`
+- remove `test/cypress/.eslintrc.js` and move its content into your root `.eslintrc.js`, targeting spec files with `overrides`. If you haven't changed the file scaffolded from a previous version, it should be as simple as copy/pasting this configuration
 
 ```js
 {
@@ -93,6 +93,7 @@ testRoute('shelfs/*/books');
         // See https://github.com/cypress-io/eslint-plugin-cypress#rules
         'plugin:cypress/recommended',
       ],
+      // ... other custom Cypress-related configuration
     },
   ],
 }
