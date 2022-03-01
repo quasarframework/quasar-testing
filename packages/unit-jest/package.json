@@ -13,8 +13,7 @@
   },
   "scripts": {
     "build": "rm -rf dist && tsc --declaration --declarationDir dist/types && copyfiles -f src/helpers/stub.css dist",
-    "deploy:beta": "yarn build && yarn publish --tag beta",
-    "deploy:latest": "yarn build && yarn publish --tag latest",
+    "deploy": "yarn install && yarn build && yarn publish --tag qv1",
     "test:unit": "jest",
     "test:unit:watch": "jest --watch",
     "test": "snyk test && echo \"No test specified\" && exit 0"
