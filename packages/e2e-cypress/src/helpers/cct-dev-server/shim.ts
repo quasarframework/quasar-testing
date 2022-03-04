@@ -8,8 +8,12 @@
 // all deep imports types should be defined via ambient modules declarations, such as this one,
 // which should then be referenced by the main types entry point to be correctly evaluated
 
-// This ambient module provide typings to the deep import, which is generated without own types,
-// and match the output folder of the cct build step
+// This module provide typings to the deep import, which is generated without own types,
+// and match the output folder of the i18n build step. It cannot reference the related module
+// or it would import it at compile time
+
+// This should be a .ts file (instead of a .d.ts) to not being elided at compile time by TS,
+// which would make it useless
 
 // The solution we fould is a bit esoteric, but at least works
 // Prior to this we tried to fetch all Node related packages as async imports,
