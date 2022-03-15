@@ -109,11 +109,18 @@ We don't plan to migrate it, unless many people ask for it and someone from the 
 
 #### Testing portal-based components
 
-Portal-based component (eg. QMenu, QDialog, etc) require a `body` tag where to attach themselves which unluckily `vue-jest` doesn't provide.
-While we search for a way to workaround this (if possible), the recommended way of testing these components with Jest is to abstract them into their own component and test them in isolation.
+Portal-based component (eg. QMenu, QDialog, etc) require a `body` so that they can attach themselves to the document.
 
-Note that, if you end up trying to test interactions between multiple components, you are probably trying to test an e2e/integration scenario using a unit testing tool.
-Take a look to our Cypress AE instead: it supports proper Component Testing since version `4.0.0-beta.7` and may be what you're searching for.
+Vue Test Utils provides a DOMWrapper that allows you to mount the document body, and access the document for testing
+purposes. The example provided in `MyDialog.spec.js` demonstrates how this can be implemented.
+
+However, if this does not work for your specific use case, the recommended way of testing these components with Jest is
+to abstract them into their own component and test them in isolation.
+
+Note that, if you end up trying to test interactions between multiple components, you are probably trying to test an
+e2e/integration scenario using a unit testing tool.
+Take a look to our Cypress AE instead: it supports proper Component Testing since version `4.0.0-beta.7` and may be what
+you're searching for.
 
 #### Mock i18n
 
