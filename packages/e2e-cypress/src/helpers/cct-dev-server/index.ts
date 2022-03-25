@@ -4,18 +4,35 @@ import {
   CypressWebpackDevServerConfig,
 } from '@cypress/webpack-dev-server';
 
-// @ts-expect-error
-import extensionRunner from '@quasar/app/lib/app-extension/extensions-runner';
-// @ts-expect-error
-import getQuasarCtx from '@quasar/app/lib/helpers/get-quasar-ctx';
-// @ts-expect-error
-import QuasarConfFile from '@quasar/app/lib/quasar-conf-file';
-// @ts-expect-error
-import { splitWebpackConfig } from '@quasar/app/lib/webpack/symbols';
+import { promisify } from 'util';
+import { exec as originalExec } from 'child_process';
+
+const exec = promisify(originalExec);
 
 async function exportWebpackConfig(): Promise<
   CypressWebpackDevServerConfig['webpackConfig']
 > {
+  let quasarAppPackage: string;
+  try {
+    await exec('npm ls @quasar/app');
+    quasarAppPackage = '@quasar/app';
+  } catch (e) {
+    quasarAppPackage = '@quasar/app-webpack';
+  }
+
+  const { default: extensionRunner } = await import(
+    `${quasarAppPackage}/lib/app-extension/extensions-runner`
+  );
+  const { default: getQuasarCtx } = await import(
+    `${quasarAppPackage}/lib/helpers/get-quasar-ctx`
+  );
+  const { default: QuasarConfFile } = await import(
+    `${quasarAppPackage}/lib/quasar-conf-file`
+  );
+  const {
+    default: { splitWebpackConfig },
+  } = await import(`${quasarAppPackage}/lib/webpack/symbols`);
+
   const ctx = getQuasarCtx({
     mode: 'spa',
     target: void 0,
