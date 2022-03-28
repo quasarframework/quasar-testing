@@ -1,0 +1,9 @@
+// Vite projects need ESM code to properly run CCT, here we provide a ESM version of the package
+// So installQuasarPlugin works properly
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist/esm",
+    "module": "esnext"
+  }
+}

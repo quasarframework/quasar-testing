@@ -41,17 +41,19 @@ let extendPackageJson = {
   },
 };
 
-const ciCommandE2e =
-  'cross-env E2E_TEST=true start-test "quasar dev" http-get://localhost:8080 "cypress run"';
-const ciCommandUnit = 'cypress run-ct';
-
 module.exports = function (api) {
+  const devServerPort = api.hasVite ? 9000 : 8080;
+
+  const ciCommandE2e = `cross-env E2E_TEST=true start-test "quasar dev" http-get://localhost:${devServerPort} "cypress run"`;
+  const ciCommandComponent = 'cypress run-ct';
+
   api.render('./templates/base');
 
   api.render(
     `./templates/${
       api.prompts.options.includes('typescript') ? '' : 'no-'
     }typescript`,
+    { devServerPort },
   );
 
   api.extendJsonFile('quasar.testing.json', {
@@ -59,7 +61,7 @@ module.exports = function (api) {
       runnerCommand: ciCommandE2e,
     },
     'unit-cypress': {
-      runnerCommand: ciCommandUnit,
+      runnerCommand: ciCommandComponent,
     },
   });
 
@@ -80,11 +82,10 @@ module.exports = function (api) {
         // "http-get" must be used because "webpack-dev-server" won't answer
         //  HEAD requests which are performed by default by the underlying "wait-on"
         // See https://github.com/bahmutov/start-server-and-test#note-for-webpack-dev-server-users
-        'test:e2e':
-          'cross-env E2E_TEST=true start-test "quasar dev" http-get://localhost:8080 "cypress open"',
+        'test:e2e': `cross-env E2E_TEST=true start-test "quasar dev" http-get://localhost:${devServerPort} "cypress open"`,
         'test:e2e:ci': ciCommandE2e,
-        'test:unit': 'cypress open-ct',
-        'test:unit:ci': ciCommandUnit,
+        'test:component': 'cypress open-ct',
+        'test:component:ci': ciCommandComponent,
       },
     };
     extendPackageJson = __mergeDeep(extendPackageJson, scripts);

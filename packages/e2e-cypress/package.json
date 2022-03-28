@@ -12,10 +12,11 @@
     "url": "https://github.com/quasarframework/quasar-testing"
   },
   "main": "dist/index.js",
+  "module": "dist/esm/index.js",
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue ./ --fix",
     "format": "prettier --write \"src/**/*.{js,ts,vue}\" \"*.{json,md}\" \"test/**/*.{js,ts,vue}\"",
-    "build": "rimraf dist cct-dev-server && tsc --declaration && tsc --project tsconfig.cct.json",
+    "build": "rimraf dist cct-dev-server && tsc --declaration && tsc --project tsconfig.cct.json && tsc --project tsconfig.esm.json",
     "build:local": "yarn install && yarn build && rimraf node_modules",
     "deploy:beta": "yarn build && yarn publish --tag beta",
     "deploy:latest": "yarn build && yarn publish --tag latest"
@@ -30,6 +31,7 @@
     "yarn": ">= 1.17.3"
   },
   "dependencies": {
+    "@cypress/vite-dev-server": "^2.2.2",
     "@cypress/vue": "^3.1.0",
     "@cypress/webpack-dev-server": "^1.8.3",
     "cross-env": "^7.0.3",
