@@ -3171,7 +3171,7 @@ csstype@^2.6.8:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.18.tgz#980a8b53085f34af313410af064f2bd241784218"
   integrity sha512-RSU6Hyeg14am3Ah4VZEmeX8H7kLwEEirXe6aU2IPfKNvhXwTflK5HQRDNI0ypQXoqmm+QPyG2IaPuQE5zMwSIQ==
 
-cypress@^9.2.0:
+cypress@^9.5.2:
   version "9.5.2"
   resolved "https://registry.yarnpkg.com/cypress/-/cypress-9.5.2.tgz#8fb6ee4a890fbc35620800810bf6fb11995927bd"
   integrity sha512-gYiQYvJozMzDOriUV1rCt6CeRM/pRK4nhwGJj3nJQyX2BoUdTCVwp30xDMKc771HiNVhBtgj5o5/iBdVDVXQUg==

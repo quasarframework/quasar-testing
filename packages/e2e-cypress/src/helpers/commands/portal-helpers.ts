@@ -7,7 +7,7 @@ declare global {
        * @example cy.withinPortal('.cy-greeting-dialog', () => { doSomething() })
        * @example cy.withinPortal({ dataCy: 'reprocess-dialog }, () => { doSomething() })
        */
-      withinPortal<E extends Node = HTMLElement>(
+      withinPortal<E extends HTMLElement = HTMLElement>(
         selectorOrOptions: string | WithinPortalOptions,
         fn: WithinPortalCallback<E>,
       ): Chainable<JQuery<E>>;
@@ -26,7 +26,7 @@ declare global {
        * @example cy.withinSelectMenu({ selector: '.cy-books-menu', fn: () => { doSomething() } })
        * @example cy.withinSelectMenu({ persistent: true, fn: () => { doSomething() } })
        */
-      withinSelectMenu<E extends Node = HTMLElement>(
+      withinSelectMenu<E extends HTMLElement = HTMLElement>(
         fnOrOptions: WithinPortalCallback<E> | WithinPortalDerivateOptions<E>,
       ): Chainable<JQuery<E>>;
 
@@ -44,7 +44,7 @@ declare global {
        * @example cy.withinMenu({ selector: '.cy-books-menu', fn: () => { doSomething() } })
        * @example cy.withinMenu({ persistent: true, fn: () => { doSomething() } })
        */
-      withinMenu<E extends Node = HTMLElement>(
+      withinMenu<E extends HTMLElement = HTMLElement>(
         fnOrOptions: WithinPortalCallback<E> | WithinPortalDerivateOptions<E>,
       ): Chainable<JQuery<E>>;
 
@@ -62,14 +62,14 @@ declare global {
        * @example cy.withinDialog({ selector: '.cy-delete-dialog', fn: () => { doSomething() } })
        * @example cy.withinDialog({ persistent: true, fn: () => { doSomething() } })
        */
-      withinDialog<E extends Node = HTMLElement>(
+      withinDialog<E extends HTMLElement = HTMLElement>(
         fnOrOptions: WithinPortalCallback<E> | WithinPortalDerivateOptions<E>,
       ): Chainable<JQuery<E>>;
     }
   }
 }
 
-type WithinPortalCallback<E extends Node = HTMLElement> = (
+type WithinPortalCallback<E extends HTMLElement = HTMLElement> = (
   currentSubject: JQuery<E>,
 ) => void;
 
@@ -77,7 +77,7 @@ interface WithinPortalOptions {
   dataCy: string;
 }
 
-interface WithinPortalDerivateOptions<E extends Node = HTMLElement> {
+interface WithinPortalDerivateOptions<E extends HTMLElement = HTMLElement> {
   /** Callback to execute within the scope of the Portal-based component */
   fn: WithinPortalCallback<E>;
   /**
@@ -106,7 +106,7 @@ function getDataCySelector(dataCy: string) {
   return `[data-cy=${dataCy}]`;
 }
 
-function portalDerivateCommand<E extends Node = HTMLElement>(
+function portalDerivateCommand<E extends HTMLElement = HTMLElement>(
   selectorDefault: string,
   selectorSuffix: string,
   fnOrOptions: WithinPortalCallback<E> | WithinPortalDerivateOptions<E>,
@@ -131,50 +131,34 @@ function portalDerivateCommand<E extends Node = HTMLElement>(
 }
 
 export function registerPortalHelpers() {
-  Cypress.Commands.add(
-    'withinPortal',
-    { prevSubject: false },
-    function (selectorOrOptions, fn) {
-      const selector =
-        typeof selectorOrOptions === 'string'
-          ? selectorOrOptions
-          : getDataCySelector(selectorOrOptions.dataCy);
+  Cypress.Commands.add('withinPortal', function (selectorOrOptions, fn) {
+    const selector =
+      typeof selectorOrOptions === 'string'
+        ? selectorOrOptions
+        : getDataCySelector(selectorOrOptions.dataCy);
 
-      return (
-        cy
-          .get(selector, {
-            withinSubject: Cypress.$('body'),
-          })
-          // Assert there's only one portal-based element that match the selection before continuing,
-          // avoids delay due to transitions
-          .should('have.length', 1)
-          .within(fn)
-      );
-    },
-  );
+    return (
+      cy
+        .get(selector, {
+          withinSubject: Cypress.$('body'),
+        })
+        // Assert there's only one portal-based element that match the selection before continuing,
+        // avoids delay due to transitions
+        .should('have.length', 1)
+        .within(fn)
+    );
+  });
 
-  Cypress.Commands.add(
-    'withinSelectMenu',
-    { prevSubject: false },
-    function (fnOrOptions) {
-      return portalDerivateCommand('.q-menu', '[role=listbox]', fnOrOptions);
-    },
-  );
+  Cypress.Commands.add('withinSelectMenu', function (fnOrOptions) {
+    return portalDerivateCommand('.q-menu', '[role=listbox]', fnOrOptions);
+  });
 
-  Cypress.Commands.add(
-    'withinMenu',
-    { prevSubject: false },
-    function (fnOrOptions) {
-      // Without `:not([role])` this would match select options menus too
-      return portalDerivateCommand('.q-menu', ':not([role])', fnOrOptions);
-    },
-  );
+  Cypress.Commands.add('withinMenu', function (fnOrOptions) {
+    // Without `:not([role])` this would match select options menus too
+    return portalDerivateCommand('.q-menu', ':not([role])', fnOrOptions);
+  });
 
-  Cypress.Commands.add(
-    'withinDialog',
-    { prevSubject: false },
-    function (fnOrOptions) {
-      return portalDerivateCommand('.q-dialog', '', fnOrOptions);
-    },
-  );
+  Cypress.Commands.add('withinDialog', function (fnOrOptions) {
+    return portalDerivateCommand('.q-dialog', '', fnOrOptions);
+  });
 }
