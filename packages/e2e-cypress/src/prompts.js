@@ -14,7 +14,7 @@ module.exports = function () {
       type: 'checkbox',
       required: true,
       message:
-        'Cypress e2e and unit Test Harness will now be installed. Please choose additional options:',
+        'Cypress e2e and component Test Harness will now be installed. Please choose additional options:',
       choices: [
         {
           name: 'extra "scripts" in your package.json',

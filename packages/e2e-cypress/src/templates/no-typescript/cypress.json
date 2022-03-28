@@ -10,6 +10,6 @@
   "component": {
     "componentFolder": "src",
     "testFiles": "**/*.spec.js",
-    "supportFile": "test/cypress/support/unit.js"
+    "supportFile": "test/cypress/support/component.js"
   }
 }

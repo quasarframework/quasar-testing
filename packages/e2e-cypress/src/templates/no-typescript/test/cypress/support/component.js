@@ -1,6 +1,6 @@
 // ***********************************************************
-// This example support/unit.js is processed and
-// loaded automatically before your unit test files.
+// This example support/component.js is processed and
+// loaded automatically before your component test files.
 //
 // This is a great place to put global configuration and
 // behavior that modifies Cypress.

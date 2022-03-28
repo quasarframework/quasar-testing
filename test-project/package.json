@@ -11,8 +11,8 @@
     "test": "echo \"See package.json => scripts for available tests.\" && exit 0",
     "test:e2e": "cross-env E2E_TEST=true start-test \"quasar dev\" http-get://localhost:8080 \"cypress open\"",
     "test:e2e:ci": "cross-env E2E_TEST=true start-test \"quasar dev\" http-get://localhost:8080 \"cypress run\"",
-    "test:unit": "cypress open-ct",
-    "test:unit:ci": "cypress run-ct"
+    "test:component": "cypress open-ct",
+    "test:component:ci": "cypress run-ct"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",

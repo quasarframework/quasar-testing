@@ -21,7 +21,7 @@ export function registerCommands() {
   registerTestRoute();
 
   // Not a command, but a common known problem with Cypress
-  // We add it here since it's needed for both e2e and unit tests
+  // We add it here since it's needed for both e2e and component tests
   // Usually it should be placed into `cypress/support/index.ts` file
   // See https://github.com/quasarframework/quasar/issues/2233#issuecomment-492975745
   const resizeObserverLoopError = 'ResizeObserver loop limit exceeded';

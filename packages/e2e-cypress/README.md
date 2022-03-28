@@ -43,7 +43,7 @@ You must have a running dev server in order to run integration tests. The script
 
 This AE is a wrapper around Cypress, you won't be able to use this or understand most of the documentation if you haven't read [the official documentation](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html).
 
-[Cypress Component Testing](https://docs.cypress.io/guides/component-testing/introduction) is supported and the AE scaffolds the code to run both `e2e` and `unit` tests with Cypress.
+[Cypress Component Testing](https://docs.cypress.io/guides/component-testing/introduction) is supported and the AE scaffolds the code to run both `e2e` and `component` tests with Cypress.
 Consequentially, we may rename this package from `@quasar/quasar-app-extension-testing-e2e-cypress` to `@quasar/quasar-app-extension-testing-cypress` in a future release.
 
 ### Upgrade from Cypress AE v3 / Quasar v1
@@ -75,7 +75,7 @@ testRoute('123/books');
 testRoute('shelfs/*/books');
 ```
 
-- Since Jest can now be used without global types and Cypress can now run its own unit tests, Cypress configuration for TS codebases can be simplified:
+- Since Jest can now be used without global types and Cypress can run its own component tests (which in many scenarios can replace Jest unit testing), Cypress configuration for TS codebases can be simplified:
 
   - remove `test/cypress/tsconfig.json` and consequentially `parserOptions` option into `test/cypress/.eslintrc.js`
   - remove `"test/cypress"` value from `exclude` option of root `tsconfig.json`. If only `"/dist", ".quasar", "node_modules"` values remains in that array, remove `exclude` option altogether, as it's already provided by `@quasar/app/tsconfig-preset`
@@ -166,5 +166,5 @@ This can generate confusion as `cy.dataCy('trees-select')` in those cases will r
 cd test-project
 yarn sync:cypress
 yarn test:e2e:ci
-yarn test:unit:ci
+yarn test:component:ci
 ```
