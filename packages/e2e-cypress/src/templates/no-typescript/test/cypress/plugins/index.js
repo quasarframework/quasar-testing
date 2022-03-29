@@ -18,11 +18,13 @@
 const {
   injectDevServer,
 } = require('@quasar/quasar-app-extension-testing-e2e-cypress/cct-dev-server');
+<% if (shouldAddCodeCoverage) { %>const cypressCodeCoverageTask = require('@cypress/code-coverage/task');<% } %>
 
 /**
  * @type {Cypress.PluginConfig}
  */
 module.exports = async (on, config) => {
+  <% if (shouldAddCodeCoverage) { %>cypressCodeCoverageTask(on, config);<% } %>
   // Enable component testing, you can safely remove this
   // if you don't plan to use Cypress for component tests
   if (config.testingType === 'component') {

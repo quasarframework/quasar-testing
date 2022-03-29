@@ -14,6 +14,7 @@
 // ***********************************************************
 
 import './commands';
+<% if (shouldAddCodeCoverage) { %>import '@cypress/code-coverage/support';<% } %>
 
 // Change this if you have a different entrypoint for the main scss.
 import 'src/css/app.scss';

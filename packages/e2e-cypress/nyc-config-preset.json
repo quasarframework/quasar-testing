@@ -1,0 +1,5 @@
+{
+  "all": true,
+  "include": ["**/*.{js,cjs,mjs,jsx,ts,tsx,vue}"],
+  "exclude": ["**/__tests__/**", "**.d.ts"]
+}

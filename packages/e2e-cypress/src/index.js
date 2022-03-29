@@ -5,7 +5,7 @@
  * API: https://github.com/quasarframework/quasar/blob/master/app/lib/app-extension/IndexAPI.js
  */
 
-module.exports = function (api) {
+module.exports = async function (api) {
   api.compatibleWith('quasar', '^2.0.0');
 
   if (api.hasVite) {
@@ -16,11 +16,34 @@ module.exports = function (api) {
     api.compatibleWith('@quasar/app', '^3.0.0');
   }
 
-  api.extendQuasarConf((conf) => {
-    // TODO: we should remove this in next AE major version, since Cypress 9.1 set a process.env.CYPRESS variable for us
-    // See https://github.com/cypress-io/cypress/issues/18805
-    if (process.env.E2E_TEST) {
-      conf.devServer.open = false;
-    }
+  // We cannot use process.env.CYPRESS here as this code is executed outside Cypress process
+  // TODO: since v4.1 we use NODE_ENV, but we keep supporting old E2E_TEST variable until next major version
+  if (process.env.NODE_ENV !== 'test' && !process.env.E2E_TEST) {
+    return;
+  }
+
+  // Prevent Quasar from opening the project into a new browser tab as Cypress opens its own window
+  api.extendQuasarConf(async (conf) => {
+    conf.devServer.open = false;
   });
+
+  if (api.prompts.options.includes('code-coverage')) {
+    if (api.hasVite) {
+      // TODO: known problem with Vue3 + Vite source maps: https://github.com/iFaxity/vite-plugin-istanbul/issues/14
+      const { default: istanbul } = await import('vite-plugin-istanbul');
+
+      api.extendViteConf((viteConf) => {
+        viteConf.plugins.push(
+          istanbul({
+            exclude: ['.quasar/*'],
+          }),
+        );
+      });
+    } else {
+      // TODO: add webpack code coverage support
+      // See https://www.npmjs.com/package/istanbul-instrumenter-loader
+      // https://github.com/vuejs/vue-cli/issues/1363#issuecomment-405352542
+      // https://github.com/akoidan/vue-webpack-typescript
+    }
+  }
 };

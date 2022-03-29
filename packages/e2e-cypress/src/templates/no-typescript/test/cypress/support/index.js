@@ -14,3 +14,4 @@
 // ***********************************************************
 
 import './commands';
+<% if (shouldAddCodeCoverage) { %>import '@cypress/code-coverage/support';<% } %>

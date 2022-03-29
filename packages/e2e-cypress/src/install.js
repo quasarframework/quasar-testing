@@ -4,6 +4,8 @@
  * API: https://github.com/quasarframework/quasar/blob/master/app/lib/app-extension/InstallAPI.js
  */
 
+const { appendFileSync } = require('fs');
+
 /**
  * Performs a deep merge of objects and returns new object. Does not modify
  * objects (immutable) and merges arrays via concatenation.
@@ -43,25 +45,34 @@ let extendPackageJson = {
 
 module.exports = function (api) {
   const devServerPort = api.hasVite ? 9000 : 8080;
+  const shouldAddScripts = api.prompts.options.includes('scripts');
+  const shouldSupportTypeScript = api.prompts.options.includes('typescript');
+  const shouldAddCodeCoverage =
+    api.prompts.options.includes('code-coverage') && api.hasVite;
 
-  const ciCommandE2e = `cross-env E2E_TEST=true start-test "quasar dev" http-get://localhost:${devServerPort} "cypress run"`;
-  const ciCommandComponent = 'cypress run-ct';
+  const testEnvCommand = `cross-env NODE_ENV=test`;
+  // "http-get" must be used because "webpack-dev-server" won't answer
+  //  HEAD requests which are performed by default by the underlying "wait-on"
+  // See https://github.com/bahmutov/start-server-and-test#note-for-webpack-dev-server-users
+  const e2eServerCommand = `${testEnvCommand} start-test "quasar dev" http-get://localhost:${devServerPort}`;
+  const e2eCommand = `${e2eServerCommand} "cypress open"`;
+  const e2eCommandCi = `${e2eServerCommand} "cypress run"`;
+  const componentCommand = `${testEnvCommand} cypress open-ct`;
+  const componentCommandCi = `${testEnvCommand} cypress run-ct`;
 
   api.render('./templates/base');
 
-  api.render(
-    `./templates/${
-      api.prompts.options.includes('typescript') ? '' : 'no-'
-    }typescript`,
-    { devServerPort },
-  );
+  api.render(`./templates/${shouldSupportTypeScript ? '' : 'no-'}typescript`, {
+    devServerPort,
+    shouldAddCodeCoverage,
+  });
 
   api.extendJsonFile('quasar.testing.json', {
     'e2e-cypress': {
-      runnerCommand: ciCommandE2e,
+      runnerCommand: e2eCommandCi,
     },
     'unit-cypress': {
-      runnerCommand: ciCommandComponent,
+      runnerCommand: componentCommandCi,
     },
   });
 
@@ -74,21 +85,32 @@ module.exports = function (api) {
     ],
   });
 
-  if (api.prompts.options.includes('scripts')) {
+  if (shouldAddScripts) {
     const scripts = {
       scripts: {
         test: 'echo "See package.json => scripts for available tests." && exit 0',
-        // We use cross-env to set a flag which the extension will catch preventing "quasar dev" to open a window
-        // "http-get" must be used because "webpack-dev-server" won't answer
-        //  HEAD requests which are performed by default by the underlying "wait-on"
-        // See https://github.com/bahmutov/start-server-and-test#note-for-webpack-dev-server-users
-        'test:e2e': `cross-env E2E_TEST=true start-test "quasar dev" http-get://localhost:${devServerPort} "cypress open"`,
-        'test:e2e:ci': ciCommandE2e,
-        'test:component': 'cypress open-ct',
-        'test:component:ci': ciCommandComponent,
+        'test:e2e': e2eCommand,
+        'test:e2e:ci': e2eCommandCi,
+        'test:component': componentCommand,
+        'test:component:ci': componentCommandCi,
       },
     };
     extendPackageJson = __mergeDeep(extendPackageJson, scripts);
+  }
+
+  if (shouldAddCodeCoverage) {
+    api.render('./templates/code-coverage');
+
+    const gitignorePath = api.resolve.app('.gitignore');
+    appendFileSync(gitignorePath, '\n.nyc_output\ncoverage/\n');
+  }
+
+  // TODO: using `api.hasWebpack` won't be available if the user is still using
+  // the old app, so we check hasVite instead
+  if (api.prompts.options.includes('code-coverage') && !api.hasVite) {
+    api.onExitLog(
+      "Code coverage isn't supported for Webpack yet. Please use Vite CLI instead.",
+    );
   }
 
   api.extendPackageJson(extendPackageJson);

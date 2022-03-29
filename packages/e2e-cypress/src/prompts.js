@@ -25,6 +25,10 @@ module.exports = function () {
           name: 'enable TypeScript support',
           value: 'typescript',
         },
+        {
+          name: 'enable code coverage (currently only supported using Vite, not Webpack)',
+          value: 'code-coverage',
+        },
       ],
     },
   ];

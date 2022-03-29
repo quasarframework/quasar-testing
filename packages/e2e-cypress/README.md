@@ -46,6 +46,40 @@ This AE is a wrapper around Cypress, you won't be able to use this or understand
 [Cypress Component Testing](https://docs.cypress.io/guides/component-testing/introduction) is supported and the AE scaffolds the code to run both `e2e` and `component` tests with Cypress.
 Consequentially, we may rename this package from `@quasar/quasar-app-extension-testing-e2e-cypress` to `@quasar/quasar-app-extension-testing-cypress` in a future release.
 
+### Code coverage
+
+> **We're aware of [a problem](https://github.com/vitejs/vite/issues/6654#issuecomment-1024732292) with Vite which cause e2e tests to fail unless Vite already compiled the app at least once. It should be solved once `@quasar/app-vite` upgrade to Vite 2.9**
+
+Since v4.1 onwards, we support scaffolding [code coverage configuration for Cypress tests](https://docs.cypress.io/guides/tooling/code-coverage), when using Vite-based Quasar CLI.
+
+To generate reports, run `test:e2e:ci` and/or `test:component:ci` scripts.
+Running them both sequentially within the same command (eg. `yarn test:e2e:ci && yarn test:component:ci`) will result in combined coverage report.
+You'll find the generated report into `coverage/lcov-report` folder.
+
+We provide a [preset configuration](https://github.com/quasarframework/quasar-testing/blob/dev/packages/e2e-cypress/nyc-config-preset.json) for the coverage report which:
+
+- enables `all` option to include some files which are ignored by default:
+  - dynamically imported components, such as layout and pages imported by vue-router;
+  - files not touched by any test.
+- excludes test folders (`__tests__`) and TS declaration files (\*.d.ts), which should already be excluded [by default](https://github.com/istanbuljs/schema/blob/master/default-exclude.js) but apparently aren't;
+- only includes actual code files, leaving out code-like static assets (eg. svgs).
+
+Check out [nyc official documentation]([official docs](https://github.com/istanbuljs/nyc)) if you want to customize report generation.
+You can either add options into `.nycrc` file or generate reports on the fly running `nyc report <options>`.
+
+> Note that we do not setup [Istanbul TS configuration](https://github.com/istanbuljs/istanbuljs/tree/master/packages/nyc-config-typescript) and its dependencies as Cypress claims [it's able to manage TS code coverage out-of-the-box](https://github.com/cypress-io/code-coverage#typescript-users).
+> Some TS files may be excluded by the report in scenarios, eg. if they aren't actually imported (dead code), if they're tree-shaked away by a bundler or if they only contain types/interfaces, and as such have no actual JS representation.
+> Please open an issue if you notice some files are missing from generated reports in this scenario.
+
+### Upgrade from Cypress v4 to v4.1 (optional)
+
+If you need code-coverage or want to adapt, rerun `quasar ext add @quasar/testing-e2e-cypress` and select the appropriate options.
+If you want adapt to latest defaults, either rerun `quasar ext add @quasar/testing-e2e-cypress` or:
+
+- If they exist, update `test:unit` and `test:unit:ci` scripts to `test:component` and `test:component:ci`, to avoid clashes with actual unit tests from other packages.
+- If they exist, prefix `test:component` and `test:component:ci` scripts with `cross-env NODE_ENV=test`. Update related command into `quasar.testing.json` too.
+- If they exist, update `test:e2e` and `test:e2e:ci` scripts to use `cross-env NODE_ENV=test` instead of `cross-env E2E_TEST=true`. Update related command into `quasar.testing.json` too. Usage of `E2E_TEST` is deprecated and will be removed into next major version.
+
 ### Upgrade from Cypress AE v3 / Quasar v1
 
 - Replace the code for Quasar custom commands into `test/cypress/support/commands.[js/ts]` with following lines, as they're now exported directly by the package
