@@ -1,19 +1,12 @@
 {
   "vetur.validation.template": false,
   "vetur.format.enable": false,
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "vue"
-  ],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"],
   "typescript.tsdk": "node_modules/typescript/lib",
   "vetur.experimental.templateInterpolationService": true,
   "json.schemas": [
     {
-      "fileMatch": [
-        "cypress.json"
-      ],
+      "fileMatch": ["cypress.json"],
       "url": "https://on.cypress.io/cypress.schema.json"
     }
   ]
