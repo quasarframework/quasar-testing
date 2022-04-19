@@ -1,11 +1,7 @@
 /* eslint-disable */
 /// <reference types="cypress" />
-import { promisify } from 'util';
-import { exec as originalExec } from 'child_process';
 
 type AvailableBundlers = 'vite' | 'webpack';
-
-const exec = promisify(originalExec);
 
 async function exportQuasarConfig(bundler: AvailableBundlers): Promise<any> {
   let quasarAppPackage = `@quasar/app-${bundler}`;
