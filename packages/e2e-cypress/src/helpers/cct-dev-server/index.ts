@@ -1,15 +1,21 @@
 /* eslint-disable */
 /// <reference types="cypress" />
 
+import { join } from 'path';
+
 type AvailableBundlers = 'vite' | 'webpack';
+
+function getPackageJson() {
+  return require(join(process.cwd(), 'package.json'));
+}
 
 async function exportQuasarConfig(bundler: AvailableBundlers): Promise<any> {
   let quasarAppPackage = `@quasar/app-${bundler}`;
 
   if (bundler === 'webpack') {
-    const { devDependencies } = require('package.json')
+    const { devDependencies } = getPackageJson();
     if (!devDependencies.hasOwnProperty(quasarAppPackage)) {
-      quasarAppPackage = '@quasar/app'
+      quasarAppPackage = '@quasar/app';
     }
   }
 
@@ -72,10 +78,12 @@ async function exportQuasarConfig(bundler: AvailableBundlers): Promise<any> {
 
 export const injectDevServer: Cypress.PluginConfig = (on, config) => {
   on('dev-server:start', async (options) => {
-    const { devDependencies } = require('package.json')
-    const bundler: AvailableBundlers = devDependencies.hasOwnProperty('@quasar/app-vite') ? 
-      'vite' : 
-      'webpack';
+    const { devDependencies } = getPackageJson();
+    const bundler: AvailableBundlers = devDependencies.hasOwnProperty(
+      '@quasar/app-vite',
+    )
+      ? 'vite'
+      : 'webpack';
 
     const { startDevServer } = await import(`@cypress/${bundler}-dev-server`);
 
