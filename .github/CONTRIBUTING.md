@@ -62,7 +62,7 @@ The packages in this repo follow the following naming convention:
 - @quasar/app-extension-testing-e2e-\*
 - @quasar/app-extension-testing-quality
 
-Quasar internally maps extensions (pruning "app-extension-") when running `quasar ext ...` commands, eg. `jest` test-runner AE id would be `@quasar/testing-unit-jest`.
+Quasar internally maps extensions (pruning "app-extension-") when running `quasar ext ...` commands, eg. `jest` test-runner App Extension (AE) id would be `@quasar/testing-unit-jest`.
 
 If you would like to help us add official harnesses, please open an issue or get in touch on Quasar Discord server #testing channel.
 Avoid opening PRs without getting in touch with us, as we may refuse to merge integrations we cannot commit to maintain.

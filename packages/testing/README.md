@@ -6,7 +6,7 @@
 $ quasar ext add @quasar/testing
 ```
 
-This AE is meant to centralize the management of all testing harnesses.
+This App Extension (AE) is meant to centralize the management of all testing harnesses.
 
 When added (or re-added) it will let you choose which testing harnesses you want and install them.
 It will provide a new `quasar test` command which you can use to run your tests.

@@ -26,7 +26,7 @@ Add into your `.eslintrc.js` the following code:
 
 ---
 
-This AE manages Quasar and Cypress integration for you, both for JavaScript and TypeScript.
+This App Extension (AE) manages Quasar and Cypress integration for you, both for JavaScript and TypeScript.
 
 Some custom commands are included out-of-the-box:
 
