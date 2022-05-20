@@ -47,7 +47,7 @@ The Test Driven Design approach will help you to write better (and fewer) tests.
 
 ## Donations
 
-The Quasar team spend a considerabile amount of time studying, coding and maintaining App Extensions which save literally thousands of developers hours, days or weeks of work.
+The Quasar team spend a considerabile amount of time studying, coding and maintaining App Extensions (AE) which save literally thousands of developers hours, days or weeks of work.
 
 Does your business or personal projects depend on these App Extensions? How much time did we save you until now? Consider [donating](https://github.com/sponsors/rstoenescu) to help us maintain them and allow us to create new ones!
 
