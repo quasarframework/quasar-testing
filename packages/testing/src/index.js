@@ -1,3 +1,6 @@
+const testTypesWithRunner = ['unit', 'component', 'e2e'];
+const testTypes = [...testTypesWithRunner, 'security'];
+
 module.exports = async function (api) {
   api.compatibleWith('quasar', '^2.0.0');
 
@@ -25,12 +28,11 @@ module.exports = async function (api) {
     let serviceLock = null;
 
     if (
-      (!args.unit && !args.e2e && !args.security) ||
-      args.unit === true ||
-      args.e2e === true
+      testTypes.every((type) => !args[type]) ||
+      testTypesWithRunner.some((type) => args[type] === true)
     ) {
       console.log(
-        chalk`{bgRed  ERROR: } Please specify what test runners to use. e.g. quasar test --unit jest or quasar test --e2e cypress.`,
+        chalk`{bgRed  ERROR: } Please specify what test runners to use. e.g. quasar test --unit jest or quasar test --component cypress or quasar test --e2e cypress.`,
       );
       if (rawArgs.length > 0) {
         console.log(
@@ -42,51 +44,27 @@ module.exports = async function (api) {
 
     // Convert string values to arrays
 
-    args.unit = (args.unit || '').split(',');
-    args.e2e = (args.e2e || '').split(',');
-    args.security = (args.security || '').split(',');
+    for (const testType of testTypes) {
+      args[testType] = (args[testType] || '').split(',');
 
-    args.unit.forEach((runner) => {
-      if (runner === '') {
-        args.unit.splice(args.unit.indexOf(runner), 1);
-        return;
-      }
-      if (!testingConfig[`unit-${runner.split(' ')[0]}`]) {
-        // TODO: install instructions for non-scoped extension
-        console.error(
-          chalk`You tried to run tests with {bold ${runner}}, but it is not installed. Please install @quasar/quasar-app-extension-unit-${runner} with {bold quasar ext add @quasar/testing-unit-${runner}}`,
-        );
-        process.exit(1);
-      }
-    });
+      args[testType].forEach((runner) => {
+        if (runner === '') {
+          args[testType].splice(args.unit.indexOf(runner), 1);
+          return;
+        }
+        if (!testingConfig[`${testType}-${runner.split(' ')[0]}`]) {
+          const testAeName = `${testType}${
+            testTypesWithRunner.includes(testType) ? `-${runner}` : ''
+          }`;
 
-    args.e2e.forEach((runner) => {
-      if (runner === '') {
-        args.e2e.splice(args.e2e.indexOf(runner), 1);
-        return;
-      }
-      if (!testingConfig[`e2e-${runner.split(' ')[0]}`]) {
-        // TODO: install instructions for non-scoped extension
-        console.error(
-          chalk`You tried to run tests with {bold ${runner}}, but it is not installed. Please install @quasar/quasar-app-extension-e2e-${runner} with {bold quasar ext add @quasar/testing-e2e-${runner}}`,
-        );
-        process.exit(1);
-      }
-    });
-
-    args.security.forEach((runner) => {
-      if (runner === '') {
-        args.security.splice(args.security.indexOf(runner), 1);
-        return;
-      }
-      if (!testingConfig[`security-${runner.split(' ')[0]}`]) {
-        // TODO: install instructions for non-scoped extension
-        console.error(
-          chalk`You tried to run security tests with {bold ${runner}}, but it is not installed. Please install @quasar/quasar-app-extension-security with {bold quasar ext add @quasar/testing-security}`,
-        );
-        process.exit(1);
-      }
-    });
+          // TODO: install instructions for non-scoped extension
+          console.error(
+            chalk`You tried to run tests with {bold ${runner}}, but it is not installed. Please install @quasar/quasar-app-extension-${testAeName} with {bold quasar ext add @quasar/testing-${testAeName}}`,
+          );
+          process.exit(1);
+        }
+      });
+    }
 
     const killProcess = (hasFailed) => {
       process.exit(hasFailed ? 1 : 0);
@@ -232,16 +210,16 @@ module.exports = async function (api) {
           }
         });
 
-      for (const runner of args.unit) {
-        await runTest(runner, 'unit');
+      for (const testType of testTypes) {
+        for (const runner of args[testType]) {
+          if (testType === 'security') {
+            serviceLock = true;
+          }
+
+          await runTest(runner, testType);
+        }
       }
-      for (const runner of args.e2e) {
-        await runTest(runner, 'e2e');
-      }
-      for (const runner of args.security) {
-        serviceLock = true;
-        await runTest(runner, 'security');
-      }
+
       failedRunners.forEach((runner) => {
         if (!args.security) {
           console.error(
