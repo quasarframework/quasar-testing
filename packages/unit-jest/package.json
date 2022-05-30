@@ -13,6 +13,7 @@
   },
   "scripts": {
     "build": "rimraf dist && tsc --declaration --declarationDir dist/types && copyfiles -f src/helpers/stub.css dist",
+    "build:local": "yarn install && yarn build && rimraf node_modules",
     "deploy:alpha": "yarn build && yarn publish --tag alpha",
     "deploy:beta": "yarn build && yarn publish --tag beta",
     "deploy:latest": "yarn build && yarn publish --tag latest",

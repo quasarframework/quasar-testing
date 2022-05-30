@@ -10,6 +10,7 @@
   },
   "main": "src/index.js",
   "scripts": {
+    "build:local": "rimraf node_modules",
     "deploy:beta": "yarn publish --tag beta",
     "deploy:latest": "yarn publish --tag latest"
   },
