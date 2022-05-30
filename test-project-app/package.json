@@ -6,7 +6,10 @@
   "author": "Paolo Caleffi <p.caleffi@dreamonkey.com>",
   "private": true,
   "scripts": {
-    "sync:cypress": "cd ../packages/e2e-cypress && yarn build:local && cd ../../test-project && yarn add -D ../packages/e2e-cypress",
+    "sync:testing": "cd ../packages/testing && yarn build:local && cd ../../test-project-app && yarn add -D ../packages/testing",
+    "sync:jest": "cd ../packages/unit-jest && yarn build:local && cd ../../test-project-app && yarn add -D ../packages/unit-jest",
+    "sync:cypress": "cd ../packages/e2e-cypress && yarn build:local && cd ../../test-project-app && yarn add -D ../packages/e2e-cypress",
+    "sync:all": "yarn sync:testing && yarn sync:jest && yarn sync:cypress",
     "lint": "eslint --ext .js,.ts,.vue ./",
     "test": "echo \"See package.json => scripts for available tests.\" && exit 0",
     "test:e2e": "cross-env NODE_ENV=test start-test \"quasar dev\" http-get://localhost:8080 \"cypress open\"",
@@ -28,6 +31,7 @@
     "core-js": "^3.6.5",
     "quasar": "^2.0.0",
     "vue-i18n": "^9.0.0",
+    "vue-router": "^4.0.0",
     "vuex": "^4.0.1"
   },
   "devDependencies": {
