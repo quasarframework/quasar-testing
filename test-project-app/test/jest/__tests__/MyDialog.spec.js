@@ -24,7 +24,7 @@ describe('MyDialog', () => {
     const wrapper = new DOMWrapper(document.body);
 
     expect(wrapper.find('.q-dialog').html()).toContain(
-      'Custom dialog which should be tested',
+      'Custom dialog which should be tested'
     );
   });
 });

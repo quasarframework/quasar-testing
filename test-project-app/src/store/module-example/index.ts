@@ -10,7 +10,7 @@ const exampleModule: Module<ExampleStateInterface, StateInterface> = {
   actions,
   getters,
   mutations,
-  state
+  state,
 };
 
 export default exampleModule;

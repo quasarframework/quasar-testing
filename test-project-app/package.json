@@ -11,6 +11,7 @@
     "sync:cypress": "cd ../packages/e2e-cypress && yarn build:local && cd ../../test-project-app && yarn add -D ../packages/e2e-cypress",
     "sync:all": "yarn sync:testing && yarn sync:jest && yarn sync:cypress",
     "lint": "eslint --ext .js,.ts,.vue ./",
+    "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
     "test": "echo \"See package.json => scripts for available tests.\" && exit 0",
     "test:e2e": "cross-env NODE_ENV=test start-test \"quasar dev\" http-get://localhost:8080 \"cypress open\"",
     "test:e2e:ci": "cross-env NODE_ENV=test start-test \"quasar dev\" http-get://localhost:8080 \"cypress run\"",
@@ -27,7 +28,7 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
-    "axios": "^0.21.1",
+    "axios": "^0.27.2",
     "core-js": "^3.6.5",
     "quasar": "^2.0.0",
     "vue-i18n": "^9.0.0",
@@ -41,14 +42,15 @@
     "@quasar/quasar-app-extension-testing-e2e-cypress": "../packages/e2e-cypress",
     "@quasar/quasar-app-extension-testing-unit-jest": "../packages/unit-jest",
     "@types/node": "^12.20.21",
-    "@typescript-eslint/eslint-plugin": "^4.16.1",
-    "@typescript-eslint/parser": "^4.16.1",
-    "eslint": "^7.14.0",
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@typescript-eslint/parser": "^5.26.0",
+    "eslint": "^8.16.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-cypress": "^2.11.3",
-    "eslint-plugin-jest": "^25.2.2",
-    "eslint-plugin-vue": "^7.0.0",
-    "majestic": "^1.7.0"
+    "eslint-plugin-jest": "^26.4.5",
+    "eslint-plugin-vue": "^9.0.1",
+    "majestic": "^1.7.0",
+    "prettier": "^2.6.2"
   },
   "browserslist": [
     "last 10 Chrome versions",
