@@ -4,5 +4,8 @@
   },
   "component-cypress": {
     "runnerCommand": "cross-env NODE_ENV=test cypress run-ct"
+  },
+  "unit-jest": {
+    "runnerCommand": "jest --ci"
   }
 }
