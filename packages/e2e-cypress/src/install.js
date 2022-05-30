@@ -71,7 +71,7 @@ module.exports = function (api) {
     'e2e-cypress': {
       runnerCommand: e2eCommandCi,
     },
-    'unit-cypress': {
+    'component-cypress': {
       runnerCommand: componentCommandCi,
     },
   });
