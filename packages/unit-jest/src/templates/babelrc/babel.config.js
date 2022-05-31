@@ -1,6 +1,5 @@
-/* eslint-env node */
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const fs = require('fs-extra');
+/* eslint-disable */
+const fs = require('fs');
 let extend = undefined;
 
 /**
@@ -12,7 +11,16 @@ if (fs.existsSync('./.babelrc')) {
   extend = './.babelrc';
 }
 
-module.exports = {
-  presets: ['@quasar/babel-preset-app'],
-  extends: extend,
+module.exports = (api) => {
+  return {
+    presets: [
+      [
+        '@quasar/babel-preset-app',
+        api.caller((caller) => caller && caller.target === 'node')
+          ? { targets: { node: 'current' } }
+          : {},
+      ],
+    ],
+    extends: extend,
+  };
 };
