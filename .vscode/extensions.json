@@ -2,7 +2,7 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
-    "johnsoncodehk.volar"
+    "vue.volar"
   ],
   "unwantedRecommendations": [
     "octref.vetur",
