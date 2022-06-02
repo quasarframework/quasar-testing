@@ -57,8 +57,8 @@ module.exports = function (api) {
   const e2eServerCommand = `${testEnvCommand} start-test "quasar dev" http-get://localhost:${devServerPort}`;
   const e2eCommand = `${e2eServerCommand} "cypress open"`;
   const e2eCommandCi = `${e2eServerCommand} "cypress run"`;
-  const componentCommand = `${testEnvCommand} cypress open-ct`;
-  const componentCommandCi = `${testEnvCommand} cypress run-ct`;
+  const componentCommand = `${testEnvCommand} cypress open --component`;
+  const componentCommandCi = `${testEnvCommand} cypress run --component`;
 
   api.render('./templates/base');
 
