@@ -76,15 +76,6 @@ module.exports = function (api) {
     },
   });
 
-  api.extendJsonFile('.vscode/settings.json', {
-    'json.schemas': [
-      {
-        fileMatch: ['cypress.json'],
-        url: 'https://on.cypress.io/cypress.schema.json',
-      },
-    ],
-  });
-
   if (shouldAddScripts) {
     const scripts = {
       scripts: {
