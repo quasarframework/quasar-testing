@@ -31,19 +31,19 @@
     "yarn": ">= 1.17.3"
   },
   "dependencies": {
-    "@cypress/code-coverage": "^3.9.12",
-    "@cypress/vite-dev-server": "^2.2.2",
-    "@cypress/vue": "^3.1.0",
-    "@cypress/webpack-dev-server": "^1.8.3",
+    "@cypress/code-coverage": "^3.10.0",
+    "@cypress/vite-dev-server": "^2.2.3",
+    "@cypress/vue": "^3.1.2",
+    "@cypress/webpack-dev-server": "^1.8.4",
     "cross-env": "^7.0.3",
-    "cypress": "^9.5.2",
+    "cypress": "^10.0.2",
     "lodash": "^4.17.21",
     "nyc": "^15.1.0",
     "start-server-and-test": "^1.14.0",
-    "vite-plugin-istanbul": "^2.5.1"
+    "vite-plugin-istanbul": "^2.7.3"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.178",
+    "@types/lodash": "^4.14.182",
     "rimraf": "^3.0.2"
   }
 }

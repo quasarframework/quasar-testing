@@ -76,8 +76,7 @@ async function exportQuasarConfig(bundler: AvailableBundlers): Promise<any> {
   }
 }
 
-export const injectDevServer: Cypress.PluginConfig = (on, config) => {
-  on('dev-server:start', async (options) => {
+export const injectDevServer = async (config) => {
     const { devDependencies } = getPackageJson();
     const bundler: AvailableBundlers = devDependencies.hasOwnProperty(
       '@quasar/app-vite',
@@ -85,11 +84,14 @@ export const injectDevServer: Cypress.PluginConfig = (on, config) => {
       ? 'vite'
       : 'webpack';
 
-    const { startDevServer } = await import(`@cypress/${bundler}-dev-server`);
+    const { devServer } = await import(`@cypress/${bundler}-dev-server`);
 
-    return startDevServer({
-      options,
-      [`${bundler}Config`]: await exportQuasarConfig(bundler),
-    });
-  });
+    return devServer(
+      {
+        ...config
+      },
+      {
+        [`${bundler}Config`]: await exportQuasarConfig(bundler),
+      }
+    );
 };
