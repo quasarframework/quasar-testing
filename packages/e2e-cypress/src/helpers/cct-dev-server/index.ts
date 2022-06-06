@@ -76,22 +76,22 @@ async function exportQuasarConfig(bundler: AvailableBundlers): Promise<any> {
   }
 }
 
-export const injectDevServer = async (config) => {
-    const { devDependencies } = getPackageJson();
-    const bundler: AvailableBundlers = devDependencies.hasOwnProperty(
-      '@quasar/app-vite',
-    )
-      ? 'vite'
-      : 'webpack';
+export const injectDevServer = async (config: Cypress.DevServerConfig) => {
+  const { devDependencies } = getPackageJson();
+  const bundler: AvailableBundlers = devDependencies.hasOwnProperty(
+    '@quasar/app-vite',
+  )
+    ? 'vite'
+    : 'webpack';
 
-    const { devServer } = await import(`@cypress/${bundler}-dev-server`);
+  const { devServer } = await import(`@cypress/${bundler}-dev-server`);
 
-    return devServer(
-      {
-        ...config
-      },
-      {
-        [`${bundler}Config`]: await exportQuasarConfig(bundler),
-      }
-    );
+  return devServer(
+    {
+      ...config,
+    },
+    {
+      [`${bundler}Config`]: await exportQuasarConfig(bundler),
+    },
+  );
 };

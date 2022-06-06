@@ -22,5 +22,7 @@
 // we should be able to remove this workaround and rely on something much simpler
 
 declare module '@quasar/quasar-app-extension-testing-e2e-cypress/cct-dev-server' {
-  const injectDevServer: Cypress.PluginConfig;
+  function injectDevServer(
+    config: Cypress.DevServerConfig,
+  ): Promise<Cypress.ResolvedDevServerConfig>;
 }
