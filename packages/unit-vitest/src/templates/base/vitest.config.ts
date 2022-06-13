@@ -8,7 +8,6 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 // https://vitejs.dev/config/
 export default defineConfig({
   test: {
-    globals: true,
     environment: 'happy-dom',
     setupFiles: 'test/vitest/setup-file.ts',
   },
@@ -19,6 +18,7 @@ export default defineConfig({
     quasar({
       sassVariables: 'src/quasar-variables.scss',
     }),
+    // TODO: is this actually needed?
     tsconfigPaths(),
   ],
 });

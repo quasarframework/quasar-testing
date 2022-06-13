@@ -44,12 +44,6 @@ module.exports = function (api) {
     },
   });
 
-  api.extendJsonFile('tsconfig.json', {
-    compilerOptions: {
-      types: ['vite/client', 'node', 'vitest/globals'],
-    },
-  });
-
   api.render('./templates/base', {}, true);
 
   if (api.prompts.options.includes('ui')) {

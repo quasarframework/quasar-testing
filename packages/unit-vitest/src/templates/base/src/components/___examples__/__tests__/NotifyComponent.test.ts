@@ -1,7 +1,8 @@
-import NotifyComponent from '../NotifyComponent.vue';
-import { Notify } from 'quasar';
-import { mount } from '@vue/test-utils';
 import { installQuasar } from '@quasar/quasar-app-extension-testing-unit-vitest';
+import { mount } from '@vue/test-utils';
+import { Notify } from 'quasar';
+import { describe, expect, it, vi } from 'vitest';
+import NotifyComponent from '../NotifyComponent.vue';
 
 installQuasar({ plugins: { Notify } });
 

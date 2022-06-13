@@ -1,10 +1,11 @@
-import StoreComponent from '../StoreComponent.vue';
-import { useCounterStore } from '../example-store';
 import {
-  installQuasar,
   installPinia,
+  installQuasar,
 } from '@quasar/quasar-app-extension-testing-unit-vitest';
 import { mount } from '@vue/test-utils';
+import { useCounterStore } from '../example-store';
+import { describe, expect, it } from 'vitest';
+import StoreComponent from '../StoreComponent.vue';
 
 // Documentation: https://pinia.vuejs.org/cookbook/testing.html#unit-testing-a-store
 
