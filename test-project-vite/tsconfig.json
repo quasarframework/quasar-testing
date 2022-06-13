@@ -11,7 +11,14 @@
       "assets/*": ["src/assets/*"],
       "boot/*": ["src/boot/*"],
       "stores/*": ["src/stores/*"]
-    }
+    },
+    // TODO: app-vite preset options are forcing us to take over, there shouldn't be any "types" property in the preset
+    // See https://github.com/quasarframework/quasar-testing/issues/262#issuecomment-1154035238
+    "types": [
+      "vite/client",
+      "node",
+      "@quasar/quasar-app-extension-testing-e2e-cypress"
+    ]
   },
   "include": [
     "src/**/*.ts",
