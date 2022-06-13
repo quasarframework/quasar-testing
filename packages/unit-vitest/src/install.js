@@ -52,12 +52,6 @@ module.exports = function (api) {
 
   api.render('./templates/base', {}, true);
 
-  //   api.render(
-  //     `./templates/${
-  //       api.prompts.options.includes('typescript') ? '' : 'no-'
-  //     }typescript`,
-  //   );
-
   if (api.prompts.options.includes('ui')) {
     const ui = {
       devDependencies: {
@@ -76,7 +70,6 @@ module.exports = function (api) {
         test: 'echo "See package.json => scripts for available tests." && exit 0',
         'test:unit': 'vitest',
         'test:unit:ci': ciCommand,
-        'concurrently:dev:jest': 'concurrently "quasar dev" "vitest"',
       },
     };
     extendPackageJson = __mergeDeep(extendPackageJson, scripts);

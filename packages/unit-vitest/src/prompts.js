@@ -21,10 +21,6 @@ module.exports = function () {
           value: 'scripts',
           checked: true,
         },
-        // {
-        //   name: 'TypeScript support',
-        //   value: 'typescript',
-        // },
         {
           name: 'Install Vitest UI',
           value: 'ui',
