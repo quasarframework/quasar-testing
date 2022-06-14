@@ -51,10 +51,14 @@ module.exports = function (api) {
       devDependencies: {
         '@vitest/ui': '^0.14.1',
       },
-      scripts: {
-        'test:unit:ui': 'vitest --ui',
-      },
     };
+
+    if (api.prompts.options.includes('scripts')) {
+      ui.scripts = {
+        'test:unit:ui': 'vitest --ui',
+      };
+    }
+
     extendPackageJson = __mergeDeep(extendPackageJson, ui);
   }
 
