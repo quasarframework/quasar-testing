@@ -47,3 +47,130 @@ describe('ExampleComponent', () => {
   });
 });
 ````
+
+### Caveats
+
+Here're some helpers which has not been included in the current AE version, but could be in future versions
+
+#### Mocking Vue Router
+
+https://github.com/posva/vue-router-mock
+
+```ts
+import { beforeEach } from 'vitest';
+import {
+  createRouterMock,
+  injectRouterMock,
+  VueRouterMock,
+  RouterMockOptions,
+} from 'vue-router-mock';
+import { config } from '@vue/test-utils';
+
+// https://github.com/posva/vue-router-mock
+export function installRouter(options?: RouterMockOptions) {
+  beforeEach(() => {
+    const router = createRouterMock(options);
+    injectRouterMock(router);
+  });
+
+  config.plugins.VueWrapper.install(VueRouterMock);
+}
+```
+
+#### Mocking Pinia
+
+```ts
+// install-pinia.ts
+
+import { config } from '@vue/test-utils';
+import { cloneDeep } from 'lodash-es';
+import { beforeAll, afterAll } from 'vitest';
+import { createTestingPinia, TestingOptions } from '@pinia/testing';
+import { Plugin } from 'vue';
+
+export function installPinia(options?: Partial<TestingOptions>) {
+  const globalConfigBackup = cloneDeep(config.global);
+
+  beforeAll(() => {
+    config.global.plugins.unshift(
+      // This is needed because typescript will complain othwerwise
+      // Probably due to this being a monorepo as this same setup inside a test project did work correctly
+      createTestingPinia(options) as unknown as Plugin,
+    );
+  });
+
+  afterAll(() => {
+    config.global = globalConfigBackup;
+  });
+}
+```
+
+```ts
+// example-store.ts
+
+import { defineStore } from 'pinia';
+
+export const useCounterStore = defineStore('counter', {
+  state: () => ({
+    counter: 0,
+  }),
+  getters: {
+    doubleCount: (state) => state.counter * 2,
+  },
+  actions: {
+    increment() {
+      this.counter++;
+    },
+  },
+});
+```
+
+```vue
+<!-- StoreComponent.vue -->
+
+<template>
+  <div>
+    {{ counter }}
+    <q-btn @click="store.increment"> Increment </q-btn>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { computed } from 'vue';
+import { useCounterStore } from './example-store';
+
+const store = useCounterStore();
+
+const counter = computed(() => store.counter);
+</script>
+```
+
+```ts
+// StoreComponent.test.ts
+
+import { installQuasar } from '@quasar/quasar-app-extension-testing-unit-vitest';
+import { mount } from '@vue/test-utils';
+import { useCounterStore } from '../example-store';
+import { describe, expect, it } from 'vitest';
+import { installPinia } from './install-pinia.ts';
+import StoreComponent from './StoreComponent.vue';
+
+// Documentation: https://pinia.vuejs.org/cookbook/testing.html#unit-testing-a-store
+
+installQuasar();
+installPinia({ stubActions: false });
+
+describe('store examples', () => {
+  it('should increment the counter', async () => {
+    const wrapper = mount(StoreComponent);
+    const store = useCounterStore();
+    expect(wrapper.text()).toContain(0);
+    const btn = wrapper.get('button');
+    expect(store.increment).not.toHaveBeenCalled();
+    await btn.trigger('click');
+    expect(store.increment).toHaveBeenCalled();
+    expect(wrapper.text()).toContain(1);
+    expect(store.counter).toBe(1);
+  });
+});
+```

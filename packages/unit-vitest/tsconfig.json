@@ -5,8 +5,7 @@
     "module": "esnext",
     // Needed to avoid errors with vitest @types/chai dep, since it uses `{ default as chai }` on a CommonJS module
     // See https://github.com/vitest-dev/vitest/issues/1076
-    "esModuleInterop": true,
-    "skipLibCheck": true
+    "esModuleInterop": true
   },
   "include": ["src/helpers"]
 }
