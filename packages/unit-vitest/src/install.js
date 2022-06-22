@@ -7,6 +7,8 @@
  * @returns {object} New object with merged key/values
  */
 
+const { join } = require('path');
+
 function __mergeDeep(...sources) {
   let result = {};
   for (const source of sources) {
@@ -28,13 +30,23 @@ function __mergeDeep(...sources) {
   return result;
 }
 
+const { peerDependencies } = require(join(__dirname, '..', 'package.json'));
+
+function getCompatibleDevDependencies(packageNames) {
+  const devDependencies = {};
+
+  for (const packageName of packageNames) {
+    devDependencies[packageName] = peerDependencies[packageName];
+  }
+
+  return devDependencies;
+}
+
 const ciCommand = 'vitest run';
 
 // make sure the object exists
 let extendPackageJson = {
-  devDependencies: {
-    '@vue/test-utils': '^2.0.0',
-  },
+  devDependencies: getCompatibleDevDependencies(['@vue/test-utils', 'vitest']),
 };
 
 module.exports = function (api) {
@@ -48,9 +60,7 @@ module.exports = function (api) {
 
   if (api.prompts.options.includes('ui')) {
     const ui = {
-      devDependencies: {
-        '@vitest/ui': '^0.14.1',
-      },
+      devDependencies: getCompatibleDevDependencies(['@vitest/ui']),
     };
 
     if (api.prompts.options.includes('scripts')) {
