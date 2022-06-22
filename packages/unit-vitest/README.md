@@ -4,6 +4,15 @@
 $ quasar ext add @quasar/testing-unit-vitest@alpha
 ```
 
+> Since Vitest requires a newer Vite version than the one Quasar CLI offer, you'll need to set your `resolutions` (if using Yarn) or `overrides` (if using NPM) fields like this to have it working:
+>
+> ```json
+> "resolutions": {
+>   "@vitejs/plugin-vue": "^2.3.3",
+>   "vite": "^2.9.12"
+> },
+> ```
+
 > This package is in **alpha** phase. The public API may still change as we collect community feedback.
 
 This App Extension (AE) manages Quasar and Vitest integration for you, both for JavaScript and TypeScript.
@@ -12,8 +21,8 @@ What is included:
 
 - a Vite config file with Quasar configure (`vitest.config.ts`);
 - an `installQuasarPlugin` function to help you setup and configure the test Quasar instance on a per-test-suite basis;
-- an `installPiniaPlugin` function to setup and configure the use of Pinia store on a per-test-suite basis;
-- some example components and related example tests inside `src/components/__examples__`
+- some examples about how to use it with Pinia and Vue Router;
+- some example components and related example tests inside `test/vitest/__tests__`
 - some useful `package.json` scripts;
 - TypeScript support.
 
@@ -28,9 +37,9 @@ It will also restore the original configuration after all tests completed.
 Usage:
 
 ````ts
-import ExampleComponent from '../ExampleComponent.vue';
-import { mount } from '@vue/test-utils';
 import { installQuasar } from '@quasar/quasar-app-extension-testing-unit-vitest';
+import { mount } from '@vue/test-utils';
+import ExampleComponent from '../ExampleComponent.vue';
 
 /*
  * You can provide a config object as param like such:
