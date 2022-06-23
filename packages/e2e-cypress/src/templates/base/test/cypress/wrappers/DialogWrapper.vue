@@ -1,6 +1,6 @@
-<script>
-import { defineComponent } from 'vue';
+<script<% if (shouldSupportTypeScript) { %>lang="ts"<% } %>>
 import { Dialog } from 'quasar';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'DialogWrapper',

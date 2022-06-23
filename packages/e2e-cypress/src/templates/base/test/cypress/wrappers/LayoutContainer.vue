@@ -4,7 +4,7 @@
   </q-layout>
 </template>
 
-<script>
+<script<% if (shouldSupportTypeScript) { %>lang="ts"<% } %>>
 import { defineComponent } from 'vue';
 
 export default defineComponent({

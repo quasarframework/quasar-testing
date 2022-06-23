@@ -48,8 +48,6 @@ Consequentially, we may rename this package from `@quasar/quasar-app-extension-t
 
 ### Code coverage
 
-> **We're aware of [a problem](https://github.com/vitejs/vite/issues/6654#issuecomment-1024732292) with Vite which cause e2e tests to fail unless Vite already compiled the app at least once. It should be solved once `@quasar/app-vite` upgrade to Vite 2.9**
-
 Since v4.1 onwards, we support scaffolding [code coverage configuration for Cypress tests](https://docs.cypress.io/guides/tooling/code-coverage), when using Vite-based Quasar CLI.
 
 To generate reports, run `test:e2e:ci` and/or `test:component:ci` scripts.
@@ -64,7 +62,7 @@ We provide a [preset configuration](https://github.com/quasarframework/quasar-te
 - excludes test folders (`__tests__`) and TS declaration files (\*.d.ts), which should already be excluded [by default](https://github.com/istanbuljs/schema/blob/master/default-exclude.js) but apparently aren't;
 - only includes actual code files, leaving out code-like static assets (eg. svgs).
 
-Check out [nyc official documentation]([official docs](https://github.com/istanbuljs/nyc)) if you want to customize report generation.
+Check out [nyc official documentation](https://github.com/istanbuljs/nyc) if you want to customize report generation.
 You can either add options into `.nycrc` file or generate reports on the fly running `nyc report <options>`.
 
 > Note that we do not setup [Istanbul TS configuration](https://github.com/istanbuljs/istanbuljs/tree/master/packages/nyc-config-typescript) and its dependencies as Cypress claims [it's able to manage TS code coverage out-of-the-box](https://github.com/cypress-io/code-coverage#typescript-users).
