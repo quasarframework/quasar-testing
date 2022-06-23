@@ -31,6 +31,7 @@
   "dependencies": {
     "happy-dom": "^5.0.0",
     "lodash-es": "^4.17.21",
+    "vite-jsconfig-paths": "^2.0.1",
     "vite-tsconfig-paths": "^3.5.0"
   },
   "//TODO:": "Adding '@vue/test-utils' here break TS compilation, probably due to a conflict with the same dependency from Jest AE, hoisted since this is a monorepo",

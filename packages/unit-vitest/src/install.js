@@ -56,7 +56,11 @@ module.exports = function (api) {
     },
   });
 
-  api.render('./templates/base', {}, true);
+  api.render(
+    `./templates/${
+      api.prompts.options.includes('typescript') ? '' : 'no-'
+    }typescript`,
+  );
 
   if (api.prompts.options.includes('ui')) {
     const ui = {

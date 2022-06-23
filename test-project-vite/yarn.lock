@@ -871,6 +871,7 @@
   dependencies:
     happy-dom "^5.0.0"
     lodash-es "^4.17.21"
+    vite-jsconfig-paths "^2.0.1"
     vite-tsconfig-paths "^3.5.0"
 
 "@quasar/quasar-app-extension-testing@../packages/testing":
@@ -1064,6 +1065,11 @@
   version "7.0.11"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.11.tgz#d421b6c527a3037f7c84433fd2c4229e016863d3"
   integrity sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==
+
+"@types/json5@^0.0.29":
+  version "0.0.29"
+  resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
+  integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
 
 "@types/mime@^1":
   version "1.3.2"
@@ -1305,10 +1311,10 @@
   resolved "https://registry.yarnpkg.com/@vitejs/plugin-vue/-/plugin-vue-2.3.3.tgz#fbf80cc039b82ac21a1acb0f0478de8f61fbf600"
   integrity sha512-SmQLDyhz+6lGJhPELsBdzXGc+AcaT8stgkbiTFGpXPe8Tl1tJaBw1A6pxDqDuRsVkD8uscrkx3hA7QDOoKYtyw==
 
-"@vitest/ui@^0.15.0":
-  version "0.15.2"
-  resolved "https://registry.yarnpkg.com/@vitest/ui/-/ui-0.15.2.tgz#8fc752446ad94d6a05620357982f8f349de3368e"
-  integrity sha512-0L5Hhk7j6MPkMK3WONpbCLRFlbOZC8w/C5/LAU66iSBhahg3nJOXNuSxnr+l0KFNKYf10SNlZZ/E2H1vb2s7WQ==
+"@vitest/ui@0.14.2":
+  version "0.14.2"
+  resolved "https://registry.yarnpkg.com/@vitest/ui/-/ui-0.14.2.tgz#63809d41127f8b539919ea785302b2ae11e6cd99"
+  integrity sha512-yV2paiv0/Obymx+9KV+KjM/FAbYF+PbnQiO2RFnZqDCgYwkkNmO1ZNNIetBeOzuNoi1BT1iPSKwtvL0PwCesDQ==
   dependencies:
     sirv "^2.0.2"
 
@@ -7261,6 +7267,16 @@ ts-jest@^26.5.6:
     semver "7.x"
     yargs-parser "20.x"
 
+tsconfig-paths@^3.9.0:
+  version "3.14.1"
+  resolved "https://registry.yarnpkg.com/tsconfig-paths/-/tsconfig-paths-3.14.1.tgz#ba0734599e8ea36c862798e920bcf163277b137a"
+  integrity sha512-fxDhWnFSLt3VuTwtvJt5fpwxBHg5AdKWMsgcPOOIilyjymcYVZoCQF8fvFRezCNfblEXmi+PcM1eYHeOAgXCOQ==
+  dependencies:
+    "@types/json5" "^0.0.29"
+    json5 "^1.0.1"
+    minimist "^1.2.6"
+    strip-bom "^3.0.0"
+
 tsconfig-paths@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/tsconfig-paths/-/tsconfig-paths-4.0.0.tgz#1082f5d99fd127b72397eef4809e4dd06d229b64"
@@ -7493,6 +7509,16 @@ verror@1.10.0:
     assert-plus "^1.0.0"
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
+
+vite-jsconfig-paths@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/vite-jsconfig-paths/-/vite-jsconfig-paths-2.0.1.tgz#d66e36d67596dd8a8e4a6ed6e6db20debc50b45e"
+  integrity sha512-rabcTTfKs0MdAsQWcZjbIMo5fcp6jthZce7uFEPgVPgpSY+RNOwjzIJOPES6cB/GJZLSoLGfHM9kt5HNmJvp7A==
+  dependencies:
+    debug "^4.1.1"
+    globrex "^0.1.2"
+    recrawl-sync "^2.0.3"
+    tsconfig-paths "^3.9.0"
 
 vite-plugin-istanbul@^2.5.1:
   version "2.7.3"
