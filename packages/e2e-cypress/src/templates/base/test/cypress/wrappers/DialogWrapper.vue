@@ -1,4 +1,4 @@
-<script<% if (shouldSupportTypeScript) { %>lang="ts"<% } %>>
+<script<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
 import { Dialog } from 'quasar';
 import { defineComponent } from 'vue';
 
