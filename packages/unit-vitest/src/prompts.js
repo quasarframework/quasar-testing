@@ -10,23 +10,24 @@
 module.exports = function () {
   return [
     {
-      name: 'harnesses',
+      name: 'options',
       type: 'checkbox',
-      required: false,
+      required: true,
       message:
-        'Please choose which testing harnesses to install (only Qv2-compatible harnesses are shown):',
+        'Vitest Unit testing will now be installed. Please choose additional options:',
       choices: [
         {
-          name: 'Jest Unit Testing',
-          value: 'unit-jest@alpha',
+          name: 'Extra "scripts" in your package.json',
+          value: 'scripts',
+          checked: true,
         },
         {
-          name: 'Vitest Unit Testing',
-          value: 'unit-vitest@alpha',
+          name: 'Use Typescript',
+          value: 'typescript',
         },
         {
-          name: 'Cypress e2e Testing',
-          value: 'e2e-cypress',
+          name: 'Install Vitest UI',
+          value: 'ui',
         },
       ],
     },

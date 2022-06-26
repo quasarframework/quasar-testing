@@ -7,5 +7,8 @@
   },
   "component-cypress": {
     "runnerCommand": "cross-env NODE_ENV=test cypress run-ct"
+  },
+  "unit-vitest": {
+    "runnerCommand": "vitest run"
   }
 }
