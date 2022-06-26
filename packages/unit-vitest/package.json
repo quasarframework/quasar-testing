@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-testing-unit-vitest",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "description": "A Quasar App Extension for running tests with Vitest",
   "contributors": [
