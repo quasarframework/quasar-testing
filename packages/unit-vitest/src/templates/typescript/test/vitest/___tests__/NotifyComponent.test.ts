@@ -11,7 +11,7 @@ describe('notify example', () => {
     expect(NotifyComponent).toBeTruthy();
 
     const wrapper = mount(NotifyComponent, {});
-    const spy = vi.spyOn(wrapper.vm.$q, 'notify');
+    const spy = vi.spyOn(Notify, 'create');
     expect(spy).not.toHaveBeenCalled();
     wrapper.trigger('click');
     expect(spy).toHaveBeenCalled();

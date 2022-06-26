@@ -22,7 +22,8 @@
   },
   "@quasar/testing-unit-vitest": {
     "options": [
+      "typescript",
       "ui"
     ]
-  }
+  } 
 }

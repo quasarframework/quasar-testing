@@ -24,7 +24,6 @@ module.exports = function () {
         {
           name: 'Use Typescript',
           value: 'typescript',
-          checked: true,
         },
         {
           name: 'Install Vitest UI',

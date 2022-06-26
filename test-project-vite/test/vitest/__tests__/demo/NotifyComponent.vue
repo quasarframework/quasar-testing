@@ -3,11 +3,9 @@
 </template>
 
 <script lang="ts" setup>
-import { useQuasar } from 'quasar';
-
-const $q = useQuasar();
+import { Notify } from 'quasar';
 
 function onClick() {
-  $q.notify('Hello there!');
+  Notify.create('Hello there!');
 }
 </script>
