@@ -1,7 +1,7 @@
 ## [Vitest](https://vitest.dev/)
 
 ```shell
-$ quasar ext add @quasar/testing-unit-vitest@alpha
+$ quasar ext add @quasar/testing-unit-vitest
 ```
 
 > Since Vitest requires a newer Vite version than the one Quasar CLI offer, you'll need to set your `resolutions` (if using Yarn) or `overrides` (if using NPM) fields like this to have it working:
