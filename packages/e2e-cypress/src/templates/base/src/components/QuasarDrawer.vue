@@ -17,7 +17,7 @@
   </q-drawer>
 </template>
 
-<script>
+<script<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
 import { ref, defineComponent } from 'vue';
 
 export default defineComponent({

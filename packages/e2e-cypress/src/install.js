@@ -60,11 +60,12 @@ module.exports = function (api) {
   const componentCommand = `${testEnvCommand} cypress open-ct`;
   const componentCommandCi = `${testEnvCommand} cypress run-ct`;
 
-  api.render('./templates/base');
+  api.render('./templates/base', { shouldSupportTypeScript });
 
   api.render(`./templates/${shouldSupportTypeScript ? '' : 'no-'}typescript`, {
     devServerPort,
     shouldAddCodeCoverage,
+    shouldSupportTypeScriptAndVite: shouldSupportTypeScript && api.hasVite,
   });
 
   api.extendJsonFile('quasar.testing.json', {
