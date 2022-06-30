@@ -13,12 +13,30 @@ describe('QuasarDialog', () => {
         },
       },
     });
-    cy.dataCy('dialog').should('exist').should('contain', message);
+
+    cy.withinDialog((el) => {
+      cy.wrap(el).should('contain', message);
+      cy.dataCy('ok-button').click();
+    });
   });
 
-  it('should close a dialog when clicking ok', () => {
-    // The dialog is still visible from the previous test
-    cy.dataCy('dialog').should('exist').dataCy('ok-button').click();
-    cy.dataCy('dialog').should('not.exist');
+  it('should keep the dialog open when not dismissed', () => {
+    const message = 'Hello, I am a dialog';
+    mount(DialogWrapper, {
+      props: {
+        component: QuasarDialog,
+        componentProps: {
+          message,
+        },
+      },
+    });
+
+    // The dialog will stay open
+    cy.withinDialog({
+      persistent: true,
+      fn: (el) => {
+        cy.wrap(el).should('contain', message);
+      },
+    });
   });
 });
