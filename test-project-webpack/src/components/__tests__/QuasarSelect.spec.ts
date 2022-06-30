@@ -1,7 +1,20 @@
 import { mount } from '@cypress/vue';
 import QuasarSelect from '../QuasarSelect.vue';
 
+function dataCySelect(dataCyId: string) {
+  return cy.dataCy(dataCyId).closest('.q-select');
+}
+
 describe('QuasarSelect', () => {
+  it('makes sure the select is disabled', () => {
+    mount(QuasarSelect, {
+      props: { disable: true },
+    });
+
+    // `cy.dataCy('select')` won't work in this case, as it won't get the root q-select element
+    dataCySelect('select').should('have.attr', 'aria-disabled', 'true');
+  });
+
   it('selects an option by content', () => {
     mount(QuasarSelect);
 

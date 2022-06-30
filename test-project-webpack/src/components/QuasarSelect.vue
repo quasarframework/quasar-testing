@@ -5,6 +5,7 @@
     label="test options selection"
     :options="options"
     :loading="loading"
+    :disable="disable"
   />
 
   <span data-cy="select-value">{{ selected }}</span>
@@ -19,6 +20,10 @@ export default defineComponent({
   name: 'QuasarSelect',
   props: {
     loadOptionsAsync: {
+      type: Boolean,
+      default: false,
+    },
+    disable: {
       type: Boolean,
       default: false,
     },
