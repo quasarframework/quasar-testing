@@ -8,11 +8,11 @@
   "scripts": {
     "sync:testing": "yarn --cwd ../packages/testing build:local && yarn add -D ../packages/testing",
     "sync:jest": "yarn --cwd ../packages/unit-jest build:local && yarn add -D ../packages/unit-jest",
-    "sync:cypress": "yarn --cwd ../packages/unit-cypress build:local && yarn add -D ../packages/unit-cypress",
+    "sync:cypress": "yarn --cwd ../packages/e2e-cypress build:local && yarn add -D ../packages/e2e-cypress",
     "sync:all": "yarn sync:testing && yarn sync:jest && yarn sync:cypress",
     "invoke:testing": "quasar ext invoke @quasar/testing",
     "invoke:jest": "quasar ext invoke @quasar/testing-unit-jest",
-    "invoke:cypress": "quasar ext invoke @quasar/testing-unit-cypress",
+    "invoke:cypress": "quasar ext invoke @quasar/testing-e2e-cypress",
     "invoke:all": "yarn invoke:testing && yarn invoke:jest && yarn invoke:cypress",
     "lint": "eslint --ext .js,.ts,.vue ./",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
