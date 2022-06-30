@@ -174,7 +174,9 @@ function dataCyCheckbox(dataCyId: string) {
 }
 ```
 
-We plan to override Cypress `get` in the future to automatically manage these edge cases
+Note that since we don't usually render a native `select` tag into `QSelect`, `.select()` API from Cypress won't work either.
+
+We plan to override Cypress `get`, `select`, `check` and similar commands in the future to automatically manage these edge cases
 
 #### QSelect and `data-cy`
 
@@ -200,9 +202,9 @@ That's why we currently don't provide our own helpers to manage VueRouter, Vuex 
 
 The good news is that we don't actually need to, since official documentation for those libraries is already available:
 
-- (VueRouter)[https://docs.cypress.io/guides/component-testing/custom-mount-vue#Vue-Router]
-- (Vuex)[https://docs.cypress.io/guides/component-testing/custom-mount-vue#Vuex]
-- (Pinia)[https://pinia.vuejs.org/cookbook/testing.html#unit-testing-components]
+- [VueRouter](https://docs.cypress.io/guides/component-testing/custom-mount-vue#Vue-Router)
+- [Vuex](https://docs.cypress.io/guides/component-testing/custom-mount-vue#Vuex)
+- [Pinia](https://pinia.vuejs.org/cookbook/testing.html#unit-testing-components)
 
 ### Testing the AE
 
