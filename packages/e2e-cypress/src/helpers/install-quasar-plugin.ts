@@ -2,6 +2,8 @@ import { config } from '@vue/test-utils';
 import { cloneDeep } from 'lodash';
 import { Quasar, QuasarPluginOptions } from 'quasar';
 
+// TODO: not properly documented into the README
+
 // Had the css imports here for styling with CCT but as this file is exported along with commands
 // the cypress E2E tests fail because they don't have loaders for css in place.
 // So somehow this code is also evaluated when only importing { registerCommands } from the AE.

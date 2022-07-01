@@ -138,14 +138,34 @@ testRoute('shelfs/*/books');
 
 ### Caveats
 
-#### Assertions on Quasar input components
+#### Automatic override of Cypress commands
 
-Some Cypress assertions, as `.should('be.checked')` for checkboxes and radio buttons, rely on the presence of a native DOM element, which many Quasar input components don't add by default for a better performance.
-When testing those components with Cypress, you must set `name` attribute to force Quasar to add the underlying native inputs.
-Also note that those Cypress assertions will only work when the input is inside a QForm, as otherwise Quasar skips updating the native `checked` DOM property.
+Many Cypress commands rely on the presence of a native DOM inputs, but many Quasar input components won't usually render them for better performance, or will use them under the hood, but hide them to the user.
 
-Since native inputs are deep down into the DOM of the input component, you should create your own helper to access them.
-Here's an example of how you could do it for radio buttons:
+This resulted in a bad DX for some Cypress commands/assertions when used on some Quasar input components.
+
+Since v4.2, we patch those Cypress commands/assertions on our side.
+Here's the list of patched methods and some limitations due to the override:
+
+- `.select()`
+  - it won't yeld anything;
+  - when dealing with a multiple QSelect, it will only select the provided options, it won't deselect the ones not specified;
+  - since option value isn't mirrored into the DOM when using QSelect, it's not possible to select options based on the option value;
+  - it will ignore the original command options (eg `force: true`).
+- `.check` / `.uncheck`
+  - it won't yeld anything;
+  - it won't accept parameters;
+- `.should('be.checked')` / `.should('not.be.checked')`
+  - no limitations.
+
+Feel free to open a PR if you want to help removing these limitations.
+
+On versions < v4.2, follow these steps:
+
+- you must set `name` attribute to force Quasar to add the underlying native inputs;
+- if you need to perform assertions like `.should('be.checked')`, make sure the component is inside a QForm, otherwise Quasar will skip updating the native `checked` DOM property;
+- since native inputs are deep down into the DOM of the input component, you should create your own helper to access them.
+  Here're a couple of examples:
 
 ```ts
 // Custom command returning the native input inside the Quasar component
@@ -157,14 +177,6 @@ function dataCyRadio(dataCyId: string) {
   });
 }
 
-// "force" option is needed as the native input is hidden
-dataCyRadio('my-radio-button').check({ force: true });
-dataCyRadio('my-radio-button').should('not.be.checked');
-```
-
-Examples for similar helpers
-
-```ts
 function dataCyCheckbox(dataCyId: string) {
   return cy.dataCy(dataCyId).then(($quasarCheckbox) => {
     return cy.get('input:checkbox', {
@@ -172,19 +184,31 @@ function dataCyCheckbox(dataCyId: string) {
     });
   });
 }
+
+// "force" option is needed as the native input is hidden
+dataCyRadio('my-radio-button').check({ force: true });
+dataCyRadio('my-radio-button').should('not.be.checked');
 ```
 
-Note that since we don't usually render a native `select` tag into `QSelect`, `.select()` API from Cypress won't work either.
+- you can select options into a QSelect like such
 
-We plan to override Cypress `get`, `select`, `check` and similar commands in the future to automatically manage these edge cases
+```ts
+cy.dataCy('select').click();
+cy.withinSelectMenu(() => {
+  // Select by content
+  cy.contains('Option 1').click();
+  // Select by index
+  cy.get('.q-item').eq(1).click();
+});
+```
 
 #### QSelect and `data-cy`
 
 QSelect automatically apply unknown props to an inner element of the component, including `data-cy`.
-This means that you need to use `cy.dataCy('trees-select').closest('.q-select')` to get the actual root element of the component.
+This means that you need to use `cy.dataCy('select').closest('.q-select')` to get the actual root element of the component.
 While this isn't important when clicking the select to open its options menu, it is if you're checking any of its attributes (eg. `aria-disabled` to see if it's enabled or not)
 
-You can define an helper to wrap this way of accessing QSelects, here's an example
+You can define an helper to access a QSelect element, here's an example:
 
 ```ts
 function dataCySelect(dataCyId: string) {
@@ -193,7 +217,7 @@ function dataCySelect(dataCyId: string) {
 ```
 
 Additionally, when using `use-input` prop, the `data-cy` is mirrored on the inner native `select` too.
-This can generate confusion as `cy.dataCy('trees-select')` in those cases will return a collection and you'll need to use `.first()` or `.last()` to get respectively the component wrapper or the native input.
+This can generate confusion as `cy.dataCy('select')` in those cases will return a collection and you'll need to use `.first()` or `.last()` to get respectively the component wrapper or the native input.
 
 ### Component Testing Caveats
 
