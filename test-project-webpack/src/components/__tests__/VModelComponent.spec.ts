@@ -16,14 +16,32 @@ describe('VModelComponent', () => {
     cy.dataCy('model-value').should('contain', text);
   });
 
-  it('should update the value via inner button when not using the helper', () => {
+  it('should call the listener when an update via inner button occurs', () => {
     const text = 'Quasar';
+    const fn = cy.stub();
 
     mount(VModelComponent, {
       props: {
         modelValue: text,
         // This is how Vue internally codifies listeners,
         // defining a prop prepended with `on` and camelCased
+        'onUpdate:modelValue': fn,
+      },
+    });
+
+    cy.dataCy('button')
+      .click()
+      .then(() => {
+        expect(fn).to.be.calledWith('uasar');
+      });
+  });
+
+  it('should update the value via inner button when not using the helper', () => {
+    const text = 'Quasar';
+
+    mount(VModelComponent, {
+      props: {
+        modelValue: text,
         'onUpdate:modelValue': (emittedValue: string) =>
           Cypress.vueWrapper.setProps({ modelValue: emittedValue }),
       },
