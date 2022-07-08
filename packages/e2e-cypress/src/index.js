@@ -41,18 +41,15 @@ module.exports = async function (api) {
         );
       });
     } else {
-      if (api.hasWebpack === true) {
-        api.extendWebpack((cfg) => {
-          cfg.module.rules.push({
-            test: /\.(js|ts|vue)$/,
-            loader: '@jsdevtools/coverage-istanbul-loader',
-            options: { esModules: true },
-            enforce: 'post',
-            include: path.join(__dirname, '..', '..', '..', '..', 'src'),
-            exclude: [/\.(e2e|spec)\.(js|ts)$/, /node_modules/],
-          });
+      api.extendWebpack((cfg) => {
+        cfg.module.rules.push({
+          test: /\.(js|ts|vue)$/,
+          loader: '@jsdevtools/coverage-istanbul-loader',
+          options: { esModules: true },
+          enforce: 'post',
+          exclude: [/\.(e2e|spec)\.(js|ts)$/, /node_modules/, /\.quasar/],
         });
-      }
+      });
     }
   }
 };
