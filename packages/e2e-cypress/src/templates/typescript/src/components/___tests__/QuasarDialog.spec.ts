@@ -31,7 +31,8 @@ describe('QuasarDialog', () => {
       },
     });
 
-    // The dialog will stay open
+    // The helper won't check for the dialog to be closed
+    // when the callback completes
     cy.withinDialog({
       persistent: true,
       fn: (el) => {
