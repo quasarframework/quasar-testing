@@ -1,7 +1,7 @@
 <template>
   <!-- notice dialogRef here -->
-  <q-dialog ref="dialogRef" @hide="onDialogHide" data-cy="dialog">
-    <q-card class="q-dialog-plugin">
+  <q-dialog ref="dialogRef" @hide="onDialogHide">
+    <q-card>
       <q-card-section>{{ message }}</q-card-section>
 
       <!-- buttons example -->
