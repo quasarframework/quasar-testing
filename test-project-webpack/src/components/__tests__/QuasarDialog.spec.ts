@@ -1,11 +1,10 @@
-import { mount } from '@cypress/vue';
 import DialogWrapper from 'app/test/cypress/wrappers/DialogWrapper.vue';
 import QuasarDialog from '../QuasarDialog.vue';
 
 describe('QuasarDialog', () => {
   it('should show a dialog with a message', () => {
     const message = 'Hello, I am a dialog';
-    mount(DialogWrapper, {
+    cy.mount(DialogWrapper, {
       props: {
         component: QuasarDialog,
         componentProps: {
@@ -22,7 +21,7 @@ describe('QuasarDialog', () => {
 
   it('should keep the dialog open when not dismissed', () => {
     const message = 'Hello, I am a dialog';
-    mount(DialogWrapper, {
+    cy.mount(DialogWrapper, {
       props: {
         component: QuasarDialog,
         componentProps: {

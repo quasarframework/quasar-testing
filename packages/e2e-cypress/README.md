@@ -13,7 +13,7 @@ Add into your `.eslintrc.js` the following code:
   // ...
   overrides: [
     {
-      files: ['**/*.spec.{js,ts}'],
+      files: ['**/*.cy.{js,jsx,ts,tsx}'],
       extends: [
         // Add Cypress-specific lint rules, globals and Cypress plugin
         // See https://github.com/cypress-io/eslint-plugin-cypress#rules
@@ -39,6 +39,8 @@ Some custom commands are included out-of-the-box:
 | `within[Portal\|Menu\|SelectMenu\|Dialog]` | `cy.withinSelectMenu(() => cy.get('.q-item').first().click())` <br /> `cy.withinDialog({ dataCy: 'add-action-dialog', fn() { /* business haha */ } });`                     | Auto-scope commands into the callback within the Portal-based component and perform assertions common to all of them.                                                                                    |
 | `should('have.[color\|backgroundColor]')`  | `cy.get('foo').should('have.color', 'white')` <br /> `cy.get('foo').should('have.backgroundColor', '#000')` <br /> `cy.get('foo').should('have.color', 'var(--q-primary)')` | Provide a couple color-related custom matchers, which accept any valid CSS color format.                                                                                                                 |
 
+<!-- TODO: remove `saveLocalStorage` and `restoreLocalStorage` and rely on experimental session command? -->
+
 You must have a running dev server in order to run integration tests. The scripts added by this AE automatically take care of this: `yarn test:e2e` and `yarn test:e2e:ci` will launch `quasar dev` when starting up the tests and kill it when cypress process ends.
 
 This AE is a wrapper around Cypress, you won't be able to use this or understand most of the documentation if you haven't read [the official documentation](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html).
@@ -49,7 +51,7 @@ Consequentially, we may rename this package from `@quasar/quasar-app-extension-t
 
 ### Code coverage
 
-Since v4.1 onwards, we support scaffolding [code coverage configuration for Cypress tests](https://docs.cypress.io/guides/tooling/code-coverage), when using Vite-based Quasar CLI.
+We support scaffolding [code coverage configuration for Cypress tests](https://docs.cypress.io/guides/tooling/code-coverage), when using Vite-based Quasar CLI.
 
 To generate reports, run `test:e2e:ci` and/or `test:component:ci` scripts.
 Running them both sequentially within the same command (eg. `yarn test:e2e:ci && yarn test:component:ci`) will result in combined coverage report.
@@ -70,71 +72,93 @@ You can either add options into `.nycrc` file or generate reports on the fly run
 > Some TS files may be excluded by the report in scenarios, eg. if they aren't actually imported (dead code), if they're tree-shaked away by a bundler or if they only contain types/interfaces, and as such have no actual JS representation.
 > Please open an issue if you notice some files are missing from generated reports in this scenario.
 
-### Upgrade from Cypress v4 to v4.1 (optional)
+### Upgrade from Cypress AE v4
 
-If you need code-coverage or want to adapt, rerun `quasar ext add @quasar/testing-e2e-cypress` and select the appropriate options.
-If you want adapt to latest defaults, either rerun `quasar ext add @quasar/testing-e2e-cypress` or:
+> if you're coming from v3, follow migration guide for v4 and v4.1 first TODO: add link
 
-- If they exist, update `test:unit` and `test:unit:ci` scripts to `test:component` and `test:component:ci`, to avoid clashes with actual unit tests from other packages.
-- If they exist, prefix `test:component` and `test:component:ci` scripts with `cross-env NODE_ENV=test`. Update related command into `quasar.testing.json` too.
-- If they exist, update `test:e2e` and `test:e2e:ci` scripts to use `cross-env NODE_ENV=test` instead of `cross-env E2E_TEST=true`. Update related command into `quasar.testing.json` too. Usage of `E2E_TEST` is deprecated and will be removed into next major version.
+- upgrade to v5, then install `cypress` dependency, which has been externalized and marked as a peerDependency
 
-### Upgrade from Cypress AE v3 / Quasar v1
-
-- Replace the code for Quasar custom commands into `test/cypress/support/commands.[js/ts]` with following lines, as they're now exported directly by the package
-
-```ts
-// DO NOT REMOVE
-// Imports Quasar Cypress AE predefined commands
-import { registerCommands } from '@quasar/quasar-app-extension-testing-e2e-cypress';
-registerCommands();
+```sh
+yarn upgrade @quasar/quasar-app-extension-testing-e2e-cypress
+yarn add -D cypress
 ```
 
-- remove the ["'ResizeObserver loop limit exceeded'" fix](https://github.com/quasarframework/quasar/issues/2233#issuecomment-492975745) into `test/cypress/support/index.[js/ts]` as we now apply it automatically when registering commands
+- if your project is Webpack-based install Typescript as dev dependency, as Cypress won't correctly detect your project as a TS one unless the dependency is present in your `package.json`. You can remove the dependency at the end of this migration guide, as `@quasar/app-webpack` already provides it for you.
 
-- Update your usages of `testRoute` command, as it's now using [`Cypress.minimatch`](https://docs.cypress.io/api/utilities/minimatch) instead of just checking if the hash/pathname contains the provided string.
-
-```ts
-// URL to match: shelfs/123/books
-
-// OLD way, too general:
-testRoute('shelfs');
-// or
-testRoute('books');
-// or even
-testRoute('123/books');
-
-// NEW way
-testRoute('shelfs/*/books');
+```sh
+yarn add -D typescript
 ```
 
-- Since Jest can now be used without global types and Cypress can run its own component tests (which in many scenarios can replace Jest unit testing), Cypress configuration for TS codebases can be simplified:
+- run `yarn cypress open` and follow the guided procedure
+- select "component testing" option and subsequentially `vue` framework and `webpack`/`vite` (accordingly to what you're using)
+- if using TS, rename the config file to `cypress.config.ts` (cypress will generate a js file) and adapt the first lines to be
 
-  - remove `test/cypress/tsconfig.json` and consequentially `parserOptions` option into `test/cypress/.eslintrc.js`
-  - remove `"test/cypress"` value from `exclude` option of root `tsconfig.json`. If only `"/dist", ".quasar", "node_modules"` values remains in that array, remove `exclude` option altogether, as it's already provided by `@quasar/app/tsconfig-preset`
+```ts
+import { defineConfig } from 'cypress';
 
-- remove `test/cypress/.eslintrc.js` and move its content into your root `.eslintrc.js`, targeting spec files with `overrides`. If you haven't changed the file scaffolded from a previous version, it should be as simple as copy/pasting this configuration
-
-```js
-{
+export default defineConfig({
   // ...
-  overrides: [
-    {
-      files: ['**/*.spec.{js,ts}'],
-      extends: [
-        // Add Cypress-specific lint rules, globals and Cypress plugin
-        // See https://github.com/cypress-io/eslint-plugin-cypress#rules
-        'plugin:cypress/recommended',
-      ],
-      // ... other custom Cypress-related configuration
-    },
-  ],
+});
+```
+
+- delete the newly generated `cypress` folder
+- create a `test/cypress/support/component-index.html` file with this content (TODO: add link to template files)
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Components App</title>
+  </head>
+  <body>
+    <div data-cy-root></div>
+  </body>
+</html>
+```
+
+- add these lines into your `test/cypress/support/component.[js|ts]` file (TODO: add link to template files) and replace all `mount` occurrences to use `cy.mount()` instead
+
+```ts
+import { mount } from 'cypress/vue';
+
+Cypress.Commands.add('mount', mount);
+```
+
+- if using TS, add the TS definition for your `cy.mount` command in its same file, otherwise add it in a standalone `test/cypress/support/custom-commands.d.ts` file (TODO: add link to template code)
+
+```ts
+import { mount } from 'cypress/vue';
+
+type MountParams = Parameters<typeof mount>;
+type OptionsParam = MountParams[1];
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace Cypress {
+    interface Chainable {
+      /**
+       * Helper mount function for Vue Components
+       * @param component Vue Component or JSX Element to mount
+       * @param options Options passed to Vue Test Utils
+       */
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      mount(component: any, options?: OptionsParam): Chainable<any>;
+    }
+  }
 }
 ```
 
-- We went through many Cypress major versions during this AE beta phase, Cypress v6 was the latest version supported by Qv1 AE, please check out [Cypress 7](https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-7-0) and [Cypress 8](https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-8-0) migration guides and adapt your code accordingly. Also check out the changelog for [Cypress 9](https://docs.cypress.io/guides/references/changelog#9-0-0)
-
-- If you're using TypeScript, update your vue-shims file to match https://github.com/quasarframework/quasar-starter-kit/blob/master/template/src/shims-vue.d.ts
+- set `component.specPattern` property to `src/**/*.cy.{js,jsx,ts,tsx}` and update all your component tests names to match that pattern, replacing `.spec` with `.cy`
+- remove from `test/cypress/plugins/index.[js|ts]` the code used to inject the component dev server (TODO: add link to code example). Plugins file is meant to be replaced by [`setupNodeEvents` hook](https://docs.cypress.io/guides/references/configuration#History) into `cypress.config.[js|ts]` file.
+- rename `test/cypress/support/index.[js|ts]` to `test/cypress/support/e2e.[js|ts]` and update `e2e.supportFile` property accordingly
+- update your `test:e2e` and `test:e2e:ci` scripts to use `--e2e` flag
+- update your `test:component` and `test:component:ci` scripts to use `--component` flag instead of `open-ct`/`run-ct` commands
+- remove JSON schema registration into vscode settings, Cypress switched to a js/ts config file and is now using an helper to provide autocomplete.
+- update eslint override pattern which applies to cypress files
+- check out [Cypress 10 changelog](https://docs.cypress.io/guides/references/changelog#10-0-0) and see if something else in there affect you
 
 ### Caveats
 

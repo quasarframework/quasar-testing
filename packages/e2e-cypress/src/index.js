@@ -17,8 +17,7 @@ module.exports = async function (api) {
   }
 
   // We cannot use process.env.CYPRESS here as this code is executed outside Cypress process
-  // TODO: since v4.1 we use NODE_ENV, but we keep supporting old E2E_TEST variable until next major version
-  if (process.env.NODE_ENV !== 'test' && !process.env.E2E_TEST) {
+  if (process.env.NODE_ENV !== 'test') {
     return;
   }
 

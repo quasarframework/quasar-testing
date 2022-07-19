@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-testing-e2e-cypress",
-  "version": "4.2.1",
+  "version": "5.0.0-beta.1",
   "license": "MIT",
   "description": "A Quasar App Extension for Cypress e2e",
   "contributors": [
@@ -32,11 +32,7 @@
   },
   "dependencies": {
     "@cypress/code-coverage": "^3.10.0",
-    "@cypress/vite-dev-server": "^2.2.3",
-    "@cypress/vue": "^3.1.2",
-    "@cypress/webpack-dev-server": "^1.8.4",
     "cross-env": "^7.0.3",
-    "cypress": "^10.0.2",
     "lodash": "^4.17.21",
     "nyc": "^15.1.0",
     "start-server-and-test": "^1.14.0",
@@ -44,6 +40,10 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.182",
+    "cypress": "^10.3.0",
     "rimraf": "^3.0.2"
+  },
+  "peerDependencies": {
+    "cypress": "^10.3.0"
   }
 }

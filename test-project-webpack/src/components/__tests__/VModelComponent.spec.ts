@@ -1,4 +1,3 @@
-import { mount } from '@cypress/vue';
 import { vModelAdapter } from '@quasar/quasar-app-extension-testing-e2e-cypress';
 import { ref } from 'vue';
 import VModelComponent from '../VModelComponent.vue';
@@ -7,7 +6,7 @@ describe('VModelComponent', () => {
   it('should show the value', () => {
     const text = 'Quasar';
 
-    mount(VModelComponent, {
+    cy.mount(VModelComponent, {
       props: {
         modelValue: text,
       },
@@ -20,7 +19,7 @@ describe('VModelComponent', () => {
     const text = 'Quasar';
     const fn = cy.stub();
 
-    mount(VModelComponent, {
+    cy.mount(VModelComponent, {
       props: {
         modelValue: text,
         // This is how Vue internally codifies listeners,
@@ -39,7 +38,7 @@ describe('VModelComponent', () => {
   it('should update the value via inner button when not using the helper', () => {
     const text = 'Quasar';
 
-    mount(VModelComponent, {
+    cy.mount(VModelComponent, {
       props: {
         modelValue: text,
         'onUpdate:modelValue': (emittedValue: string) =>
@@ -54,7 +53,7 @@ describe('VModelComponent', () => {
   it('should update the value via inner button using the helper', () => {
     const model = ref('Quasar');
 
-    mount(VModelComponent, {
+    cy.mount(VModelComponent, {
       props: {
         ...vModelAdapter(model),
       },

@@ -1,4 +1,3 @@
-import { mount } from '@cypress/vue';
 import QuasarSelect from '../QuasarSelect.vue';
 
 function dataCySelect(dataCyId: string) {
@@ -7,7 +6,7 @@ function dataCySelect(dataCyId: string) {
 
 describe('QuasarSelect', () => {
   it('makes sure the select is disabled', () => {
-    mount(QuasarSelect, {
+    cy.mount(QuasarSelect, {
       props: { disable: true },
     });
 
@@ -16,21 +15,21 @@ describe('QuasarSelect', () => {
   });
 
   it('selects an option by content', () => {
-    mount(QuasarSelect);
+    cy.mount(QuasarSelect);
 
     cy.dataCy('select').select('Option 1');
     cy.dataCy('select-value').should('have.text', 'Option 1');
   });
 
   it('selects an option by cardinality', () => {
-    mount(QuasarSelect);
+    cy.mount(QuasarSelect);
 
     cy.dataCy('select').select(1);
     cy.dataCy('select-value').should('have.text', 'Option 2');
   });
 
   it('selects an option asynchronously', () => {
-    mount(QuasarSelect, {
+    cy.mount(QuasarSelect, {
       props: {
         loadOptionsAsync: true,
       },

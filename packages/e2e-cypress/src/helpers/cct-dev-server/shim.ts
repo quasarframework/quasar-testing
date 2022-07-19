@@ -22,7 +22,8 @@
 // we should be able to remove this workaround and rely on something much simpler
 
 declare module '@quasar/quasar-app-extension-testing-e2e-cypress/cct-dev-server' {
-  function injectDevServer(
-    config: Cypress.DevServerConfig,
-  ): Promise<Cypress.ResolvedDevServerConfig>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function quasarWebpackConfig(): Promise<any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function quasarViteConfig(): Promise<any>;
 }
