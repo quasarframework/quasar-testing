@@ -43,12 +43,11 @@ You must have a running dev server in order to run integration tests. The script
 
 This AE is a wrapper around Cypress, you won't be able to use this or understand most of the documentation if you haven't read [the official documentation](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html).
 
-[Cypress Component Testing](https://docs.cypress.io/guides/component-testing/introduction) is supported and the AE scaffolds the code to run both `e2e` and `component` tests with Cypress.
+**Cypress Component Testing** is supported and the AE scaffolds the code to run both "e2e" and "component" tests with Cypress.
+As for "e2e" tests, you'll need to first take a look to their (official documentation)[https://docs.cypress.io/guides/component-testing/writing-your-first-component-test], or you won't understand many of the concepts described into this documentation.
 Consequentially, we may rename this package from `@quasar/quasar-app-extension-testing-e2e-cypress` to `@quasar/quasar-app-extension-testing-cypress` in a future release.
 
 ### Code coverage
-
-> **We're aware of [a problem](https://github.com/vitejs/vite/issues/6654#issuecomment-1024732292) with Vite which cause e2e tests to fail unless Vite already compiled the app at least once. It should be solved once `@quasar/app-vite` upgrade to Vite 2.9**
 
 Since v4.1 onwards, we support scaffolding [code coverage configuration for Cypress tests](https://docs.cypress.io/guides/tooling/code-coverage), when using Vite-based Quasar CLI.
 
@@ -64,7 +63,7 @@ We provide a [preset configuration](https://github.com/quasarframework/quasar-te
 - excludes test folders (`__tests__`) and TS declaration files (\*.d.ts), which should already be excluded [by default](https://github.com/istanbuljs/schema/blob/master/default-exclude.js) but apparently aren't;
 - only includes actual code files, leaving out code-like static assets (eg. svgs).
 
-Check out [nyc official documentation]([official docs](https://github.com/istanbuljs/nyc)) if you want to customize report generation.
+Check out [nyc official documentation](https://github.com/istanbuljs/nyc) if you want to customize report generation.
 You can either add options into `.nycrc` file or generate reports on the fly running `nyc report <options>`.
 
 > Note that we do not setup [Istanbul TS configuration](https://github.com/istanbuljs/istanbuljs/tree/master/packages/nyc-config-typescript) and its dependencies as Cypress claims [it's able to manage TS code coverage out-of-the-box](https://github.com/cypress-io/code-coverage#typescript-users).
@@ -139,14 +138,34 @@ testRoute('shelfs/*/books');
 
 ### Caveats
 
-#### Assertions on Quasar input components
+#### Automatic override of Cypress commands
 
-Some Cypress assertions, as `.should('be.checked')` for checkboxes and radio buttons, rely on the presence of a native DOM element, which many Quasar input components don't add by default for a better performance.
-When testing those components with Cypress, you must set `name` attribute to force Quasar to add the underlying native inputs.
-Also note that those Cypress assertions will only work when the input is inside a QForm, as otherwise Quasar skips updating the native `checked` DOM property.
+Many Cypress commands rely on the presence of a native DOM inputs, but many Quasar input components won't usually render them for better performance, or will use them under the hood, but hide them to the user.
 
-Since native inputs are deep down into the DOM of the input component, you should create your own helper to access them.
-Here's an example of how you could do it for radio buttons:
+This resulted in a bad DX for some Cypress commands/assertions when used on some Quasar input components.
+
+Since v4.2, we patch those Cypress commands/assertions on our side.
+Here's the list of patched methods and some limitations due to the override:
+
+- `.select()`
+  - it won't yeld anything;
+  - when dealing with a multiple QSelect, it will only select the provided options, it won't deselect the ones not specified;
+  - since option value isn't mirrored into the DOM when using QSelect, it's not possible to select options based on the option value;
+  - it will ignore the original command options (eg `force: true`).
+- `.check` / `.uncheck`
+  - it won't yeld anything;
+  - it won't accept parameters;
+- `.should('be.checked')` / `.should('not.be.checked')`
+  - no limitations.
+
+Feel free to open a PR if you want to help removing these limitations.
+
+On versions < v4.2, follow these steps:
+
+- you must set `name` attribute to force Quasar to add the underlying native inputs;
+- if you need to perform assertions like `.should('be.checked')`, make sure the component is inside a QForm, otherwise Quasar will skip updating the native `checked` DOM property;
+- since native inputs are deep down into the DOM of the input component, you should create your own helper to access them.
+  Here're a couple of examples:
 
 ```ts
 // Custom command returning the native input inside the Quasar component
@@ -158,14 +177,6 @@ function dataCyRadio(dataCyId: string) {
   });
 }
 
-// "force" option is needed as the native input is hidden
-dataCyRadio('my-radio-button').check({ force: true });
-dataCyRadio('my-radio-button').should('not.be.checked');
-```
-
-Examples for similar helpers
-
-```ts
 function dataCyCheckbox(dataCyId: string) {
   return cy.dataCy(dataCyId).then(($quasarCheckbox) => {
     return cy.get('input:checkbox', {
@@ -173,17 +184,31 @@ function dataCyCheckbox(dataCyId: string) {
     });
   });
 }
+
+// "force" option is needed as the native input is hidden
+dataCyRadio('my-radio-button').check({ force: true });
+dataCyRadio('my-radio-button').should('not.be.checked');
 ```
 
-We plan to override Cypress `get` in the future to automatically manage these edge cases
+- you can select options into a QSelect like such
+
+```ts
+cy.dataCy('select').click();
+cy.withinSelectMenu(() => {
+  // Select by content
+  cy.contains('Option 1').click();
+  // Select by index
+  cy.get('.q-item').eq(1).click();
+});
+```
 
 #### QSelect and `data-cy`
 
 QSelect automatically apply unknown props to an inner element of the component, including `data-cy`.
-This means that you need to use `cy.dataCy('trees-select').closest('.q-select')` to get the actual root element of the component.
+This means that you need to use `cy.dataCy('select').closest('.q-select')` to get the actual root element of the component.
 While this isn't important when clicking the select to open its options menu, it is if you're checking any of its attributes (eg. `aria-disabled` to see if it's enabled or not)
 
-You can define an helper to wrap this way of accessing QSelects, here's an example
+You can define an helper to access a QSelect element, here's an example:
 
 ```ts
 function dataCySelect(dataCyId: string) {
@@ -192,7 +217,18 @@ function dataCySelect(dataCyId: string) {
 ```
 
 Additionally, when using `use-input` prop, the `data-cy` is mirrored on the inner native `select` too.
-This can generate confusion as `cy.dataCy('trees-select')` in those cases will return a collection and you'll need to use `.first()` or `.last()` to get respectively the component wrapper or the native input.
+This can generate confusion as `cy.dataCy('select')` in those cases will return a collection and you'll need to use `.first()` or `.last()` to get respectively the component wrapper or the native input.
+
+### Component Testing Caveats
+
+This AE aims to be as lightweight as possible to reduce maintenance burden.
+That's why we currently don't provide our own helpers to manage VueRouter, Vuex and Pinia.
+
+The good news is that we don't actually need to, since official documentation for those libraries is already available:
+
+- [VueRouter](https://docs.cypress.io/guides/component-testing/custom-mount-vue#Vue-Router)
+- [Vuex](https://docs.cypress.io/guides/component-testing/custom-mount-vue#Vuex)
+- [Pinia](https://pinia.vuejs.org/cookbook/testing.html#unit-testing-components)
 
 ### Testing the AE
 

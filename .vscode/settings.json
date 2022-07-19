@@ -10,5 +10,7 @@
       "url": "https://on.cypress.io/cypress.schema.json"
     }
   ],
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.endOfLine": "crlf",
+  "files.eol": "\r\n"
 }

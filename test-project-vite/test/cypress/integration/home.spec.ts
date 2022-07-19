@@ -40,3 +40,7 @@ describe('Landing', () => {
 //       .and('contain', 'Continuous Integration & Continuous Deployment CI/CD');
 //   });
 // });
+
+// Workaround for Cypress AE + TS + Vite
+// See: https://github.com/quasarframework/quasar-testing/issues/262#issuecomment-1154127497
+export {};

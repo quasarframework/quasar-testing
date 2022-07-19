@@ -21,6 +21,10 @@ module.exports = function () {
           value: 'unit-jest@alpha',
         },
         {
+          name: 'Vitest Unit Testing',
+          value: 'unit-vitest@alpha',
+        },
+        {
           name: 'Cypress e2e Testing',
           value: 'e2e-cypress',
         },

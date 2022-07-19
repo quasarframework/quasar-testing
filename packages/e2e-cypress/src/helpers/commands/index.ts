@@ -8,12 +8,15 @@
 /// <reference path="./test-route.ts" />
 
 import { registerColorAssertions } from './color-assertions';
+import { registerCypressOverwrites } from './cypress-overrides';
 import { registerDataCy } from './data-cy';
 import { registerPortalHelpers } from './portal-helpers';
 import { registerStorageHelpers } from './storage-helpers';
 import { registerTestRoute } from './test-route';
 
 export function registerCommands() {
+  registerCypressOverwrites();
+
   registerColorAssertions();
   registerDataCy();
   registerPortalHelpers();
