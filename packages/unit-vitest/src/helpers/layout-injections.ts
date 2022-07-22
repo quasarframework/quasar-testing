@@ -1,4 +1,5 @@
 import { vi } from 'vitest';
+import { ref } from 'vue';
 
 /**
  * Injections for Components with a QPage root Element
@@ -13,16 +14,16 @@ export function qLayoutInjections() {
       right: { size: 300, offset: 0, space: false },
       footer: { size: 0, offset: 0, space: false },
       left: { size: 300, offset: 0, space: false },
-      isContainer: { value: false },
-      view: { value: 'lHh Lpr lff' },
-      rows: { value: { top: 'lHh', middle: 'Lpr', bottom: 'lff' } },
-      height: { value: 900 },
+      isContainer: ref(false),
+      view: ref('lHh Lpr lff'),
+      rows: ref({ top: 'lHh', middle: 'Lpr', bottom: 'lff' }),
+      height: ref(900),
       instances: {},
       update: vi.fn(),
       animate: vi.fn(),
-      totalWidth: { value: 1200 },
-      scroll: { value: { position: 0, direction: 'up' } },
-      scrollbarWidth: { value: 125 },
+      totalWidth: ref(1200),
+      scroll: ref({ position: 0, direction: 'up' }),
+      scrollbarWidth: ref(125),
     },
   };
 }
