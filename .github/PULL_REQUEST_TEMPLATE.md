@@ -1,6 +1,6 @@
 <!--
 Please make sure to read the Pull Request Guidelines:
-https://github.com/quasar-framework/quasar-test/blob/dev/.github/CONTRIBUTING.md#pull-request-guidelines
+https://github.com/quasarframework/quasar-testing/blob/dev/.github/CONTRIBUTING.md#pull-request-guidelines
 -->
 
 <!-- PULL REQUEST TEMPLATE -->
