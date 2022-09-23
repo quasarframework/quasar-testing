@@ -44,7 +44,7 @@ You must have a running dev server in order to run integration tests. The script
 This AE is a wrapper around Cypress, you won't be able to use this or understand most of the documentation if you haven't read [the official documentation](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html).
 
 **Cypress Component Testing** is supported and the AE scaffolds the code to run both "e2e" and "component" tests with Cypress.
-As for "e2e" tests, you'll need to first take a look to their (official documentation)[https://docs.cypress.io/guides/component-testing/writing-your-first-component-test], or you won't understand many of the concepts described into this documentation.
+As for "e2e" tests, you'll need to first take a look to their [official documentation](https://docs.cypress.io/guides/component-testing/writing-your-first-component-test), or you won't understand many of the concepts described into this documentation.
 Consequentially, we may rename this package from `@quasar/quasar-app-extension-testing-e2e-cypress` to `@quasar/quasar-app-extension-testing-cypress` in a future release.
 
 ### Code coverage
