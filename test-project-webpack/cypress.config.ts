@@ -1,6 +1,5 @@
 import { defineConfig } from 'cypress';
 import { quasarWebpackConfig } from '@quasar/quasar-app-extension-testing-e2e-cypress/cct-dev-server';
-import { devServer } from '@cypress/webpack-dev-server';
 
 export default defineConfig({
   fixturesFolder: 'test/cypress/fixtures',
@@ -15,12 +14,10 @@ export default defineConfig({
   component: {
     supportFile: 'test/cypress/support/component.ts',
     specPattern: 'src/**/*.spec.{js,jsx,ts,tsx}',
-    devServer: async (devServerOptions) => {
-      return devServer({
-        ...devServerOptions,
-        framework: 'vue',
-        webpackConfig: await quasarWebpackConfig(),
-      });
+    devServer: {
+      framework: 'vue',
+      bundler: 'webpack',
+      webpackConfig: quasarWebpackConfig,
     },
     indexHtmlFile: 'test/cypress/support/component-index.html',
   },
