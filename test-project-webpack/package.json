@@ -41,6 +41,7 @@
     "vue-router": "^4.0.0"
   },
   "devDependencies": {
+    "@cypress/webpack-dev-server": "^2.3.0",
     "@quasar/app-webpack": "^3.0.0",
     "@quasar/quasar-app-extension-testing": "../packages/testing",
     "@quasar/quasar-app-extension-testing-e2e-cypress": "../packages/e2e-cypress",
@@ -72,5 +73,8 @@
     "node": ">= 12.22.1",
     "npm": ">= 6.13.4",
     "yarn": ">= 1.21.1"
+  },
+  "resolutions": {
+    "html-webpack-plugin": "^5.5.0"
   }
 }

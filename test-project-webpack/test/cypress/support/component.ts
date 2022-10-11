@@ -25,14 +25,10 @@ import 'quasar/src/css/index.sass';
 import '@quasar/extras/material-icons/material-icons.css';
 import 'quasar/dist/icon-set/material-icons.umd.prod';
 
-import { installQuasarPlugin } from '@quasar/quasar-app-extension-testing-e2e-cypress';
-import { config } from '@vue/test-utils';
-import { Dialog } from 'quasar';
+import { Quasar, Dialog } from 'quasar';
 
 import { mount } from 'cypress/vue';
-
-type MountParams = Parameters<typeof mount>;
-type OptionsParam = MountParams[1];
+import type { CyMountOptions } from 'cypress/vue';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -44,25 +40,22 @@ declare global {
        * @param options Options passed to Vue Test Utils
        */
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      mount(component: any, options?: OptionsParam): Chainable<any>;
+      mount(component: any, options?: CyMountOptions<unknown>): Chainable<any>;
     }
   }
 }
 
-Cypress.Commands.add('mount', mount);
+Cypress.Commands.add(
+  'mount',
+  (component, options: CyMountOptions<unknown> = {}) => {
+    options.global = options.global || {};
+    options.global.stubs = options.global.stubs || {};
+    options.global.components = options.global.components || {};
+    options.global.plugins = options.global.plugins || [];
+    options.global.mocks = options.global.mocks || {};
 
-// Example to import i18n from boot and use as plugin
-// import { i18n } from 'src/boot/i18n';
+    options.global.plugins.unshift([Quasar, { plugins: { Dialog } }]); //
 
-// You can modify the global config here for all tests or pass in the configuration per test
-// For example use the actual i18n instance or mock it
-// config.global.plugins.push(i18n);
-config.global.mocks = {
-  $t: () => '',
-};
-
-// Overwrite the transition and transition-group stubs which are stubbed by test-utils by default.
-// We do want transitions to show when doing visual testing :)
-config.global.stubs = {};
-
-installQuasarPlugin({ plugins: { Dialog } });
+    return mount(component, options);
+  }
+);
