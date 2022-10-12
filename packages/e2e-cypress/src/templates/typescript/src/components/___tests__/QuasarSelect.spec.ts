@@ -1,4 +1,3 @@
-import { mount } from '@cypress/vue';
 import QuasarSelect from '../QuasarSelect.vue';
 
 function dataCySelect(dataCyId: string) {
@@ -7,7 +6,7 @@ function dataCySelect(dataCyId: string) {
 
 describe('QuasarSelect', () => {
   it('makes sure the select is disabled', () => {
-    mount(QuasarSelect, {
+    cy.mount(QuasarSelect, {
       props: { disable: true },
     });
 

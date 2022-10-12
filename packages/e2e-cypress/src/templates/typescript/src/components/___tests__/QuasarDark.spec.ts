@@ -1,10 +1,9 @@
-import { mount } from '@cypress/vue';
 import { Dark } from 'quasar';
 import QuasarDark from '../QuasarDark.vue';
 
 describe('QuasarDark', () => {
   it('changes its color', () => {
-    mount(QuasarDark);
+    cy.mount(QuasarDark);
 
     cy.dataCy('dark-card')
       .should('not.have.class', 'q-dark')

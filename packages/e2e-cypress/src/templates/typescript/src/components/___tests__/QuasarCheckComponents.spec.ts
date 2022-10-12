@@ -1,9 +1,8 @@
-import { mount } from '@cypress/vue';
 import QuasarCheckComponents from '../QuasarCheckComponents.vue';
 
 describe('QuasarCheckbox', () => {
   it('can be used with normal Cypress commands', () => {
-    mount(QuasarCheckComponents);
+    cy.mount(QuasarCheckComponents);
 
     cy.dataCy('checkbox').check();
     cy.dataCy('checkbox').should('be.checked');
@@ -15,7 +14,7 @@ describe('QuasarCheckbox', () => {
 
 describe('QuasarToggle', () => {
   it('can be used with normal Cypress commands', () => {
-    mount(QuasarCheckComponents);
+    cy.mount(QuasarCheckComponents);
 
     cy.dataCy('toggle').check();
     cy.dataCy('toggle').should('be.checked');
@@ -27,7 +26,7 @@ describe('QuasarToggle', () => {
 
 describe('QuasarToggle', () => {
   it('can be used with normal Cypress commands', () => {
-    mount(QuasarCheckComponents);
+    cy.mount(QuasarCheckComponents);
 
     cy.dataCy('radio-1').check();
     cy.dataCy('radio-1').should('be.checked');

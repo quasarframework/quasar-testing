@@ -119,37 +119,7 @@ export default defineConfig({
 </html>
 ```
 
-- add these lines into your `test/cypress/support/component.[js|ts]` file (TODO: add link to template files) and replace all `mount` occurrences to use `cy.mount()` instead
-
-```ts
-import { mount } from 'cypress/vue';
-
-Cypress.Commands.add('mount', mount);
-```
-
-- if using TS, add the TS definition for your `cy.mount` command in its same file, otherwise add it in a standalone `test/cypress/support/custom-commands.d.ts` file (TODO: add link to template code)
-
-```ts
-import { mount } from 'cypress/vue';
-
-type MountParams = Parameters<typeof mount>;
-type OptionsParam = MountParams[1];
-
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace Cypress {
-    interface Chainable {
-      /**
-       * Helper mount function for Vue Components
-       * @param component Vue Component or JSX Element to mount
-       * @param options Options passed to Vue Test Utils
-       */
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      mount(component: any, options?: OptionsParam): Chainable<any>;
-    }
-  }
-}
-```
+- replace all `mount` occurrences to use the new `cy.mount()` helper instead
 
 - set `component.specPattern` property to `src/**/*.cy.{js,jsx,ts,tsx}` and update all your component tests names to match that pattern, replacing `.spec` with `.cy`
 - remove from `test/cypress/plugins/index.[js|ts]` the code used to inject the component dev server (TODO: add link to code example). Plugins file is meant to be replaced by [`setupNodeEvents` hook](https://docs.cypress.io/guides/references/configuration#History) into `cypress.config.[js|ts]` file.
