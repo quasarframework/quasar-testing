@@ -26,30 +26,10 @@ import '@quasar/extras/material-icons/material-icons.css';
 import 'quasar/dist/icon-set/material-icons.umd.prod';
 
 import { installQuasarPlugin } from '@quasar/quasar-app-extension-testing-e2e-cypress';
-import { config } from '@vue/test-utils';
 import { Dialog } from 'quasar';
 
-import { mount } from 'cypress/vue';
-
-type MountParams = Parameters<typeof mount>;
-type OptionsParam = MountParams[1];
-
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace Cypress {
-    interface Chainable {
-      /**
-       * Helper mount function for Vue Components
-       * @param component Vue Component or JSX Element to mount
-       * @param options Options passed to Vue Test Utils
-       */
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      mount(component: any, options?: OptionsParam): Chainable<any>;
-    }
-  }
-}
-
-Cypress.Commands.add('mount', mount);
+import { VueTestUtils } from 'cypress/vue';
+const { config } = VueTestUtils;
 
 // Example to import i18n from boot and use as plugin
 // import { i18n } from 'src/boot/i18n';

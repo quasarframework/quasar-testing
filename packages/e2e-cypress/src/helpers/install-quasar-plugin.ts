@@ -1,6 +1,9 @@
-import { config } from '@vue/test-utils';
+import { VueTestUtils } from 'cypress/vue';
 import { cloneDeep } from 'lodash';
 import { Quasar, QuasarPluginOptions } from 'quasar';
+// Since Cypress 10 we cannot import `config` from VTU directly since Cypress bundles its own version of VTU
+// See https://github.com/cypress-io/cypress/issues/22611
+const { config } = VueTestUtils;
 
 // TODO: not properly documented into the README
 

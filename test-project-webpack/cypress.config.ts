@@ -14,11 +14,11 @@ export default defineConfig({
   component: {
     supportFile: 'test/cypress/support/component.ts',
     specPattern: 'src/**/*.spec.{js,jsx,ts,tsx}',
+    indexHtmlFile: 'test/cypress/support/component-index.html',
     devServer: {
       framework: 'vue',
       bundler: 'webpack',
       webpackConfig: quasarWebpackConfig,
     },
-    indexHtmlFile: 'test/cypress/support/component-index.html',
   },
 });

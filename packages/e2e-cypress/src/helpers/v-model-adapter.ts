@@ -15,10 +15,6 @@ export function vModelAdapter<T>(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): any {
   watch(modelRef, (value) =>
-    // TODO: types aren't properly exposed, we should wait until next Cypress release
-    // See https://github.com/cypress-io/cypress/issues/22087
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
     Cypress.vueWrapper.setProps({ [modelName]: value }),
   );
 
