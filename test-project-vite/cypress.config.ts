@@ -7,7 +7,6 @@ export default defineConfig({
   screenshotsFolder: 'test/cypress/screenshots',
   videosFolder: 'test/cypress/videos',
   video: true,
-
   e2e: {
     setupNodeEvents(on, config) {
       registerCodeCoverageTasks(on, config);
@@ -17,14 +16,14 @@ export default defineConfig({
     supportFile: 'test/cypress/support/e2e.ts',
     specPattern: 'test/cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
   },
-
   component: {
     setupNodeEvents(on, config) {
       registerCodeCoverageTasks(on, config);
       return config;
     },
     supportFile: 'test/cypress/support/component.ts',
-    specPattern: 'src/**/*.cy.ts',
+    specPattern: 'src/**/*.cy.{js,jsx,ts,tsx}',
+    indexHtmlFile: 'test/cypress/support/component-index.html',
     devServer: injectQuasarDevServerConfig(),
   },
 });
