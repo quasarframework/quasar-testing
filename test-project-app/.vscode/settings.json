@@ -3,11 +3,5 @@
   "vetur.format.enable": false,
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"],
   "typescript.tsdk": "node_modules/typescript/lib",
-  "vetur.experimental.templateInterpolationService": true,
-  "json.schemas": [
-    {
-      "fileMatch": ["cypress.json"],
-      "url": "https://on.cypress.io/cypress.schema.json"
-    }
-  ]
+  "vetur.experimental.templateInterpolationService": true
 }

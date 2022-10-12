@@ -1,5 +1,6 @@
+<% if (shouldAddCodeCoverage) { %>import registerCodeCoverageTasks from '@cypress/code-coverage/task';<% } %>
+import { injectQuasarDevServerConfig } from '@quasar/quasar-app-extension-testing-e2e-cypress/cct-dev-server';
 import { defineConfig } from 'cypress';
-import { injectDevServer } from '@quasar/quasar-app-extension-testing-e2e-cypress/cct-dev-server';
 
 export default defineConfig({
   fixturesFolder: 'test/cypress/fixtures',
@@ -7,15 +8,24 @@ export default defineConfig({
   videosFolder: 'test/cypress/videos',
   video: true,
   e2e: {
-    setupNodeEvents(on, config) {},
+    <% if (shouldAddCodeCoverage) { %>setupNodeEvents(on, config) {
+      registerCodeCoverageTasks(on, config);
+      return config;
+    },<% }
+    else { %>// setupNodeEvents(on, config) {},<% } %>
     baseUrl: 'http://localhost:<%= devServerPort %>/',
-    specPattern: 'test/cypress/integration/**/*.cy.{js,jsx,ts,tsx}',
-    supportFile: 'test/cypress/support/index.ts',
+    supportFile: 'test/cypress/support/e2e.ts',
+    specPattern: 'test/cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
   },
   component: {
-    setupNodeEvents(on, config) {},
+    <% if (shouldAddCodeCoverage) { %>setupNodeEvents(on, config) {
+      registerCodeCoverageTasks(on, config);
+      return config;
+    },<% }
+    else { %>// setupNodeEvents(on, config) {},<% } %>
     supportFile: 'test/cypress/support/component.ts',
-    specPattern: 'src/**/*.spec.ts',
-    devServer: async (cypressDevServerConfig) => injectDevServer(cypressDevServerConfig)
-  }
+    specPattern: 'src/**/*.cy.{js,jsx,ts,tsx}',
+    indexHtmlFile: 'test/cypress/support/component-index.html',
+    devServer: injectQuasarDevServerConfig(),
+  },
 });

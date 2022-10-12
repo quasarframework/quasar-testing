@@ -39,8 +39,6 @@ Some custom commands are included out-of-the-box:
 | `within[Portal\|Menu\|SelectMenu\|Dialog]` | `cy.withinSelectMenu(() => cy.get('.q-item').first().click())` <br /> `cy.withinDialog({ dataCy: 'add-action-dialog', fn() { /* business haha */ } });`                     | Auto-scope commands into the callback within the Portal-based component and perform assertions common to all of them.                                                                                    |
 | `should('have.[color\|backgroundColor]')`  | `cy.get('foo').should('have.color', 'white')` <br /> `cy.get('foo').should('have.backgroundColor', '#000')` <br /> `cy.get('foo').should('have.color', 'var(--q-primary)')` | Provide a couple color-related custom matchers, which accept any valid CSS color format.                                                                                                                 |
 
-<!-- TODO: remove `saveLocalStorage` and `restoreLocalStorage` and rely on experimental session command? -->
-
 You must have a running dev server in order to run integration tests. The scripts added by this AE automatically take care of this: `yarn test:e2e` and `yarn test:e2e:ci` will launch `quasar dev` when starting up the tests and kill it when cypress process ends.
 
 This AE is a wrapper around Cypress, you won't be able to use this or understand most of the documentation if you haven't read [the official documentation](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html).
@@ -74,6 +72,8 @@ You can either add options into `.nycrc` file or generate reports on the fly run
 
 ### Upgrade from Cypress AE v4
 
+All changes are related to Cypress v10 breaking changes, Quasar first-party helpers haven't been changed unless Cypress required it.
+
 > if you're coming from v3, follow migration guide for v4 and v4.1 first TODO: add link
 
 - upgrade to v5, then install `cypress` dependency, which has been externalized and marked as a peerDependency
@@ -90,74 +90,32 @@ yarn add -D typescript
 ```
 
 - run `yarn cypress open` and follow the guided procedure
-- select "component testing" option and subsequentially `vue` framework and `webpack`/`vite` (accordingly to what you're using)
-- if using TS, rename the config file to `cypress.config.ts` (cypress will generate a js file) and adapt the first lines to be
+- select "component testing" option and accept all proposed steps. When prompted for it, if autodetection doesn't kick in, select `vue` framework and `webpack`/`vite` bundler accordingly to what you're using. Note that, after the migration wizard completes, Cypress is expected to display an error due to it's inability to run Quasar devServer out-of-the-box
+- if a duplicated `component` property is generated into `cypress.config.[js|ts]`, remove the one containting `devServer` property.
+- remove from `test/cypress/plugins/index.[js|ts]` the code used to inject the component dev server, and add it into `cypress.config.[js|ts]` as
 
 ```ts
-import { defineConfig } from 'cypress';
+import { injectQuasarDevServerConfig } from '@quasar/quasar-app-extension-testing-e2e-cypress/cct-dev-server';
 
 export default defineConfig({
   // ...
+  component: {
+    devServer: injectQuasarDevServerConfig(),
+  },
 });
 ```
 
-- delete the newly generated `cypress` folder
 - create a `test/cypress/support/component-index.html` file with this content (TODO: add link to template files)
-
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>Components App</title>
-  </head>
-  <body>
-    <div data-cy-root></div>
-  </body>
-</html>
-```
-
-- add these lines into your `test/cypress/support/component.[js|ts]` file (TODO: add link to template files) and replace all `mount` occurrences to use `cy.mount()` instead
-
-```ts
-import { mount } from 'cypress/vue';
-
-Cypress.Commands.add('mount', mount);
-```
-
-- if using TS, add the TS definition for your `cy.mount` command in its same file, otherwise add it in a standalone `test/cypress/support/custom-commands.d.ts` file (TODO: add link to template code)
-
-```ts
-import { mount } from 'cypress/vue';
-
-type MountParams = Parameters<typeof mount>;
-type OptionsParam = MountParams[1];
-
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace Cypress {
-    interface Chainable {
-      /**
-       * Helper mount function for Vue Components
-       * @param component Vue Component or JSX Element to mount
-       * @param options Options passed to Vue Test Utils
-       */
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      mount(component: any, options?: OptionsParam): Chainable<any>;
-    }
-  }
-}
-```
-
+- set `component.test/cypress/support/component-index.html` property into `cypress.config.[js|ts]` to `test/cypress/support/component-index.html`
+- replace all `mount` occurrences to use the new `cy.mount()` helper instead
 - set `component.specPattern` property to `src/**/*.cy.{js,jsx,ts,tsx}` and update all your component tests names to match that pattern, replacing `.spec` with `.cy`
-- remove from `test/cypress/plugins/index.[js|ts]` the code used to inject the component dev server (TODO: add link to code example). Plugins file is meant to be replaced by [`setupNodeEvents` hook](https://docs.cypress.io/guides/references/configuration#History) into `cypress.config.[js|ts]` file.
+- rename `test/cypress/integration` folder to `test/cypress/e2e` and update `e2e.specPattern` accordingly
 - rename `test/cypress/support/index.[js|ts]` to `test/cypress/support/e2e.[js|ts]` and update `e2e.supportFile` property accordingly
-- update your `test:e2e` and `test:e2e:ci` scripts to use `--e2e` flag
-- update your `test:component` and `test:component:ci` scripts to use `--component` flag instead of `open-ct`/`run-ct` commands
-- remove JSON schema registration into vscode settings, Cypress switched to a js/ts config file and is now using an helper to provide autocomplete.
-- update eslint override pattern which applies to cypress files
+- update your `test:e2e` and `test:e2e:ci` scripts to use `--e2e` flag (`open --e2e` and `run --e2e` respectively)
+- update your `test:component` and `test:component:ci` scripts to use `--component` flag instead of `open-ct`/`run-ct` commands (`open --component` and `run --component` respectively)
+- remove Cypress JSON schema registration from vscode settings, Cypress switched to a JS/TS config file and is now using an helper function to provide autocomplete.
+- update eslint override pattern which applies to cypress files as explained into this AE installation instructions
+- (optional) move any other custom configuration from `test/cypress/plugins/index.[js|ts]` to [`setupNodeEvents` hooks](https://docs.cypress.io/guides/references/configuration#History) into `cypress.config.[js|ts]`. Note that if you're using Vite and you added code coverage, you'll need to setup code coverage plugin both into e2e and component `setupNodeEvents` hooks
 - check out [Cypress 10 changelog](https://docs.cypress.io/guides/references/changelog#10-0-0) and see if something else in there affect you
 
 ### Caveats
@@ -166,9 +124,7 @@ declare global {
 
 Many Cypress commands rely on the presence of a native DOM inputs, but many Quasar input components won't usually render them for better performance, or will use them under the hood, but hide them to the user.
 
-This resulted in a bad DX for some Cypress commands/assertions when used on some Quasar input components.
-
-Since v4.2, we patch those Cypress commands/assertions on our side.
+This resulted in a bad DX for some Cypress commands/assertions when used on some Quasar input components, so we patched those Cypress commands/assertions on our side.
 Here's the list of patched methods and some limitations due to the override:
 
 - `.select()`
@@ -183,48 +139,6 @@ Here's the list of patched methods and some limitations due to the override:
   - no limitations.
 
 Feel free to open a PR if you want to help removing these limitations.
-
-On versions < v4.2, follow these steps:
-
-- you must set `name` attribute to force Quasar to add the underlying native inputs;
-- if you need to perform assertions like `.should('be.checked')`, make sure the component is inside a QForm, otherwise Quasar will skip updating the native `checked` DOM property;
-- since native inputs are deep down into the DOM of the input component, you should create your own helper to access them.
-  Here're a couple of examples:
-
-```ts
-// Custom command returning the native input inside the Quasar component
-function dataCyRadio(dataCyId: string) {
-  return cy.dataCy(dataCyId).then(($quasarRadio) => {
-    return cy.get('input:radio', {
-      withinSubject: $quasarRadio,
-    });
-  });
-}
-
-function dataCyCheckbox(dataCyId: string) {
-  return cy.dataCy(dataCyId).then(($quasarCheckbox) => {
-    return cy.get('input:checkbox', {
-      withinSubject: $quasarCheckbox,
-    });
-  });
-}
-
-// "force" option is needed as the native input is hidden
-dataCyRadio('my-radio-button').check({ force: true });
-dataCyRadio('my-radio-button').should('not.be.checked');
-```
-
-- you can select options into a QSelect like such
-
-```ts
-cy.dataCy('select').click();
-cy.withinSelectMenu(() => {
-  // Select by content
-  cy.contains('Option 1').click();
-  // Select by index
-  cy.get('.q-item').eq(1).click();
-});
-```
 
 #### QSelect and `data-cy`
 

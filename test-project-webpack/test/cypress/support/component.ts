@@ -22,40 +22,29 @@ import 'quasar/src/css/index.sass';
 
 // ICON SETS
 // If you use multiple or different icon-sets then the default, be sure to import them here.
-import '@quasar/extras/material-icons/material-icons.css';
 import 'quasar/dist/icon-set/material-icons.umd.prod';
+import '@quasar/extras/material-icons/material-icons.css';
 
-import { Quasar, Dialog } from 'quasar';
+import { installQuasarPlugin } from '@quasar/quasar-app-extension-testing-e2e-cypress';
+import { Dialog } from 'quasar';
 
-import { mount } from 'cypress/vue';
-import type { CyMountOptions } from 'cypress/vue';
+// Since Cypress v10 we cannot import `config` directly from VTU as Cypress bundles its own version of it
+// See https://github.com/cypress-io/cypress/issues/22611
+import { VueTestUtils } from 'cypress/vue';
+const { config } = VueTestUtils;
 
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace Cypress {
-    interface Chainable {
-      /**
-       * Helper mount function for Vue Components
-       * @param component Vue Component or JSX Element to mount
-       * @param options Options passed to Vue Test Utils
-       */
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      mount(component: any, options?: CyMountOptions<unknown>): Chainable<any>;
-    }
-  }
-}
+// Example to import i18n from boot and use as plugin
+// import { i18n } from 'src/boot/i18n';
 
-Cypress.Commands.add(
-  'mount',
-  (component, options: CyMountOptions<unknown> = {}) => {
-    options.global = options.global || {};
-    options.global.stubs = options.global.stubs || {};
-    options.global.components = options.global.components || {};
-    options.global.plugins = options.global.plugins || [];
-    options.global.mocks = options.global.mocks || {};
+// You can modify the global config here for all tests or pass in the configuration per test
+// For example use the actual i18n instance or mock it
+// config.global.plugins.push(i18n);
+config.global.mocks = {
+  $t: () => '',
+};
 
-    options.global.plugins.unshift([Quasar, { plugins: { Dialog } }]); //
+// Overwrite the transition and transition-group stubs which are stubbed by test-utils by default.
+// We do want transitions to show when doing visual testing :)
+config.global.stubs = {};
 
-    return mount(component, options);
-  }
-);
+installQuasarPlugin({ plugins: { Dialog } });

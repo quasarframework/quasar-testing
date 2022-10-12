@@ -7,16 +7,10 @@ function getPackageJson() {
   return require(join(process.cwd(), 'package.json'));
 }
 
-async function quasarSharedConfig(bundler: AvailableBundlers) {
-  let quasarAppPackage = `@quasar/app-${bundler}`;
-
-  if (bundler === 'webpack') {
-    const { devDependencies } = getPackageJson();
-    if (!devDependencies.hasOwnProperty(quasarAppPackage)) {
-      quasarAppPackage = '@quasar/app';
-    }
-  }
-
+async function quasarSharedConfig(
+  quasarAppPackage: string,
+  bundler: AvailableBundlers,
+) {
   const { default: extensionRunner } = await import(
     `${quasarAppPackage}/lib/app-extension/extensions-runner`
   );
@@ -47,8 +41,9 @@ async function quasarSharedConfig(bundler: AvailableBundlers) {
   };
 }
 
-export async function quasarWebpackConfig() {
-  const { quasarAppPackage, QuasarConfFile, ctx } = await quasarSharedConfig(
+async function quasarWebpackConfig(quasarAppPackage: string) {
+  const { QuasarConfFile, ctx } = await quasarSharedConfig(
+    quasarAppPackage,
     'webpack',
   );
 
@@ -71,8 +66,9 @@ export async function quasarWebpackConfig() {
   return configEntries[0].webpack;
 }
 
-export async function quasarViteConfig() {
-  const { quasarAppPackage, QuasarConfFile, ctx } = await quasarSharedConfig(
+async function quasarViteConfig(quasarAppPackage: string) {
+  const { QuasarConfFile, ctx } = await quasarSharedConfig(
+    quasarAppPackage,
     'vite',
   );
 
@@ -88,4 +84,30 @@ export async function quasarViteConfig() {
   );
 
   return generateConfig['vite'](quasarConf);
+}
+
+export function injectQuasarDevServerConfig() {
+  const { devDependencies } = getPackageJson();
+  const bundler: AvailableBundlers = devDependencies.hasOwnProperty(
+    '@quasar/app-vite',
+  )
+    ? 'vite'
+    : 'webpack';
+
+  let quasarAppPackage = `@quasar/app-${bundler}`;
+
+  if (bundler === 'webpack') {
+    if (!devDependencies.hasOwnProperty(quasarAppPackage)) {
+      quasarAppPackage = '@quasar/app';
+    }
+  }
+
+  const configExtractor =
+    bundler === 'vite' ? quasarViteConfig : quasarWebpackConfig;
+
+  return {
+    framework: 'vue',
+    bundler,
+    [`${bundler}Config`]: async () => await configExtractor(quasarAppPackage),
+  };
 }
