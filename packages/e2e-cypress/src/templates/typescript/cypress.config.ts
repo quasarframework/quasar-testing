@@ -15,7 +15,7 @@ export default defineConfig({
     else { %>// setupNodeEvents(on, config) {},<% } %>
     baseUrl: 'http://localhost:<%= devServerPort %>/',
     supportFile: 'test/cypress/support/e2e.ts',
-    specPattern: 'test/cypress/integration/**/*.cy.{js,jsx,ts,tsx}',
+    specPattern: 'test/cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
   },
   component: {
     <% if (shouldAddCodeCoverage) { %>setupNodeEvents(on, config) {

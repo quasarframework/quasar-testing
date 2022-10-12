@@ -15,21 +15,21 @@ describe('QuasarSelect', () => {
   });
 
   it('selects an option by content', () => {
-    mount(QuasarSelect);
+    cy.mount(QuasarSelect);
 
     cy.dataCy('select').select('Option 1');
     cy.dataCy('select-value').should('have.text', 'Option 1');
   });
 
   it('selects an option by cardinality', () => {
-    mount(QuasarSelect);
+    cy.mount(QuasarSelect);
 
     cy.dataCy('select').select(1);
     cy.dataCy('select-value').should('have.text', 'Option 2');
   });
 
   it('selects an option asynchronously', () => {
-    mount(QuasarSelect, {
+    cy.mount(QuasarSelect, {
       props: {
         loadOptionsAsync: true,
       },
