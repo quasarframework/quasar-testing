@@ -15,7 +15,7 @@ export default defineConfig({
   component: {
     setupNodeEvents(on, config) {},
     supportFile: 'test/cypress/support/component.ts',
-    specPattern: 'src/**/*.spec.ts',
+    specPattern: 'src/**/*.cy.{js,jsx,ts,tsx}',
     indexHtmlFile: 'test/cypress/support/component-index.html',
     devServer: injectQuasarDevServerConfig(),
   },
