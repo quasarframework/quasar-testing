@@ -105,7 +105,8 @@ export default defineConfig({
 });
 ```
 
-- create a `test/cypress/support/component-index.html` file with this content (TODO: add link to template files) and add its path into `component.indexHtmlFile` property into `cypress.config.[js|ts]`
+- create a `test/cypress/support/component-index.html` file with this content (TODO: add link to template files)
+- set `component.test/cypress/support/component-index.html` property into `cypress.config.[js|ts]` to `test/cypress/support/component-index.html`
 - replace all `mount` occurrences to use the new `cy.mount()` helper instead
 - set `component.specPattern` property to `src/**/*.cy.{js,jsx,ts,tsx}` and update all your component tests names to match that pattern, replacing `.spec` with `.cy`
 - rename `test/cypress/integration` folder to `test/cypress/e2e` and update `e2e.specPattern` accordingly
