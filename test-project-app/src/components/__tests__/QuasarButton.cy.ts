@@ -1,10 +1,9 @@
-import { mount } from '@cypress/vue';
 import QuasarButton from '../QuasarButton.vue';
 
 describe('QuasarButton', () => {
   it('renders a message', () => {
     const label = 'Hello there';
-    mount(QuasarButton, {
+    cy.mount(QuasarButton, {
       props: {
         label,
       },
@@ -15,7 +14,7 @@ describe('QuasarButton', () => {
 
   it('renders another message', () => {
     const label = 'Will this work?';
-    mount(QuasarButton, {
+    cy.mount(QuasarButton, {
       props: {
         label,
       },
@@ -25,7 +24,7 @@ describe('QuasarButton', () => {
   });
 
   it('should have a `positive` color', () => {
-    mount(QuasarButton);
+    cy.mount(QuasarButton);
 
     cy.dataCy('button')
       .should('have.backgroundColor', 'var(--q-positive)')
@@ -33,7 +32,7 @@ describe('QuasarButton', () => {
   });
 
   it('should emit `test` upon click', () => {
-    mount(QuasarButton);
+    cy.mount(QuasarButton);
 
     cy.dataCy('button')
       .click()

@@ -1,9 +1,8 @@
-import { mount } from '@cypress/vue';
-import ColorAssertionsComponent from './color-assertions.vue';
+import ColorAssertionsComponent from '../color-assertions.vue';
 
 describe('color assertions', () => {
   it('works with names, hex codes and CSS variables', () => {
-    mount(ColorAssertionsComponent);
+    cy.mount(ColorAssertionsComponent);
 
     cy.get('.wrapper')
       .should('have.color', 'var(--q-primary)')
