@@ -4,12 +4,6 @@
   "editor.guides.bracketPairs": true,
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"],
   "typescript.tsdk": "node_modules/typescript/lib",
-  "json.schemas": [
-    {
-      "fileMatch": ["cypress.json"],
-      "url": "https://on.cypress.io/cypress.schema.json"
-    }
-  ],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "prettier.endOfLine": "crlf",
   "files.eol": "\r\n"
