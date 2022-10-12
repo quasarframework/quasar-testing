@@ -7,13 +7,13 @@ export default defineConfig({
   videosFolder: 'test/cypress/videos',
   video: true,
   e2e: {
-    setupNodeEvents(on, config) {},
+    // setupNodeEvents(on, config) {},
     baseUrl: 'http://localhost:<%= devServerPort %>/',
     supportFile: 'test/cypress/support/e2e.ts',
     specPattern: 'test/cypress/integration/**/*.cy.{js,jsx,ts,tsx}',
   },
   component: {
-    setupNodeEvents(on, config) {},
+    // setupNodeEvents(on, config) {},
     supportFile: 'test/cypress/support/component.ts',
     specPattern: 'src/**/*.cy.{js,jsx,ts,tsx}',
     indexHtmlFile: 'test/cypress/support/component-index.html',
