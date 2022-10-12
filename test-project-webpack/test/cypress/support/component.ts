@@ -28,7 +28,7 @@ import '@quasar/extras/material-icons/material-icons.css';
 import { installQuasarPlugin } from '@quasar/quasar-app-extension-testing-e2e-cypress';
 import { Dialog } from 'quasar';
 
-// Since Cypress 10 we cannot import `config` from VTU directly since Cypress bundles its own version of VTU
+// Since Cypress v10 we cannot import `config` directly from VTU as Cypress bundles its own version of it
 // See https://github.com/cypress-io/cypress/issues/22611
 import { VueTestUtils } from 'cypress/vue';
 const { config } = VueTestUtils;
