@@ -83,7 +83,16 @@ async function quasarViteConfig(quasarAppPackage: string) {
     `${quasarAppPackage}/lib/modes/spa/spa-config`
   );
 
-  return generateConfig['vite'](quasarConf);
+  // [1] -> https://github.com/cypress-io/cypress/issues/22505#issuecomment-1277855100
+  // [1] Make sure to use the root for predictability
+  quasarConf.publicPath = '/';
+
+  const result = await generateConfig['vite'](quasarConf);
+
+  // [1] Delete base so it can correctly be set by Cypress
+  delete result.base;
+
+  return result;
 }
 
 export function injectQuasarDevServerConfig() {
