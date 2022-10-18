@@ -139,7 +139,7 @@ function portalDerivateCommand<E extends HTMLElement = HTMLElement>(
 
 export function registerPortalHelpers() {
   Cypress.Commands.add('withinPortal', function (selectorOrOptions, fn) {
-    const selector =
+    const selector: string =
       typeof selectorOrOptions === 'string'
         ? selectorOrOptions
         : getDataCySelector(selectorOrOptions.dataCy);

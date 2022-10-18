@@ -55,10 +55,10 @@ module.exports = function (api) {
   //  HEAD requests which are performed by default by the underlying "wait-on"
   // See https://github.com/bahmutov/start-server-and-test#note-for-webpack-dev-server-users
   const e2eServerCommand = `${testEnvCommand} start-test "quasar dev" http-get://localhost:${devServerPort}`;
-  const e2eCommand = `${e2eServerCommand} "cypress open"`;
-  const e2eCommandCi = `${e2eServerCommand} "cypress run"`;
-  const componentCommand = `${testEnvCommand} cypress open-ct`;
-  const componentCommandCi = `${testEnvCommand} cypress run-ct`;
+  const e2eCommand = `${e2eServerCommand} "cypress open --e2e"`;
+  const e2eCommandCi = `${e2eServerCommand} "cypress run --e2e"`;
+  const componentCommand = `${testEnvCommand} cypress open --component`;
+  const componentCommandCi = `${testEnvCommand} cypress run --component`;
 
   api.render('./templates/base', { shouldSupportTypeScript });
 
@@ -75,15 +75,6 @@ module.exports = function (api) {
     'component-cypress': {
       runnerCommand: componentCommandCi,
     },
-  });
-
-  api.extendJsonFile('.vscode/settings.json', {
-    'json.schemas': [
-      {
-        fileMatch: ['cypress.json'],
-        url: 'https://on.cypress.io/cypress.schema.json',
-      },
-    ],
   });
 
   if (shouldAddScripts) {

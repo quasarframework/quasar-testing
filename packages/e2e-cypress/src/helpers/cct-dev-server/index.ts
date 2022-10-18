@@ -1,6 +1,4 @@
 /* eslint-disable */
-/// <reference types="cypress" />
-
 import { join } from 'path';
 
 type AvailableBundlers = 'vite' | 'webpack';
@@ -9,16 +7,10 @@ function getPackageJson() {
   return require(join(process.cwd(), 'package.json'));
 }
 
-async function exportQuasarConfig(bundler: AvailableBundlers): Promise<any> {
-  let quasarAppPackage = `@quasar/app-${bundler}`;
-
-  if (bundler === 'webpack') {
-    const { devDependencies } = getPackageJson();
-    if (!devDependencies.hasOwnProperty(quasarAppPackage)) {
-      quasarAppPackage = '@quasar/app';
-    }
-  }
-
+async function quasarSharedConfig(
+  quasarAppPackage: string,
+  bundler: AvailableBundlers,
+) {
   const { default: extensionRunner } = await import(
     `${quasarAppPackage}/lib/app-extension/extensions-runner`
   );
@@ -42,54 +34,89 @@ async function exportQuasarConfig(bundler: AvailableBundlers): Promise<any> {
   // register app extensions
   await extensionRunner.registerExtensions(ctx);
 
-  if (bundler === 'vite') {
-    const quasarConfFile = new QuasarConfFile({ ctx });
-
-    const quasarConf = await quasarConfFile.read();
-    if (quasarConf.error !== void 0) {
-      console.log(quasarConf.error);
-    }
-
-    const { default: generateConfig } = await import(
-      `${quasarAppPackage}/lib/modes/spa/spa-config`
-    );
-
-    return generateConfig['vite'](quasarConf);
-  } else {
-    const {
-      default: { splitWebpackConfig },
-    } = await import(`${quasarAppPackage}/lib/webpack/symbols`);
-
-    const quasarConfFile = new QuasarConfFile(ctx);
-
-    try {
-      await quasarConfFile.prepare();
-    } catch (e) {
-      console.log(e);
-      return;
-    }
-    await quasarConfFile.compile();
-
-    const configEntries = splitWebpackConfig(quasarConfFile.webpackConf, 'spa');
-
-    return configEntries[0].webpack;
-  }
+  return {
+    quasarAppPackage,
+    QuasarConfFile,
+    ctx,
+  };
 }
 
-export const injectDevServer: Cypress.PluginConfig = (on, config) => {
-  on('dev-server:start', async (options) => {
-    const { devDependencies } = getPackageJson();
-    const bundler: AvailableBundlers = devDependencies.hasOwnProperty(
-      '@quasar/app-vite',
-    )
-      ? 'vite'
-      : 'webpack';
+async function quasarWebpackConfig(quasarAppPackage: string) {
+  const { QuasarConfFile, ctx } = await quasarSharedConfig(
+    quasarAppPackage,
+    'webpack',
+  );
 
-    const { startDevServer } = await import(`@cypress/${bundler}-dev-server`);
+  const {
+    default: { splitWebpackConfig },
+  } = await import(`${quasarAppPackage}/lib/webpack/symbols`);
 
-    return startDevServer({
-      options,
-      [`${bundler}Config`]: await exportQuasarConfig(bundler),
-    });
-  });
-};
+  const quasarConfFile = new QuasarConfFile(ctx);
+
+  try {
+    await quasarConfFile.prepare();
+  } catch (e) {
+    console.log(e);
+    return;
+  }
+  await quasarConfFile.compile();
+
+  const configEntries = splitWebpackConfig(quasarConfFile.webpackConf, 'spa');
+
+  return configEntries[0].webpack;
+}
+
+async function quasarViteConfig(quasarAppPackage: string) {
+  const { QuasarConfFile, ctx } = await quasarSharedConfig(
+    quasarAppPackage,
+    'vite',
+  );
+
+  const quasarConfFile = new QuasarConfFile({ ctx });
+
+  const quasarConf = await quasarConfFile.read();
+  if (quasarConf.error !== void 0) {
+    console.log(quasarConf.error);
+  }
+
+  const { default: generateConfig } = await import(
+    `${quasarAppPackage}/lib/modes/spa/spa-config`
+  );
+
+  // [1] -> https://github.com/cypress-io/cypress/issues/22505#issuecomment-1277855100
+  // [1] Make sure to use the root for predictability
+  quasarConf.publicPath = '/';
+
+  const result = await generateConfig['vite'](quasarConf);
+
+  // [1] Delete base so it can correctly be set by Cypress
+  delete result.base;
+
+  return result;
+}
+
+export function injectQuasarDevServerConfig() {
+  const { devDependencies } = getPackageJson();
+  const bundler: AvailableBundlers = devDependencies.hasOwnProperty(
+    '@quasar/app-vite',
+  )
+    ? 'vite'
+    : 'webpack';
+
+  let quasarAppPackage = `@quasar/app-${bundler}`;
+
+  if (bundler === 'webpack') {
+    if (!devDependencies.hasOwnProperty(quasarAppPackage)) {
+      quasarAppPackage = '@quasar/app';
+    }
+  }
+
+  const configExtractor =
+    bundler === 'vite' ? quasarViteConfig : quasarWebpackConfig;
+
+  return {
+    framework: 'vue',
+    bundler,
+    [`${bundler}Config`]: async () => await configExtractor(quasarAppPackage),
+  };
+}
