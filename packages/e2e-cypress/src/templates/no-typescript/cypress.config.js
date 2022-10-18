@@ -1,8 +1,8 @@
-<% if (shouldAddCodeCoverage) { %>import registerCodeCoverageTasks from '@cypress/code-coverage/task';<% } %>
-import { injectQuasarDevServerConfig } from '@quasar/quasar-app-extension-testing-e2e-cypress/cct-dev-server';
-import { defineConfig } from 'cypress';
+<% if (shouldAddCodeCoverage) { %>const registerCodeCoverageTasks = require('@cypress/code-coverage/task');<% } %>
+const { injectQuasarDevServerConfig } = require('@quasar/quasar-app-extension-testing-e2e-cypress/cct-dev-server');
+const { defineConfig } = require('cypress');
 
-export default defineConfig({
+module.exports = defineConfig({
   fixturesFolder: 'test/cypress/fixtures',
   screenshotsFolder: 'test/cypress/screenshots',
   videosFolder: 'test/cypress/videos',
