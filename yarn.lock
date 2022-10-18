@@ -8704,9 +8704,9 @@ snyk-try-require@^1.1.1:
     then-fs "^2.0.0"
 
 snyk@^1.170.0:
-  version "1.974.0"
-  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.974.0.tgz#e24729ac3335cda39f5d8ae28079ab0b674da09b"
-  integrity sha512-LOeQuMxFnA2KDjZCrGL5nNEZfE2twdfEs64cO3OTEOXsTyMzO3pV/8GVrkAvoOGF9KHeICNpZkQSKK0G8JV9wA==
+  version "1.996.0"
+  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.996.0.tgz#0369ca9e6a3a148751294c1320f59a79d5eb3c88"
+  integrity sha512-nq//Ely0bSt50LzX9Er5lCQNqTpaKn7I7xkhUB3Z+8rs8Jqha360HeQwhbVzsuQS3xT/1+36zt6CcgyLPM1QbA==
 
 socks-proxy-agent@^5.0.0:
   version "5.0.1"
