@@ -2,8 +2,10 @@
 
 > You’re looking at Quasar v2 testing docs. If you're searching for Quasar v1 docs, head [here](https://testing.quasar.dev/packages/e2e-cypress/)
 
+> You’re looking at Cypress AE v5 (Cypress 10) docs. If you're searching for Cypress AE v4 (Cypress 9) docs, head [here](https://github.com/quasarframework/quasar-testing/tree/cypress-v4/packages/e2e-cypress)
+
 ```shell
-$ quasar ext add @quasar/testing-e2e-cypress
+$ quasar ext add @quasar/testing-e2e-cypress@beta
 ```
 
 Add into your `.eslintrc.js` the following code:
@@ -74,7 +76,7 @@ You can either add options into `.nycrc` file or generate reports on the fly run
 
 All changes are related to Cypress v10 breaking changes, Quasar first-party helpers haven't been changed unless Cypress required it.
 
-> if you're coming from v3, follow migration guide for v4 and v4.1 first TODO: add link
+> if you're coming from v3, follow [the migration guide for v4 and v4.1 first](https://github.com/quasarframework/quasar-testing/tree/cypress-v4/packages/e2e-cypress#upgrade-from-cypress-v4-to-v41-optional)
 
 - upgrade to v5, then install `cypress` dependency, which has been externalized and marked as a peerDependency
 
