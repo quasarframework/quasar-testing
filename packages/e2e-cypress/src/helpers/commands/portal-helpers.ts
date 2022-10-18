@@ -1,3 +1,5 @@
+import { castArray } from 'lodash';
+
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
@@ -108,9 +110,11 @@ function getDataCySelector(dataCy: string) {
 
 function portalDerivateCommand<E extends HTMLElement = HTMLElement>(
   selectorDefault: string,
-  selectorSuffix: string,
+  selectorSuffixes: string | string[],
   fnOrOptions: WithinPortalCallback<E> | WithinPortalDerivateOptions<E>,
 ) {
+  selectorSuffixes = castArray(selectorSuffixes);
+
   const {
     dataCy = undefined,
     persistent = false,
@@ -119,9 +123,12 @@ function portalDerivateCommand<E extends HTMLElement = HTMLElement>(
 
   const fn = typeof fnOrOptions === 'function' ? fnOrOptions : fnOrOptions.fn;
 
-  const portalSelector = `${
-    dataCy ? getDataCySelector(dataCy) : selector
-  }${selectorSuffix}`;
+  const portalSelector = selectorSuffixes
+    .map(
+      (selectorSuffix) =>
+        `${dataCy ? getDataCySelector(dataCy) : selector}${selectorSuffix}`,
+    )
+    .join(',');
 
   return cy.withinPortal(portalSelector, fn).should(($el) => {
     if (!persistent) {
@@ -154,8 +161,13 @@ export function registerPortalHelpers() {
   });
 
   Cypress.Commands.add('withinMenu', function (fnOrOptions) {
-    // Without `:not([role])` this would match select options menus too
-    return portalDerivateCommand('.q-menu', ':not([role])', fnOrOptions);
+    // QMenu only have a role attribute from Quasar v2.8.4 onwards
+    // Without the suffixes specification this would match select options menus too
+    return portalDerivateCommand(
+      '.q-menu',
+      [':not([role])', '[role=menu]'],
+      fnOrOptions,
+    );
   });
 
   Cypress.Commands.add('withinDialog', function (fnOrOptions) {
