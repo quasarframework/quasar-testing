@@ -5,7 +5,7 @@
 > You’re looking at Cypress AE v5 (Cypress 10) docs. If you're searching for Cypress AE v4 (Cypress 9) docs, head [here](https://github.com/quasarframework/quasar-testing/tree/cypress-v4/packages/e2e-cypress)
 
 ```shell
-$ quasar ext add @quasar/testing-e2e-cypress@beta
+$ yarn quasar ext add @quasar/testing-e2e-cypress@beta
 ```
 
 Add into your `.eslintrc.js` the following code:
@@ -74,9 +74,13 @@ You can either add options into `.nycrc` file or generate reports on the fly run
 
 ### Upgrade from Cypress AE v4
 
+> if you're coming from v3, follow [the migration guide for v4 and v4.1 first](https://github.com/quasarframework/quasar-testing/tree/cypress-v4/packages/e2e-cypress#upgrade-from-cypress-v4-to-v41-optional)
+
 All changes are related to Cypress v10 breaking changes, Quasar first-party helpers haven't been changed unless Cypress required it.
 
-> if you're coming from v3, follow [the migration guide for v4 and v4.1 first](https://github.com/quasarframework/quasar-testing/tree/cypress-v4/packages/e2e-cypress#upgrade-from-cypress-v4-to-v41-optional)
+Alternatively to the following guide, a faster but more error-prone way for advanced developers would be to run `yarn quasar ext add @quasar/testing-e2e-cypress@beta` and `yarn add -D cypress`, then let the package scaffold new files overriding the existing ones and manually merge your changes into the generated files. Even in this case, we suggest to take a look to the following migration guide and use it as a checklist, as some files must be renamed/removed.
+
+Here's all the steps you need to take while upgrading from v4 to v5:
 
 - upgrade to v5, then install `cypress` dependency, which has been externalized and marked as a peerDependency
 
