@@ -79,7 +79,7 @@ All changes are related to Cypress v10 breaking changes, Quasar first-party help
 - upgrade to v5, then install `cypress` dependency, which has been externalized and marked as a peerDependency
 
 ```sh
-yarn upgrade @quasar/quasar-app-extension-testing-e2e-cypress
+yarn upgrade @quasar/quasar-app-extension-testing-e2e-cypress@beta
 yarn add -D cypress
 ```
 
@@ -105,7 +105,7 @@ export default defineConfig({
 });
 ```
 
-- create a `test/cypress/support/component-index.html` file with this content (TODO: add link to template files)
+- create a `test/cypress/support/component-index.html` file with [this content](./src/templates/base/test/cypress/support/component-index.html)
 - set `component.test/cypress/support/component-index.html` property into `cypress.config.[js|ts]` to `test/cypress/support/component-index.html`
 - replace all `mount` occurrences to use the new `cy.mount()` helper instead
 - set `component.specPattern` property to `src/**/*.cy.{js,jsx,ts,tsx}` and update all your component tests names to match that pattern, replacing `.spec` with `.cy`
