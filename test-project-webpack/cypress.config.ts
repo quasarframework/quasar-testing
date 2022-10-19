@@ -1,5 +1,5 @@
-import { defineConfig } from 'cypress';
 import { injectQuasarDevServerConfig } from '@quasar/quasar-app-extension-testing-e2e-cypress/cct-dev-server';
+import { defineConfig } from 'cypress';
 
 export default defineConfig({
   fixturesFolder: 'test/cypress/fixtures',
@@ -10,7 +10,7 @@ export default defineConfig({
     // setupNodeEvents(on, config) {},
     baseUrl: 'http://localhost:8080/',
     supportFile: 'test/cypress/support/e2e.ts',
-    specPattern: 'test/cypress/integration/**/*.cy.{js,jsx,ts,tsx}',
+    specPattern: 'test/cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
   },
   component: {
     // setupNodeEvents(on, config) {},
