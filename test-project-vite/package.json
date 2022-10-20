@@ -60,7 +60,7 @@
     "cypress": "^10.10.0",
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-cypress": "^2.11.3",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-jest": "^25.2.2",
     "eslint-plugin-vue": "^8.5.0",
     "majestic": "^1.7.0",

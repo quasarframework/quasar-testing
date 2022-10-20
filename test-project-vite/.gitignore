@@ -34,3 +34,6 @@ yarn-error.log*
 
 .nyc_output
 coverage/
+
+.nyc_output
+coverage/
