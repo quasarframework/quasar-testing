@@ -39,6 +39,7 @@ function __mergeDeep(...sources) {
 // make sure the object exists
 let extendPackageJson = {
   devDependencies: {
+    cypress: '^10.10.0',
     'eslint-plugin-cypress': '^2.12.1',
   },
 };
