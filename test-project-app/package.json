@@ -51,7 +51,7 @@
     "cypress": "^10.10.0",
     "eslint": "^8.16.0",
     "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-cypress": "^2.11.3",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-jest": "^26.4.6",
     "eslint-plugin-vue": "^9.1.0",
     "majestic": "^1.7.0",
