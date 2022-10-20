@@ -1,7 +1,7 @@
 <template>
   <q-select
-    data-cy="select"
     v-model="selected"
+    data-cy="select"
     label="test options selection"
     :options="options"
     :loading="loading"

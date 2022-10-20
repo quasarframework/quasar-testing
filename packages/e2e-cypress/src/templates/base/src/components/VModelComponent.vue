@@ -26,6 +26,7 @@ export default defineComponent({
       required: true,
     },
   },
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   emits: { 'update:modelValue': (payload<% if (shouldSupportTypeScript) { %>: string<% } %>) => payload !== undefined },
 });
 </script>

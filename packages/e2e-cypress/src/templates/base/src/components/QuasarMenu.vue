@@ -2,10 +2,10 @@
   <q-btn data-cy="open-menu-btn" label="Open menu">
     <q-menu>
       <q-list>
-        <q-item clickable v-close-popup>
+        <q-item v-close-popup clickable>
           <q-item-section>Item 1</q-item-section>
         </q-item>
-        <q-item clickable v-close-popup>
+        <q-item v-close-popup clickable>
           <q-item-section>Item 2</q-item-section>
         </q-item>
       </q-list>
