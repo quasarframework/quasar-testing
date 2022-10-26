@@ -4,7 +4,7 @@
 
 # **`@quasar/testing`**
 
-> You’re looking at Quasar v2 testing docs. If you're searching for Quasar v1 docs, head [here](https://testing.quasar.dev/)
+> You’re looking at Quasar v2 testing docs. If you're searching for Quasar v1 docs, head [here](https://github.com/quasarframework/quasar-testing/tree/qv1)
 >
 > Check out the migration status [here](https://github.com/quasarframework/quasar/discussions/10341)
 
