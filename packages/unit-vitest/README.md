@@ -4,15 +4,6 @@
 $ quasar ext add @quasar/testing-unit-vitest
 ```
 
-> Since Vitest requires a newer Vite version than the one Quasar CLI offer, you'll need to set your `resolutions` (if using Yarn) or `overrides` (if using NPM) fields like this to have it working:
->
-> ```json
-> "resolutions": {
->   "@vitejs/plugin-vue": "^2.3.3",
->   "vite": "^2.9.12"
-> },
-> ```
-
 > This package is in **alpha** phase. The public API may still change as we collect community feedback.
 
 This App Extension (AE) manages Quasar and Vitest integration for you, both for JavaScript and TypeScript.
