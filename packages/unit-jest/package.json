@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-testing-unit-jest",
-  "version": "3.0.0-alpha.10",
+  "version": "3.0.0-beta.1",
   "license": "MIT",
   "description": "A Quasar App Extension for running Jest tests",
   "contributors": [
@@ -24,7 +24,7 @@
   "main": "dist/index.js",
   "typings": "dist/types/index.d.ts",
   "engines": {
-    "node": ">= 12.22.1",
+    "node": "^14.15.0 || ^16.10.0 || >=18.0.0",
     "npm": ">= 6.14.12",
     "yarn": ">= 1.17.3"
   },

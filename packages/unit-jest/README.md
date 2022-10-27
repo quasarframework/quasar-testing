@@ -6,10 +6,11 @@
 $ quasar ext add @quasar/testing-unit-jest@alpha
 ```
 
-> This package is in **alpha** phase. The public API may still change as we collect community feedback.
-> Notice that we rely on "@vue/test-utils" (VTU, currently in RC phase) and "vue-jest" (currently in alpha phase) and may not release the **stable** version of this package until those packages are released as **stable** too.
+> This package is in **beta** phase. The public API shouldn't change before the stable release.
 
 This App Extension (AE) manages Quasar and Jest integration for you, both for JavaScript and TypeScript.
+
+**[Jest isn't compatible with Vite](https://github.com/quasarframework/quasar-testing/issues/244#issuecomment-1293671738)**, if you use `@quasar/app-vite` and you need unit testing, you should use [Vitest](../unit-vitest/README.md) instead.
 
 What is included:
 
