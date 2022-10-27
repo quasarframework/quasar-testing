@@ -167,9 +167,9 @@ We won't commit to any deadline for integrations of new harnesses.
 
 ### QUALITY
 
-- [x] [lighthouse 3.0](https://github.com/GoogleChrome/lighthouse)
-- [x] [snyk](https://snyk.io/test)
-- [x] [nlf](https://github.com/iandotkelly/nlf) (Node license finder)
+- [ ] [lighthouse 3.0](https://github.com/GoogleChrome/lighthouse)
+- [ ] [snyk](https://snyk.io/test)
+- [ ] [nlf](https://github.com/iandotkelly/nlf) (Node license finder)
 - [ ] [import-cost](https://github.com/wix/import-cost/tree/master/packages/import-cost) (custom)
 - [ ] [bundlesize](https://github.com/siddharthkp/bundlesize) (custom)
 - [ ] [webpagetest](https://www.webpagetest.org/)
@@ -222,12 +222,8 @@ Please note: project coordination takes place on the [Discord server](https://di
 - bloo_df
 - PhearZero
 
-## Special Thanks
-
-Denjell would like to give a special shout out to all of the people who helped test the testing framework during the transition from 0.17 to 1.0
-
 ## License
 
-MIT ©2018 - present - D.C. Thompson & Razvan Stoenescu
+MIT ©2022 - present - Paolo Caleffi & Razvan Stoenescu
 
 All Icons © the respective owners
