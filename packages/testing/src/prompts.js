@@ -18,7 +18,7 @@ module.exports = function () {
       choices: [
         {
           name: 'Jest Unit Testing',
-          value: 'unit-jest@alpha',
+          value: 'unit-jest@beta',
         },
         {
           name: 'Vitest Unit Testing',
