@@ -1,15 +1,4 @@
 /* eslint-disable */
-const fs = require('fs');
-let extend = undefined;
-
-/**
- * The .babelrc file has been created to assist Jest for transpiling.
- * You should keep your application's babel rules in this file.
- */
-
-if (fs.existsSync('./.babelrc')) {
-  extend = './.babelrc';
-}
 
 module.exports = (api) => {
   return {
@@ -21,6 +10,5 @@ module.exports = (api) => {
           : {},
       ],
     ],
-    extends: extend,
   };
 };
