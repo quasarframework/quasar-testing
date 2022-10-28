@@ -7,6 +7,8 @@
  * @returns {object} New object with merged key/values
  */
 
+const { join } = require('path');
+
 function __mergeDeep(...sources) {
   let result = {};
   for (const source of sources) {
@@ -28,13 +30,23 @@ function __mergeDeep(...sources) {
   return result;
 }
 
+const { peerDependencies } = require(join(__dirname, '..', 'package.json'));
+
+function getCompatibleDevDependencies(packageNames) {
+  const devDependencies = {};
+
+  for (const packageName of packageNames) {
+    devDependencies[packageName] = peerDependencies[packageName];
+  }
+
+  return devDependencies;
+}
+
 const ciCommand = 'jest --ci';
 
 // make sure the object exists
 let extendPackageJson = {
-  devDependencies: {
-    'eslint-plugin-jest': '^25.2.2',
-  },
+  devDependencies: getCompatibleDevDependencies(['@vue/test-utils', 'jest']),
 };
 
 module.exports = function (api) {
@@ -54,13 +66,15 @@ module.exports = function (api) {
 
   if (api.prompts.options.includes('majestic')) {
     const majestic = {
-      devDependencies: {
-        majestic: '^1.7.0',
-      },
-      scripts: {
-        'test:unit:ui': 'majestic',
-      },
+      devDependencies: getCompatibleDevDependencies(['majestic']),
     };
+
+    if (api.prompts.options.includes('scripts')) {
+      majestic.scripts = {
+        'test:unit:ui': 'majestic',
+      };
+    }
+
     extendPackageJson = __mergeDeep(extendPackageJson, majestic);
   }
 
@@ -73,8 +87,6 @@ module.exports = function (api) {
         'test:unit:coverage': 'jest --coverage',
         'test:unit:watch': 'jest --watch',
         'test:unit:watchAll': 'jest --watchAll',
-        'serve:test:coverage':
-          'quasar serve test/jest/coverage/lcov-report/ --port 8788',
         'concurrently:dev:jest': 'concurrently "quasar dev" "jest --watch"',
       },
     };

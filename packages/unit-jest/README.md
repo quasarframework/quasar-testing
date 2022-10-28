@@ -2,15 +2,44 @@
 
 > You’re looking at Quasar v2 testing docs. If you're searching for Quasar v1 docs, head [here](https://github.com/quasarframework/quasar-testing/tree/qv1/packages/unit-jest/)
 
-```shell
-$ quasar ext add @quasar/testing-unit-jest@alpha
-```
+> **[Jest isn't compatible with Vite](https://github.com/quasarframework/quasar-testing/issues/244#issuecomment-1293671738)**, if you use `@quasar/app-vite` and you need unit testing, you should use [Vitest](../unit-vitest/README.md) instead.
 
 > This package is in **beta** phase. The public API shouldn't change before the stable release.
 
-This App Extension (AE) manages Quasar and Jest integration for you, both for JavaScript and TypeScript.
+```shell
+$ quasar ext add @quasar/testing-unit-jest@beta
+```
 
-**[Jest isn't compatible with Vite](https://github.com/quasarframework/quasar-testing/issues/244#issuecomment-1293671738)**, if you use `@quasar/app-vite` and you need unit testing, you should use [Vitest](../unit-vitest/README.md) instead.
+Add into your `.eslintrc.js` the following code:
+
+```js
+{
+  // ...
+  overrides: [
+    {
+      files: [
+        '**/test/jest/__tests__/**/*.{spec,test}.{js,jsx,ts,tsx}',
+        '**/*.jest.{spec,test}.{js,jsx,ts,tsx}',
+      ],
+      env: {
+        browser: true,
+      },
+      extends: [
+        // Removes 'no-undef' lint errors for Jest global functions (`describe`, `it`, etc),
+        //  add Jest-specific lint rules and Jest plugin
+        // See https://github.com/jest-community/eslint-plugin-jest#recommended
+        'plugin:jest/recommended',
+        // Uncomment following line to apply style rules
+        // 'plugin:jest/style',
+      ],
+    },
+  ],
+}
+```
+
+---
+
+This App Extension (AE) manages Quasar and Jest integration for you, both for JavaScript and TypeScript.
 
 What is included:
 
