@@ -101,5 +101,22 @@ module.exports = {
         'plugin:cypress/recommended',
       ],
     },
+    {
+      files: [
+        '**/test/jest/__tests__/**/*.{spec,test}.{js,jsx,ts,tsx}',
+        '**/*.jest.{spec,test}.{js,jsx,ts,tsx}',
+      ],
+      env: {
+        browser: true,
+      },
+      extends: [
+        // Removes 'no-undef' lint errors for Jest global functions (`describe`, `it`, etc),
+        //  add Jest-specific lint rules and Jest plugin
+        // See https://github.com/jest-community/eslint-plugin-jest#recommended
+        'plugin:jest/recommended',
+        // Uncomment following line to apply style rules
+        'plugin:jest/style',
+      ],
+    },
   ],
 };
