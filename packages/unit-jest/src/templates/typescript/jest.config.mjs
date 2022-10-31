@@ -1,4 +1,4 @@
-import { esModules } from '@quasar/quasar-app-extension-testing-unit-jest';
+import { quasarEsModulesPackageNames } from '@quasar/quasar-app-extension-testing-unit-jest/jest-preset.mjs';
 
 /** @type {import('jest').Config} */
 export default {
@@ -13,7 +13,7 @@ export default {
   //   },
   // },
   transform: {
-    [`^(${esModules}).+\\.js$`]: 'babel-jest',
+    [`^(${quasarEsModulesPackageNames}).+\\.js$`]: 'babel-jest',
     '^.+\\.(ts|js|html)$': [
       'ts-jest',
       {
@@ -23,7 +23,4 @@ export default {
       },
     ],
   },
-  // https://jestjs.io/docs/configuration#transformignorepatterns-arraystring
-  // Note that this must be adapted as explained in the link above if you're using PNPM
-  transformIgnorePatterns: [`node_modules/(?!(${esModules}))`],
 };
