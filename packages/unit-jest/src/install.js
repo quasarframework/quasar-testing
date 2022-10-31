@@ -87,7 +87,6 @@ module.exports = function (api) {
         'test:unit:coverage': 'jest --coverage',
         'test:unit:watch': 'jest --watch',
         'test:unit:watchAll': 'jest --watchAll',
-        'concurrently:dev:jest': 'concurrently "quasar dev" "jest --watch"',
       },
     };
     extendPackageJson = __mergeDeep(extendPackageJson, scripts);
