@@ -94,8 +94,4 @@ module.exports = function (api) {
   }
 
   api.extendPackageJson(extendPackageJson);
-
-  if (api.prompts.babel) {
-    api.render(`./templates/${api.prompts.babel}`);
-  }
 };

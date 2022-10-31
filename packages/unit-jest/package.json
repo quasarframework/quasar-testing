@@ -29,7 +29,6 @@
     "yarn": ">= 1.17.3"
   },
   "dependencies": {
-    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@vue/vue3-jest": "^29.0.0",
     "alias-hq": "^5.4.0",
     "babel-jest": "^29.2.2",
