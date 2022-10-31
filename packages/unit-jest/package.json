@@ -33,7 +33,6 @@
     "alias-hq": "^5.4.0",
     "babel-jest": "^29.2.2",
     "chai": "^4.3.6",
-    "concurrently": "^7.5.0",
     "esbuild": "^0.15.12",
     "jest-environment-jsdom": "^29.2.2",
     "jest-transform-stub": "^2.0.0",
