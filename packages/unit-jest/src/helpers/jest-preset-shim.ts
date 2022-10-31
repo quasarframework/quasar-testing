@@ -5,5 +5,6 @@ declare module '@quasar/quasar-app-extension-testing-unit-jest/jest-preset.mjs' 
   import { Config } from 'jest';
 
   export const quasarEsModulesPackageNames: string;
+  export const config: Config;
   export default Config;
 }
