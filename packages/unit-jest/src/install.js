@@ -46,7 +46,11 @@ const ciCommand = 'jest --ci';
 
 // make sure the object exists
 let extendPackageJson = {
-  devDependencies: getCompatibleDevDependencies(['@vue/test-utils', 'jest']),
+  devDependencies: getCompatibleDevDependencies([
+    '@vue/test-utils',
+    'jest',
+    'eslint-plugin-jest',
+  ]),
 };
 
 module.exports = function (api) {
