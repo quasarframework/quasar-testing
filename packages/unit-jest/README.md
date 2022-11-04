@@ -17,6 +17,15 @@ Add into your `.eslintrc.js` the following code:
   // ...
   overrides: [
     {
+      files: ["**/*.{js,ts}"],
+      // If the `script` part of a Vue component is stored in a separate JS/TS file,
+      // as is the case when using DFC (https://testing.quasar.dev/packages/unit-jest/#double-file-components-dfc),
+      // Vue ESLint plugin will highlight all public properties as unused
+      // as it's not able to detect their usage into the template
+      // We disable this rule and only keep it for Vue files
+      rules: { "vue/no-unused-properties": "off" },
+    },
+    {
       files: [
         '**/test/jest/__tests__/**/*.{spec,test}.{js,jsx,ts,tsx}',
         '**/*.jest.{spec,test}.{js,jsx,ts,tsx}',
