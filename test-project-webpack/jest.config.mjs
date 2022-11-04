@@ -18,7 +18,7 @@ export default {
       'ts-jest',
       {
         // Remove if using `const enums`
-        // See https://huafu.github.io/ts-jest/user/config/isolatedModules#example
+        // See https://kulshekhar.github.io/ts-jest/docs/getting-started/options/isolatedModules/
         isolatedModules: true,
       },
     ],
