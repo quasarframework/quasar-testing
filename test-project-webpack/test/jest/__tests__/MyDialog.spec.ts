@@ -1,5 +1,5 @@
-import { installQuasarPlugin } from '@quasar/quasar-app-extension-testing-unit-jest';
 import { beforeEach, describe, expect, it } from '@jest/globals';
+import { installQuasarPlugin } from '@quasar/quasar-app-extension-testing-unit-jest';
 import { DOMWrapper, mount } from '@vue/test-utils';
 import MyDialog from './demo/MyDialog';
 
@@ -24,7 +24,7 @@ describe('MyDialog', () => {
     const wrapper = new DOMWrapper(document.body);
 
     expect(wrapper.find('.q-dialog').html()).toContain(
-      'Custom dialog which should be tested',
+      'Custom dialog which should be tested'
     );
   });
 });
