@@ -3,6 +3,11 @@ import { config } from '@vue/test-utils';
 import { cloneDeep } from 'lodash-es';
 import { Quasar, QuasarPluginOptions } from 'quasar';
 
+// All Quasar components are registered by default if no `components` option
+// is provided via these helper options
+// TODO: why this happens is currently unknown, but handy.
+// We know those components aren't available into config.global.components,
+// so it must be something happening into Vue Test Utils or Jest.
 export function installQuasarPlugin(options?: Partial<QuasarPluginOptions>) {
   const globalConfigBackup = cloneDeep(config.global);
 
