@@ -1,10 +1,9 @@
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
   name: 'MyDialog',
-  data() {
-    return {
-      isDialogOpen: false,
-    };
+  setup() {
+    const isDialogOpen = ref(false);
+    return { isDialogOpen };
   },
 });
