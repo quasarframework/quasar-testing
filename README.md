@@ -38,6 +38,8 @@ The Test Driven Design approach will help you to write better (and fewer) tests.
   - [Testing Harnesses Manager](packages/testing/README.md)
   - Unit testing
     - [Jest](packages/unit-jest/README.md)
+    - [Vitest](packages/unit-vitest/README.md)
+  
   - E2E testing
     - [Cypress](packages/e2e-cypress/README.md)
   - [Quality Auditing](#quality-auditing) (**OUTDATED, not migrated to Qv2 yet**)
