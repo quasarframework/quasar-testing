@@ -7,6 +7,11 @@ export const quasarEsModulesPackageNames = [
   'lodash-es',
 ].join('|');
 
+const aliases = hq.get('jest', { format: 'array' });
+// "^vue$$" alias points to an ESM bundler build which Jest would need to transpile or re-map to CJS
+// Currently this this alias isn't even defined into TS codebases
+delete aliases['^vue$$'];
+
 /** @type {import('jest').Config} */
 export const config = {
   globals: {
@@ -37,10 +42,11 @@ export const config = {
   // See https://github.com/vuejs/vue-jest/issues/188#issuecomment-620750728
   moduleFileExtensions: ['vue', ...defaults.moduleFileExtensions],
   moduleNameMapper: {
+    // Quasar CJS export is SSR-only, so we need to use ESM build and transpile it with Babel
     '^quasar$': 'quasar/dist/quasar.esm.prod.js',
     '^~/(.*)$': '<rootDir>/$1',
     '.*css$': '@quasar/quasar-app-extension-testing-unit-jest/stub.css',
-    ...hq.get('jest', { format: 'array' }),
+    ...aliases,
   },
   transform: {
     '.*\\.vue$': [
