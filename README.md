@@ -122,6 +122,10 @@ $ quasar ext add @quasar/testing-unit-jest
 
 [Check out Jest AE documentation](packages/unit-jest/README.md)
 
+### [Vitest](https://vitest.dev/)
+
+[Check out Vitest AE documentation](packages/unit-vitest/README.md)
+
 ## E2E Testing
 
 We recommend testing webapps with Cypress if you target Chrome-based browsers (Chrome, Edge, Electron) or Firefox - but if you want to test Safari or Cordova/Capacitor apps, then you should consider using webdriver.io.
