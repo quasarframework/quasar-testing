@@ -35,7 +35,7 @@ module.exports = async function (api) {
         viteConf.plugins.push(
           istanbul({
             exclude: ['.quasar/*'],
-            forceBuildInstrument: true,
+            forceBuildInstrument: api.ctx.prod ? true : false,
           }),
         );
       });
