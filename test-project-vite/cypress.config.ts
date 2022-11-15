@@ -15,6 +15,7 @@ export default defineConfig({
     baseUrl: 'http://localhost:9000/',
     supportFile: 'test/cypress/support/e2e.ts',
     specPattern: 'test/cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
+    defaultCommandTimeout: 10000,
   },
   component: {
     setupNodeEvents(on, config) {

@@ -36,15 +36,15 @@
     "lodash": "^4.17.21",
     "nyc": "^15.1.0",
     "start-server-and-test": "^1.14.0",
-    "vite-plugin-istanbul": "^2.7.3"
+    "vite-plugin-istanbul": "^3.0.2"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.182",
-    "cypress": "^10.10.0",
+    "cypress": "^11.0.1",
     "eslint-plugin-cypress": "^2.12.1",
     "rimraf": "^3.0.2"
   },
   "peerDependencies": {
-    "cypress": "^10.10.0"
+    "cypress": "^11.0.1"
   }
 }
