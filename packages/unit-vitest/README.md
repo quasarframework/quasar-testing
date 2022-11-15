@@ -11,7 +11,7 @@ This App Extension (AE) manages Quasar and Vitest integration for you, both for 
 What is included:
 
 - a Vite config file with Quasar configure (`vitest.config.ts`);
-- an `installQuasar` function to help you setup and configure the test Quasar instance on a per-test-suite basis;
+- an `installQuasarPlugin` function to help you setup and configure the test Quasar instance on a per-test-suite basis;
 - some examples about how to use it with Pinia and Vue Router;
 - some example components and related example tests inside `test/vitest/__tests__`
 - some useful `package.json` scripts;
@@ -36,10 +36,10 @@ import ExampleComponent from '../ExampleComponent.vue';
  * You can provide a config object as param like such:
  *
  * ```ts
- * installQuasar({ plugins: { Dialog } });
+ * installQuasarPlugin({ plugins: { Dialog } });
  * ```
  */
-installQuasar();
+installQuasarPlugin();
 
 describe('ExampleComponent', () => {
   it('should mount correctly', async () => {
