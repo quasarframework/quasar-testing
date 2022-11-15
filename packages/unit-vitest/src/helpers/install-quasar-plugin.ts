@@ -4,7 +4,7 @@ import { Quasar, QuasarPluginOptions } from 'quasar';
 import { qLayoutInjections } from './layout-injections';
 import { beforeAll, afterAll } from 'vitest';
 
-export function installQuasar(options?: Partial<QuasarPluginOptions>) {
+export function installQuasarPlugin(options?: Partial<QuasarPluginOptions>) {
   const globalConfigBackup = cloneDeep(config.global);
 
   beforeAll(() => {

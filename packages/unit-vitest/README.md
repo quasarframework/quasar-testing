@@ -28,7 +28,7 @@ It will also restore the original configuration after all tests completed.
 Usage:
 
 ````ts
-import { installQuasar } from '@quasar/quasar-app-extension-testing-unit-vitest';
+import { installQuasarPlugin } from '@quasar/quasar-app-extension-testing-unit-vitest';
 import { mount } from '@vue/test-utils';
 import ExampleComponent from '../ExampleComponent.vue';
 
@@ -148,7 +148,7 @@ const counter = computed(() => store.counter);
 ```ts
 // StoreComponent.test.ts
 
-import { installQuasar } from '@quasar/quasar-app-extension-testing-unit-vitest';
+import { installQuasarPlugin } from '@quasar/quasar-app-extension-testing-unit-vitest';
 import { mount } from '@vue/test-utils';
 import { useCounterStore } from '../example-store';
 import { describe, expect, it } from 'vitest';
@@ -157,7 +157,7 @@ import StoreComponent from './StoreComponent.vue';
 
 // Documentation: https://pinia.vuejs.org/cookbook/testing.html#unit-testing-a-store
 
-installQuasar();
+installQuasarPlugin();
 installPinia({ stubActions: false });
 
 describe('store examples', () => {

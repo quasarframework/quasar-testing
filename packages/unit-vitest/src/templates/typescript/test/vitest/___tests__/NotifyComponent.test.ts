@@ -1,10 +1,10 @@
-import { installQuasar } from '@quasar/quasar-app-extension-testing-unit-vitest';
+import { installQuasarPlugin } from '@quasar/quasar-app-extension-testing-unit-vitest';
 import { mount } from '@vue/test-utils';
 import { Notify } from 'quasar';
 import { describe, expect, it, vi } from 'vitest';
 import NotifyComponent from './demo/NotifyComponent.vue';
 
-installQuasar({ plugins: { Notify } });
+installQuasarPlugin({ plugins: { Notify } });
 
 describe('notify example', () => {
   it('should call notify on click', async () => {

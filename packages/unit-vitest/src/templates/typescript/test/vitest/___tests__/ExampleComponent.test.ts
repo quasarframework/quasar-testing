@@ -1,9 +1,9 @@
-import { installQuasar } from '@quasar/quasar-app-extension-testing-unit-vitest';
+import { installQuasarPlugin } from '@quasar/quasar-app-extension-testing-unit-vitest';
 import { mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import ExampleComponent from './demo/ExampleComponent.vue';
 
-installQuasar();
+installQuasarPlugin();
 
 describe('example Component', () => {
   it('should mount component with todos', () => {
