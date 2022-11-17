@@ -1,5 +1,5 @@
 {
   "all": true,
-  "include": ["**/*.{js,cjs,mjs,jsx,ts,tsx,vue}"],
-  "exclude": ["**/.quasar/**", "**/__tests__/**", "**/*.d.ts"]
+  "include": ["src/**/*.{js,cjs,mjs,jsx,ts,tsx,vue}"],
+  "exclude": ["**/__tests__/**", "**/*.d.ts"]
 }
