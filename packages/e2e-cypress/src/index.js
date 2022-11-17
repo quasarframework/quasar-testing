@@ -34,7 +34,7 @@ module.exports = async function (api) {
       api.extendViteConf((viteConf) => {
         viteConf.plugins.push(
           istanbul({
-            forceBuildInstrument: api.ctx.prod ? true : false,
+            forceBuildInstrument: api.ctx.prod,
           }),
         );
       });
