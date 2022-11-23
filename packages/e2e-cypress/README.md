@@ -177,8 +177,8 @@ The good news is that we don't actually need to, since official documentation fo
 ### Testing the AE
 
 ```sh
-cd test-project
-yarn sync:cypress
-yarn test:e2e:ci
-yarn test:component:ci
+cd test-project-webpack # or "cd test-project-vite" or "cd test-project-app"
+yarn sync:cypress # or "yarn sync:all", if it's the first time you run this command
+yarn test:e2e:ci # check if e2e tests still work with the local version of the AE
+yarn test:component:ci # check if component tests still work with the local version of the AE
 ```

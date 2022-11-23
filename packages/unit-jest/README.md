@@ -315,3 +315,11 @@ export default defineComponent({
 
 `jest --watch` will not work if you don't have a version control system (Git, Mercurial) in place, as jest relies on it to track which files should be watched for changes.
 Alternatively you can use `jest --watchAll`, but be aware there will be a performance impact and you should ignore all folders not containing tests in your Jest configuration.
+
+### Testing the AE
+
+```sh
+cd test-project-webpack # or "cd test-project-app"
+yarn sync:jest # or "yarn sync:all", if it's the first time you run this command
+yarn test:unit:ci # check if unit tests still work with the local version of the AE
+```

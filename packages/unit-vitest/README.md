@@ -174,3 +174,11 @@ describe('store examples', () => {
   });
 });
 ```
+
+### Testing the AE
+
+```sh
+cd test-project-vite
+yarn sync:vitest # or "yarn sync:all", if it's the first time you run this command
+yarn test:unit:ci # check if unit tests still work with the local version of the AE
+```
