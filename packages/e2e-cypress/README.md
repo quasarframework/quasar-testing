@@ -2,7 +2,7 @@
 
 > You’re looking at Quasar v2 testing docs. If you're searching for Quasar v1 docs, head [here](https://github.com/quasarframework/quasar-testing/tree/qv1/packages/e2e-cypress/)
 
-> You’re looking at Cypress AE v5 (Cypress 10) docs. If you're searching for Cypress AE v4 (Cypress 9) docs, head [here](https://github.com/quasarframework/quasar-testing/tree/cypress-v4/packages/e2e-cypress)
+> You’re looking at Cypress AE v5 (Cypress 11) docs. If you're searching for Cypress AE v4 (Cypress 9) docs, head [here](https://github.com/quasarframework/quasar-testing/tree/cypress-v4/packages/e2e-cypress)
 
 ```shell
 $ yarn quasar ext add @quasar/testing-e2e-cypress@beta
@@ -122,7 +122,7 @@ export default defineConfig({
 - remove Cypress JSON schema registration from vscode settings, Cypress switched to a JS/TS config file and is now using an helper function to provide autocomplete.
 - update eslint override pattern which applies to cypress files as explained into this AE installation instructions
 - (optional) move any other custom configuration from `test/cypress/plugins/index.[js|ts]` to [`setupNodeEvents` hooks](https://docs.cypress.io/guides/references/configuration#History) into `cypress.config.[js|ts]`. Note that if you're using Vite and you added code coverage, you'll need to setup code coverage plugin both into e2e and component `setupNodeEvents` hooks
-- check out [Cypress 10 changelog](https://docs.cypress.io/guides/references/changelog#10-0-0) and see if something else in there affect you
+- check out [Cypress 10 changelog](https://docs.cypress.io/guides/references/changelog#10-0-0) and [Cypress 11 changelog](https://docs.cypress.io/guides/references/changelog#11-0-0), and see if something else in there affect you
 
 ### Caveats
 
