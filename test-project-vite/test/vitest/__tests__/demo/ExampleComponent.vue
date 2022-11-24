@@ -34,7 +34,7 @@ const props = withDefaults(
   }>(),
   {
     todos: () => [],
-  },
+  }
 );
 
 const clickCount = ref(0);
