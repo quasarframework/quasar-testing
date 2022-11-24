@@ -5,6 +5,7 @@
  */
 
 const { appendFileSync } = require('fs');
+const { join } = require('path');
 
 /**
  * Performs a deep merge of objects and returns new object. Does not modify
@@ -36,12 +37,24 @@ function __mergeDeep(...sources) {
   return result;
 }
 
+const { peerDependencies } = require(join(__dirname, '..', 'package.json'));
+
+function getCompatibleDevDependencies(packageNames) {
+  const devDependencies = {};
+
+  for (const packageName of packageNames) {
+    devDependencies[packageName] = peerDependencies[packageName];
+  }
+
+  return devDependencies;
+}
+
 // make sure the object exists
 let extendPackageJson = {
-  devDependencies: {
-    cypress: '^10.10.0',
-    'eslint-plugin-cypress': '^2.12.1',
-  },
+  devDependencies: getCompatibleDevDependencies([
+    'cypress',
+    'eslint-plugin-cypress',
+  ]),
 };
 
 module.exports = function (api) {
