@@ -29,7 +29,7 @@ module.exports = function () {
           value: 'e2e-cypress',
         },
         {
-          name: 'Cypress 10 e2e and component testing (beta)',
+          name: 'Cypress 11 e2e and component testing (beta)',
           value: 'e2e-cypress@beta',
         },
       ],
