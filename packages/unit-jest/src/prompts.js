@@ -26,6 +26,10 @@ module.exports = function () {
           value: 'typescript',
         },
         {
+          name: 'SWC for TypeScript (experimental)',
+          value: 'swc',
+        },
+        {
           name: 'Use Majestic UI as Jest tests GUI',
           value: 'majestic',
         },

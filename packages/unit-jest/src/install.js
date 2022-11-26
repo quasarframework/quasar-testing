@@ -68,6 +68,14 @@ module.exports = function (api) {
     }typescript`,
   );
 
+  if (api.prompts.options.includes('swc')) {
+    api.render(`./templates/swc`)
+    const swc = {
+      devDependencies: getCompatibleDevDependencies(['@swc/jest', '@swc/core']),
+    };
+    extendPackageJson = __mergeDeep(extendPackageJson, swc)
+  }
+
   if (api.prompts.options.includes('majestic')) {
     const majestic = {
       devDependencies: getCompatibleDevDependencies(['majestic']),

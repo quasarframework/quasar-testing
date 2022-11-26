@@ -284,6 +284,10 @@ This AE ships with project-level type-checking disabled by default since it incr
 
 Project-wide type-checking already takes place during development and into your IDE, so you won't usually need this during tests anyway.
 
+##### SWC support
+
+Experimental support has been added for [swc/jest](https://swc.rs/docs/usage/jest), which is a drop-in Rust replacement for ts-jest and should make your TypeScript Jest tests run faster. To install it, choose the relevant option when prompted on installation, ensuring also to choose typescript.
+
 ##### Double File Components (DFC)
 
 There are a couple of limitations due to Vue and TS incompabilities.
