@@ -10394,10 +10394,10 @@ vite-jsconfig-paths@^2.0.1:
     recrawl-sync "^2.0.3"
     tsconfig-paths "^3.9.0"
 
-vite-plugin-istanbul@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/vite-plugin-istanbul/-/vite-plugin-istanbul-3.0.2.tgz#abb01b337bbd3a20666d9d82d472688a99ba2796"
-  integrity sha512-eOKedaeciqJTLEAUo7mkMqXjjeAXGhHUYuiLLBUaBwj8AdO31uVOsZvKeVViRqHKyhi5YlarmGh8r7jJVlX0VQ==
+vite-plugin-istanbul@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/vite-plugin-istanbul/-/vite-plugin-istanbul-3.0.3.tgz#88a0e286ccc33030b36d7809a78382cf84dd5f74"
+  integrity sha512-2nCYSsY1kgF83S007rg0GPmeL5P+bph8Z5RJ3Pv1kHHx9OMyKt/cLyGCWAYQnBk9VckzXRGEaX3FSLtcSai4Yg==
   dependencies:
     "@istanbuljs/load-nyc-config" "^1.1.0"
     istanbul-lib-instrument "^5.1.0"

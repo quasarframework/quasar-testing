@@ -36,7 +36,7 @@
     "lodash": "^4.17.21",
     "nyc": "^15.1.0",
     "start-server-and-test": "^1.14.0",
-    "vite-plugin-istanbul": "^3.0.2"
+    "vite-plugin-istanbul": "^3.0.3"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.182",
