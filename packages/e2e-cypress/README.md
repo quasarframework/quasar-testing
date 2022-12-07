@@ -57,20 +57,25 @@ To generate reports, run `test:e2e:ci` and/or `test:component:ci` scripts.
 Running them both sequentially within the same command (eg. `yarn test:e2e:ci && yarn test:component:ci`) will result in combined coverage report.
 You'll find the generated report into `coverage/lcov-report` folder.
 
-We provide a [preset configuration](https://github.com/quasarframework/quasar-testing/blob/dev/packages/e2e-cypress/nyc-config-preset.json) for the coverage report which:
+We provide a [preset configuration][nyc-config-preset] for the coverage report which:
 
 - enables `all` option to include some files which are ignored by default:
   - dynamically imported components, such as layout and pages imported by vue-router;
   - files not touched by any test.
 - excludes test folders (`__tests__`) and TS declaration files (\*.d.ts), which should already be excluded [by default](https://github.com/istanbuljs/schema/blob/master/default-exclude.js) but apparently aren't;
-- only includes actual code files, leaving out code-like static assets (eg. svgs).
+- only includes actual code files, leaving out code-like static assets (e.g. SVGs).
 
 Check out [nyc official documentation](https://github.com/istanbuljs/nyc) if you want to customize report generation.
 You can either add options into `.nycrc` file or generate reports on the fly running `nyc report <options>`.
 
+If you want to override the options that are defined by our [preset configuration][nyc-config-preset](_or any preset_), you should be aware of [this nyc issue](https://github.com/istanbuljs/nyc/issues/1286).
+You can either apply [this workaround](https://github.com/istanbuljs/nyc/issues/1286#issuecomment-926077635) or embed our [preset configuration][nyc-config-preset] into your `.nycrc` file directly, instead of `extends`.
+
 > Note that we do not setup [Istanbul TS configuration](https://github.com/istanbuljs/istanbuljs/tree/master/packages/nyc-config-typescript) and its dependencies as Cypress claims [it's able to manage TS code coverage out-of-the-box](https://github.com/cypress-io/code-coverage#typescript-users).
 > Some TS files may be excluded by the report in scenarios, eg. if they aren't actually imported (dead code), if they're tree-shaked away by a bundler or if they only contain types/interfaces, and as such have no actual JS representation.
 > Please open an issue if you notice some files are missing from generated reports in this scenario.
+
+[nyc-config-preset]: https://github.com/quasarframework/quasar-testing/blob/dev/packages/e2e-cypress/nyc-config-preset.json
 
 ### Upgrade from Cypress AE v4
 
