@@ -45,7 +45,7 @@ export const config = {
     // Quasar CJS export is SSR-only, so we need to use ESM build and transpile it with Babel
     '^quasar$': 'quasar/dist/quasar.esm.prod.js',
     '^~/(.*)$': '<rootDir>/$1',
-    '.*css$': '@quasar/quasar-app-extension-testing-unit-jest/stub.css',
+    '.*css$': '@quasar/quasar-app-extension-testing-unit-jest/src/helpers/stub.css',
     ...aliases,
   },
   transform: {
