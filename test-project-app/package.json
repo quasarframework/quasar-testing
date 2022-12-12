@@ -32,7 +32,7 @@
     "test:component": "cross-env NODE_ENV=test cypress open --component",
     "test:component:ci": "cross-env NODE_ENV=test cypress run --component",
     "test:unit:ui": "majestic",
-    "test:unit": "jest --updateSnapshot",
+    "test:unit": "jest",
     "test:unit:ci": "jest --ci",
     "test:unit:coverage": "jest --coverage",
     "test:unit:watch": "jest --watch",

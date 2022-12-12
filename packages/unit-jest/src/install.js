@@ -86,7 +86,7 @@ module.exports = function (api) {
     const scripts = {
       scripts: {
         test: 'echo "See package.json => scripts for available tests." && exit 0',
-        'test:unit': 'jest --updateSnapshot',
+        'test:unit': 'jest',
         'test:unit:ci': ciCommand,
         'test:unit:coverage': 'jest --coverage',
         'test:unit:watch': 'jest --watch',

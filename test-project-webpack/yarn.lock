@@ -1919,14 +1919,14 @@
   integrity sha512-p3JKgTjRlJ1YQXbqTw3Bsa4j0mQdt5dq+WfYvyb7MgKGdephHCKdR/kxA5PCTAmJanGJuDKqRdyGYX/hYN4KGw==
 
 "@quasar/quasar-app-extension-testing-e2e-cypress@../packages/e2e-cypress":
-  version "5.0.0-beta.7"
+  version "5.0.0-beta.10"
   dependencies:
     "@cypress/code-coverage" "^3.10.0"
     cross-env "^7.0.3"
     lodash "^4.17.21"
     nyc "^15.1.0"
     start-server-and-test "^1.14.0"
-    vite-plugin-istanbul "^3.0.2"
+    vite-plugin-istanbul "^3.0.3"
 
 "@quasar/quasar-app-extension-testing-unit-jest@../packages/unit-jest":
   version "3.0.0-beta.5"
@@ -1942,7 +1942,7 @@
     ts-jest "^29.0.3"
 
 "@quasar/quasar-app-extension-testing@../packages/testing":
-  version "2.0.5"
+  version "2.0.6"
   dependencies:
     chalk "^4.1.1"
     execa "^5.1.1"
@@ -9975,10 +9975,10 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-vite-plugin-istanbul@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/vite-plugin-istanbul/-/vite-plugin-istanbul-3.0.2.tgz#abb01b337bbd3a20666d9d82d472688a99ba2796"
-  integrity sha512-eOKedaeciqJTLEAUo7mkMqXjjeAXGhHUYuiLLBUaBwj8AdO31uVOsZvKeVViRqHKyhi5YlarmGh8r7jJVlX0VQ==
+vite-plugin-istanbul@^3.0.3:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/vite-plugin-istanbul/-/vite-plugin-istanbul-3.0.4.tgz#a8367e393fc51c9e071607de5bacf46ddcac698f"
+  integrity sha512-DJy3cq6yOFbsM3gLQf/3zeuaJNJsfBv5dLFdZdv8sUV30xLtZI+66QeYfHUyP/5vBUYyLA+xNUCSG5uHY6w+5g==
   dependencies:
     "@istanbuljs/load-nyc-config" "^1.1.0"
     istanbul-lib-instrument "^5.1.0"
