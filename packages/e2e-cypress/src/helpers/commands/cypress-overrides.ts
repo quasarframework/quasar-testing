@@ -1,6 +1,3 @@
-// TODO: Cypress types when overriding select are wrong up until 9.7, they miss subject param
-// this forces us to use ts-expect-error on every override
-
 function isCheckBasedComponent(subject: JQuery<HTMLElement>) {
   return (
     subject.hasClass('q-checkbox') ||
@@ -10,16 +7,9 @@ function isCheckBasedComponent(subject: JQuery<HTMLElement>) {
 }
 
 export function registerCypressOverwrites() {
-  Cypress.Commands.overwrite(
+  Cypress.Commands.overwrite<'select', 'element'>(
     'select',
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    (
-      originalFn,
-      subject: JQuery<HTMLElement>,
-      valueOrTextOrIndex: string | number | Array<string | number>,
-      options,
-    ) => {
+    (originalFn, subject, valueOrTextOrIndex, options) => {
       // Hijack the subject to be the root q-select element if we notice we are inside one of them
       // This is due to Quasar passing data-cy attr to the underlying "q-field__native" element
       // The re-target allow to use this command seamlessly, but the problem will still bite back in other scenarios
@@ -60,17 +50,13 @@ export function registerCypressOverwrites() {
         return;
       }
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       return originalFn(subject, valueOrTextOrIndex, options);
     },
   );
 
-  Cypress.Commands.overwrite(
+  Cypress.Commands.overwrite<'check', 'element'>(
     'check',
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    (originalFn, subject: JQuery<HTMLElement>, options) => {
+    (originalFn, subject, options) => {
       if (isCheckBasedComponent(subject)) {
         if (!subject.is('[aria-checked="true"]')) {
           cy.wrap(subject).click();
@@ -78,17 +64,13 @@ export function registerCypressOverwrites() {
         return;
       }
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       return originalFn(subject, options);
     },
   );
 
-  Cypress.Commands.overwrite(
+  Cypress.Commands.overwrite<'uncheck', 'element'>(
     'uncheck',
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    (originalFn, subject: JQuery<HTMLElement>, options) => {
+    (originalFn, subject, options) => {
       if (isCheckBasedComponent(subject)) {
         if (!subject.is('[aria-checked="false"]')) {
           cy.wrap(subject).click();
@@ -96,8 +78,6 @@ export function registerCypressOverwrites() {
         return;
       }
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       return originalFn(subject, options);
     },
   );
