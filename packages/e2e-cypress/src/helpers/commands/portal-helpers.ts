@@ -130,7 +130,7 @@ function portalDerivateCommand<E extends HTMLElement = HTMLElement>(
     )
     .join(',');
 
-  return cy.withinPortal(portalSelector, fn).should(($el) => {
+  return cy.withinPortal(portalSelector, fn).then(($el) => {
     if (!persistent) {
       cy.wrap($el).should('not.exist');
     }

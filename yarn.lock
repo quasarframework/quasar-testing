@@ -2051,10 +2051,15 @@
   dependencies:
     "@types/lodash" "*"
 
-"@types/lodash@*", "@types/lodash@^4.14.182":
+"@types/lodash@*":
   version "4.14.182"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.182.tgz#05301a4d5e62963227eaafe0ce04dd77c54ea5c2"
   integrity sha512-/THyiqyQAP9AfARo4pF+aCGcyiQ94tX/Is2I7HofNRqoYLgN1PBoOWu2/zTA5zMxzP5EFutMtWtGAFRKUe961Q==
+
+"@types/lodash@^4.14.191":
+  version "4.14.191"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.191.tgz#09511e7f7cba275acd8b419ddac8da9a6a79e2fa"
+  integrity sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==
 
 "@types/minimatch@^3.0.3":
   version "3.0.5"
@@ -2655,6 +2660,11 @@ are-we-there-yet@~1.1.2:
     delegates "^1.0.0"
     readable-stream "^2.0.6"
 
+arg@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/arg/-/arg-5.0.2.tgz#c81433cc427c92c4dcf4865142dbca6f15acd59c"
+  integrity sha512-PYjyFOLKQ9y57JvQ6QLo8dAgNqswh8M1RMJYdQduT6xbWSgK36P/Z/v+p888pM69jMMfS8Xd8F6I1kQ/I9HUGg==
+
 argparse@^1.0.7:
   version "1.0.10"
   resolved "https://registry.yarnpkg.com/argparse/-/argparse-1.0.10.tgz#bcd6791ea5ae09725e17e5ad988134cd40b3d911"
@@ -2800,12 +2810,12 @@ axe-core@3.3.0:
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-3.3.0.tgz#3b32d7e54390d89ff4891b20394d33ad7a192776"
   integrity sha512-54XaTd2VB7A6iBnXMUG2LnBOI7aRbnrVxC5Tz+rVUwYl9MX/cIJc/Ll32YUoFIE/e9UKWMZoQenQu9dFrQyZCg==
 
-axios@^0.21.1:
-  version "0.21.4"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.4.tgz#c67b90dc0568e5c1cf2b0b858c43ba28e2eda575"
-  integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
+axios@^0.25.0:
+  version "0.25.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.25.0.tgz#349cfbb31331a9b4453190791760a8d35b093e0a"
+  integrity sha512-cD8FOb0tRH3uuEe6+evtAbgJtfxr7ly3fQjYcMcuPlgkwVS9xboaVIpcDV+cYQe+yGykgwZCs1pzjntcGa6l5g==
   dependencies:
-    follow-redirects "^1.14.0"
+    follow-redirects "^1.14.7"
 
 babel-core@^7.0.0-bridge.0:
   version "7.0.0-bridge.0"
@@ -3757,10 +3767,10 @@ csstype@^2.6.8:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.20.tgz#9229c65ea0b260cf4d3d997cb06288e36a8d6dda"
   integrity sha512-/WwNkdXfckNgw6S5R125rrW8ez139lBHWouiBvX8dfMFtcn6V81REDqnH7+CRpRipfYlyU1CmOnOxrmGcFOjeA==
 
-cypress@^11.2.0:
-  version "11.2.0"
-  resolved "https://registry.yarnpkg.com/cypress/-/cypress-11.2.0.tgz#63edef8c387b687066c5493f6f0ad7b9ced4b2b7"
-  integrity sha512-u61UGwtu7lpsNWLUma/FKNOsrjcI6wleNmda/TyKHe0dOBcVjbCPlp1N6uwFZ0doXev7f/91YDpU9bqDCFeBLA==
+cypress@^12.2.0:
+  version "12.2.0"
+  resolved "https://registry.yarnpkg.com/cypress/-/cypress-12.2.0.tgz#86ddc1ecfffadf57a8689e211cfb4437735f4e92"
+  integrity sha512-kvl95ri95KK8mAy++tEU/wUgzAOMiIciZSL97LQvnOinb532m7dGvwN0mDSIGbOd71RREtmT9o4h088RjK5pKw==
   dependencies:
     "@cypress/request" "^2.88.10"
     "@cypress/xvfb" "^1.2.4"
@@ -3850,13 +3860,6 @@ debug@4, debug@4.3.4, debug@^4.1.0, debug@^4.1.1, debug@^4.3.2, debug@^4.3.3, de
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"
   integrity sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==
-  dependencies:
-    ms "2.1.2"
-
-debug@4.3.2:
-  version "4.3.2"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.2.tgz#f0a49c18ac8779e31d4a0c6029dfb76873c7428b"
-  integrity sha512-mOp8wKcvj7XxC78zLgw/ZA+6TSgkoE2C/ienthhRD298T7UNwAg9diBpLRxC0mOezLl4B0xV7M0cCO6P/O0Xhw==
   dependencies:
     ms "2.1.2"
 
@@ -4966,10 +4969,10 @@ flow-parser@0.*:
   resolved "https://registry.yarnpkg.com/flow-parser/-/flow-parser-0.191.0.tgz#0fe7eb4be505f443c067c47f795153bf3b87c7d7"
   integrity sha512-/5Gv9zY+Mg58ubzzwNz4I29uYHDpBFR5F5ohyVsb+SxW2R8S4s1qCBRtgiTAsujsC6qmQlrsOn2DBlK4m7SQTQ==
 
-follow-redirects@^1.14.0:
-  version "1.15.1"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.1.tgz#0ca6a452306c9b276e4d3127483e29575e207ad5"
-  integrity sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==
+follow-redirects@^1.14.7:
+  version "1.15.2"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.2.tgz#b460864144ba63f2681096f274c4e57026da2c13"
+  integrity sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==
 
 for-in@^1.0.2:
   version "1.0.2"
@@ -6648,10 +6651,10 @@ jest@^29.2.2:
     import-local "^3.0.2"
     jest-cli "^29.2.2"
 
-joi@^17.4.0:
-  version "17.6.0"
-  resolved "https://registry.yarnpkg.com/joi/-/joi-17.6.0.tgz#0bb54f2f006c09a96e75ce687957bd04290054b2"
-  integrity sha512-OX5dG6DTbcr/kbMFj0KGYxuew69HPcAE3K/sZpEV2nP6e/j/C0HV+HNiBPCASxdx5T7DMoa0s8UeHWMnb6n2zw==
+joi@^17.6.0:
+  version "17.7.0"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-17.7.0.tgz#591a33b1fe1aca2bc27f290bcad9b9c1c570a6b3"
+  integrity sha512-1/ugc8djfn93rTE3WRKdCzGGt/EtiYKxITMO4Wiv6q5JL1gl9ePt4kBsl1S499nbosspfctIQTpYIhSmHA3WAg==
   dependencies:
     "@hapi/hoek" "^9.0.0"
     "@hapi/topo" "^5.0.0"
@@ -9122,10 +9125,17 @@ rxjs@^6.6.0:
   dependencies:
     tslib "^1.9.0"
 
-rxjs@^7.1.0, rxjs@^7.5.1:
+rxjs@^7.5.1:
   version "7.5.6"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.5.6.tgz#0446577557862afd6903517ce7cae79ecb9662bc"
   integrity sha512-dnyv2/YsXhnm461G+R/Pe5bWP41Nm6LBXEYWI6eiFP4fiwx6WRI/CD0zbdVAudd9xwLEF2IDcKXLHit0FYjUzw==
+  dependencies:
+    tslib "^2.1.0"
+
+rxjs@^7.5.4:
+  version "7.8.0"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.8.0.tgz#90a938862a82888ff4c7359811a595e14e1e09a4"
+  integrity sha512-F2+gxDshqmIub1KdvZkaEfGDwLNpPvk9Fs6LD/MyQxNgMds/WH9OdDDXOmxUZpME+iSK3rQCctkL0DYyytUqMg==
   dependencies:
     tslib "^2.1.0"
 
@@ -9585,18 +9595,19 @@ stack-utils@^2.0.3:
   dependencies:
     escape-string-regexp "^2.0.0"
 
-start-server-and-test@^1.14.0:
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/start-server-and-test/-/start-server-and-test-1.14.0.tgz#c57f04f73eac15dd51733b551d775b40837fdde3"
-  integrity sha512-on5ELuxO2K0t8EmNj9MtVlFqwBMxfWOhu4U7uZD1xccVpFlOQKR93CSe0u98iQzfNxRyaNTb/CdadbNllplTsw==
+start-server-and-test@^1.15.2:
+  version "1.15.2"
+  resolved "https://registry.yarnpkg.com/start-server-and-test/-/start-server-and-test-1.15.2.tgz#3c4f9b358a0dc5ae03a96dd7d7ae9e25a3b24165"
+  integrity sha512-t5xJX04Hg7hqxiKHMJBz/n4zIMsE6G7hpAcerFAH+4Vh9le/LeyFcJERJM7WLiPygWF9TOg33oroJF1XOzJtYQ==
   dependencies:
+    arg "^5.0.2"
     bluebird "3.7.2"
     check-more-types "2.24.0"
-    debug "4.3.2"
+    debug "4.3.4"
     execa "5.1.1"
     lazy-ass "1.6.0"
     ps-tree "1.2.0"
-    wait-on "6.0.0"
+    wait-on "6.0.1"
 
 static-extend@^0.1.1:
   version "0.1.2"
@@ -10437,10 +10448,10 @@ vite-jsconfig-paths@^2.0.1:
     recrawl-sync "^2.0.3"
     tsconfig-paths "^3.9.0"
 
-vite-plugin-istanbul@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/vite-plugin-istanbul/-/vite-plugin-istanbul-3.0.3.tgz#88a0e286ccc33030b36d7809a78382cf84dd5f74"
-  integrity sha512-2nCYSsY1kgF83S007rg0GPmeL5P+bph8Z5RJ3Pv1kHHx9OMyKt/cLyGCWAYQnBk9VckzXRGEaX3FSLtcSai4Yg==
+vite-plugin-istanbul@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/vite-plugin-istanbul/-/vite-plugin-istanbul-3.0.4.tgz#a8367e393fc51c9e071607de5bacf46ddcac698f"
+  integrity sha512-DJy3cq6yOFbsM3gLQf/3zeuaJNJsfBv5dLFdZdv8sUV30xLtZI+66QeYfHUyP/5vBUYyLA+xNUCSG5uHY6w+5g==
   dependencies:
     "@istanbuljs/load-nyc-config" "^1.1.0"
     istanbul-lib-instrument "^5.1.0"
@@ -10541,16 +10552,16 @@ w3c-xmlserializer@^3.0.0:
   dependencies:
     xml-name-validator "^4.0.0"
 
-wait-on@6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/wait-on/-/wait-on-6.0.0.tgz#7e9bf8e3d7fe2daecbb7a570ac8ca41e9311c7e7"
-  integrity sha512-tnUJr9p5r+bEYXPUdRseolmz5XqJTTj98JgOsfBn7Oz2dxfE2g3zw1jE+Mo8lopM3j3et/Mq1yW7kKX6qw7RVw==
+wait-on@6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/wait-on/-/wait-on-6.0.1.tgz#16bbc4d1e4ebdd41c5b4e63a2e16dbd1f4e5601e"
+  integrity sha512-zht+KASY3usTY5u2LgaNqn/Cd8MukxLGjdcZxT2ns5QzDmTFc4XoWBgC+C/na+sMRZTuVygQoMYwdcVjHnYIVw==
   dependencies:
-    axios "^0.21.1"
-    joi "^17.4.0"
+    axios "^0.25.0"
+    joi "^17.6.0"
     lodash "^4.17.21"
     minimist "^1.2.5"
-    rxjs "^7.1.0"
+    rxjs "^7.5.4"
 
 walker@^1.0.8:
   version "1.0.8"

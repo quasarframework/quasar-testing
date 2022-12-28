@@ -2,7 +2,7 @@
 
 > You’re looking at Quasar v2 testing docs. If you're searching for Quasar v1 docs, head [here](https://github.com/quasarframework/quasar-testing/tree/qv1/packages/e2e-cypress/)
 
-> You’re looking at Cypress AE v5 (Cypress 11) docs. If you're searching for Cypress AE v4 (Cypress 9) docs, head [here](https://github.com/quasarframework/quasar-testing/tree/cypress-v4/packages/e2e-cypress)
+> You’re looking at Cypress AE v5 (Cypress 12) docs. If you're searching for Cypress AE v4 (Cypress 9) docs, head [here](https://github.com/quasarframework/quasar-testing/tree/cypress-v4/packages/e2e-cypress)
 
 ```shell
 $ yarn quasar ext add @quasar/testing-e2e-cypress@beta
@@ -36,8 +36,6 @@ Some custom commands are included out-of-the-box:
 | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `dataCy`                                   | `cy.dataCy('my-data-id')`                                                                                                                                                   | Implements the [selection best practice](https://docs.cypress.io/guides/references/best-practices.html#Selecting-Elements) which avoids brittle tests, is equivalent to `cy.get('[data-cy=my-data-id]')` |
 | `testRoute`                                | `cy.testRoute('home')` <br /> `cy.testRoute('books/*/pages/*')`                                                                                                             | Tests if the current URL matches the provided string using [`minimatch`](https://docs.cypress.io/api/utilities/minimatch). Leading `#`, if using router hash mode, and `/` are automatically prepended.  |
-| `saveLocalStorage`                         | `cy.saveLocalStorage()`                                                                                                                                                     | Save local storage data to be used in subsequent tests                                                                                                                                                   |
-| `restoreLocalStorage`                      | `cy.restoreLocalStorage()`                                                                                                                                                  | Restore previously saved local storage data                                                                                                                                                              |
 | `within[Portal\|Menu\|SelectMenu\|Dialog]` | `cy.withinSelectMenu(() => cy.get('.q-item').first().click())` <br /> `cy.withinDialog({ dataCy: 'add-action-dialog', fn() { /* business haha */ } });`                     | Auto-scope commands into the callback within the Portal-based component and perform assertions common to all of them.                                                                                    |
 | `should('have.[color\|backgroundColor]')`  | `cy.get('foo').should('have.color', 'white')` <br /> `cy.get('foo').should('have.backgroundColor', '#000')` <br /> `cy.get('foo').should('have.color', 'var(--q-primary)')` | Provide a couple color-related custom matchers, which accept any valid CSS color format.                                                                                                                 |
 
@@ -81,7 +79,7 @@ You can either apply [this workaround](https://github.com/istanbuljs/nyc/issues/
 
 > if you're coming from v3, follow [the migration guide for v4 and v4.1 first](https://github.com/quasarframework/quasar-testing/tree/cypress-v4/packages/e2e-cypress#upgrade-from-cypress-v4-to-v41-optional)
 
-All changes are related to Cypress v10 breaking changes, Quasar first-party helpers haven't been changed unless Cypress required it.
+All changes are related to Cypress v10-v11-v12 breaking changes, Quasar first-party helpers haven't been changed unless Cypress required it.
 
 Alternatively to the following guide, a faster but more error-prone way for advanced developers would be to run `yarn quasar ext add @quasar/testing-e2e-cypress@beta` and `yarn add -D cypress`, then let the package scaffold new files overriding the existing ones and manually merge your changes into the generated files. Even in this case, we suggest to take a look to the following migration guide and use it as a checklist, as some files must be renamed/removed.
 
@@ -127,7 +125,8 @@ export default defineConfig({
 - remove Cypress JSON schema registration from vscode settings, Cypress switched to a JS/TS config file and is now using an helper function to provide autocomplete.
 - update eslint override pattern which applies to cypress files as explained into this AE installation instructions
 - (optional) move any other custom configuration from `test/cypress/plugins/index.[js|ts]` to [`setupNodeEvents` hooks](https://docs.cypress.io/guides/references/configuration#History) into `cypress.config.[js|ts]`. Note that if you're using Vite and you added code coverage, you'll need to setup code coverage plugin both into e2e and component `setupNodeEvents` hooks
-- check out [Cypress 10 changelog](https://docs.cypress.io/guides/references/changelog#10-0-0) and [Cypress 11 changelog](https://docs.cypress.io/guides/references/changelog#11-0-0), and see if something else in there affect you
+- `cy.saveLocalStorage` and `cy.restoreLocalStorage` has been removed, since Cypress 12 now provides a more [stable and complete solution](https://docs.cypress.io/api/commands/session) to persist cookies, session storage and local storage across tests.
+- check out [Cypress 10 changelog](https://docs.cypress.io/guides/references/changelog#10-0-0), [Cypress 11 changelog](https://docs.cypress.io/guides/references/changelog#11-0-0) and [Cypress 12 changelog](https://docs.cypress.io/guides/references/changelog#12-0-0), and see if something else in there affect you. We are sorry for continuously bumping Cypress peer dependency during the beta, but Cypress team released 3 major versions in a 6 months time span and we cannot afford to maintain too many major versions of this AE.
 
 ### Caveats
 
