@@ -40,5 +40,3 @@ describe('Landing', () => {
 //       .and('contain', 'Continuous Integration & Continuous Deployment CI/CD');
 //   });
 // });
-
-
