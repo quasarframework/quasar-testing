@@ -25,12 +25,8 @@ module.exports = function () {
           value: 'unit-vitest@alpha',
         },
         {
-          name: 'Cypress 9 e2e and component testing',
+          name: 'Cypress 12 e2e and component testing',
           value: 'e2e-cypress',
-        },
-        {
-          name: 'Cypress 11 e2e and component testing (beta)',
-          value: 'e2e-cypress@beta',
         },
       ],
     },

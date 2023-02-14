@@ -5,7 +5,7 @@
 > You’re looking at Cypress AE v5 (Cypress 12) docs. If you're searching for Cypress AE v4 (Cypress 9) docs, head [here](https://github.com/quasarframework/quasar-testing/tree/cypress-v4/packages/e2e-cypress)
 
 ```shell
-$ yarn quasar ext add @quasar/testing-e2e-cypress@beta
+$ yarn quasar ext add @quasar/testing-e2e-cypress
 ```
 
 Add into your `.eslintrc.js` the following code:
@@ -81,14 +81,14 @@ You can either apply [this workaround](https://github.com/istanbuljs/nyc/issues/
 
 All changes are related to Cypress v10-v11-v12 breaking changes, Quasar first-party helpers haven't been changed unless Cypress required it.
 
-Alternatively to the following guide, a faster but more error-prone way for advanced developers would be to run `yarn quasar ext add @quasar/testing-e2e-cypress@beta` and `yarn add -D cypress`, then let the package scaffold new files overriding the existing ones and manually merge your changes into the generated files. Even in this case, we suggest to take a look to the following migration guide and use it as a checklist, as some files must be renamed/removed.
+Alternatively to the following guide, a faster but more error-prone way for advanced developers would be to run `yarn quasar ext add @quasar/testing-e2e-cypress` and `yarn add -D cypress`, then let the package scaffold new files overriding the existing ones and manually merge your changes into the generated files. Even in this case, we suggest to take a look to the following migration guide and use it as a checklist, as some files must be renamed/removed.
 
 Here's all the steps you need to take while upgrading from v4 to v5:
 
 - upgrade to v5, then install `cypress` dependency, which has been externalized and marked as a peerDependency
 
 ```sh
-yarn upgrade @quasar/quasar-app-extension-testing-e2e-cypress@beta
+yarn upgrade @quasar/quasar-app-extension-testing-e2e-cypress
 yarn add -D cypress
 ```
 
@@ -117,7 +117,7 @@ export default defineConfig({
 - create a `test/cypress/support/component-index.html` file with [this content](./src/templates/base/test/cypress/support/component-index.html)
 - set `component.test/cypress/support/component-index.html` property into `cypress.config.[js|ts]` to `test/cypress/support/component-index.html`
 - replace all `mount` occurrences to use the new `cy.mount()` helper instead
-- set `component.specPattern` property to `src/**/*.cy.{js,jsx,ts,tsx}` and update all your component tests names to match that pattern, replacing `.spec` with `.cy`
+- set `component.specPattern` property to `src/**/*.cy.{js,jsx,ts,tsx}` and update all your component tests names to match that pattern, replacing `.spec.[js|ts]` with `.cy.[js|ts]`
 - rename `test/cypress/integration` folder to `test/cypress/e2e` and update `e2e.specPattern` accordingly
 - rename `test/cypress/support/index.[js|ts]` to `test/cypress/support/e2e.[js|ts]` and update `e2e.supportFile` property accordingly
 - update your `test:e2e` and `test:e2e:ci` scripts to use `--e2e` flag (`open --e2e` and `run --e2e` respectively)
