@@ -32,12 +32,15 @@ This App Extension (AE) manages Quasar and Cypress integration for you, both for
 
 Some custom commands are included out-of-the-box:
 
-| Name                                       | Usage                                                                                                                                                                       | Description                                                                                                                                                                                              |
-| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dataCy`                                   | `cy.dataCy('my-data-id')`                                                                                                                                                   | Implements the [selection best practice](https://docs.cypress.io/guides/references/best-practices.html#Selecting-Elements) which avoids brittle tests, is equivalent to `cy.get('[data-cy=my-data-id]')` |
-| `testRoute`                                | `cy.testRoute('home')` <br /> `cy.testRoute('books/*/pages/*')`                                                                                                             | Tests if the current URL matches the provided string using [`minimatch`](https://docs.cypress.io/api/utilities/minimatch). Leading `#`, if using router hash mode, and `/` are automatically prepended.  |
-| `within[Portal\|Menu\|SelectMenu\|Dialog]` | `cy.withinSelectMenu(() => cy.get('.q-item').first().click())` <br /> `cy.withinDialog({ dataCy: 'add-action-dialog', fn() { /* business haha */ } });`                     | Auto-scope commands into the callback within the Portal-based component and perform assertions common to all of them.                                                                                    |
-| `should('have.[color\|backgroundColor]')`  | `cy.get('foo').should('have.color', 'white')` <br /> `cy.get('foo').should('have.backgroundColor', '#000')` <br /> `cy.get('foo').should('have.color', 'var(--q-primary)')` | Provide a couple color-related custom matchers, which accept any valid CSS color format.                                                                                                                 |
+| Name                                       | Usage                                                                                                                                                                       | Description                                                                                                                                                                                             |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dataCy`                                   | `cy.dataCy('my-data-id')`                                                                                                                                                   | Implement the [selection best practice](https://docs.cypress.io/guides/references/best-practices.html#Selecting-Elements) which avoids brittle tests, is equivalent to `cy.get('[data-cy=my-data-id]')` |
+| `selectDate`                               | `cy.get('.q-date').selectDate('2023/02/23')`                                                                                                                                | Select a given date into a QDate component, it accept either a `Date` object or a string which `new Date(myDate)` can parse correctly                                                                   |
+| `testRoute`                                | `cy.testRoute('home')` <br /> `cy.testRoute('books/*/pages/*')`                                                                                                             | Test if the current URL matches the provided string using [`minimatch`](https://docs.cypress.io/api/utilities/minimatch). Leading `#`, if using router hash mode, and `/` are automatically prepended.  |
+| `within[Portal\|Menu\|SelectMenu\|Dialog]` | `cy.withinSelectMenu(() => cy.get('.q-item').first().click())` <br /> `cy.withinDialog({ dataCy: 'add-action-dialog', fn() { /* business haha */ } });`                     | Auto-scope commands into the callback within the Portal-based component and perform assertions common to all of them.                                                                                   |
+| `should('have.[color\|backgroundColor]')`  | `cy.get('foo').should('have.color', 'white')` <br /> `cy.get('foo').should('have.backgroundColor', '#000')` <br /> `cy.get('foo').should('have.color', 'var(--q-primary)')` | Provide a couple color-related custom matchers, which accept any valid CSS color format.                                                                                                                |
+
+> Check out how to use these commands, and other recipes about testing Quasar UI components, into our [automated tests suite](./src/templates/typescript/src/components/___tests__).
 
 You must have a running dev server in order to run integration tests. The scripts added by this AE automatically take care of this: `yarn test:e2e` and `yarn test:e2e:ci` will launch `quasar dev` when starting up the tests and kill it when cypress process ends.
 
@@ -177,6 +180,24 @@ The good news is that we don't actually need to, since official documentation fo
 - [VueRouter](https://docs.cypress.io/guides/component-testing/custom-mount-vue#Vue-Router)
 - [Vuex](https://docs.cypress.io/guides/component-testing/custom-mount-vue#Vuex)
 - [Pinia](https://pinia.vuejs.org/cookbook/testing.html#unit-testing-components)
+
+#### Using vModel into your tests
+
+Vue Test Utils doesn't provide an helper to test your components vModel, so we created our own, which even allow you use refs into your tests, based on [this discussion](https://github.com/vuejs/test-utils/discussions/279).
+
+```ts
+const model = ref(null);
+mount(QSelect, {
+  props: {
+    ...vModelAdapter(model),
+    // or, if you're using a custom name for your vModel, use
+    // ...vModelAdapter(model, 'myModelName'),
+    options,
+  },
+});
+```
+
+Check out more examples [here](./src/templates/typescript/src/components/___tests__/VModelComponent.cy.ts).
 
 ### Testing the AE
 
