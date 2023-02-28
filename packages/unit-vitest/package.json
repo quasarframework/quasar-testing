@@ -43,10 +43,10 @@
     "vue": "^3.2.47"
   },
   "peerDependencies": {
-    "@vitest/ui": "^0.25.2",
+    "@vitest/ui": "^0.29.1",
     "@vue/test-utils": "^2.0.0",
     "quasar": "^2.10.2",
-    "vitest": "^0.25.2",
+    "vitest": "^0.29.1",
     "vue": "^3.2.0"
   },
   "peerDependenciesMeta": {
