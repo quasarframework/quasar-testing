@@ -36,17 +36,17 @@
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.4",
-    "@vue/test-utils": "^2.3.0",
-    "quasar": "^2.11.6",
-    "rimraf": "^4.1.2",
-    "vitest": "^0.29.1",
+    "@vue/test-utils": "^2.3.2",
+    "quasar": "^2.11.10",
+    "rimraf": "^5.0.0",
+    "vitest": "^0.31.0",
     "vue": "^3.2.47"
   },
   "peerDependencies": {
-    "@vitest/ui": "^0.29.1",
+    "@vitest/ui": "^0.31.0",
     "@vue/test-utils": "^2.0.0",
     "quasar": "^2.10.2",
-    "vitest": "^0.30.1",
+    "vitest": "^0.31.0",
     "vue": "^3.2.0"
   },
   "peerDependenciesMeta": {
