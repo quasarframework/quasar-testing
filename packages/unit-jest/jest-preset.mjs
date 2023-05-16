@@ -31,7 +31,7 @@ export const config = {
     // Matches tests in any subfolder of 'src' or into 'test/jest/__tests__'
     // Matches all files with extension 'js', 'jsx', 'ts' and 'tsx'
     '<rootDir>/test/jest/__tests__/**/*.(spec|test).+(ts|js)?(x)',
-    '<rootDir>/src/**/*.jest.(spec|test).+(ts|js)?(x)',
+    '<rootDir>/src/**/*?(.jest).(spec|test).+(ts|js)?(x)',
   ],
   // Extension-less imports of components are resolved to .ts files by TS,
   //  grating correct type-checking in test files.
