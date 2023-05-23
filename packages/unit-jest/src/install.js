@@ -54,6 +54,11 @@ let extendPackageJson = {
 };
 
 module.exports = function (api) {
+  api.compatibleWith('quasar', '^2.0.4');
+  // TODO: should be "@quasar/app-webpack" but that is not backward compatible
+  // Remove when Qv3 comes out, or when "@quasar/app" is officially deprecated
+  api.compatibleWith('@quasar/app', '^3.0.0 || ^4.0.0');
+
   api.extendJsonFile('quasar.testing.json', {
     'unit-jest': {
       runnerCommand: ciCommand,
@@ -63,8 +68,7 @@ module.exports = function (api) {
   api.render('./templates/base', {}, true);
 
   api.render(
-    `./templates/${
-      api.prompts.options.includes('typescript') ? '' : 'no-'
+    `./templates/${api.prompts.options.includes('typescript') ? '' : 'no-'
     }typescript`,
   );
 

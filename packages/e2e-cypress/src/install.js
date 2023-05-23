@@ -58,6 +58,15 @@ let extendPackageJson = {
 };
 
 module.exports = function (api) {
+  api.compatibleWith('quasar', '^2.0.0');
+  if (api.hasVite) {
+    api.compatibleWith('@quasar/app-vite', '^1.0.0 || ^2.0.0');
+  } else if (api.hasWebpack) {
+    // TODO: should be "@quasar/app-webpack" but that is not backward compatible
+    // Remove when Qv3 comes out, or when "@quasar/app" is officially deprecated
+    api.compatibleWith('@quasar/app', '^3.0.0 || ^4.0.0');
+  }
+
   const devServerPort = api.hasVite ? 9000 : 8080;
   const shouldAddScripts = api.prompts.options.includes('scripts');
   const shouldSupportTypeScript = api.prompts.options.includes('typescript');

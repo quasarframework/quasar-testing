@@ -50,6 +50,9 @@ let extendPackageJson = {
 };
 
 module.exports = function (api) {
+  api.compatibleWith('quasar', '^2.6.0');
+  api.compatibleWith('@quasar/app-vite', '^1.0.0 || ^2.0.0');
+
   api.extendJsonFile('quasar.testing.json', {
     'unit-vitest': {
       runnerCommand: ciCommand,
@@ -57,8 +60,7 @@ module.exports = function (api) {
   });
 
   api.render(
-    `./templates/${
-      api.prompts.options.includes('typescript') ? '' : 'no-'
+    `./templates/${api.prompts.options.includes('typescript') ? '' : 'no-'
     }typescript`,
   );
 
