@@ -11,13 +11,15 @@ async function quasarSharedConfig(
   quasarAppPackage: string,
   bundler: AvailableBundlers,
 ) {
-  const { default: extensionRunner } = await import(
-    `${quasarAppPackage}/lib/app-extension/extensions-runner`
-  );
-  const { default: getQuasarCtx } = await import(
-    `${quasarAppPackage}/lib/helpers/get-quasar-ctx`
-  );
-  const { default: QuasarConfFile } = await import(
+  const {
+    default: { extensionRunner },
+  } = await import(`${quasarAppPackage}/lib/app-extension/extensions-runner`);
+  const {
+    default: { getQuasarCtx },
+  } = await import(`${quasarAppPackage}/lib/utils/get-quasar-ctx`);
+  const {
+    default: { QuasarConfFile },
+  } = await import(
     `${quasarAppPackage}/lib/quasar-${
       bundler === 'vite' ? 'config' : 'conf'
     }-file`
@@ -79,15 +81,15 @@ async function quasarViteConfig(quasarAppPackage: string) {
     console.log(quasarConf.error);
   }
 
-  const { default: generateConfig } = await import(
-    `${quasarAppPackage}/lib/modes/spa/spa-config`
-  );
+  const {
+    default: { quasarSpaConfig },
+  } = await import(`${quasarAppPackage}/lib/modes/spa/spa-config`);
 
   // [1] -> https://github.com/cypress-io/cypress/issues/22505#issuecomment-1277855100
   // [1] Make sure to use the root for predictability
   quasarConf.publicPath = '/';
 
-  const result = await generateConfig['vite'](quasarConf);
+  const result = await quasarSpaConfig['vite'](quasarConf);
 
   // [1] Delete base so it can correctly be set by Cypress
   delete result.base;

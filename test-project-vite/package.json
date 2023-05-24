@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@intlify/vite-plugin-vue-i18n": "^3.3.1",
-    "@quasar/app-vite": "^1.2.0",
+    "@quasar/app-vite": "^2.0.0-alpha.2",
     "@quasar/quasar-app-extension-testing": "../packages/testing",
     "@quasar/quasar-app-extension-testing-e2e-cypress": "../packages/e2e-cypress",
     "@quasar/quasar-app-extension-testing-unit-vitest": "../packages/unit-vitest",
