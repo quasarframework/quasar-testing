@@ -7,7 +7,7 @@ function getPackageJson() {
   return require(join(process.cwd(), 'package.json'));
 }
 
-async function quasarSharedConfig(
+async function getSharedConfigImports(
   quasarAppPackage: string,
   bundler: AvailableBundlers,
 ) {
@@ -24,6 +24,45 @@ async function quasarSharedConfig(
       bundler === 'vite' ? 'config' : 'conf'
     }-file`
   );
+
+  return {
+    extensionRunner,
+    getQuasarCtx,
+    QuasarConfFile,
+  };
+}
+
+async function getSharedConfigImportsForOldVersion(
+  quasarAppPackage: string,
+  bundler: AvailableBundlers,
+) {
+  const { default: extensionRunner } = await import(
+    `${quasarAppPackage}/lib/app-extension/extensions-runner`
+  );
+  const { default: getQuasarCtx } = await import(
+    `${quasarAppPackage}/lib/helpers/get-quasar-ctx`
+  );
+  const { default: QuasarConfFile } = await import(
+    `${quasarAppPackage}/lib/quasar-${
+      bundler === 'vite' ? 'config' : 'conf'
+    }-file`
+  );
+
+  return {
+    extensionRunner,
+    getQuasarCtx,
+    QuasarConfFile,
+  };
+}
+
+async function quasarSharedConfig(
+  quasarAppPackage: string,
+  bundler: AvailableBundlers,
+  supportOldVersion: boolean,
+) {
+  const { extensionRunner, getQuasarCtx, QuasarConfFile } = supportOldVersion
+    ? await getSharedConfigImportsForOldVersion(quasarAppPackage, bundler)
+    : await getSharedConfigImports(quasarAppPackage, bundler);
 
   const ctx = getQuasarCtx({
     mode: 'spa',
@@ -43,12 +82,27 @@ async function quasarSharedConfig(
   };
 }
 
-async function quasarWebpackConfig(quasarAppPackage: string) {
+async function getQuasarConfig(
+  quasarAppPackage: string,
+  bundler: AvailableBundlers,
+  supportOldVersion: boolean,
+) {
   const { QuasarConfFile, ctx } = await quasarSharedConfig(
     quasarAppPackage,
-    'webpack',
+    bundler,
+    supportOldVersion,
   );
 
+  return {
+    QuasarConfFile,
+    ctx,
+  };
+}
+
+async function quasarWebpackConfig(
+  quasarAppPackage: string,
+  { QuasarConfFile, ctx }: { QuasarConfFile: any; ctx: any },
+) {
   const {
     default: { splitWebpackConfig },
   } = await import(`${quasarAppPackage}/lib/webpack/symbols`);
@@ -68,12 +122,10 @@ async function quasarWebpackConfig(quasarAppPackage: string) {
   return configEntries[0].webpack;
 }
 
-async function quasarViteConfig(quasarAppPackage: string) {
-  const { QuasarConfFile, ctx } = await quasarSharedConfig(
-    quasarAppPackage,
-    'vite',
-  );
-
+async function quasarViteConfig(
+  quasarAppPackage: string,
+  { QuasarConfFile, ctx }: { QuasarConfFile: any; ctx: any },
+) {
   const quasarConfFile = new QuasarConfFile({ ctx });
 
   const quasarConf = await quasarConfFile.read();
@@ -106,11 +158,17 @@ export function injectQuasarDevServerConfig() {
     : 'webpack';
 
   let quasarAppPackage = `@quasar/app-${bundler}`;
+  let isOldVersion = false;
 
   if (bundler === 'webpack') {
     if (!devDependencies.hasOwnProperty(quasarAppPackage)) {
       quasarAppPackage = '@quasar/app';
+      isOldVersion = devDependencies['@quasar/app'].startsWith('^3');
     }
+
+    isOldVersion = devDependencies[quasarAppPackage].startsWith('^3');
+  } else if (bundler === 'vite') {
+    isOldVersion = devDependencies[quasarAppPackage].startsWith('^1');
   }
 
   const configExtractor =
@@ -119,6 +177,10 @@ export function injectQuasarDevServerConfig() {
   return {
     framework: 'vue',
     bundler,
-    [`${bundler}Config`]: async () => await configExtractor(quasarAppPackage),
+    [`${bundler}Config`]: async () =>
+      await configExtractor(
+        quasarAppPackage,
+        await getQuasarConfig(quasarAppPackage, bundler, isOldVersion),
+      ),
   };
 }
