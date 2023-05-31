@@ -1,5 +1,6 @@
 /* eslint-disable */
 import { join } from 'path';
+import { satisfies, coerce } from 'semver';
 
 type AvailableBundlers = 'vite' | 'webpack';
 
@@ -82,23 +83,6 @@ async function quasarSharedConfig(
   };
 }
 
-async function getQuasarConfig(
-  quasarAppPackage: string,
-  bundler: AvailableBundlers,
-  supportOldVersion: boolean,
-) {
-  const { QuasarConfFile, ctx } = await quasarSharedConfig(
-    quasarAppPackage,
-    bundler,
-    supportOldVersion,
-  );
-
-  return {
-    QuasarConfFile,
-    ctx,
-  };
-}
-
 async function quasarWebpackConfig(
   quasarAppPackage: string,
   supportsOldVersion: boolean,
@@ -128,6 +112,24 @@ async function quasarWebpackConfig(
   return configEntries[0].webpack;
 }
 
+async function getQuasarViteSpaConfig(
+  quasarAppPackage: string,
+  supportsOldVersion: boolean,
+) {
+  if (supportsOldVersion) {
+    const { default: quasarSpaConfig } = await import(
+      `${quasarAppPackage}/lib/modes/spa/spa-config`
+    );
+    return quasarSpaConfig;
+  }
+
+  const {
+    default: { quasarSpaConfig },
+  } = await import(`${quasarAppPackage}/lib/modes/spa/spa-config`);
+
+  return quasarSpaConfig;
+}
+
 async function quasarViteConfig(
   quasarAppPackage: string,
   supportsOldVersion: boolean,
@@ -144,9 +146,10 @@ async function quasarViteConfig(
     console.log(quasarConf.error);
   }
 
-  const {
-    default: { quasarSpaConfig },
-  } = await import(`${quasarAppPackage}/lib/modes/spa/spa-config`);
+  const quasarSpaConfig = await getQuasarViteSpaConfig(
+    quasarAppPackage,
+    supportsOldVersion,
+  );
 
   // [1] -> https://github.com/cypress-io/cypress/issues/22505#issuecomment-1277855100
   // [1] Make sure to use the root for predictability
@@ -160,6 +163,14 @@ async function quasarViteConfig(
   return result;
 }
 
+function checkIfOldVersion(bundler: AvailableBundlers, version: string) {
+  if (bundler === 'vite') {
+    return satisfies(coerce(version) || '', '^1.0.0');
+  }
+
+  return satisfies(coerce(version) || '', '^3.0.0');
+}
+
 export function injectQuasarDevServerConfig() {
   const { devDependencies } = getPackageJson();
   const bundler: AvailableBundlers = devDependencies.hasOwnProperty(
@@ -169,18 +180,17 @@ export function injectQuasarDevServerConfig() {
     : 'webpack';
 
   let quasarAppPackage = `@quasar/app-${bundler}`;
-  let isOldVersion = false;
 
   if (bundler === 'webpack') {
     if (!devDependencies.hasOwnProperty(quasarAppPackage)) {
       quasarAppPackage = '@quasar/app';
-      isOldVersion = true;
     }
-
-    isOldVersion = devDependencies[quasarAppPackage].startsWith('^3');
-  } else if (bundler === 'vite') {
-    isOldVersion = devDependencies[quasarAppPackage].startsWith('^1');
   }
+
+  const isOldVersion = checkIfOldVersion(
+    bundler,
+    devDependencies[quasarAppPackage],
+  );
 
   const configExtractor =
     bundler === 'vite' ? quasarViteConfig : quasarWebpackConfig;
