@@ -58,9 +58,9 @@ async function getSharedConfigImportsForOldVersion(
 async function quasarSharedConfig(
   quasarAppPackage: string,
   bundler: AvailableBundlers,
-  supportOldVersion: boolean,
+  supportsOldVersion: boolean,
 ) {
-  const { extensionRunner, getQuasarCtx, QuasarConfFile } = supportOldVersion
+  const { extensionRunner, getQuasarCtx, QuasarConfFile } = supportsOldVersion
     ? await getSharedConfigImportsForOldVersion(quasarAppPackage, bundler)
     : await getSharedConfigImports(quasarAppPackage, bundler);
 
@@ -101,8 +101,14 @@ async function getQuasarConfig(
 
 async function quasarWebpackConfig(
   quasarAppPackage: string,
-  { QuasarConfFile, ctx }: { QuasarConfFile: any; ctx: any },
+  supportsOldVersion: boolean,
 ) {
+  const { QuasarConfFile, ctx } = await quasarSharedConfig(
+    quasarAppPackage,
+    'webpack',
+    supportsOldVersion,
+  );
+
   const {
     default: { splitWebpackConfig },
   } = await import(`${quasarAppPackage}/lib/webpack/symbols`);
@@ -124,8 +130,13 @@ async function quasarWebpackConfig(
 
 async function quasarViteConfig(
   quasarAppPackage: string,
-  { QuasarConfFile, ctx }: { QuasarConfFile: any; ctx: any },
+  supportsOldVersion: boolean,
 ) {
+  const { QuasarConfFile, ctx } = await quasarSharedConfig(
+    quasarAppPackage,
+    'vite',
+    supportsOldVersion,
+  );
   const quasarConfFile = new QuasarConfFile({ ctx });
 
   const quasarConf = await quasarConfFile.read();
@@ -163,7 +174,7 @@ export function injectQuasarDevServerConfig() {
   if (bundler === 'webpack') {
     if (!devDependencies.hasOwnProperty(quasarAppPackage)) {
       quasarAppPackage = '@quasar/app';
-      isOldVersion = devDependencies['@quasar/app'].startsWith('^3');
+      isOldVersion = true;
     }
 
     isOldVersion = devDependencies[quasarAppPackage].startsWith('^3');
@@ -178,9 +189,6 @@ export function injectQuasarDevServerConfig() {
     framework: 'vue',
     bundler,
     [`${bundler}Config`]: async () =>
-      await configExtractor(
-        quasarAppPackage,
-        await getQuasarConfig(quasarAppPackage, bundler, isOldVersion),
-      ),
+      await configExtractor(quasarAppPackage, isOldVersion),
   };
 }
