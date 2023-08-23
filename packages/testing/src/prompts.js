@@ -22,7 +22,7 @@ module.exports = function () {
         },
         {
           name: 'Vitest Unit Testing (Vite only, alpha)',
-          value: 'unit-vitest@alpha',
+          value: 'unit-vitest',
         },
         {
           name: 'Cypress 12 e2e and component testing',
