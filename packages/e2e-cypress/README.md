@@ -103,8 +103,8 @@ yarn add -D typescript
 
 - run `yarn cypress open` and follow the guided procedure
 - select "component testing" option and accept all proposed steps. When prompted for it, if autodetection doesn't kick in, select `vue` framework and `webpack`/`vite` bundler accordingly to what you're using. Note that, after the migration wizard completes, Cypress is expected to display an error due to it's inability to run Quasar devServer out-of-the-box
-- if a duplicated `component` property is generated into `cypress.config.[js|ts]`, remove the one containting `devServer` property.
-- remove from `test/cypress/plugins/index.[js|ts]` the code used to inject the component dev server, and add it into `cypress.config.[js|ts]` as
+- if a duplicated `component` property is generated into `cypress.config.[cjs|ts]`, remove the one containting `devServer` property.
+- remove from `test/cypress/plugins/index.[js|ts]` the code used to inject the component dev server, and add it into `cypress.config.[cjs|ts]` as
 
 ```ts
 import { injectQuasarDevServerConfig } from '@quasar/quasar-app-extension-testing-e2e-cypress/cct-dev-server';
@@ -118,7 +118,7 @@ export default defineConfig({
 ```
 
 - create a `test/cypress/support/component-index.html` file with [this content](./src/templates/base/test/cypress/support/component-index.html)
-- set `component.test/cypress/support/component-index.html` property into `cypress.config.[js|ts]` to `test/cypress/support/component-index.html`
+- set `component.test/cypress/support/component-index.html` property into `cypress.config.[cjs|ts]` to `test/cypress/support/component-index.html`
 - replace all `mount` occurrences to use the new `cy.mount()` helper instead
 - set `component.specPattern` property to `src/**/*.cy.{js,jsx,ts,tsx}` and update all your component tests names to match that pattern, replacing `.spec.[js|ts]` with `.cy.[js|ts]`
 - rename `test/cypress/integration` folder to `test/cypress/e2e` and update `e2e.specPattern` accordingly
@@ -127,7 +127,7 @@ export default defineConfig({
 - update your `test:component` and `test:component:ci` scripts to use `--component` flag instead of `open-ct`/`run-ct` commands (`open --component` and `run --component` respectively)
 - remove Cypress JSON schema registration from vscode settings, Cypress switched to a JS/TS config file and is now using an helper function to provide autocomplete.
 - update eslint override pattern which applies to cypress files as explained into this AE installation instructions
-- (optional) move any other custom configuration from `test/cypress/plugins/index.[js|ts]` to [`setupNodeEvents` hooks](https://docs.cypress.io/guides/references/configuration#History) into `cypress.config.[js|ts]`. Note that if you're using Vite and you added code coverage, you'll need to setup code coverage plugin both into e2e and component `setupNodeEvents` hooks
+- (optional) move any other custom configuration from `test/cypress/plugins/index.[js|ts]` to [`setupNodeEvents` hooks](https://docs.cypress.io/guides/references/configuration#History) into `cypress.config.[cjs|ts]`. Note that if you're using Vite and you added code coverage, you'll need to setup code coverage plugin both into e2e and component `setupNodeEvents` hooks
 - `cy.saveLocalStorage` and `cy.restoreLocalStorage` has been removed, since Cypress 12 now provides a more [stable and complete solution](https://docs.cypress.io/api/commands/session) to persist cookies, session storage and local storage across tests.
 - check out [Cypress 10 changelog](https://docs.cypress.io/guides/references/changelog#10-0-0), [Cypress 11 changelog](https://docs.cypress.io/guides/references/changelog#11-0-0) and [Cypress 12 changelog](https://docs.cypress.io/guides/references/changelog#12-0-0), and see if something else in there affect you. We are sorry for continuously bumping Cypress peer dependency during the beta, but Cypress team released 3 major versions in a 6 months time span and we cannot afford to maintain too many major versions of this AE.
 

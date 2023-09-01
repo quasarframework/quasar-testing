@@ -20,9 +20,13 @@ module.exports = async function (api) {
     return;
   }
 
-  // Prevent Quasar from opening the project into a new browser tab as Cypress opens its own window
   api.extendQuasarConf(async (conf) => {
+    // Prevent Quasar from opening the project into a new browser
+    // tab as Cypress opens its own window
     conf.devServer.open = false;
+
+    // Force a specific port for Cypress
+    conf.devServer.port = 8080;
   });
 
   if (api.prompts.options.includes('code-coverage')) {
