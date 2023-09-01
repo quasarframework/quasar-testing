@@ -120,10 +120,11 @@ module.exports = async function (api) {
           });
       }
 
+      const doneRegex = /App URL\.{11,} (https?:\/\/localhost:\d{4}\/)/;
+
       // Pipe output to console
       devServer.stdout.pipe(process.stdout);
       devServer.stdout.on('data', async (rawData) => {
-        const doneRegex = /App URL\.{11} (https?:\/\/localhost:\d{4}\/)/;
         const data = stripAnsi(rawData.toString());
         if (/ERROR {2}Failed to compile with \d* errors/.test(data)) {
           // Dev server errored
