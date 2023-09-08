@@ -181,6 +181,21 @@ The good news is that we don't actually need to, since official documentation fo
 - [Vuex](https://docs.cypress.io/guides/component-testing/custom-mount-vue#Vuex)
 - [Pinia](https://pinia.vuejs.org/cookbook/testing.html#unit-testing-components)
 
+#### Using boot files
+
+When testing components, your Quasar boot files aren't loaded. If you need some features defined in your boot files, you can manually add them in your support file.
+
+For instance, to make an axios API client globally available, simply set it in the `VueTestUtils` `config.global.mocks` object (like you would do on `app.config.globalProperties` in your boot file):
+
+```ts
+import { VueTestUtils } from 'cypress/vue';
+import axios from 'axios';
+
+const api = axios.create({ baseURL: 'https://api.example.com' });
+
+VueTestUtils.config.global.mocks.$api = api;
+```
+
 #### Using vModel into your tests
 
 Vue Test Utils doesn't provide an helper to test your components vModel, so we created our own, which even allow you use refs into your tests, based on [this discussion](https://github.com/vuejs/test-utils/discussions/279).
