@@ -11,8 +11,8 @@
     "type": "git",
     "url": "https://github.com/quasarframework/quasar-testing"
   },
-  "main": "dist/index.js",
-  "module": "dist/esm/index.js",
+  "main": "dist/main.js",
+  "module": "dist/esm/main.js",
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue ./ --fix",
     "format": "prettier --write \"src/**/*.{js,ts,vue}\" \"*.{json,md}\" \"test/**/*.{js,ts,vue}\"",
