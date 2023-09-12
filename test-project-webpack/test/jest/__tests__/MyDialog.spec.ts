@@ -29,7 +29,7 @@ describe('MyDialog', () => {
 
     // `.get()` expects the element to exist, otherwise it throws an error
     expect(bodyWrapper.get('.q-dialog').html()).toContain(
-      'Custom dialog which should be tested'
+      'Custom dialog which should be tested',
     );
   });
 });
