@@ -31,18 +31,18 @@
     "yarn": ">= 1.17.3"
   },
   "dependencies": {
-    "@cypress/code-coverage": "^3.10.0",
+    "@cypress/code-coverage": "^3.12.1",
     "cross-env": "^7.0.3",
     "lodash": "^4.17.21",
     "nyc": "^15.1.0",
     "start-server-and-test": "^2.0.0",
-    "vite-plugin-istanbul": "^4.0.1"
+    "vite-plugin-istanbul": "^5.0.0"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.191",
-    "cypress": "^12.7.0",
+    "@types/lodash": "^4.14.198",
+    "cypress": "^12.17.4",
     "eslint-plugin-cypress": "^2.14.0",
-    "rimraf": "^4.1.2"
+    "rimraf": "^5.0.1"
   },
   "peerDependencies": {
     "cypress": "^12.2.0",
