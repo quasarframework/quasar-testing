@@ -81,9 +81,9 @@ async function quasarWebpackConfig(quasarAppPackage: string) {
 }
 
 async function getQuasarViteSpaConfig(quasarAppPackage: string) {
-  const {
-    default: quasarSpaConfig,
-  } = await import(`${quasarAppPackage}/lib/modes/spa/spa-config`);
+  const { default: quasarSpaConfig } = await import(
+    `${quasarAppPackage}/lib/modes/spa/spa-config`
+  );
 
   return quasarSpaConfig;
 }
