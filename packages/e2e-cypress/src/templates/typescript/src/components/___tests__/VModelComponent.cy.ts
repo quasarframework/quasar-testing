@@ -30,8 +30,8 @@ describe('VModelComponent', () => {
 
     cy.dataCy('button').click();
     cy.dataCy('button').then(() => {
-        expect(fn).to.be.calledWith('uasar');
-      });
+      expect(fn).to.be.calledWith('uasar');
+    });
   });
 
   it('should update the value via inner button when not using the helper', () => {
