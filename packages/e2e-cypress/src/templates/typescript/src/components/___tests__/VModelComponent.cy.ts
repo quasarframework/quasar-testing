@@ -28,9 +28,8 @@ describe('VModelComponent', () => {
       },
     });
 
-    cy.dataCy('button')
-      .click()
-      .then(() => {
+    cy.dataCy('button').click();
+    cy.dataCy('button').then(() => {
         expect(fn).to.be.calledWith('uasar');
       });
   });
