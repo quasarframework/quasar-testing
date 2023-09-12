@@ -34,10 +34,9 @@ describe('QuasarButton', () => {
   it('should emit `test` upon click', () => {
     cy.mount(QuasarButton);
 
-    cy.dataCy('button')
-      .click()
-      .should(() => {
-        expect(Cypress.vueWrapper.emitted('test')).to.have.length(1);
-      });
+    cy.dataCy('button').click();
+    cy.dataCy('button').should(() => {
+      expect(Cypress.vueWrapper.emitted('test')).to.have.length(1);
+    });
   });
 });
