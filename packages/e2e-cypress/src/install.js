@@ -6,6 +6,7 @@
 
 const { appendFileSync } = require('fs');
 const { join } = require('path');
+const { enforcedDevServerPort } = require('./shared');
 
 /**
  * Performs a deep merge of objects and returns new object. Does not modify
@@ -71,7 +72,7 @@ module.exports = function (api) {
     api.compatibleWith('@quasar/app', '^3.0.0 || ^4.0.0-alpha.20');
   }
 
-  const devServerPort = 8080;
+  const devServerPort = enforcedDevServerPort;
   const shouldAddScripts = api.prompts.options.includes('scripts');
   const shouldSupportTypeScript = api.prompts.options.includes('typescript');
   const shouldAddCodeCoverage =

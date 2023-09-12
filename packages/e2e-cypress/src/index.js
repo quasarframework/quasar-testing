@@ -5,6 +5,8 @@
  * API: https://github.com/quasarframework/quasar/blob/master/app/lib/app-extension/IndexAPI.js
  */
 
+const { enforcedDevServerPort } = require('./shared');
+
 module.exports = async function (api) {
   api.compatibleWith('quasar', '^2.0.0');
   if (api.hasVite) {
@@ -26,7 +28,7 @@ module.exports = async function (api) {
     conf.devServer.open = false;
 
     // Force a specific port for Cypress
-    conf.devServer.port = 8080;
+    conf.devServer.port = enforcedDevServerPort;
   });
 
   if (api.prompts.options.includes('code-coverage')) {
