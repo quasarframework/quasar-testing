@@ -37,13 +37,17 @@ function __mergeDeep(...sources) {
   return result;
 }
 
-const { peerDependencies } = require(join(__dirname, '..', 'package.json'));
+// We use devDependencies instead of peerDependencies because devDependencies are usually the latest version
+// and peerDependencies could contain a string supporting multiple major versions (e.g. "cypress": "^12.2.0 || ^13.1.0")
+const { devDependencies: aeDevDependencies } = require(
+  join(__dirname, '..', 'package.json'),
+);
 
 function getCompatibleDevDependencies(packageNames) {
   const devDependencies = {};
 
   for (const packageName of packageNames) {
-    devDependencies[packageName] = peerDependencies[packageName];
+    devDependencies[packageName] = aeDevDependencies[packageName];
   }
 
   return devDependencies;
