@@ -4,10 +4,6 @@
 
 # **`@quasar/testing`**
 
-> You’re looking at Quasar v2 testing docs. If you're searching for Quasar v1 docs, head [here](https://github.com/quasarframework/quasar-testing/tree/qv1)
->
-> Check out the migration status [here](https://github.com/quasarframework/quasar/discussions/10341)
-
 This is the monorepo for integrating the test-runner of your choice into your Quasar app.
 
 You can install multiple pre-rigged testing harnesses (test runners) to your Quasar application, each one will:

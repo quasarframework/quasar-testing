@@ -1,7 +1,5 @@
 ## [Jest](https://jestjs.io/)
 
-> You’re looking at Quasar v2 testing docs. If you're searching for Quasar v1 docs, head [here](https://github.com/quasarframework/quasar-testing/tree/qv1/packages/unit-jest/)
-
 > **[Jest isn't compatible with Vite](https://github.com/quasarframework/quasar-testing/issues/244#issuecomment-1293671738)**, if you use `@quasar/app-vite` and you need unit testing, you should use [Vitest](../unit-vitest/README.md) instead.
 
 > This package is in **beta** phase. The public API shouldn't change before the stable release.
