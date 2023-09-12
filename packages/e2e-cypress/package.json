@@ -24,7 +24,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "typings": "dist/index.d.ts",
+  "typings": "dist/main.d.ts",
   "engines": {
     "node": "^14.13.0 || ^16.0.0 || >= 18.0.0",
     "npm": ">= 6.14.12",
