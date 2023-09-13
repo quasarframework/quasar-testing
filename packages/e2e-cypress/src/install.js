@@ -96,15 +96,6 @@ module.exports = function (api) {
     shouldSupportTypeScriptAndVite: shouldSupportTypeScript && api.hasVite,
   });
 
-  api.extendJsonFile('quasar.testing.json', {
-    'e2e-cypress': {
-      runnerCommand: e2eCommandCi,
-    },
-    'component-cypress': {
-      runnerCommand: componentCommandCi,
-    },
-  });
-
   if (shouldAddScripts) {
     const scripts = {
       scripts: {

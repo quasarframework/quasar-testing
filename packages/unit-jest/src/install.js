@@ -46,8 +46,6 @@ function getCompatibleDevDependencies(packageNames) {
   return devDependencies;
 }
 
-const ciCommand = 'jest --ci';
-
 // make sure the object exists
 let extendPackageJson = {
   devDependencies: getCompatibleDevDependencies([
@@ -62,12 +60,6 @@ module.exports = function (api) {
   // TODO: should be "@quasar/app-webpack" but that is not backward compatible
   // Remove when Qv3 comes out, or when "@quasar/app" is officially deprecated
   api.compatibleWith('@quasar/app', '^3.0.0 || ^4.0.0-alpha.20');
-
-  api.extendJsonFile('quasar.testing.json', {
-    'unit-jest': {
-      runnerCommand: ciCommand,
-    },
-  });
 
   api.render('./templates/base', {}, true);
 
@@ -96,7 +88,7 @@ module.exports = function (api) {
       scripts: {
         test: 'echo "See package.json => scripts for available tests." && exit 0',
         'test:unit': 'jest',
-        'test:unit:ci': ciCommand,
+        'test:unit:ci': 'jest --ci',
         'test:unit:coverage': 'jest --coverage',
         'test:unit:watch': 'jest --watch',
         'test:unit:watchAll': 'jest --watchAll',

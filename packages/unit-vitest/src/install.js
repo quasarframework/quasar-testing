@@ -46,8 +46,6 @@ function getCompatibleDevDependencies(packageNames) {
   return devDependencies;
 }
 
-const ciCommand = 'vitest run';
-
 // make sure the object exists
 let extendPackageJson = {
   devDependencies: getCompatibleDevDependencies(['@vue/test-utils', 'vitest']),
@@ -56,12 +54,6 @@ let extendPackageJson = {
 module.exports = function (api) {
   api.compatibleWith('quasar', '^2.6.0');
   api.compatibleWith('@quasar/app-vite', '^1.0.0 || ^2.0.0-alpha.27');
-
-  api.extendJsonFile('quasar.testing.json', {
-    'unit-vitest': {
-      runnerCommand: ciCommand,
-    },
-  });
 
   api.render(
     `./templates/${
@@ -88,7 +80,7 @@ module.exports = function (api) {
       scripts: {
         test: 'echo "See package.json => scripts for available tests." && exit 0',
         'test:unit': 'vitest',
-        'test:unit:ci': ciCommand,
+        'test:unit:ci': 'vitest run',
       },
     };
     extendPackageJson = __mergeDeep(extendPackageJson, scripts);

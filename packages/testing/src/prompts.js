@@ -14,8 +14,18 @@ module.exports = function () {
       type: 'checkbox',
       required: false,
       message:
-        'Please choose which testing harnesses to install (only Qv2-compatible harnesses are shown):',
+        'Please choose which testing harnesses to install:',
       choices: [
+        {
+          name: 'THIS AE IS DEPRECATED; please refer to individual harnesses AEs instead',
+          value: 'deprecation',
+          disabled: true
+        },
+        {
+          name: 'See https://github.com/quasarframework/quasar-testing/tree/dev/packages/testing/README.md#DEPRECATION-NOTICE',
+          value: 'notice',
+          disabled: true
+        },
         {
           name: 'Jest Unit Testing (Webpack only, beta)',
           value: 'unit-jest@beta',
