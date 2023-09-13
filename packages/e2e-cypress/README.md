@@ -80,8 +80,6 @@ You can either apply [this workaround](https://github.com/istanbuljs/nyc/issues/
 
 > If you're coming from v4, follow the migration guide in the next section first.
 
-> v5.2 leverage some features from `@quasar/app-webpack@3.11.0`/`@quasar/app-vite@1.6.0`, thus you'll need to upgrade your Quasar CLI to at least those versions.
-
 Here's all the steps you need to take while upgrading from v5.1 to v5.2:
 
 - Upgrade `@quasar/app-webpack`/`@quasar/app-vite` to its latest version: v5.2 leverage some features which are only available on `@quasar/app-webpack@3.11.0`/`@quasar/app-vite@1.6.0` onwards. Notice that this means that the old `@quasar/app` package (old name of `@quasar/app-webpack`) isn't supported anymore.
