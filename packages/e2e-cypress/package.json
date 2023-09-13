@@ -40,12 +40,12 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.198",
-    "cypress": "^12.17.4",
+    "cypress": "^13.2.0",
     "eslint-plugin-cypress": "^2.14.0",
     "rimraf": "^5.0.1"
   },
   "peerDependencies": {
-    "cypress": "^12.2.0",
+    "cypress": "^12.2.0 || ^13.2.0",
     "eslint-plugin-cypress": "^2.12.1"
   },
   "peerDependenciesMeta": {
