@@ -1,6 +1,6 @@
 {
   "@quasar/testing-unit-vitest": {
-    "options": ["typescript", "ui"]
+    "options": ["ui"]
   },
   "@quasar/testing-e2e-cypress": {
     "options": ["code-coverage"]
