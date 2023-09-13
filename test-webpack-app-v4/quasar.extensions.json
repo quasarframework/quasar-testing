@@ -1,6 +1,6 @@
 {
   "@quasar/testing-e2e-cypress": {
-    "options": ["code-coverage"]
+    "options": []
   },
   "@quasar/testing-unit-jest": {
     "options": ["majestic"]
