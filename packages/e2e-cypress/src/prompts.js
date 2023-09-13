@@ -7,7 +7,7 @@
  *
  */
 
-module.exports = function () {
+module.exports = function (api) {
   return [
     {
       name: 'options',
@@ -17,17 +17,9 @@ module.exports = function () {
         'Cypress e2e and component Test Harness will now be installed. Please choose additional options:',
       choices: [
         {
-          name: 'extra "scripts" in your package.json',
-          value: 'scripts',
-          checked: true,
-        },
-        {
-          name: 'enable TypeScript support',
-          value: 'typescript',
-        },
-        {
           name: 'enable code coverage (currently only supported using Vite, not Webpack)',
           value: 'code-coverage',
+          checked: api.hasVite,
         },
       ],
     },

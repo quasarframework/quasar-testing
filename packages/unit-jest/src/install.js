@@ -55,47 +55,38 @@ let extendPackageJson = {
   ]),
 };
 
-module.exports = function (api) {
+module.exports = async function (api) {
   api.compatibleWith('quasar', '^2.0.4');
-  // TODO: should be "@quasar/app-webpack" but that is not backward compatible
-  // Remove when Qv3 comes out, or when "@quasar/app" is officially deprecated
-  api.compatibleWith('@quasar/app', '^3.0.0 || ^4.0.0-alpha.20');
+  // hasTypescript is only available from v3.11.0 onwards
+  api.compatibleWith('@quasar/app-webpack', '^3.11.0 || ^4.0.0-alpha.20');
 
   api.render('./templates/base', {}, true);
 
-  api.render(
-    `./templates/${
-      api.prompts.options.includes('typescript') ? '' : 'no-'
-    }typescript`,
-  );
+  api.render(`./templates/${await api.hasTypescript() ? '' : 'no-'}typescript`);
 
   if (api.prompts.options.includes('majestic')) {
     const majestic = {
       devDependencies: getCompatibleDevDependencies(['majestic']),
     };
 
-    if (api.prompts.options.includes('scripts')) {
-      majestic.scripts = {
-        'test:unit:ui': 'majestic',
-      };
-    }
+    majestic.scripts = {
+      'test:unit:ui': 'majestic',
+    };
 
     extendPackageJson = __mergeDeep(extendPackageJson, majestic);
   }
 
-  if (api.prompts.options.includes('scripts')) {
-    const scripts = {
-      scripts: {
-        test: 'echo "See package.json => scripts for available tests." && exit 0',
-        'test:unit': 'jest',
-        'test:unit:ci': 'jest --ci',
-        'test:unit:coverage': 'jest --coverage',
-        'test:unit:watch': 'jest --watch',
-        'test:unit:watchAll': 'jest --watchAll',
-      },
-    };
-    extendPackageJson = __mergeDeep(extendPackageJson, scripts);
-  }
+  const scripts = {
+    scripts: {
+      test: 'echo "See package.json => scripts for available tests." && exit 0',
+      'test:unit': 'jest',
+      'test:unit:ci': 'jest --ci',
+      'test:unit:coverage': 'jest --coverage',
+      'test:unit:watch': 'jest --watch',
+      'test:unit:watchAll': 'jest --watchAll',
+    },
+  };
+  extendPackageJson = __mergeDeep(extendPackageJson, scripts);
 
   api.extendPackageJson(extendPackageJson);
 };

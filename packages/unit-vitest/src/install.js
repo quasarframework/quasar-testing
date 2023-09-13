@@ -51,40 +51,33 @@ let extendPackageJson = {
   devDependencies: getCompatibleDevDependencies(['@vue/test-utils', 'vitest']),
 };
 
-module.exports = function (api) {
+module.exports = async function (api) {
   api.compatibleWith('quasar', '^2.6.0');
-  api.compatibleWith('@quasar/app-vite', '^1.0.0 || ^2.0.0-alpha.27');
+  // hasTypescript is only available from v1.6.0 onwards
+  api.compatibleWith('@quasar/app-vite', '^1.6.0 || ^2.0.0-alpha.27');
 
-  api.render(
-    `./templates/${
-      api.prompts.options.includes('typescript') ? '' : 'no-'
-    }typescript`,
-  );
+  api.render(`./templates/${await api.hasTypescript() ? '' : 'no-'}typescript`);
 
   if (api.prompts.options.includes('ui')) {
     const ui = {
       devDependencies: getCompatibleDevDependencies(['@vitest/ui']),
     };
 
-    if (api.prompts.options.includes('scripts')) {
-      ui.scripts = {
-        'test:unit:ui': 'vitest --ui',
-      };
-    }
+    ui.scripts = {
+      'test:unit:ui': 'vitest --ui',
+    };
 
     extendPackageJson = __mergeDeep(extendPackageJson, ui);
   }
 
-  if (api.prompts.options.includes('scripts')) {
-    const scripts = {
-      scripts: {
-        test: 'echo "See package.json => scripts for available tests." && exit 0',
-        'test:unit': 'vitest',
-        'test:unit:ci': 'vitest run',
-      },
-    };
-    extendPackageJson = __mergeDeep(extendPackageJson, scripts);
-  }
+  const scripts = {
+    scripts: {
+      test: 'echo "See package.json => scripts for available tests." && exit 0',
+      'test:unit': 'vitest',
+      'test:unit:ci': 'vitest run',
+    },
+  };
+  extendPackageJson = __mergeDeep(extendPackageJson, scripts);
 
   api.extendPackageJson(extendPackageJson);
 };

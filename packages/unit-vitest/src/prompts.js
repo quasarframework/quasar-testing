@@ -17,15 +17,6 @@ module.exports = function () {
         'Vitest Unit testing will now be installed. Please choose additional options:',
       choices: [
         {
-          name: 'Extra "scripts" in your package.json',
-          value: 'scripts',
-          checked: true,
-        },
-        {
-          name: 'Use Typescript',
-          value: 'typescript',
-        },
-        {
           name: 'Install Vitest UI',
           value: 'ui',
         },

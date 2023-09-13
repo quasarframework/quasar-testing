@@ -17,15 +17,6 @@ module.exports = function () {
         'Jest Unit testing will now be installed. Please choose additional options:',
       choices: [
         {
-          name: 'Extra "scripts" in your package.json',
-          value: 'scripts',
-          checked: true,
-        },
-        {
-          name: 'TypeScript support',
-          value: 'typescript',
-        },
-        {
           name: 'Use Majestic UI as Jest tests GUI',
           value: 'majestic',
         },

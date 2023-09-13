@@ -62,19 +62,18 @@ let extendPackageJson = {
   ]),
 };
 
-module.exports = function (api) {
+module.exports = async function (api) {
   api.compatibleWith('quasar', '^2.0.0');
   if (api.hasVite) {
-    api.compatibleWith('@quasar/app-vite', '^1.0.0 || ^2.0.0-alpha.27');
+    // PromptsAPI and hasTypescript are only available from v1.6.0 onwards
+    api.compatibleWith('@quasar/app-vite', '^v1.6.0 || ^2.0.0-alpha.27');
   } else if (api.hasWebpack) {
-    // TODO: should be "@quasar/app-webpack" but that is not backward compatible
-    // Remove when Qv3 comes out, or when "@quasar/app" is officially deprecated
-    api.compatibleWith('@quasar/app', '^3.0.0 || ^4.0.0-alpha.20');
+    // PromptsAPI and hasTypescript are only available from v3.11.0 onwards
+    api.compatibleWith('@quasar/app-webpack', '^3.11.0 || ^4.0.0-alpha.20');
   }
 
   const devServerPort = enforcedDevServerPort;
-  const shouldAddScripts = api.prompts.options.includes('scripts');
-  const shouldSupportTypeScript = api.prompts.options.includes('typescript');
+  const shouldSupportTypeScript = await api.hasTypescript();
   const shouldAddCodeCoverage =
     api.prompts.options.includes('code-coverage') && api.hasVite;
 
@@ -96,18 +95,16 @@ module.exports = function (api) {
     shouldSupportTypeScriptAndVite: shouldSupportTypeScript && api.hasVite,
   });
 
-  if (shouldAddScripts) {
-    const scripts = {
-      scripts: {
-        test: 'echo "See package.json => scripts for available tests." && exit 0',
-        'test:e2e': e2eCommand,
-        'test:e2e:ci': e2eCommandCi,
-        'test:component': componentCommand,
-        'test:component:ci': componentCommandCi,
-      },
-    };
-    extendPackageJson = __mergeDeep(extendPackageJson, scripts);
-  }
+  const scripts = {
+    scripts: {
+      test: 'echo "See package.json => scripts for available tests." && exit 0',
+      'test:e2e': e2eCommand,
+      'test:e2e:ci': e2eCommandCi,
+      'test:component': componentCommand,
+      'test:component:ci': componentCommandCi,
+    },
+  };
+  extendPackageJson = __mergeDeep(extendPackageJson, scripts);
 
   if (shouldAddCodeCoverage) {
     api.render('./templates/code-coverage');
@@ -116,9 +113,7 @@ module.exports = function (api) {
     appendFileSync(gitignorePath, '\n.nyc_output\ncoverage/\n');
   }
 
-  // TODO: using `api.hasWebpack` won't be available if the user is still using
-  // the old app, so we check hasVite instead
-  if (api.prompts.options.includes('code-coverage') && !api.hasVite) {
+  if (api.prompts.options.includes('code-coverage') && api.hasWebpack) {
     api.onExitLog(
       "Code coverage isn't supported for Webpack yet. Please use Vite CLI instead.",
     );
