@@ -10,7 +10,7 @@ You can install multiple pre-rigged testing harnesses (test runners) to your Qua
 
 - install the harness NPM package into your project;
 - scaffold necessary configuration files;
-- add script commands, if you so choose, which expose some functionality of the respective harness.
+- add script commands which expose some functionality of the respective harness.
 
 > App Extensions (such as these testing harnesses) only work with Quasar CLI, not with Vue CLI, nor by directly installing packages via a package manager as npm or yarn. Use `quasar ext add ...` or the installation step won't be executed and configuration files won't be copied over.
 
@@ -48,7 +48,7 @@ The Test Driven Design approach will help you to write better (and fewer) tests.
 
 ## Donations
 
-The Quasar team spend a considerabile amount of time studying, coding and maintaining App Extensions (AE) which save literally thousands of developers hours, days or weeks of work.
+The Quasar team spend a considerable amount of time studying, coding and maintaining App Extensions (AE) which save literally thousands of developers hours, days or weeks of work.
 
 Does your business or personal projects depend on these App Extensions? How much time did we save you until now? Consider [donating](https://github.com/sponsors/rstoenescu) to help us maintain them and allow us to create new ones!
 
@@ -56,7 +56,7 @@ Does your business or personal projects depend on these App Extensions? How much
 
 You can add test harnesses:
 
-- in a centralized way via the [Testing Harnesses Manager](packages/testing/README.md);
+- in a centralized way via the [Testing Harnesses Manager](packages/testing/README.md) (**DEPRECATED**);
 - using an "a-la-carte" approach, checking each harness documentation.
 
 You can add multiple harnesses and even use them into your continuous integration pipelines.
@@ -108,7 +108,7 @@ $ quasar ext remove @quasar/testing-unit-jest
 $ quasar ext add @quasar/testing-unit-jest
 ```
 
-## Testing Harnesses Manager
+## Testing Harnesses Manager (**DEPRECATED**)
 
 [Check out Testing Harnesses Manager AE documentation](packages/testing/README.md)
 
