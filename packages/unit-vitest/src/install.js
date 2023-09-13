@@ -52,7 +52,8 @@ let extendPackageJson = {
 };
 
 module.exports = async function (api) {
-  api.compatibleWith('quasar', '^2.6.0');
+  api.compatibleWith('quasar', '^2.12.7');
+  api.compatibleWith('vue', '^3.3.4');
   // hasTypescript is only available from v1.6.0 onwards
   api.compatibleWith('@quasar/app-vite', '^1.6.0 || ^2.0.0-alpha.27');
 

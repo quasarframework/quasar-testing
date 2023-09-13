@@ -39,14 +39,14 @@
     "@vue/test-utils": "^2.4.1",
     "quasar": "^2.12.7",
     "rimraf": "^5.0.1",
-    "vitest": "^0.31.0",
+    "vitest": "^0.34.0",
     "vue": "^3.3.4"
   },
   "peerDependencies": {
-    "@vitest/ui": "^0.31.0",
+    "@vitest/ui": "^0.34.0",
     "@vue/test-utils": "^2.4.1",
     "quasar": "^2.12.7",
-    "vitest": "^0.31.0",
+    "vitest": "^0.34.0",
     "vue": "^3.3.4"
   },
   "peerDependenciesMeta": {
