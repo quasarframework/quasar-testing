@@ -76,6 +76,21 @@ You can either apply [this workaround](https://github.com/istanbuljs/nyc/issues/
 
 [nyc-config-preset]: https://github.com/quasarframework/quasar-testing/blob/dev/packages/e2e-cypress/nyc-config-preset.json
 
+### Upgrade from Cypress AE v5.1 to v5.2 onwards
+
+> If you're coming from v4, follow the migration guide in the next section first.
+
+> v5.2 leverage some features from `@quasar/app-webpack@3.11.0`/`@quasar/app-vite@1.6.0`, thus you'll need to upgrade your Quasar CLI to at least those versions.
+
+Here's all the steps you need to take while upgrading from v5.1 to v5.2:
+
+- Upgrade `@quasar/app-webpack`/`@quasar/app-vite` to its latest version: v5.2 leverage some features which are only available on `@quasar/app-webpack@3.11.0`/`@quasar/app-vite@1.6.0` onwards. Notice that this means that the old `@quasar/app` package (old name of `@quasar/app-webpack`) isn't supported anymore.
+- Update `test:e2e` and `test:e2e:ci` scripts to use port "8080". The AE now enforces the usage of "8080" port on the dev server for both `@quasar/app-webpack` and `@quasar/app-vite`, and for all build modes. It previously varied for each combination and Vite-based projects used "9000" port by default.
+- (**JS projects only**) Rename `cypress.config.js` to `cypress.config.cjs`. This will avoid problems with future major versions of `@quasar/app-webpack`/`@quasar/app-vite`, in case at some point you decide to switch your project to "ESM by default" using `"type": "module"` option in `package.json`.
+- (**TS projects only**) Upgrade TypeScript to v4 or newer
+- (**optional**) Upgrade Cypress to v13 and check out its [migration guide](https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-130)
+- (**optional**) Upgrade Node to v18 or newer
+
 ### Upgrade from Cypress AE v4
 
 > if you're coming from v3, follow [the migration guide for v4 and v4.1 first](https://github.com/quasarframework/quasar-testing/tree/cypress-v4/packages/e2e-cypress#upgrade-from-cypress-v4-to-v41-optional)
