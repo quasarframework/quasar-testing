@@ -72,7 +72,7 @@ module.exports = async function (api) {
     api.compatibleWith('@quasar/app-webpack', '^3.11.0 || ^4.0.0-alpha.20');
   }
 
-  const devServerPort = enforcedDevServerPort;
+  const devServerPort = api.prompts.port ?? enforcedDevServerPort;
   const shouldSupportTypeScript = await api.hasTypescript();
   const shouldAddCodeCoverage =
     api.prompts.options.includes('code-coverage') && api.hasVite;

@@ -28,7 +28,7 @@ module.exports = async function (api) {
     conf.devServer.open = false;
 
     // Force a specific port for Cypress
-    conf.devServer.port = enforcedDevServerPort;
+    conf.devServer.port = api.prompts.port ?? enforcedDevServerPort;
   });
 
   if (api.prompts.options.includes('code-coverage')) {

@@ -7,8 +7,17 @@
  *
  */
 
+const { enforcedDevServerPort } = require('./shared');
+
 module.exports = function (api) {
   return [
+    {
+      name: 'port',
+      type: 'text',
+      required: true,
+      default: enforcedDevServerPort,
+      message: 'Choose which port the app will be served when run for Cypress:',
+    },
     {
       name: 'options',
       type: 'checkbox',
