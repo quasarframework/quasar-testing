@@ -32,7 +32,7 @@ The Test Driven Design approach will help you to write better (and fewer) tests.
 - [Upgrade](#upgrade)
 - Provided App Extensions
 
-  - [Testing Harnesses Manager](packages/testing/README.md)
+  - [Testing Harnesses Manager](packages/testing/README.md) (**DEPRECATED**)
   - Unit testing
 
     - [Jest](packages/unit-jest/README.md)
@@ -143,46 +143,6 @@ The `Lighthouse` tool can help you identify issues with your PWA app, but only i
 `Snyk` is a tool for identifying node modules that have security implications. Running this regularly will keep you alerted to issues that may be stemming from repositories you use.
 
 `Node License Finder (nlf)` is a free tool you can use to catalog all the licenses of the hundreds of open-source projects you are using in your project.
-
-## Roadmap
-
-Test harnesses currently verified to have valid "integration" are checked off in the following list.
-We won't commit to any deadline for integrations of new harnesses.
-
-### UNIT
-
-- [ ] [ava](https://github.com/avajs/ava)
-- [ ] [jasmine 3](https://jasmine.github.io/)
-- [x] [jest 26](https://facebook.github.io/jest/)
-- [ ] [tap](https://github.com/tapjs/node-tap)
-- [ ] [tape](https://github.com/substack/tape)
-- [ ] [mocha-webpack](https://github.com/zinserjan/mocha-webpack)
-
-### E2E
-
-- [ ] [appium](https://github.com/appium/appium) (cordova)
-- [x] [cypress](https://github.com/cypress-io/cypress)
-- [ ] [karma](https://github.com/karma-runner/karma)
-- [ ] [nightwatch](http://nightwatchjs.org/)
-- [ ] [polly.js](https://github.com/Netflix/pollyjs)
-- [ ] [spectron](https://github.com/electron/spectron) (electron)
-- [ ] [testcafe](https://github.com/DevExpress/testcafe)
-- [ ] [testee](https://github.com/bitovi/testee)
-- [ ] [webdriver.io](http://webdriver.io/)
-
-### QUALITY
-
-- [ ] [lighthouse 3.0](https://github.com/GoogleChrome/lighthouse)
-- [ ] [snyk](https://snyk.io/test)
-- [ ] [nlf](https://github.com/iandotkelly/nlf) (Node license finder)
-- [ ] [import-cost](https://github.com/wix/import-cost/tree/master/packages/import-cost) (custom)
-- [ ] [bundlesize](https://github.com/siddharthkp/bundlesize) (custom)
-- [ ] [webpagetest](https://www.webpagetest.org/)
-
-### UTILS
-
-- [ ] [jest-codemods](https://www.npmjs.com/package/jest-codemods)
-- [ ] [ava-codemods](https://github.com/avajs/ava-codemods) (tape=>ava)
 
 ## Further Reading
 

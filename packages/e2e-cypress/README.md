@@ -1,6 +1,6 @@
 ## [Cypress](https://www.cypress.io/)
 
-> You’re looking at Cypress AE v5 (Cypress 12) docs. If you're searching for Cypress AE v4 (Cypress 9) docs, head [here](https://github.com/quasarframework/quasar-testing/tree/cypress-v4/packages/e2e-cypress)
+> You’re looking at Cypress AE v5 (Cypress 12 & 13) docs. If you're searching for Cypress AE v4 (Cypress 9) docs, head [here](https://github.com/quasarframework/quasar-testing/tree/cypress-v4/packages/e2e-cypress)
 
 ```shell
 $ yarn quasar ext add @quasar/testing-e2e-cypress
