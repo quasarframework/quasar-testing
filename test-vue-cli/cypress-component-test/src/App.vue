@@ -2,14 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated class="glossy">
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          @click="leftDrawerOpen = !leftDrawerOpen"
-          aria-label="Menu"
-          icon="menu"
-        />
+        <q-btn flat dense round @click="leftDrawerOpen = !leftDrawerOpen" aria-label="Menu" icon="menu" />
 
         <q-toolbar-title> Quasar App </q-toolbar-title>
 
@@ -29,12 +22,7 @@
             <q-item-label caption>quasar.dev</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item
-          clickable
-          tag="a"
-          target="_blank"
-          href="https://github.com/quasarframework/"
-        >
+        <q-item clickable tag="a" target="_blank" href="https://github.com/quasarframework/">
           <q-item-section avatar>
             <q-icon name="code" />
           </q-item-section>
@@ -43,12 +31,7 @@
             <q-item-label caption>github.com/quasarframework</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item
-          clickable
-          tag="a"
-          target="_blank"
-          href="https://chat.quasar.dev"
-        >
+        <q-item clickable tag="a" target="_blank" href="https://chat.quasar.dev">
           <q-item-section avatar>
             <q-icon name="chat" />
           </q-item-section>
@@ -57,12 +40,7 @@
             <q-item-label caption>chat.quasar.dev</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item
-          clickable
-          tag="a"
-          target="_blank"
-          href="https://forum.quasar.dev"
-        >
+        <q-item clickable tag="a" target="_blank" href="https://forum.quasar.dev">
           <q-item-section avatar>
             <q-icon name="forum" />
           </q-item-section>
@@ -71,12 +49,7 @@
             <q-item-label caption>forum.quasar.dev</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item
-          clickable
-          tag="a"
-          target="_blank"
-          href="https://twitter.com/quasarframework"
-        >
+        <q-item clickable tag="a" target="_blank" href="https://twitter.com/quasarframework">
           <q-item-section avatar>
             <q-icon name="rss_feed" />
           </q-item-section>
@@ -89,20 +62,23 @@
     </q-drawer>
 
     <q-page-container>
-      <HelloWorld />
+      <QuasarHelloWorld />
+      <SimpleHelloWorld />
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
 import { ref } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import QuasarHelloWorld from './components/quasar-hello-world/QuasarHelloWorld.vue';
+import SimpleHelloWorld from './components/simple-hello-world/SimpleHelloWorld.vue';
 
 export default {
   name: 'LayoutDefault',
 
   components: {
-    HelloWorld,
+    QuasarHelloWorld,
+    SimpleHelloWorld
   },
 
   setup() {
