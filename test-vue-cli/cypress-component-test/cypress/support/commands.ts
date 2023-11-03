@@ -49,7 +49,7 @@ Cypress.Commands.add('mount', (component, options = {}) => {
   /* Add any global plugins */
   options.global.plugins.push({
     install(app) {
-      //app.use(Quasar, quasarUserOptions);
+      app.use(Quasar, quasarUserOptions);
     },
   });
 
