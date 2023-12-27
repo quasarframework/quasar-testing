@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-testing-e2e-cypress",
-  "version": "5.2.0-alpha.3",
+  "version": "5.2.0",
   "license": "MIT",
   "description": "A Quasar App Extension for Cypress e2e",
   "contributors": [
@@ -33,8 +33,8 @@
   },
   "dependenciesComments": {
     "start-server-and-test": "versions after 2.0.0 fix some security issues, with https://github.com/jeffbski/wait-on/pull/147, but they also bump the minimum node supported version to 16. We can upgrade them in the next major version when we'll drop support for Node 14, 16 and 18. See https://github.com/bahmutov/start-server-and-test/releases/tag/v2.0.1"
-  }
-,  "dependencies": {
+  },
+  "dependencies": {
     "@cypress/code-coverage": "^3.12.15",
     "cross-env": "^7.0.3",
     "lodash": "^4.17.21",
