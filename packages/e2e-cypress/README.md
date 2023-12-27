@@ -88,6 +88,7 @@ Here's all the steps you need to take while upgrading from v5.1 to v5.2:
 - (**TS projects only**) Upgrade TypeScript to v4 or newer
 - (**optional**) Upgrade Cypress to v13 and check out its [migration guide](https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-130)
 - (**optional**) Upgrade Node to v18 or newer
+- (**mandatory only when using Node 17, 18 or 19**) replace "localhost" domain with "127.0.0.1" in `test:e2e` and `test:e2e:ci` scripts, since on Node 17-18-19 "localhost" will be resolved to "::0" on Windows and Mac, and this will make those scripts fail silently and hang indefinitely. Node 20 LTS correctly supports Happy Eyeball protocol and thus this fix shouldn't be needed
 
 ### Upgrade from Cypress AE v4
 
