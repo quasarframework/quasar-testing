@@ -81,7 +81,19 @@ module.exports = async function (api) {
   // "http-get" must be used because "webpack-dev-server" won't answer
   //  HEAD requests which are performed by default by the underlying "wait-on"
   // See https://github.com/bahmutov/start-server-and-test#note-for-webpack-dev-server-users
-  const e2eServerCommand = `${testEnvCommand} start-test "quasar dev" http-get://localhost:${devServerPort}`;
+  // On Node 17, 18 and 19, "localhost" could resolve to "::0" instead of "127.0.0.1" depending on the OS
+  // Mac and Windows will, Linux will stick to the old behaviour
+  // That's why we had to upgrade the script to explicitly use "127.0.0.1" instead
+  // See https://github.com/nodejs/node/issues/40537
+  // See https://github.com/jeffbski/wait-on/issues/137
+  // See https://github.com/jeffbski/wait-on/issues/109
+  // See https://github.com/bahmutov/start-server-and-test/issues/358
+  // See https://vitejs.dev/config/server-options.html#server-host
+  // TODO: AFAIK latest version of Node 20 implements "Happy Eyeball" protocol which will try both IPv6 and IPv4,
+  // thus we should be able to revert to use "localhost" once we remove support for Node 18 in the next major version
+  // See https://github.com/electron/electron/issues/37044
+  // See https://github.com/jeffbski/wait-on/issues/109#issuecomment-1344097583
+  const e2eServerCommand = `${testEnvCommand} start-test "quasar dev" http-get://127.0.0.1:${devServerPort}`;
   const e2eCommand = `${e2eServerCommand} "cypress open --e2e"`;
   const e2eCommandCi = `${e2eServerCommand} "cypress run --e2e"`;
   const componentCommand = `${testEnvCommand} cypress open --component`;
