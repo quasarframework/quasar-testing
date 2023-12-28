@@ -13,7 +13,7 @@ describe('notify example', () => {
     const wrapper = mount(NotifyComponent);
     const spy = vi.spyOn(Notify, 'create');
     expect(spy).not.toHaveBeenCalled();
-    wrapper.trigger('click');
+    await wrapper.trigger('click');
     expect(spy).toHaveBeenCalled();
   });
 });
