@@ -4,6 +4,15 @@
 $ quasar ext add @quasar/testing-unit-vitest
 ```
 
+> Since Vitest 0.34 onwards relies on Vite 4 types, while `@quasar/app-vite` v1 still relies on Vite 2, you'll need to set your `resolutions` (if using Yarn) or `overrides` (if using NPM or PNPM) fields like the following to avoid type mismatch errors:
+>
+> ```json
+> "resolutions": {
+>   "@vitejs/plugin-vue": "^4.0.0",
+>   "vite": "^4.0.0"
+> },
+> ```
+
 > This package is in **alpha** phase. The public API may still change as we collect community feedback.
 
 This App Extension (AE) manages Quasar and Vitest integration for you, both for JavaScript and TypeScript.
