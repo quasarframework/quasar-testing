@@ -66,10 +66,10 @@ module.exports = async function (api) {
   api.compatibleWith('quasar', '^2.0.0');
   if (api.hasVite) {
     // PromptsAPI and hasTypescript are only available from v1.6.0 onwards
-    api.compatibleWith('@quasar/app-vite', '^v1.6.0 || ^2.0.0-alpha.27');
+    api.compatibleWith('@quasar/app-vite', '^v1.6.0 || ^2.0.0-alpha.44');
   } else if (api.hasWebpack) {
     // PromptsAPI and hasTypescript are only available from v3.11.0 onwards
-    api.compatibleWith('@quasar/app-webpack', '^3.11.0 || ^4.0.0-alpha.20');
+    api.compatibleWith('@quasar/app-webpack', '^3.11.0 || ^4.0.0-alpha.31');
   }
 
   const devServerPort = api.prompts.port ?? enforcedDevServerPort;
@@ -81,7 +81,7 @@ module.exports = async function (api) {
   // "http-get" must be used because "webpack-dev-server" won't answer
   //  HEAD requests which are performed by default by the underlying "wait-on"
   // See https://github.com/bahmutov/start-server-and-test#note-for-webpack-dev-server-users
-  // On Node 17, 18 and 19, "localhost" could resolve to "::0" instead of "127.0.0.1" depending on the OS
+  // On Node 17, 18 and 19, "localhost" could resolve to "::1" instead of "127.0.0.1" depending on the OS
   // Mac and Windows will, Linux will stick to the old behaviour
   // That's why we had to upgrade the script to explicitly use "127.0.0.1" instead
   // See https://github.com/nodejs/node/issues/40537
