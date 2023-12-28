@@ -1,24 +1,32 @@
 {
-  "name": "test-app-vite-v1-vite4",
+  "name": "test-app-vite-v1-vite5",
   "version": "0.0.1",
   "description": "A Quasar Project",
   "productName": "Quasar App",
   "author": "Paolo Caleffi <p.caleffi@dreamonkey.com>",
   "private": true,
   "scripts": {
+    "sync:vitest": "yarn --cwd ../packages/unit-vitest build:local && yarn add -D ../packages/unit-vitest",
     "sync:cypress": "yarn --cwd ../packages/e2e-cypress build:local && yarn add -D ../packages/e2e-cypress",
-    "sync:all": "yarn sync:cypress",
+    "sync:all": "yarn sync:vitest && yarn sync:cypress",
+    "invoke:vitest": "quasar ext invoke @quasar/testing-unit-vitest && yarn format",
     "invoke:cypress": "quasar ext invoke @quasar/testing-e2e-cypress && yarn format",
-    "invoke:all": "yarn invoke:cypress",
+    "invoke:all": "yarn invoke:vitest && yarn invoke:cypress",
+    "sync:invoke:vitest": "yarn sync:vitest && yarn invoke:vitest",
     "sync:invoke:cypress": "yarn sync:cypress && yarn invoke:cypress",
-    "sync:invoke:all": "yarn sync:invoke:cypress",
+    "sync:invoke:all": "yarn sync:invoke:vitest && yarn sync:invoke:cypress",
+    "test:vitest": "yarn test:unit:ci",
     "test:cypress": "yarn test:e2e:ci && yarn test:component:ci",
-    "test:all": "yarn test:cypress",
+    "test:all": "yarn test:vitest && yarn test:cypress",
+    "sync:invoke:test:vitest": "yarn sync:invoke:vitest && yarn test:vitest",
     "sync:invoke:test:cypress": "yarn sync:invoke:cypress && yarn test:cypress",
-    "sync:invoke:test:all": "yarn sync:invoke:test:cypress",
+    "sync:invoke:test:all": "yarn sync:invoke:test:vitest && yarn sync:invoke:test:cypress",
     "lint": "eslint --ext .js,.ts,.vue ./",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
     "test": "echo \"See package.json => scripts for available tests.\" && exit 0",
+    "test:unit:ui": "vitest --ui",
+    "test:unit": "vitest",
+    "test:unit:ci": "vitest run",
     "test:e2e": "cross-env NODE_ENV=test start-test \"quasar dev\" http-get://127.0.0.1:8080 \"cypress open --e2e\"",
     "test:e2e:ci": "cross-env NODE_ENV=test start-test \"quasar dev\" http-get://127.0.0.1:8080 \"cypress run --e2e\"",
     "test:component": "cross-env NODE_ENV=test cypress open --component",
@@ -27,11 +35,11 @@
   "dependencies": {
     "@quasar/extras": "^1.16.6",
     "axios": "^0.21.1",
-    "pinia": "^2.1.6",
+    "pinia": "^2.1.7",
     "quasar": "^2.14.2",
     "vue": "^3.3.13",
     "vue-i18n": "^9.4.0",
-    "vue-router": "^4.2.4"
+    "vue-router": "^4.2.5"
   },
   "devDependenciesComments": {
     "typescript": "We're keeping this pinned to v4 on purpose to test a setup without TS5"
@@ -40,27 +48,29 @@
     "@intlify/vite-plugin-vue-i18n": "^3.3.1",
     "@quasar/app-vite": "^1.7.1",
     "@quasar/quasar-app-extension-testing-e2e-cypress": "../packages/e2e-cypress",
+    "@quasar/quasar-app-extension-testing-unit-vitest": "../packages/unit-vitest",
     "@types/node": "^18.17.15",
     "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@typescript-eslint/parser": "^5.54.0",
-    "@vue/test-utils": "^2.4.1",
-    "autoprefixer": "^10.4.15",
+    "@vitest/ui": "^1.1.0",
+    "@vue/test-utils": "^2.4.3",
+    "autoprefixer": "^10.4.16",
     "cypress": "^13.6.2",
-    "eslint": "^8.49.0",
+    "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-cypress": "^2.15.1",
-    "eslint-plugin-vue": "^9.17.0",
-    "prettier": "^3.0.3",
-    "typescript": "^4.9.5"
+    "eslint-plugin-vue": "^9.19.2",
+    "prettier": "^3.1.1",
+    "typescript": "^4.9.5",
+    "vitest": "^1.1.0"
   },
   "resolutionsComments": {
     "vite": "See workaround https://github.com/quasarframework/quasar/issues/14077#issuecomment-1353213893, since Quasar Vite v1 only supports up to Vite 3",
-    "vite-version": "We're keeping this pinned to v4 on purpose to test a setup prior to v5. That's also why we removed Vitest from this project, since it needs Vite 5",
-    "vitest": "If you need to test/run/update the alpha version of the Vitest AE, checkout `vitest-alpha` branch, in which the Vitest AE still doesn't use Vitest 1.0"
+    "vite-version": "We're keeping this pinned to v5 on purpose to test a setup using @quasar/app-vite v1 but forcing Vite 5 over it"
   },
   "resolutions": {
-    "vite": "^4.0.0",
-    "@vitejs/plugin-vue": "^4.0.0"
+    "vite": "^5.0.10",
+    "@vitejs/plugin-vue": "^4.5.2"
   },
   "engines": {
     "node": "^18 || ^16 || ^14.19",
