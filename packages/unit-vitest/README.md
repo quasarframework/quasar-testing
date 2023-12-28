@@ -1,19 +1,11 @@
 ## [Vitest](https://vitest.dev/)
 
 ```shell
-$ quasar ext add @quasar/testing-unit-vitest
+$ quasar ext add @quasar/testing-unit-vitest@beta
 ```
 
-> Since Vitest 0.34 onwards relies on Vite 4 types, while `@quasar/app-vite` v1 still relies on Vite 2, you'll need to set your `resolutions` (if using Yarn) or `overrides` (if using NPM or PNPM) fields like the following to avoid type mismatch errors:
->
-> ```json
-> "resolutions": {
->   "@vitejs/plugin-vue": "^4.0.0",
->   "vite": "^4.0.0"
-> },
-> ```
-
-> This package is in **alpha** phase. The public API may still change as we collect community feedback.
+> This package is in **beta** phase. The public API is unlikely to change much before the stable release.
+> It will be released as stable once `@quasar/app-vite@v2` will hit a stable release.
 
 This App Extension (AE) manages Quasar and Vitest integration for you, both for JavaScript and TypeScript.
 
@@ -28,6 +20,19 @@ What is included:
 
 This AE is a lightweight add-on to "@vue/test-utils" package, which helps you test Vue components that rely on some Quasar features.
 Please check out ["@vue/test-utils" official documentation](https://vue-test-utils.vuejs.org/) to learn how to test Vue components.
+
+If you're migrating from Jest to Vitest, please check out the official [migration guide](https://vitest.dev/guide/migration.html#migrating-from-jest).
+
+### Upgrade from Vitest AE v0.4 to v1.0 onwards
+
+All changes are related to Vitest v1.0 breaking changes, Quasar first-party helpers haven't changed.
+
+- Upgrade Node to v18 or newer, v20 is preferred due to some quirks in v18;
+- Upgrade all Vitest related dependencies, especially `@vue/test-utils`, `vitest` and `@vitest/ui`, which minimum peer dependencies versions has been bumped. If you don't want to upgrade these dependencies manually, you can just re-install the AE and it will update all dependencies for you;
+- (**optional**) Upgrade `vue` and `quasar` dependencies to the latest version;
+- Rename `vitest.config.[js|ts]` to `vitest.config.[mjs|mts]` or switch your project to "ESM by default" adding `"type": "module"` option in `package.json`. Check out [here](https://vitejs.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated) why CJS build and syntax are deprecated in Vite 5;
+- Vitest 1.0 requires Vite 5, thus you'll need to upgrade `@quasar/app-vite` to v2 (currently in alpha stage). If you can't migrate away from v1 yet, you can use this [workaround](https://github.com/quasarframework/quasar/issues/14077#issuecomment-1851463530) until you can migrate. We do test against the setup using that workaround, to ease the migration, but bear in mind that we don't consider it as "officially supported" and we will stop testing against it in the near future;
+- Follow Vitest [upgrade guide](https://vitest.dev/guide/migration.html#migrating-from-vitest-0-34-6) to upgrade from Vitest v34.6 to v1.0
 
 ### installQuasarPlugin(options)
 
