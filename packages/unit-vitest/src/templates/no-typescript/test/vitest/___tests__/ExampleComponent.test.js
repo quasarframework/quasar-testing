@@ -6,7 +6,7 @@ import ExampleComponent from './demo/ExampleComponent.vue';
 installQuasarPlugin();
 
 describe('example Component', () => {
-  it('should mount component with todos', () => {
+  it('should mount component with todos', async () => {
     const wrapper = mount(ExampleComponent, {
       props: {
         title: 'Hello',
@@ -18,7 +18,7 @@ describe('example Component', () => {
       },
     });
     expect(wrapper.vm.clickCount).toBe(0);
-    wrapper.find('.q-item').trigger('click');
+    await wrapper.find('.q-item').trigger('click');
     expect(wrapper.vm.clickCount).toBe(1);
   });
 
