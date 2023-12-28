@@ -61,6 +61,13 @@
     "typescript": "^4.9.5",
     "vitest": "^0.34.0"
   },
+  "resolutionsComments": {
+    "vite": "See workaround https://github.com/quasarframework/quasar/issues/14077#issuecomment-1353213893, since Quasar Vite v1 only supports up to Vite 3"
+  },
+  "resolutions": {
+    "vite": "^4.0.0",
+    "@vitejs/plugin-vue": "^4.0.0"
+  },
   "engines": {
     "node": "^18 || ^16 || ^14.19",
     "npm": ">= 6.13.4",
