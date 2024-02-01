@@ -114,8 +114,8 @@ yarn add -D typescript
 ```
 
 - run `yarn cypress open` and follow the guided procedure
-- select "component testing" option and accept all proposed steps. When prompted for it, if autodetection doesn't kick in, select `vue` framework and `webpack`/`vite` bundler accordingly to what you're using. Note that, after the migration wizard completes, Cypress is expected to display an error due to it's inability to run Quasar devServer out-of-the-box
-- if a duplicated `component` property is generated into `cypress.config.[cjs|ts]`, remove the one containting `devServer` property.
+- select "component testing" option and accept all proposed steps. When prompted for it, if auto-detection doesn't kick in, select `vue` framework and `webpack`/`vite` bundler accordingly to what you're using. Note that, after the migration wizard completes, Cypress is expected to display an error due to it's inability to run Quasar devServer out-of-the-box
+- if a duplicated `component` property is generated into `cypress.config.[cjs|ts]`, remove the one containing `devServer` property.
 - remove from `test/cypress/plugins/index.[js|ts]` the code used to inject the component dev server, and add it into `cypress.config.[cjs|ts]` as
 
 ```ts
@@ -130,7 +130,16 @@ export default defineConfig({
 ```
 
 - create a `test/cypress/support/component-index.html` file with [this content](./src/templates/base/test/cypress/support/component-index.html)
-- set `component.test/cypress/support/component-index.html` property into `cypress.config.[cjs|ts]` to `test/cypress/support/component-index.html`
+- set `test/cypress/support/component-index.html` property into `cypress.config.[cjs|ts]` to `test/cypress/support/component-index.html`
+- into `test/cypress/support/component.[js|ts]` replace `import { config } from '@vue/test-utils';` with
+
+```ts
+// Since Cypress v10 we cannot import `config` directly from VTU as Cypress bundles its own version of it
+// See https://github.com/cypress-io/cypress/issues/22611
+import { VueTestUtils } from 'cypress/vue';
+const { config } = VueTestUtils;
+```
+
 - replace all `mount` occurrences to use the new `cy.mount()` helper instead
 - set `component.specPattern` property to `src/**/*.cy.{js,jsx,ts,tsx}` and update all your component tests names to match that pattern, replacing `.spec.[js|ts]` with `.cy.[js|ts]`
 - rename `test/cypress/integration` folder to `test/cypress/e2e` and update `e2e.specPattern` accordingly
