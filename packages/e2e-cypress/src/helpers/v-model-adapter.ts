@@ -12,8 +12,9 @@ export function vModelAdapter<T>(
   // the returned object and match it with the component props this helper is applied to.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): any {
-  watch(modelRef, (value) =>
-    Cypress.vueWrapper.setProps({ [modelName]: value }),
+  watch(
+    modelRef,
+    async (value) => await Cypress.vueWrapper.setProps({ [modelName]: value }),
   );
 
   return {
