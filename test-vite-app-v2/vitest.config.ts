@@ -22,9 +22,9 @@ export default defineConfig({
     quasar({
       sassVariables: 'src/quasar-variables.scss',
     }),
-    tsconfigPaths(
+    tsconfigPaths({
       // This is needed to avoid Vitest picking up tsconfig.json files from other unrelated projects in the monorepo
       ignoreConfigErrors: true,
-    ),
+    }),
   ],
 });
