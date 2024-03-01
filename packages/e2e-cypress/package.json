@@ -27,24 +27,21 @@
   },
   "typings": "dist/main.d.ts",
   "engines": {
-    "node": "^14.13.0 || ^16.0.0 || >= 18.0.0",
+    "node": "^30 || ^28 || ^26 || ^24 || ^22 || ^20 || ^18",
     "npm": ">= 6.14.12",
     "yarn": ">= 1.17.3"
   },
-  "dependenciesComments": {
-    "start-server-and-test": "versions after 2.0.0 fix some security issues, with https://github.com/jeffbski/wait-on/pull/147, but they also bump the minimum node supported version to 16. We can upgrade them in the next major version when we'll drop support for Node 14, 16 and 18. See https://github.com/bahmutov/start-server-and-test/releases/tag/v2.0.1"
-  },
   "dependencies": {
-    "@cypress/code-coverage": "^3.12.15",
+    "@cypress/code-coverage": "^3.12.26",
     "cross-env": "^7.0.3",
     "lodash": "^4.17.21",
     "nyc": "^15.1.0",
-    "start-server-and-test": "2.0.0",
+    "start-server-and-test": "^2.0.3",
     "vite-plugin-istanbul": "^5.0.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.202",
-    "cypress": "^13.6.2",
+    "cypress": "^13.6.6",
     "eslint-plugin-cypress": "^2.15.1",
     "rimraf": "^5.0.5"
   },
