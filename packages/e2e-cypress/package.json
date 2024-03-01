@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-testing-e2e-cypress",
-  "version": "5.2.1",
+  "version": "6.0.0",
   "license": "MIT",
   "description": "A Quasar App Extension for Cypress e2e",
   "contributors": [
