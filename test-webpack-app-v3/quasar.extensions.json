@@ -1,15 +1,9 @@
 {
   "@quasar/testing-unit-jest": {
-    "options": [
-      "scripts",
-      "typescript",
-      "majestic"
-    ]
+    "options": ["scripts", "typescript", "majestic"]
   },
   "@quasar/testing-e2e-cypress": {
-    "options": [
-      "scripts",
-      "typescript"
-    ]
+    "port": 8080,
+    "options": []
   }
 }
