@@ -20,8 +20,10 @@ export function registerCypressOverwrites() {
       }
 
       if (subject.hasClass('q-select')) {
+        const isMultipleSelect = subject.hasClass('q-select--multiple');
+
         if (Array.isArray(valueOrTextOrIndex)) {
-          if (!subject.hasClass('q-select--multiple')) {
+          if (!isMultipleSelect) {
             throw new Error(
               'Cypress: select command with array param can only be used with a multiple select',
             );
@@ -37,20 +39,23 @@ export function registerCypressOverwrites() {
         }
 
         cy.wrap(subject).should('be.visible').click();
-        cy.withinSelectMenu(() => {
-          (valueOrTextOrIndex as (string | number)[]).forEach((value) => {
-            if (typeof value === 'string') {
-              cy.get('.q-item[role=option]')
-                .should('be.visible')
-                .contains(value)
-                .click();
-            } else {
-              cy.get('.q-item[role=option]')
-                .should('be.visible')
-                .eq(value)
-                .click();
-            }
-          });
+        cy.withinSelectMenu({
+          persistent: isMultipleSelect,
+          fn: () => {
+            (valueOrTextOrIndex as (string | number)[]).forEach((value) => {
+              if (typeof value === 'string') {
+                cy.get('.q-item[role=option]')
+                  .should('be.visible')
+                  .contains(value)
+                  .click();
+              } else {
+                cy.get('.q-item[role=option]')
+                  .should('be.visible')
+                  .eq(value)
+                  .click();
+              }
+            });
+          },
         });
 
         return;
