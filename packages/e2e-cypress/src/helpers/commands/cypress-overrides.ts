@@ -36,13 +36,19 @@ export function registerCypressOverwrites() {
           );
         }
 
-        cy.wrap(subject).click();
+        cy.wrap(subject).should('be.visible').click();
         cy.withinSelectMenu(() => {
           (valueOrTextOrIndex as (string | number)[]).forEach((value) => {
             if (typeof value === 'string') {
-              cy.get('.q-item[role=option]').contains(value).click();
+              cy.get('.q-item[role=option]')
+                .should('be.visible')
+                .contains(value)
+                .click();
             } else {
-              cy.get('.q-item[role=option]').eq(value).click();
+              cy.get('.q-item[role=option]')
+                .should('be.visible')
+                .eq(value)
+                .click();
             }
           });
         });
