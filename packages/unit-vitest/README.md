@@ -57,6 +57,37 @@ describe('ExampleComponent', () => {
 });
 ````
 
+### Simulate Quasar component Event
+
+Here is a way to simulate a Quasar Event emission, for example from a QDialog or a QSelect
+
+```ts
+const findPopup = () => wrapper.findComponent('[data-testid="my-popup"]');
+await findPopup().vm.$emit('accept');
+
+const findSelect = () => wrapper.findComponent({ ref: 'my-select' });
+await findSelect().vm.$emit('update:model-value', 'a choice');
+```
+
+### QTooltip
+
+For QTooltip and other components existing in a specific Quasar div, they cant be analysed by vitest.
+
+
+### QIcon
+
+When mounted, a QIcon fetch the image corresponding to his name. But if you use materialize extra and dont inject it in Quasar test instance, that can be simplier to test directly for text of QICON
+
+```ts
+expect(findCloseButton().text()).toBe('close');
+```
+### Snapshot
+
+When using Snapshot, keep in mind that some Quasar component generate UIDs that can break snapshot.
+Most of the time, adding a for attribute to the component fix the genenrated snapshot.
+But if this is not working (for example for QBtnDropDown), you can also stub the component in order to fix the snapshot.
+
+
 ### Caveats
 
 Here're some helpers which has not been included in the current AE version, but could be in future versions
