@@ -43,7 +43,7 @@ export const config = {
   moduleFileExtensions: ['vue', ...defaults.moduleFileExtensions],
   moduleNameMapper: {
     // Quasar CJS export is SSR-only, so we need to use ESM build and transpile it with Babel
-    '^quasar$': 'quasar/dist/quasar.esm.prod.js',
+    '^quasar$': 'quasar/dist/quasar.client.js',
     '^~/(.*)$': '<rootDir>/$1',
     '.*css$': '@quasar/quasar-app-extension-testing-unit-jest/stub.css',
     ...aliases,
