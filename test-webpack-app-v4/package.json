@@ -42,13 +42,13 @@
     "axios": "^1.2.1",
     "core-js": "^3.32.2",
     "pinia": "^2.1.7",
-    "quasar": "^2.14.5",
+    "quasar": "^2.16.4",
     "vue": "^3.4.19",
     "vue-i18n": "^9.9.1",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
-    "@quasar/app-webpack": "^4.0.0-beta.2",
+    "@quasar/app-webpack": "^4.0.0-beta.13",
     "@quasar/quasar-app-extension-testing-e2e-cypress": "../packages/e2e-cypress",
     "@quasar/quasar-app-extension-testing-unit-jest": "../packages/unit-jest",
     "@types/node": "^20.5.9",

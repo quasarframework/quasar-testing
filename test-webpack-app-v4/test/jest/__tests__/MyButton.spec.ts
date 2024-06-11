@@ -5,7 +5,7 @@ import { QBtn } from 'quasar';
 import MyButton from './demo/MyButton';
 
 // Specify here Quasar config you'll need to test your component
-installQuasarPlugin();
+installQuasarPlugin({ components: { QBtn } });
 
 describe('MyButton', () => {
   it('has increment method', () => {
