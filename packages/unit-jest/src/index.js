@@ -6,7 +6,7 @@
  */
 
 module.exports = function (api) {
-  api.compatibleWith('quasar', '^2.0.4');
+  api.compatibleWith('quasar', '^2.16.0');
   // TODO: should be "@quasar/app-webpack" but that is not backward compatible
   // Remove when Qv3 comes out, or when "@quasar/app" is officially deprecated
   api.compatibleWith('@quasar/app', '^3.0.0 || ^4.0.0-alpha.31');
