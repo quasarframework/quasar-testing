@@ -43,7 +43,9 @@ export const config = {
   moduleFileExtensions: ['vue', ...defaults.moduleFileExtensions],
   moduleNameMapper: {
     // Quasar CJS export is SSR-only, so we need to use ESM build and transpile it with Babel
-    '^quasar$': 'quasar/dist/quasar.client.js',
+    // From Quasar 2.16 onwards, the ESM build file name changed and thus we need to check both names
+    // See https://github.com/quasarframework/quasar/issues/17184#issuecomment-2158497588
+    '^quasar$': ['quasar/dist/quasar.esm.prod.js', 'quasar/dist/quasar.client.js'],
     '^~/(.*)$': '<rootDir>/$1',
     '.*css$': '@quasar/quasar-app-extension-testing-unit-jest/stub.css',
     ...aliases,
