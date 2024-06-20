@@ -54,7 +54,7 @@
     "@types/node": "^20.5.9",
     "@typescript-eslint/eslint-plugin": "^6.6.0",
     "@typescript-eslint/parser": "^6.6.0",
-    "@vue/test-utils": "^2.4.1",
+    "@vue/test-utils": "^2.4.6",
     "cypress": "^13.6.6",
     "eslint": "^8.49.0",
     "eslint-config-prettier": "^9.0.0",

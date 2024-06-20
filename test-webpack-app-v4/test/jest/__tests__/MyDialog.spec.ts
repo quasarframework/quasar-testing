@@ -1,10 +1,10 @@
 import { beforeEach, describe, expect, it } from '@jest/globals';
 import { installQuasarPlugin } from '@quasar/quasar-app-extension-testing-unit-jest';
-import { QDialog } from 'quasar';
-import { DOMWrapper, mount, VueWrapper } from '@vue/test-utils';
+import { DOMWrapper, VueWrapper, mount } from '@vue/test-utils';
+import { QCard, QCardSection, QDialog } from 'quasar';
 import MyDialog from './demo/MyDialog';
 
-installQuasarPlugin({ components: { QDialog } });
+installQuasarPlugin({ components: { QDialog, QCard, QCardSection } });
 
 describe('MyDialog', () => {
   let wrapper: VueWrapper<InstanceType<typeof MyDialog>>;
