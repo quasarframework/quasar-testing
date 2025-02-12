@@ -39,18 +39,18 @@
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.12",
-    "@vitest/ui": "^2.0.5",
-    "@vue/test-utils": "^2.4.4",
+    "@vitest/ui": ">=1.6.1 <2.0.0 || >=2.1.9 <3.0.0 || >=3.0.5",
+    "@vue/test-utils": "^2.0.5",
     "quasar": "^2.14.6",
     "rimraf": "^5.0.5",
-    "vitest": "^2.0.5",
+    "vitest": ">=1.6.1 <2.0.0 || >=2.1.9 <3.0.0 || >=3.0.5",
     "vue": "^3.4.21"
   },
   "peerDependencies": {
     "@vitest/ui": "^1.1.0 || ^2.0.0",
     "@vue/test-utils": "^2.4.3",
     "quasar": "^2.12.7",
-    "vitest": "^1.1.0 || ^2.0.0",
+    "vitest": ">=1.6.1 <2.0.0 || >=2.1.9 <3.0.0 || >=3.0.5",
     "vue": "^3.3.4"
   },
   "peerDependenciesMeta": {
