@@ -6,9 +6,6 @@
  * @param {...object} sources - Objects to merge
  * @returns {object} New object with merged key/values
  */
-
-const { join } = require('path');
-
 function __mergeDeep(...sources) {
   let result = {};
   for (const source of sources) {
@@ -30,26 +27,19 @@ function __mergeDeep(...sources) {
   return result;
 }
 
-// We use devDependencies instead of peerDependencies because devDependencies are usually the latest version
-// and peerDependencies could contain a string supporting multiple major versions (e.g. "cypress": "^12.2.0 || ^13.1.0")
-const { devDependencies: aeDevDependencies } = require(
-  join(__dirname, '..', 'package.json'),
-);
-
-function getCompatibleDevDependencies(packageNames) {
-  const devDependencies = {};
-
-  for (const packageName of packageNames) {
-    devDependencies[packageName] = aeDevDependencies[packageName];
+function setCorrectVitestVersion(package, isViteOne) {
+  return {
+    devDependencies: {
+      // Depending on the version of vite we will decide on which vitest version we should use
+      // vite v1 will not work well with vitest > 2.x. Also, we are pinning to these specific versions because of this
+      // issue: https://github.com/vitest-dev/vitest/security/advisories/GHSA-9crc-q9x8-hgqq
+      [package]: isViteOne ?  '>=1.6.1 <2.0.0' : '>=2.1.9 <3.0.0 || >=3.0.5'
+    }
   }
-
-  return devDependencies;
-}
+} 
 
 // make sure the object exists
-let extendPackageJson = {
-  devDependencies: getCompatibleDevDependencies(['@vue/test-utils', 'vitest']),
-};
+let extendPackageJson = {};
 
 module.exports = async function (api) {
   api.compatibleWith('quasar', '^2.12.7');
@@ -65,14 +55,15 @@ module.exports = async function (api) {
   );
 
   if (api.prompts.options.includes('ui')) {
-    const ui = {
-      devDependencies: getCompatibleDevDependencies(['@vitest/ui']),
-    };
+    const isViteOne = api.hasPackage('@quasar/app-vite', '^1.0.0');
+    const vitestDependency = setCorrectVitestVersion('vitest', isViteOne);
+    const ui = setCorrectVitestVersion('@vitest/ui', isViteOne);
 
     ui.scripts = {
       'test:unit:ui': 'vitest --ui',
     };
 
+    extendPackageJson = __mergeDeep(extendPackageJson, vitestDependency);
     extendPackageJson = __mergeDeep(extendPackageJson, ui);
   }
 
