@@ -58,7 +58,7 @@ let extendPackageJson = {
 module.exports = async function (api) {
   api.compatibleWith('quasar', '^2.0.4');
   // hasTypescript is only available from v3.11.0 onwards
-  api.compatibleWith('@quasar/app-webpack', '^3.11.0 || ^4.0.0-alpha.31');
+  api.compatibleWith('@quasar/app-webpack', '^3.11.0 || ^4.0.0');
 
   api.render('./templates/base', {}, true);
 
