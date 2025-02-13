@@ -27,5 +27,8 @@ module.exports = defineConfig({
     specPattern: 'src/**/*.cy.{js,jsx,ts,tsx}',
     indexHtmlFile: 'test/cypress/support/component-index.html',
     devServer: injectQuasarDevServerConfig(),
+    <% if (requiresPublicPath) {%>   
+      devServerPublicPathRoute: ''
+    <% } %>
   },
 });
