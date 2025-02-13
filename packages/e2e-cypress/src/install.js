@@ -66,10 +66,10 @@ module.exports = async function (api) {
   api.compatibleWith('quasar', '^2.0.0');
   if (api.hasVite) {
     // PromptsAPI and hasTypescript are only available from v1.6.0 onwards
-    api.compatibleWith('@quasar/app-vite', '^v1.6.0 || ^2.0.0-alpha.44');
+    api.compatibleWith('@quasar/app-vite', '^v1.6.0 || ^2.0.0');
   } else if (api.hasWebpack) {
     // PromptsAPI and hasTypescript are only available from v3.11.0 onwards
-    api.compatibleWith('@quasar/app-webpack', '^3.11.0 || ^4.0.0-alpha.31');
+    api.compatibleWith('@quasar/app-webpack', '^3.11.0 || ^4.0.0');
   }
 
   const devServerPort = api.prompts.port ?? enforcedDevServerPort;
