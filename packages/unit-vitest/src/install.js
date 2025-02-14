@@ -27,13 +27,13 @@ function __mergeDeep(...sources) {
   return result;
 }
 
-function setCorrectVitestVersion(package, isViteOne) {
+function setCorrectVitestVersion(package, isViteFive) {
   return {
     devDependencies: {
       // Depending on the version of vite we will decide on which vitest version we should use
-      // vite v1 will not work well with vitest > 2.x. Also, we are pinning to these specific versions because of this
+      // Vitest 2 requires Vite 5. Also, we are pinning to these specific versions because of this issue here:
       // issue: https://github.com/vitest-dev/vitest/security/advisories/GHSA-9crc-q9x8-hgqq
-      [package]: isViteOne ?  '>=1.6.1 <2.0.0' : '>=2.1.9 <3.0.0 || >=3.0.5'
+      [package]: isViteFive ? '>=2.1.9 <3.0.0 || >=3.0.5' : '>=1.6.1 <2.0.0' 
     }
   }
 } 
@@ -55,9 +55,9 @@ module.exports = async function (api) {
   );
 
   if (api.prompts.options.includes('ui')) {
-    const isViteOne = api.hasPackage('@quasar/app-vite', '^1.0.0');
-    const vitestDependency = setCorrectVitestVersion('vitest', isViteOne);
-    const ui = setCorrectVitestVersion('@vitest/ui', isViteOne);
+    const isViteFive = api.hasPackage('vite', '>=5.0.0');
+    const vitestDependency = setCorrectVitestVersion('vitest', isViteFive);
+    const ui = setCorrectVitestVersion('@vitest/ui', isViteFive);
 
     ui.scripts = {
       'test:unit:ui': 'vitest --ui',
