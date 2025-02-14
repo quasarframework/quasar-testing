@@ -128,7 +128,7 @@ module.exports = async function (api) {
     shouldSupportTypeScriptAndVite: shouldSupportTypeScript && api.hasVite,
     shouldUpdateModuleResolution,
     // See https://github.com/quasarframework/quasar-testing/issues/379
-    requiresPublicPath: api.hasVite && api.hasPackage('@quasar/app-vite', '^2.0.0')
+    requiresPublicPath: api.hasVite && api.hasPackage('@quasar/app-vite', '^2.0.0-0')
   });
 
   const scripts = {

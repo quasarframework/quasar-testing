@@ -27,8 +27,7 @@ module.exports = defineConfig({
     specPattern: 'src/**/*.cy.{js,jsx,ts,tsx}',
     indexHtmlFile: 'test/cypress/support/component-index.html',
     devServer: injectQuasarDevServerConfig(),
-    <% if (requiresPublicPath) {%>   
-      devServerPublicPathRoute: ''
-    <% } %>
+    <% if (requiresPublicPath) {%>// If not set it will break tests related to components that load public assets. See https://github.com/quasarframework/quasar-testing/issues/379
+    devServerPublicPathRoute: '' <% } %>
   },
 });
