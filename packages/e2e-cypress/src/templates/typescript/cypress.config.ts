@@ -27,9 +27,7 @@ export default defineConfig({
     specPattern: 'src/**/*.cy.{js,jsx,ts,tsx}',
     indexHtmlFile: 'test/cypress/support/component-index.html',
     devServer: injectQuasarDevServerConfig(),
-    <% if (requiresPublicPath) {%>   
-      // @ts-expect-error -- if not set it will break tests the load public assets. See https://github.com/quasarframework/quasar-testing/issues/379
-      devServerPublicPathRoute: ''
-    <% } %>
+    <% if (requiresPublicPath) {%>// @ts-expect-error -- If not set it will break tests related to components that load public assets. See https://github.com/quasarframework/quasar-testing/issues/379
+    devServerPublicPathRoute: '' <% } %>
   },
 });
