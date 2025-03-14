@@ -27,17 +27,6 @@ function __mergeDeep(...sources) {
   return result;
 }
 
-function setCorrectVitestVersion(package, isViteFive) {
-  return {
-    devDependencies: {
-      // Depending on the version of vite we will decide on which vitest version we should use
-      // Vitest 2 requires Vite 5. Also, we are pinning to these specific versions because of this issue here:
-      // issue: https://github.com/vitest-dev/vitest/security/advisories/GHSA-9crc-q9x8-hgqq
-      [package]: isViteFive ? '>=2.1.9 <3.0.0 || >=3.0.5' : '>=1.6.1 <2.0.0' 
-    }
-  }
-} 
-
 // make sure the object exists
 let extendPackageJson = {};
 
@@ -55,15 +44,23 @@ module.exports = async function (api) {
   );
 
   if (api.prompts.options.includes('ui')) {
-    const isViteFive = api.hasPackage('vite', '>=5.0.0');
-    const vitestDependency = setCorrectVitestVersion('vitest', isViteFive);
-    const ui = setCorrectVitestVersion('@vitest/ui', isViteFive);
+    const hasModernVite = api.hasPackage('vite', '>=5.0.0');
+    const vitestVersion = hasModernVite ? '^3.0.9' : '^0.34.6';
+    extendPackageJson = __mergeDeep(extendPackageJson, {
+      devDependencies: {
+        '@vitest/ui': vitestVersion,
+      },
+    });
+    const ui = {
+      devDependencies: {
+        '@vitest/ui': vitestVersion,
+      },
+    };
 
     ui.scripts = {
       'test:unit:ui': 'vitest --ui',
     };
 
-    extendPackageJson = __mergeDeep(extendPackageJson, vitestDependency);
     extendPackageJson = __mergeDeep(extendPackageJson, ui);
   }
 
