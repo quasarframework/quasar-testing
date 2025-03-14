@@ -56,11 +56,20 @@ function getCompatibleDevDependencies(packageNames) {
 
 // make sure the object exists
 let extendPackageJson = {
-  devDependencies: getCompatibleDevDependencies([
-    'cypress',
-    'eslint-plugin-cypress',
-  ]),
+  devDependencies: getCompatibleDevDependencies(['cypress']),
 };
+
+function getEslintPluginCypressDependency(api) {
+  return {
+    devDependencies: {
+      // eslint-plugin-cypress v3 doesn't support ESLint v9 and eslint-plugin-cypress v4 only supports ESLint v9,
+      // So if the user has ESLint v9 installed, then we will scaffold with eslint-plugin-cypress v4, otherwise we will use v3
+      'eslint-plugin-cypress': api.hasPackage('eslint', '^9.0.0')
+        ? '^4.2.0'
+        : '^3.6.0',
+    },
+  };
+}
 
 module.exports = async function (api) {
   api.compatibleWith('quasar', '^2.0.0');
@@ -117,6 +126,10 @@ module.exports = async function (api) {
     },
   };
   extendPackageJson = __mergeDeep(extendPackageJson, scripts);
+  extendPackageJson = __mergeDeep(
+    extendPackageJson,
+    getEslintPluginCypressDependency(api),
+  );
   api.extendPackageJson(extendPackageJson);
 
   if (shouldAddCodeCoverage) {
