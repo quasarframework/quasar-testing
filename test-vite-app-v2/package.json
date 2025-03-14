@@ -52,7 +52,7 @@
     "@quasar/quasar-app-extension-testing-e2e-cypress": "../packages/e2e-cypress",
     "@quasar/quasar-app-extension-testing-unit-vitest": "../packages/unit-vitest",
     "@types/node": "^20.5.9",
-    "@vitest/ui": "^2.0.5",
+    "@vitest/ui": "^3.0.9",
     "@vue/eslint-config-prettier": "^10.1.0",
     "@vue/eslint-config-typescript": "^14.4.0",
     "@vue/test-utils": "^2.4.4",
