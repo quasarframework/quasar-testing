@@ -114,6 +114,8 @@ async function quasarViteConfig(quasarAppPackage: string) {
   return result;
 }
 
+// TODO: Prefer exposing an object with the dev server as prop
+// https://github.com/quasarframework/quasar-testing/issues/395
 export function injectQuasarDevServerConfig() {
   const { devDependencies } = getPackageJson();
   const bundler: AvailableBundlers = devDependencies.hasOwnProperty(
