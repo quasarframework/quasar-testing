@@ -6,7 +6,6 @@
     :options="options"
     :loading="loading"
     :disable="disable"
-    :multiple="multiple"
   />
 
   <span data-cy="select-value">{{ selected }}</span>
@@ -25,10 +24,6 @@ export default defineComponent({
       default: false,
     },
     disable: {
-      type: Boolean,
-      default: false,
-    },
-    multiple: {
       type: Boolean,
       default: false,
     },

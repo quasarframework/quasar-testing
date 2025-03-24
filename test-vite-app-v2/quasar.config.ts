@@ -3,10 +3,10 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
 
-import { configure } from 'quasar/wrappers';
-import path from 'node:path';
+import { defineConfig } from '#q-app/wrappers';
+import { fileURLToPath } from 'node:url';
 
-export default configure((/* ctx */) => {
+export default defineConfig((/* ctx */) => {
   return {
     eslint: {
       // fix: true,
@@ -71,7 +71,7 @@ export default configure((/* ctx */) => {
 
       vitePlugins: [
         [
-          '@intlify/vite-plugin-vue-i18n',
+          '@intlify/unplugin-vue-i18n/vite',
           {
             // if you want to use Vue I18n Legacy API, you need to set `compositionOnly: false`
             // compositionOnly: false,
@@ -81,7 +81,7 @@ export default configure((/* ctx */) => {
             // runtimeOnly: false,
 
             // you need to set i18n resource including paths !
-            include: path.resolve(__dirname, './src/i18n/**'),
+            include: [fileURLToPath(new URL('./src/i18n', import.meta.url))],
           },
         ],
       ],

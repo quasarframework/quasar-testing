@@ -65,7 +65,7 @@ function getEslintPluginCypressDependency(api) {
       // eslint-plugin-cypress v3 doesn't support ESLint v9 and eslint-plugin-cypress v4 only supports ESLint v9,
       // So if the user has ESLint v9 installed, then we will scaffold with eslint-plugin-cypress v4, otherwise we will use v3
       'eslint-plugin-cypress': api.hasPackage('eslint', '^9.0.0')
-        ? '^4.2.0'
+        ? '^4.2.1'
         : '^3.6.0',
     },
   };
@@ -85,8 +85,17 @@ module.exports = async function (api) {
   const shouldSupportTypeScript = await api.hasTypescript();
   const shouldAddCodeCoverage =
     api.prompts.options.includes('code-coverage') && api.hasVite;
+  const shouldUpdateModuleResolution =
+    api.hasPackage('typescript', '^5.0.0') &&
+    api.hasPackage('@quasar/app-vite', '^2.0.0');
 
-  const testEnvCommand = `cross-env NODE_ENV=test`;
+  // TODO: We are setting the TS_NODE_PROJECT to ensure the test/cypress/tsconfig.json is used. This is needed as a workaround for
+  // module resolution issues with Cypress and Typescript >=5. Once the issue is resolved we can remove this TS_NODE_PROJECT flag
+  const testEnvCommand =
+    `cross-env NODE_ENV=test` +
+    (shouldUpdateModuleResolution
+      ? ' TS_NODE_PROJECT=test/cypress/tsconfig.json'
+      : '');
   // "http-get" must be used because "webpack-dev-server" won't answer
   //  HEAD requests which are performed by default by the underlying "wait-on"
   // See https://github.com/bahmutov/start-server-and-test#note-for-webpack-dev-server-users
@@ -114,6 +123,7 @@ module.exports = async function (api) {
     devServerPort,
     shouldAddCodeCoverage,
     shouldSupportTypeScriptAndVite: shouldSupportTypeScript && api.hasVite,
+    shouldUpdateModuleResolution,
   });
 
   const scripts = {
