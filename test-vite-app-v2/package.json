@@ -5,6 +5,7 @@
   "productName": "Quasar App",
   "author": "Paolo Caleffi <p.caleffi@dreamonkey.com>",
   "private": true,
+  "type": "module",
   "scripts": {
     "sync:vitest": "yarn --cwd ../packages/unit-vitest build:local && yarn add -D ../packages/unit-vitest",
     "sync:cypress": "yarn --cwd ../packages/e2e-cypress build:local && yarn add -D ../packages/e2e-cypress",
@@ -29,10 +30,11 @@
     "test:unit:ui": "vitest --ui",
     "test:unit": "vitest",
     "test:unit:ci": "vitest run",
-    "test:e2e": "cross-env NODE_ENV=test start-test \"quasar dev\" http-get://127.0.0.1:8080 \"cypress open --e2e\"",
-    "test:e2e:ci": "cross-env NODE_ENV=test start-test \"quasar dev\" http-get://127.0.0.1:8080 \"cypress run --e2e\"",
-    "test:component": "cross-env NODE_ENV=test cypress open --component",
-    "test:component:ci": "cross-env NODE_ENV=test cypress run --component"
+    "test:e2e": "cross-env NODE_ENV=test TS_NODE_PROJECT=test/cypress/tsconfig.json start-test \"quasar dev\" http-get://127.0.0.1:8080 \"cypress open --e2e\"",
+    "test:e2e:ci": "cross-env NODE_ENV=test TS_NODE_PROJECT=test/cypress/tsconfig.json start-test \"quasar dev\" http-get://127.0.0.1:8080 \"cypress run --e2e\"",
+    "test:component": "cross-env NODE_ENV=test TS_NODE_PROJECT=test/cypress/tsconfig.json cypress open --component",
+    "test:component:ci": "cross-env NODE_ENV=test TS_NODE_PROJECT=test/cypress/tsconfig.json cypress run --component",
+    "postinstall": "quasar prepare"
   },
   "dependencies": {
     "@quasar/extras": "^1.16.9",
@@ -44,8 +46,8 @@
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
-    "@intlify/vite-plugin-vue-i18n": "^3.3.1",
-    "@quasar/app-vite": "^2.0.0-beta.12",
+    "@intlify/unplugin-vue-i18n": "6.0.5",
+    "@quasar/app-vite": "^2.2.0",
     "@quasar/quasar-app-extension-testing-e2e-cypress": "../packages/e2e-cypress",
     "@quasar/quasar-app-extension-testing-unit-vitest": "../packages/unit-vitest",
     "@types/node": "^20.5.9",
@@ -54,10 +56,10 @@
     "@vitest/ui": "^2.0.5",
     "@vue/test-utils": "^2.4.4",
     "autoprefixer": "^10.4.16",
-    "cypress": "^13.6.6",
+    "cypress": "^14.2.1",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-cypress": "^2.15.1",
+    "eslint-plugin-cypress": "^3.6.0",
     "eslint-plugin-vue": "^9.19.2",
     "prettier": "^3.1.1",
     "typescript": "^5.3.3",

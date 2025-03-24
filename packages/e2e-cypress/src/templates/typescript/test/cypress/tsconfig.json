@@ -1,8 +1,13 @@
 {
-  // This is needed when using Typescript 5 or higher
-  // It can be removed when https://github.com/cypress-io/cypress/issues/26203 will be fixed
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "sourceMap": false
+    // This is needed when using Typescript 5 or higher
+    // It can be removed when https://github.com/cypress-io/cypress/issues/26203 will be fixed
+    "sourceMap": false<% if (shouldUpdateModuleResolution) { %>,
+    // Cypress uses ts-node, which is quite outdated. So, it doesn't correctly process "module": "preserve".
+    // As a result, it doesn't set moduleResolution accordingly.
+    // See: https://github.com/quasarframework/quasar/discussions/16877#discussioncomment-11434734
+    // Cypress 15 will fix this by replacing ts-node with tsx: https://github.com/cypress-io/cypress/issues/31185
+    "moduleResolution": "bundler"<% } %>
   }
 }
