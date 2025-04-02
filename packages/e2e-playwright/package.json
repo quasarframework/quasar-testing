@@ -16,6 +16,15 @@
     "deploy:latest": "yarn build && yarn publish --tag latest",
     "prepare": "husky"
   },
+  "exports": {
+    ".": {
+      "import": "./dist/esm/main.js",
+      "require": "./dist/cjs/main.js",
+      "types": "./dist/types/main.d.ts"
+    },
+    "./package.json": "./package.json",
+    "./src/index.js": "./src/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/n05la3/testing-e2e-playwright"
