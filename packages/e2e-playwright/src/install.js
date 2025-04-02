@@ -1,47 +1,9 @@
-import { spawn, spawnSync } from 'child_process';
+import { spawnSync } from 'child_process';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { readFile } from 'fs/promises';
-import * as os from 'os';
 import * as fs from 'fs';
-import { existsSync } from 'fs';
 import { enforcedDevServerPort } from './shared.js';
-
-async function isUbuntuOrDebian() {
-  const osType = os.type();
-  if (osType !== 'Linux') {
-    return false;
-  }
-
-  try {
-    try {
-      const osRelease = await fs.readFile('/etc/os-release', 'utf8');
-      if (osRelease.includes('ID=ubuntu') || osRelease.includes('ID=debian')) {
-        return true;
-      }
-    } catch {
-      //
-    }
-
-    if (existsSync('/etc/debian_version')) {
-      return true;
-    }
-
-    try {
-      const osVersion = await fs.readFile('/etc/os-version', 'utf8');
-      if (osVersion.toLowerCase().includes('debian')) {
-        return true;
-      }
-    } catch {
-      //
-    }
-
-    return false;
-  } catch (error) {
-    console.error('Could not determine Linux Distro', error.message);
-    return false;
-  }
-}
 
 // TODO: This install all browsers, consider giving the user the option of selecting specific browsers
 async function installPlaywrightBrowsers() {
@@ -62,40 +24,6 @@ async function installPlaywrightBrowsers() {
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
-async function runPnpmCommand(command, args = [], options = {}) {
-  return new Promise((resolve, reject) => {
-    let pnpmExecutable;
-    if (process.platform === 'win32') {
-      pnpmExecutable = 'pnpm.cmd';
-    } else {
-      pnpmExecutable = 'pnpm';
-    }
-
-    const pnpmProcess = spawn(pnpmExecutable, [command, ...args], {
-      stdio: 'inherit',
-      ...options,
-      shell: process.platform === 'win32',
-    });
-
-    pnpmProcess.on('error', (error) => {
-      if (error.code === 'ENOENT') {
-        console.error(
-          'Error: pnpm is not installed or not in your PATH. Please install pnpm globally.',
-        );
-      }
-      reject(error);
-    });
-
-    pnpmProcess.on('close', (code) => {
-      if (code === 0) {
-        resolve();
-      } else {
-        reject(new Error(`pnpm ${command} exited with code ${code}`));
-      }
-    });
-  });
-}
 
 /**
  * Performs a deep merge of objects and returns new object. Does not modify
@@ -150,26 +78,7 @@ let extendPackageJson = {
   ]),
 };
 
-async function setUpPlaywright() {
-  try {
-    await runPnpmCommand('create', ['playwright']);
-  } catch (error) {
-    console.error('Some errors were found', error);
-
-    if (os.type() !== 'Linux') {
-      throw new Error();
-    }
-
-    if (!(await isUbuntuOrDebian())) {
-      console.error('Your Linux distro is not supported.');
-      return;
-    }
-
-    throw new Error();
-  }
-}
-
-function appendIfNotExists(filePath, searchText, appendText) {
+function appendToFileIfNotExists(filePath, searchText, appendText) {
   try {
     const content = fs.readFileSync(filePath, 'utf8');
 
@@ -196,8 +105,6 @@ function answerIsYes(response) {
 }
 
 export default async function (api) {
-  setUpPlaywright();
-
   try {
     const devServerPort = api.prompts.port ?? enforcedDevServerPort;
     const supportsTypescript = await api.hasTypescript();
@@ -244,7 +151,7 @@ export default async function (api) {
 
     const playwrightCommentStart = '\n# Playwright';
     const playwrightGitignore = `\n${playwrightCommentStart}\n/test-results/\n/playwright-report/\n/blob-report/n/playwright/.cache/\n/playwright/.cache/\n`;
-    appendIfNotExists(
+    appendToFileIfNotExists(
       gitignorePath,
       playwrightCommentStart,
       playwrightGitignore,
