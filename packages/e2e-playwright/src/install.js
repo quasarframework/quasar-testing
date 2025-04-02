@@ -169,6 +169,23 @@ async function setUpPlaywright() {
   }
 }
 
+function appendIfNotExists(filePath, searchText, appendText) {
+  try {
+    const content = fs.readFileSync(filePath, 'utf8');
+
+    if (content.includes(searchText)) {
+      return;
+    }
+    fs.appendFileSync(filePath, appendText, 'utf8');
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      fs.appendFileSync(filePath, appendText, 'utf8');
+      return;
+    }
+    console.error(`Error processing file ${filePath}:`, error);
+  }
+}
+
 function answerIsYes(response) {
   return (
     response === 'y' ||
@@ -222,6 +239,16 @@ export default async function (api) {
     }
     extendPackageJson = __mergeDeep(extendPackageJson, scripts);
     api.extendPackageJson(extendPackageJson);
+
+    const gitignorePath = api.resolve.app('.gitignore');
+
+    const playwrightCommentStart = '\n# Playwright';
+    const playwrightGitignore = `\n${playwrightCommentStart}\n/test-results/\n/playwright-report/\n/blob-report/n/playwright/.cache/\n/playwright/.cache/\n`;
+    appendIfNotExists(
+      gitignorePath,
+      playwrightCommentStart,
+      playwrightGitignore,
+    );
 
     if (answerIsYes(api.prompts.installBrowsers)) {
       installPlaywrightBrowsers();
