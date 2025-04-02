@@ -37,9 +37,3 @@ export function expectColor(locator: Locator, expectedColor: string) {
 export function backgroundColor(locator: Locator, expectedBackgrouind: string) {
   return expertStyle(locator, 'background-color', expectedBackgrouind);
 }
-
-// test('Testing if it works', async ({ page, toHaveColor, toHaveBackgroundColor }) => {
-//   await page.setContent('<div style="color: red; background-color: blue;">Hello</div>');
-//   await toHaveColor(page.locator('div'), 'rgb(255, 0, 0)');
-//   await toHaveBackgroundColor(page.locator('div'), 'rgb(0, 0, 255)');
-// });
