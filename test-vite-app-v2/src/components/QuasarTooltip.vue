@@ -4,6 +4,7 @@
     <q-tooltip
       v-model="showTooltip"
       data-cy="tooltip"
+      data-testid="tooltip"
       class="bg-red"
       :offset="[10, 10]"
     >

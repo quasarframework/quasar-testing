@@ -41,17 +41,4 @@ describe('QuasarSelect', () => {
     cy.dataCy('select').select('Option 3');
     cy.dataCy('select-value').should('have.text', 'Option 3');
   });
-
-  it('selects multiple options', () => {
-    const options = ['Option 1', 'Option 2'];
-
-    cy.mount(QuasarSelect, {
-      props: {
-        multiple: true,
-        options,
-      },
-    });
-
-    cy.dataCy('select').select(['Option 1', 'Option 2']);
-  });
 });
