@@ -34,3 +34,10 @@ yarn-error.log*
 
 .nyc_output
 coverage/
+
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/n/playwright/.cache/
+/playwright/.cache/
