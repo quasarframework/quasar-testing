@@ -11,24 +11,24 @@ export default function () {
     },
     {
       name: 'githubWorkflow',
-      type: 'text',
+      type: 'confirm',
       required: true,
-      default: 'y/N',
+      default: true,
       message: 'Do you want to add a GitHub workflow for your CI?',
     },
     {
       name: 'installBrowsers',
-      type: 'text',
+      type: 'confirm',
       required: true,
-      default: 'y/N',
+      default: false,
       message:
         "Install Playwright browsers (can be done manually via 'npx exec playwright install')?",
     },
     {
       name: 'enableCodeCoverage',
-      type: 'text',
+      type: 'confirm',
       required: true,
-      default: 'y/N',
+      default: false,
       message: 'Do you want to enable code coverage?',
     },
   ];

@@ -95,32 +95,21 @@ function appendToFileIfNotExists(filePath, searchText, appendText) {
   }
 }
 
-function answerIsYes(response) {
-  return (
-    response === 'y' ||
-    response === 'Y' ||
-    response === 'yes' ||
-    response === 'Yes'
-  );
-}
-
 export default async function (api) {
   try {
     const devServerPort = api.prompts.port ?? enforcedDevServerPort;
     const supportsTypescript = await api.hasTypescript();
 
-    if (answerIsYes(api.prompts.githubWorkflow)) {
+    if (api.prompts.githubWorkflow) {
       api.render('./templates/github-workflow');
     }
-
-    const codeCoverageIsEnabled = answerIsYes(api.prompts.enableCodeCoverage);
 
     const configTemplate = supportsTypescript
       ? './templates/typescript'
       : './templates/javascript';
     api.render(configTemplate, {
       devServerPort,
-      codeCoverageIsEnabled,
+      codeCoverageIsEnabled: api.prompts.enableCodeCoverage,
     });
 
     api.render('./templates/base', {
@@ -157,7 +146,7 @@ export default async function (api) {
       playwrightGitignore,
     );
 
-    if (answerIsYes(api.prompts.installBrowsers)) {
+    if (api.prompts.installBrowsers) {
       installPlaywrightBrowsers();
     }
 
