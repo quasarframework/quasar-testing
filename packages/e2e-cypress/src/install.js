@@ -59,6 +59,8 @@ let extendPackageJson = {
   devDependencies: getCompatibleDevDependencies(['cypress']),
 };
 
+// TODO: remove this and roll back to use `getCompatibleDevDependencies` for next Cypress AE major version,
+// which will drop support for ESLint v8 and require a migration of this monorepo to ESLint v9
 function getEslintPluginCypressDependency(api) {
   return {
     devDependencies: {
@@ -91,6 +93,7 @@ module.exports = async function (api) {
 
   // TODO: We are setting the TS_NODE_PROJECT to ensure the test/cypress/tsconfig.json is used. This is needed as a workaround for
   // module resolution issues with Cypress and Typescript >=5. Once the issue is resolved we can remove this TS_NODE_PROJECT flag
+  // See https://github.com/quasarframework/quasar/discussions/16877#discussioncomment-11434734
   const testEnvCommand =
     `cross-env NODE_ENV=test` +
     (shouldUpdateModuleResolution
