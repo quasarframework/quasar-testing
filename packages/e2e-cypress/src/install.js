@@ -89,8 +89,8 @@ module.exports = async function (api) {
     api.prompts.options.includes('code-coverage') && api.hasVite;
   const shouldUpdateModuleResolution =
     api.hasPackage('typescript', '^5.0.0') &&
-    api.hasPackage('@quasar/app-vite', '^2.0.0');
-
+    (api.hasPackage('@quasar/app-vite', '^2.0.0') ||
+      api.hasPackage('@quasar/app-webpack', '^4.0.0'));
   // TODO: We are setting the TS_NODE_PROJECT to ensure the test/cypress/tsconfig.json is used. This is needed as a workaround for
   // module resolution issues with Cypress and Typescript >=5. Once the issue is resolved we can remove this TS_NODE_PROJECT flag
   // See https://github.com/quasarframework/quasar/discussions/16877#discussioncomment-11434734
