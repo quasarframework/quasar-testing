@@ -21,7 +21,6 @@ module.exports = function (api) {
     {
       name: 'options',
       type: 'checkbox',
-      required: true,
       message:
         'Cypress e2e and component Test Harness will now be installed. Please choose additional options:',
       choices: [
