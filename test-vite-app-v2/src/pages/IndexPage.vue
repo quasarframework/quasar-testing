@@ -10,9 +10,9 @@
 </template>
 
 <script setup lang="ts">
-import { Todo, Meta } from 'components/models';
-import ExampleComponent from 'components/ExampleComponent.vue';
 import { ref } from 'vue';
+import type { Todo, Meta } from 'components/models';
+import ExampleComponent from 'components/ExampleComponent.vue';
 
 const todos = ref<Todo[]>([
   {
@@ -36,6 +36,7 @@ const todos = ref<Todo[]>([
     content: 'ct5',
   },
 ]);
+
 const meta = ref<Meta>({
   totalCount: 1200,
 });

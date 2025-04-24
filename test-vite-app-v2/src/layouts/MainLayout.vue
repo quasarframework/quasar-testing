@@ -22,7 +22,7 @@
         <q-item-label header> Essential Links </q-item-label>
 
         <EssentialLink
-          v-for="link in essentialLinks"
+          v-for="link in linksList"
           :key="link.title"
           v-bind="link"
         />
@@ -38,10 +38,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import EssentialLink, {
-  EssentialLinkProps,
+  type EssentialLinkProps,
 } from 'components/EssentialLink.vue';
 
-const essentialLinks: EssentialLinkProps[] = [
+const linksList: EssentialLinkProps[] = [
   {
     title: 'Docs',
     caption: 'quasar.dev',
