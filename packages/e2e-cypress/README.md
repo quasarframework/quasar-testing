@@ -6,7 +6,7 @@
 $ yarn quasar ext add @quasar/testing-e2e-cypress
 ```
 
-Add into your `.eslintrc.js` the following code:
+For ESLint < v9, add into your `.eslintrc.js` the following code:
 
 ```js
 {
@@ -22,6 +22,30 @@ Add into your `.eslintrc.js` the following code:
     },
   ],
 }
+```
+
+For ESLint v9 onwards, add into your `eslint.config.js` the following code:
+
+```js
+import pluginCypress from 'eslint-plugin-cypress/flat';
+
+export default [
+  // ...
+  {
+    name: 'custom/cypress',
+
+    files: ['**/*.cy.{js,jsx,ts,tsx}'],
+    extends: [
+      // Add Cypress-specific lint rules, globals and Cypress plugin
+      // See https://github.com/cypress-io/eslint-plugin-cypress#rules
+      pluginCypress.configs.recommended,
+    ],
+    rules: {
+      // Allow chai-style assertions, e.g. `expect(foo).to.be.true`
+      '@typescript-eslint/no-unused-expressions': 'off',
+    },
+  },
+];
 ```
 
 ---
@@ -75,6 +99,23 @@ You can either apply [this workaround](https://github.com/istanbuljs/nyc/issues/
 > Please open an issue if you notice some files are missing from generated reports in this scenario.
 
 [nyc-config-preset]: https://github.com/quasarframework/quasar-testing/blob/dev/packages/e2e-cypress/nyc-config-preset.json
+
+### Upgrade from Cypress AE v6.1 to v6.2 onwards
+
+> If you're coming from v5.1, follow the migration guide in the next section first.
+
+Here's all the steps you need to take while upgrading from v6.1 to v6.2:
+
+- If you're using `@quasar/app-webpack` v4 beta version or `@quasar/app-vite` v2 beta version, install the latest (stable) version of those packages, as the beta versions aren't supported anymore.
+- If you're using `@quasar/app-webpack` v4 or `@quasar/app-vite` v2, and `typescript` v5 or newer:
+  - add `"moduleResolution": "bundler"` option into `compilerOptions` section of your `test/cypress/tsconfig.json`.
+  - Update `test:e2e`, `test:e2e:ci`, `test:component` and `test:component:ci` scripts, replacing `cross-env NODE_ENV=test` with `cross-env NODE_ENV=test TS_NODE_PROJECT=test/cypress/tsconfig.json`.
+- (**optional**) Upgrade Cypress to v14 and check out its [migration guide](https://docs.cypress.io/app/references/migration-guide#Migrating-to-Cypress-140).
+- (**optional**) If you're using Cypress >= v13.12, you can delete `"sourceMap": false` option from your `test/cypress/tsconfig.json`. We'll keep scaffolding that option for now, to maintain compatibility with older versions of Cypress.
+- (**optional**) Migrate your project to use ESLint v9 and `eslint-plugin-cypress` v4, as the next major version of Cypress AE won't support ESLint v8 anymore. You'll also need to update your ESLint config, so check the new installation instruction for ESLint v9 at the top of this page.
+
+We know this back and forth between adding/removing tsconfig options and script flags are annoying, but Cypress guys are having trouble properly supporting newer versions of TypeScript and it's really hard to keep up with the bugs they keep adding/removing.
+They should fix these problems for good in v15, subscribe to [this issue](https://github.com/cypress-io/cypress/issues/30718) for updates on the matter.
 
 ### Upgrade from Cypress AE v5.1 to v5.2 onwards
 
