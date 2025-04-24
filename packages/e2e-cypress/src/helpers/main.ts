@@ -1,4 +1,4 @@
-/// <reference types="cypress" />
+/// <reference types="cypress" preserve="true" />
 
 export * from './install-quasar-plugin';
 export * from './v-model-adapter';

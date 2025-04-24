@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/triple-slash-reference */
 // Normal imports are stripped away when building,
 // we need these imports to force TS to evaluate augmentation in every single command file
-/// <reference path="./color-assertions.ts" />
-/// <reference path="./data-cy.ts" />
-/// <reference path="./mount.ts" />
-/// <reference path="./portal-helpers.ts" />
-/// <reference path="./select-date.ts" />
-/// <reference path="./test-route.ts" />
+/// <reference path="./color-assertions.ts" preserve="true" />
+/// <reference path="./data-cy.ts" preserve="true" />
+/// <reference path="./mount.ts" preserve="true" />
+/// <reference path="./portal-helpers.ts" preserve="true" />
+/// <reference path="./select-date.ts" preserve="true" />
+/// <reference path="./test-route.ts" preserve="true" />
 
 import { registerColorAssertions } from './color-assertions';
 import { registerCypressOverwrites } from './cypress-overrides';
