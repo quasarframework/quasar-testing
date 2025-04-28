@@ -41,7 +41,7 @@ export function registerColorAssertions() {
   for (const property of COLOR_RELATED_CSS_PROPERTIES) {
     chai.Assertion.addMethod(property, function (colorValue: string) {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const targetElement: JQuery<HTMLElement> = this._obj;
+      const targetElement = (this._obj as JQuery<HTMLElement>).get(0);
 
       const tempElement = document.createElement('div');
       tempElement.style.color = colorValue;
@@ -49,7 +49,7 @@ export function registerColorAssertions() {
       document.body.appendChild(tempElement); // append so that `getComputedStyle` actually works
 
       const tempColor = getComputedStyle(tempElement).color;
-      const targetColor = getComputedStyle(targetElement[0])[property];
+      const targetColor = getComputedStyle(targetElement)[property];
 
       document.body.removeChild(tempElement); // remove it because we're done with it
 

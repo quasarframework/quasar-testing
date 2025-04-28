@@ -19,7 +19,10 @@
     "module": "commonjs",
     "skipLibCheck": true,
     // Without this, TS won't be able to load correctly Quasar deep imports into `injectDevServer` (eg. `@quasar/app/lib/helpers/get-quasar-ctx`)
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    // Align with stricter TS settings in app-webpack v4 and app-vite v2
+    "exactOptionalPropertyTypes": true,
+    "noUncheckedIndexedAccess": true
   },
   "include": ["src/helpers/main.ts"]
 }
