@@ -13,7 +13,7 @@ describe('QuasarPageSticky', () => {
     cy.dataCy('button')
       .should('be.visible')
       .should(($el) => {
-        const rect = $el[0].getBoundingClientRect();
+        const rect = $el.get(0).getBoundingClientRect();
         expect(rect.bottom).to.equal(window.innerHeight - 18);
         expect(rect.right).to.equal(window.innerWidth - 18);
       });
