@@ -52,8 +52,8 @@
     "@types/node": "^18.17.15",
     "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@typescript-eslint/parser": "^5.54.0",
-    "@vitest/ui": "^2.0.5",
-    "@vue/test-utils": "^2.4.4",
+    "@vitest/ui": "^3.1.2",
+    "@vue/test-utils": "^2.4.6",
     "autoprefixer": "^10.4.16",
     "cypress": "^14.2.1",
     "eslint": "^8.56.0",
@@ -62,7 +62,7 @@
     "eslint-plugin-vue": "^9.19.2",
     "prettier": "^3.1.1",
     "typescript": "^4.9.5",
-    "vitest": "^2.0.5"
+    "vitest": "^3.1.2"
   },
   "resolutionsComments": {
     "vite": "See workaround https://github.com/quasarframework/quasar/issues/14077#issuecomment-1353213893, since Quasar Vite v1 only supports up to Vite 3",
