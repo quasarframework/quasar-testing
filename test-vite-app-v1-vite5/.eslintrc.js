@@ -101,5 +101,15 @@ module.exports = {
         'plugin:cypress/recommended',
       ],
     },
+    {
+      files: [
+        'src/**/*.vitest.{test,spec}.{js,jsx,ts,tsx}',
+        'test/vitest/__tests__/**/*.{test,spec}.{js,jsx,ts,tsx}',
+      ],
+      rules: {
+        // Allow chai-style assertions, e.g. `expect(foo).to.be.true`
+        '@typescript-eslint/no-unused-expressions': 'off',
+      },
+    },
   ],
 };

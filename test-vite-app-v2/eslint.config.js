@@ -102,4 +102,17 @@ export default defineConfigWithVueTs(
       '@typescript-eslint/no-unused-expressions': 'off',
     },
   },
+
+  {
+    name: 'custom/vitest',
+
+    files: [
+      'src/**/*.vitest.{test,spec}.{js,jsx,ts,tsx}',
+      'test/vitest/__tests__/**/*.{test,spec}.{js,jsx,ts,tsx}',
+    ],
+    rules: {
+      // Allow chai-style assertions, e.g. `expect(foo).to.be.true`
+      '@typescript-eslint/no-unused-expressions': 'off',
+    },
+  },
 );

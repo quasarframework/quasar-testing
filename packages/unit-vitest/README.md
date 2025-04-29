@@ -4,6 +4,46 @@
 $ quasar ext add @quasar/testing-unit-vitest
 ```
 
+For ESLint < v9, add into your `.eslintrc.js` the following code:
+
+```js
+{
+  // ...
+  overrides: [
+    {
+      files: [
+        'src/**/*.vitest.{test,spec}.{js,jsx,ts,tsx}',
+        'test/vitest/__tests__/**/*.{test,spec}.{js,jsx,ts,tsx}',
+      ],
+      rules: {
+        // Allow chai-style assertions, e.g. `expect(foo).to.be.true`
+        '@typescript-eslint/no-unused-expressions': 'off',
+      },
+    },
+  ],
+}
+```
+
+For ESLint v9 onwards, add into your `eslint.config.js` the following code:
+
+```js
+export default [
+  // ...
+  {
+    name: 'custom/vitest',
+
+    files: [
+      'src/**/*.vitest.{test,spec}.{js,jsx,ts,tsx}',
+      'test/vitest/__tests__/**/*.{test,spec}.{js,jsx,ts,tsx}',
+    ],
+    rules: {
+      // Allow chai-style assertions, e.g. `expect(foo).to.be.true`
+      '@typescript-eslint/no-unused-expressions': 'off',
+    },
+  },
+];
+```
+
 This App Extension (AE) manages Quasar and Vitest integration for you, both for JavaScript and TypeScript.
 
 What is included:
@@ -28,7 +68,7 @@ All changes are related to Vitest v1.0 breaking changes, Quasar first-party help
 - Upgrade all Vitest related dependencies, especially `@vue/test-utils`, `vitest` and `@vitest/ui`, which minimum peer dependencies versions has been bumped. If you don't want to upgrade these dependencies manually, you can just re-install the AE and it will update all dependencies for you;
 - (**optional**) Upgrade `vue` and `quasar` dependencies to the latest version;
 - Rename `vitest.config.[js|ts]` to `vitest.config.[mjs|mts]` or switch your project to "ESM by default" adding `"type": "module"` option in `package.json`. Check out [here](https://vitejs.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated) why CJS build and syntax are deprecated in Vite 5;
-- Vitest 1.0 requires Vite 5, thus you'll need to upgrade `@quasar/app-vite` to v2 (currently in beta stage). If you can't migrate away from v1 yet, you can use this [workaround](https://github.com/quasarframework/quasar/issues/14077#issuecomment-1851463530) until you can migrate. We do test against the setup using that workaround, to ease the migration, but bear in mind that we don't consider it as "officially supported" and we will stop testing against it in the near future;
+- Vitest 1.0 requires Vite 5, thus you'll need to upgrade `@quasar/app-vite` to v2. If you can't migrate away from v1 yet, you can use this [workaround](https://github.com/quasarframework/quasar/issues/14077#issuecomment-1851463530) until you can migrate. We do test against the setup using that workaround, to ease the migration, but bear in mind that we don't consider it as "officially supported" and we will stop testing against it in the near future;
 - Follow Vitest [upgrade guide](https://vitest.dev/guide/migration.html#migrating-from-vitest-0-34-6) to upgrade from Vitest v34.6 to v1.0
 
 ### installQuasarPlugin(options)
