@@ -41,4 +41,8 @@ function increment() {
 }
 
 const todoCount = computed(() => props.todos.length);
+
+defineExpose({
+  clickCount,
+});
 </script>

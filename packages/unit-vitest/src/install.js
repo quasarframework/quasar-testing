@@ -6,6 +6,9 @@
  * @param {...object} sources - Objects to merge
  * @returns {object} New object with merged key/values
  */
+
+const { join } = require('path');
+
 function __mergeDeep(...sources) {
   let result = {};
   for (const source of sources) {
@@ -27,34 +30,45 @@ function __mergeDeep(...sources) {
   return result;
 }
 
+// We use devDependencies instead of peerDependencies because devDependencies are usually the latest version
+// and peerDependencies could contain a string supporting multiple major versions (e.g. "cypress": "^12.2.0 || ^13.1.0")
+const { devDependencies: aeDevDependencies } = require(
+  join(__dirname, '..', 'package.json'),
+);
+
+function getCompatibleDevDependencies(packageNames) {
+  const devDependencies = {};
+
+  for (const packageName of packageNames) {
+    devDependencies[packageName] = aeDevDependencies[packageName];
+  }
+
+  return devDependencies;
+}
+
 // make sure the object exists
-let extendPackageJson = {};
+let extendPackageJson = {
+  devDependencies: getCompatibleDevDependencies(['@vue/test-utils', 'vitest']),
+};
 
 module.exports = async function (api) {
   api.compatibleWith('quasar', '^2.12.7');
   api.compatibleWith('vue', '^3.3.4');
   // hasTypescript is only available from v1.6.0 onwards
-  // Vitest 1.0 requires Vite 5, which is only officially supported by @quasar/app-vite v2
-  // Yet, there are workarounds to make @quasar/app-vite@v1 work with Vite 5, so we aren't restricting this AE only to v2
+  // Vitest 1.0 and Vitest 2.0 require Vite 5, which isn't officially supported by @quasar/app-vite v1, 
+  // but there are workarounds to make @quasar/app-vite@v1 work with Vite 5, so we aren't restricting this AE only to v2
   // See https://github.com/quasarframework/quasar/issues/14077
-  api.compatibleWith('@quasar/app-vite', '^1.6.0 || ^2.0.0-alpha.44');
+  // At the same time, @quasar/app-vite v2 stable release require Vite 6,
+  // which cause type mismatch errors in the project when not using Vitest 3
+  api.compatibleWith('@quasar/app-vite', '^1.6.0 || ^2.0.0');
 
   api.render(
     `./templates/${(await api.hasTypescript()) ? '' : 'no-'}typescript`,
   );
 
   if (api.prompts.options.includes('ui')) {
-    const hasModernVite = api.hasPackage('vite', '>=5.0.0');
-    const vitestVersion = hasModernVite ? '^3.0.9' : '^0.34.6';
-    extendPackageJson = __mergeDeep(extendPackageJson, {
-      devDependencies: {
-        '@vitest/ui': vitestVersion,
-      },
-    });
     const ui = {
-      devDependencies: {
-        '@vitest/ui': vitestVersion,
-      },
+      devDependencies: getCompatibleDevDependencies(['@vitest/ui']),
     };
 
     ui.scripts = {
