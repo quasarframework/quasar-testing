@@ -9,7 +9,7 @@ import {
 import prettierSkipFormatting from '@vue/eslint-config-prettier/skip-formatting';
 import pluginCypress from 'eslint-plugin-cypress/flat';
 
-export default defineConfigWithVueTs(
+const config = defineConfigWithVueTs(
   {
     /**
      * Ignore the following files.
@@ -104,3 +104,21 @@ export default defineConfigWithVueTs(
     },
   },
 );
+
+// FIXME: quick-fix due to Vue plugin disabling these rules without allowing for a way to customize them
+// We're waiting for an answer from the Vue team, because type-aware linting rules are automatically extracted by them and injected before
+// the TS plugin parser configuration, in order to be able to apply them to Vue files.
+// See https://github.com/vuejs/eslint-config-typescript/blob/e5b983369bee342e3fb0d9141138c5d5a80e6949/src/internals.ts#L133-L145
+// See https://github.com/vuejs/eslint-config-typescript/blob/e5b983369bee342e3fb0d9141138c5d5a80e6949/src/utilities.ts#L196-L208
+config.push({
+  files: ['test/cypress/**/*.{js,jsx,ts,tsx}', '**/*.cy.{js,jsx,ts,tsx}'],
+  rules: {
+    '@typescript-eslint/no-unsafe-argument': 'error',
+    '@typescript-eslint/no-unsafe-assignment': 'error',
+    '@typescript-eslint/no-unsafe-call': 'error',
+    '@typescript-eslint/no-unsafe-member-access': 'error',
+    '@typescript-eslint/no-unsafe-return': 'error',
+  }
+});
+
+export default config;
