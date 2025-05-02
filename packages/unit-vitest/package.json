@@ -28,14 +28,10 @@
     "npm": ">= 9.5",
     "yarn": ">= 1.22.19"
   },
-  "dependenciesComments": {
-    "vite-tsconfig-paths": "v5 requires Vite 5, so we cannot support older @quasar/app-vite AND bump this dependency versions"
-  },
   "dependencies": {
     "happy-dom": "^15.0.0",
     "lodash-es": "^4.17.21",
-    "vite-jsconfig-paths": "^2.0.1",
-    "vite-tsconfig-paths": "^4.3.1"
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.12",
