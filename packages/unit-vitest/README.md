@@ -1,7 +1,11 @@
 ## [Vitest](https://vitest.dev/)
 
 ```shell
-$ quasar ext add @quasar/testing-unit-vitest
+$ npm quasar ext add @quasar/testing-unit-vitest
+# or
+$ yarn quasar ext add @quasar/testing-unit-vitest
+# or
+$ pnpm quasar ext add @quasar/testing-unit-vitest
 ```
 
 For ESLint < v9, add into your `.eslintrc.js` the following code:

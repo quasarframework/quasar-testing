@@ -8,7 +8,11 @@
 > **If you're interested, please reach out on [Discord](https://chat.quasar.dev/)**
 
 ```shell
-$ quasar ext add @quasar/testing-unit-jest
+$ npm quasar ext add @quasar/testing-unit-jest
+# or
+$ yarn quasar ext add @quasar/testing-unit-jest
+# or
+$ pnpm quasar ext add @quasar/testing-unit-jest
 ```
 
 Add into your `.eslintrc.js` the following code:

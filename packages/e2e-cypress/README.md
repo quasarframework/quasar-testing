@@ -3,7 +3,11 @@
 > You’re looking at Cypress AE v5 (Cypress 12 & 13) docs. If you're searching for Cypress AE v4 (Cypress 9) docs, head [here](https://github.com/quasarframework/quasar-testing/tree/cypress-v4/packages/e2e-cypress)
 
 ```shell
+$ npm quasar ext add @quasar/testing-e2e-cypress
+# or
 $ yarn quasar ext add @quasar/testing-e2e-cypress
+# or
+$ pnpm quasar ext add @quasar/testing-e2e-cypress
 ```
 
 For ESLint < v9, add into your `.eslintrc.js` the following code:
