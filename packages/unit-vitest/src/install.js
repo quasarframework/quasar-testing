@@ -88,4 +88,10 @@ module.exports = async function (api) {
   extendPackageJson = __mergeDeep(extendPackageJson, scripts);
 
   api.extendPackageJson(extendPackageJson);
+
+  if (await api.hasLint()) {
+    api.onExitLog(
+      'Check out https://github.com/quasarframework/quasar-testing/tree/dev/packages/unit-vitest to see how to add proper Vitest linting configuration to your project.',
+    );
+  }
 };
