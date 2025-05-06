@@ -1,6 +1,6 @@
 import { expect, Locator } from '@playwright/test';
 
-export async function expertStyle(
+export async function expectColorStyle(
   locator: Locator,
   property: 'color' | 'background-color',
   expectedStyle: string,
@@ -31,9 +31,9 @@ export async function expertStyle(
 }
 
 export function expectColor(locator: Locator, expectedColor: string) {
-  return expertStyle(locator, 'color', expectedColor);
+  return expectColorStyle(locator, 'color', expectedColor);
 }
 
-export function backgroundColor(locator: Locator, expectedBackgrouind: string) {
-  return expertStyle(locator, 'background-color', expectedBackgrouind);
+export function expectBackgroundColor(locator: Locator, expectedBackgrouind: string) {
+  return expectColorStyle(locator, 'background-color', expectedBackgrouind);
 }
