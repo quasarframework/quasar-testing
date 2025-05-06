@@ -73,7 +73,8 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'quasar dev -p <%= devServerPort %>',
+    command:
+      '<% if (codeCoverageIsEnabled) { %> VITE_COVERAGE=true <% } %>quasar dev -p <%= devServerPort %>',
     url: 'http://localhost:<%= devServerPort %>',
     reuseExistingServer: !process.env.CI,
   },
