@@ -149,12 +149,6 @@ export default async function (api) {
     if (api.prompts.installBrowsers) {
       installPlaywrightBrowsers();
     }
-
-    if (await api.hasLint()) {
-      api.onExitLog(
-        'Check out https://github.com/quasarframework/quasar-testing/tree/dev/packages/e2e-cypress to see how to add proper Cypress linting configuration to your project.',
-      );
-    }
   } catch (error) {
     console.error('An error occurred while installing the extension:', error);
 

@@ -16,5 +16,11 @@
     "declaration": true,
     "declarationDir": "dist/types"
   },
-  "include": ["src/main.ts", "src/*.js"]
+  "include": [
+    "src/main.ts",
+    "src/ct/main.ts",
+    "coverage.d.ts",
+    "src/utils/coverage.ts",
+    "src/*.js"
+  ]
 }
