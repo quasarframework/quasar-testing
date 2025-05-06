@@ -1,6 +1,7 @@
-import { defineConfig, devices } from '@playwright/experimental-ct-vue';
+import { defineConfig, devices, PlaywrightTestConfig } from '@playwright/experimental-ct-vue';
 import vue from '@vitejs/plugin-vue';
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin';
+<% if (codeCoverageIsEnabled) { %> import istanbul from 'vite-plugin-istanbul'; <% } %>
 // import { fileURLToPath } from 'node:url';
 // import AutoImport from 'unplugin-auto-import/vite';
 // import Components from 'unplugin-vue-components/vite';
@@ -33,6 +34,9 @@ export default defineConfig({
     ctPort: 3100,
 
     ctViteConfig: {
+      build: {
+        sourcemap: true
+      },
       plugins: [
         vue({ template: { transformAssetUrls } }),
         // AutoImport({
@@ -60,23 +64,37 @@ export default defineConfig({
           //   new URL('./src/quasar-variables.sass', import.meta.url),
           // ),
         }),
-      ],
-    },
+        <% if(codeCoverageIsEnabled) { %>
+          // Instrument the code for nyc/istanbul code coverage
+          istanbul({
+            include: ['src/**/*.{js,cjs,mjs,jsx,ts,tsx,vue}'],
+            exclude: [
+              '**/__tests__/**',
+              'node_modules',
+              '.quasar/',
+              'dist',
+              '**/*.d.ts',
+            ],
+            extension: ['.js', '.ts', '.vue'],
+            requireEnv: false,
+          }) <% } %>
+        ],
   },
+},
 
   /* Configure projects for major browsers */
   projects: [
-    {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
-  ],
-});
+  {
+    name: 'chromium',
+    use: { ...devices['Desktop Chrome'] },
+  },
+  {
+    name: 'firefox',
+    use: { ...devices['Desktop Firefox'] },
+  },
+  {
+    name: 'webkit',
+    use: { ...devices['Desktop Safari'] },
+  },
+],
+} as PlaywrightTestConfig);
