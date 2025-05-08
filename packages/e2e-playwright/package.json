@@ -28,7 +28,7 @@
       "types": "./dist/types/ct/main.d.ts"
     },
     "./package.json": "./package.json",
-    "./src/index.js": "./src/index.js"
+    "./src/*": "./src/*"
   },
   "repository": {
     "type": "git",
@@ -43,6 +43,12 @@
     "node": ">= 12.2.0",
     "npm": ">= 5.6.0",
     "yarn": ">= 1.6.0"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "nyc": "^17.1.0",
+    "vite-plugin-istanbul": "^7.0.0",
+    "@istanbuljs/nyc-config-typescript": "^1.0.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",
