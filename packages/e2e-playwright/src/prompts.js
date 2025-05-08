@@ -1,7 +1,7 @@
 import { enforcedDevServerPort } from './shared.js';
 
-export default function () {
-  return [
+export default function (api) {
+  const prompt = [
     {
       name: 'port',
       type: 'text',
@@ -24,12 +24,15 @@ export default function () {
       message:
         "Install Playwright browsers (can be done manually via 'npx exec playwright install')?",
     },
-    {
+  ];
+  if (api.hasVite) {
+    prompt.push({
       name: 'enableCodeCoverage',
       type: 'confirm',
       required: true,
       default: false,
       message: 'Do you want to enable code coverage?',
-    },
-  ];
+    });
+  }
+  return prompt;
 }

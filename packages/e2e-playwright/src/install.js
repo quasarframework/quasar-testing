@@ -5,7 +5,7 @@ import { readFile } from 'fs/promises';
 import * as fs from 'fs';
 import { enforcedDevServerPort } from './shared.js';
 
-// TODO: This install all browsers, consider giving the user the option of selecting specific browsers
+// TODO: This installs all browsers, consider giving the user the option of selecting specific browsers
 async function installPlaywrightBrowsers() {
   try {
     spawnSync('npx', ['playwright', 'install'], {
@@ -96,9 +96,20 @@ function appendToFileIfNotExists(filePath, searchText, appendText) {
 }
 
 export default async function (api) {
+  api.compatibleWith('quasar', '^2.0.0');
+  if (api.hasVite) {
+    // PromptsAPI and hasTypescript are only available from v1.6.0 onwards
+    api.compatibleWith('@quasar/app-vite', '^v1.6.0 || ^2.0.0');
+  } else if (api.hasWebpack) {
+    // PromptsAPI and hasTypescript are only available from v3.11.0 onwards
+    api.compatibleWith('@quasar/app-webpack', '^3.11.0 || ^4.0.0');
+  }
+
   try {
     const devServerPort = api.prompts.port ?? enforcedDevServerPort;
     const supportsTypescript = await api.hasTypescript();
+    const shouldEnableCodeCoverage =
+      api.prompts.enableCodeCoverage && api.hasVite;
 
     if (api.prompts.githubWorkflow) {
       api.render('./templates/github-workflow');
@@ -109,7 +120,7 @@ export default async function (api) {
       : './templates/javascript';
     api.render(configTemplate, {
       devServerPort,
-      codeCoverageIsEnabled: api.prompts.enableCodeCoverage,
+      codeCoverageIsEnabled: shouldEnableCodeCoverage,
     });
 
     api.render('./templates/base', {
@@ -118,13 +129,25 @@ export default async function (api) {
 
     const testEnvCommand = `cross-env NODE_ENV=test`;
 
+    const packageManager = await api.getNodePackagerName();
     const scripts = {
       scripts: {
-        test: 'echo "See package.json => scripts for available tests." && exit 0',
+        test: `${packageManager} test:clear && ${packageManager} test:component:ci && ${packageManager} test:e2e:ci`,
+        'test:clear': 'rimraf .nyc_output coverage',
         'test:e2e': `${testEnvCommand} playwright test --ui`,
         'test:e2e:ci': `${testEnvCommand} playwright test`,
+        'test:report': `${testEnvCommand} playwright show-report`,
       },
     };
+
+    if (shouldEnableCodeCoverage) {
+      api.render('./templates/code-coverage');
+
+      scripts.scripts['test'] =
+        scripts.scripts['test'] + ` && ${packageManager} coverage-report`;
+      scripts.scripts['coverage-report'] =
+        'nyc report --reporter=html --reporter=text';
+    }
 
     // Playwirght only offers native support for component testing with Vite
     if (api.hasPackage('@quasar/app-vite')) {
@@ -139,7 +162,11 @@ export default async function (api) {
     const gitignorePath = api.resolve.app('.gitignore');
 
     const playwrightCommentStart = '\n# Playwright';
-    const playwrightGitignore = `\n${playwrightCommentStart}\n/test-results/\n/playwright-report/\n/blob-report/n/playwright/.cache/\n/playwright/.cache/\n`;
+    let playwrightGitignore = `\n${playwrightCommentStart}\n/test-results/\n/playwright-report/\n/blob-report\n/playwright/.cache/\n`;
+
+    if (shouldEnableCodeCoverage) {
+      playwrightGitignore += '\n\n# Coverage\n.nyc_output\n/coverage\n';
+    }
     appendToFileIfNotExists(
       gitignorePath,
       playwrightCommentStart,
