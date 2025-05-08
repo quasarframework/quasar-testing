@@ -1,7 +1,6 @@
 <template>
   <q-select
     v-model="selected"
-    data-cy="select"
     data-testid="select"
     label="test options selection"
     :options="options"
@@ -9,10 +8,10 @@
     :disable="disable"
   />
 
-  <span data-cy="select-value" data-testid="select-value">{{ selected }}</span>
+  <span data-testid="select-value">{{ selected }}</span>
 </template>
 
-<script<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
+<script lang="ts">
 import { defineComponent, ref } from 'vue';
 
 const syncOptions = ['Option 1', 'Option 2', 'Option 3'];

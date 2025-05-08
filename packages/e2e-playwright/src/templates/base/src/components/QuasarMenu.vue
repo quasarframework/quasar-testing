@@ -1,5 +1,5 @@
 <template>
-  <q-btn data-cy="open-menu-btn" data-testid="open-menu-btn" label="Open menu">
+  <q-btn data-testid="open-menu-btn" label="Open menu">
     <q-menu>
       <q-list>
         <q-item v-close-popup clickable>
@@ -13,7 +13,7 @@
   </q-btn>
 </template>
 
-<script<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
+<script lang="ts">
 import { defineComponent } from 'vue';
 
 export default defineComponent({

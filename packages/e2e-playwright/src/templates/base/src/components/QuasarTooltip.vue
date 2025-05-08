@@ -1,19 +1,13 @@
 <template>
-  <q-btn color="primary" data-cy="button">
+  <q-btn color="primary">
     Button
-    <q-tooltip
-      v-model="showTooltip"
-      data-cy="tooltip"
-      data-testid="tooltip"
-      class="bg-red"
-      :offset="[10, 10]"
-    >
+    <q-tooltip v-model="showTooltip" data-testid="tooltip" class="bg-red" :offset="[10, 10]">
       Here I am!
     </q-tooltip>
   </q-btn>
 </template>
 
-<script<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
+<script lang="ts">
 import { ref, defineComponent } from 'vue';
 
 export default defineComponent({

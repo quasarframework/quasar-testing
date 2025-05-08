@@ -1,13 +1,16 @@
 <template>
-  <q-card data-cy="dark-card" :dark="$q.dark.isActive">
+  <q-card :dark="$q.dark.isActive">
     {{ $q.dark.isActive ? 'Dark ' : 'Light' }} content
 
-    <q-btn label="Toggle Dark Mode" data-testid="dark-mode-toggle-button" @click="toggleNightMode" />
+    <q-btn
+      label="Toggle Dark Mode"
+      data-testid="dark-mode-toggle-button"
+      @click="toggleNightMode"
+    />
   </q-card>
-
 </template>
 
-<script<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
+<script lang="ts">
 import { defineComponent } from 'vue';
 import { useQuasar } from 'quasar';
 
@@ -25,7 +28,7 @@ export default defineComponent({
     }
 
     return {
-      toggleNightMode
+      toggleNightMode,
     };
   },
 });

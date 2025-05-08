@@ -1,18 +1,16 @@
 <template>
-  <q-btn
-    data-cy="button"
-    label="test emit"
-    color="positive"
-    rounded
-    icon="edit"
-    @click="$emit('test')"
-  />
+  <q-btn :label="label" color="positive" rounded icon="edit" @click="$emit('test')" />
 </template>
 
-<script<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
+<script lang="ts">
 import { defineComponent } from 'vue';
 
 export default defineComponent({
+  props: {
+    label: {
+      type: String,
+    },
+  },
   name: 'QuasarButton',
   emits: { test: () => true },
 });
