@@ -1,20 +1,20 @@
-import { test, expect } from '@playwright/test';
+import {
+  test,
+  expect,
+} from '@quasar/quasar-app-extension-testing-e2e-playwright';
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+test('has title', async ({ page, withinDialog }) => {
+  await page.goto('/');
+
+  await page.getByTestId('open-dialog-button').click();
+
+  await withinDialog(async (dialog) => {
+    await expect(dialog).toContainText('Hello world!');
+
+    await dialog.getByTestId('ok-button').click();
+    await dialog.waitFor({ state: 'hidden' });
+  });
 
   // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
-
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(
-    page.getByRole('heading', { name: 'Installation' }),
-  ).toBeVisible();
+  await expect(page).toHaveTitle(/Quasar App/);
 });

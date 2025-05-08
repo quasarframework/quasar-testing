@@ -72,7 +72,7 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'quasar dev -p 8080',
+    command: ' VITE_COVERAGE=true quasar dev -p 8080',
     url: 'http://localhost:8080',
     reuseExistingServer: !process.env.CI,
   },

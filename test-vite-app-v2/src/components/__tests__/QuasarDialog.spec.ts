@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/experimental-ct-vue';
-import DialogWrapper from 'app/test/cypress/wrappers/DialogWrapper.vue';
+import DialogWrapper from 'app/test/playwright/wrappers/DialogWrapper.vue';
 import QuasarDialog from '../QuasarDialog.vue';
 import { withinDialog } from '@quasar/quasar-app-extension-testing-e2e-playwright';
 
