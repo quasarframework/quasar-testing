@@ -9,26 +9,36 @@
     "build:esm": "tsc -p tsconfig.json",
     "build:cjs": "tsc -p tsconfig-cjs.json",
     "build:types": "tsc --emitDeclarationOnly --outDir dist/types",
-    "build": "rimraf ./dist && yarn build:esm && yarn build:cjs && yarn build:types",
-    "build:local": "yarn install && yarn build && rimraf node_modules",
-    "deploy:alpha": "yarn build && yarn publish --tag alpha",
-    "deploy:beta": "yarn build && yarn publish --tag beta",
-    "deploy:latest": "yarn build && yarn publish --tag latest",
-    "prepare": "husky"
+    "build": "unbuild",
+    "prepack": "unbuild",
+    "build:local": "yarn install && unbuild && rimraf node_modules",
+    "deploy:alpha": "unbuild && yarn publish --tag alpha",
+    "deploy:beta": "unbuild && yarn publish --tag beta",
+    "deploy:latest": "unbuild && yarn publish --tag latest"
+  },
+  "files": [
+    "dist"
+  ],
+  "exportsComments": {
+    "exports": "Explictly map core AE script as require.resolve(scriptName) in vite v1 fails when installing, invoking, etc the AE"
   },
   "exports": {
     ".": {
-      "import": "./dist/esm/main.js",
-      "require": "./dist/cjs/main.js",
-      "types": "./dist/types/main.d.ts"
+      "import": "./dist/main.mjs",
+      "require": "./dist/main.cjs",
+      "types": "./dist/main.d.ts"
     },
     "./ct": {
-      "import": "./dist/esm/ct/main.js",
-      "require": "./dist/cjs/ct/main.js",
-      "types": "./dist/types/ct/main.d.ts"
+      "import": "./dist/ct/main.mjs",
+      "require": "./dist/ct/main.cjs",
+      "types": "./dist/ct/main.d.ts"
     },
     "./package.json": "./package.json",
-    "./src/*": "./src/*"
+    "./src/index": "./src/index.js",
+    "./src/prompts": "./src/prompts.js",
+    "./src/install": "./src/install.js",
+    "./src/*": "./src/*",
+    "./nyc-preset": "./nyc-preset.json"
   },
   "repository": {
     "type": "git",
@@ -45,10 +55,13 @@
     "yarn": ">= 1.6.0"
   },
   "dependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "cross-env": "^7.0.3",
     "nyc": "^17.1.0",
-    "vite-plugin-istanbul": "^7.0.0",
-    "@istanbuljs/nyc-config-typescript": "^1.0.2"
+    "vite-plugin-istanbul": "^7.0.0"
+  },
+  "devDependenciesComments": {
+    "rimraf": "Requires node 20+, so let's not update it to continue supporting lower versions"
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",
@@ -57,14 +70,16 @@
     "@types/node": "^22.10.7",
     "@typescript-eslint/eslint-plugin": "^8.20.0",
     "@typescript-eslint/parser": "^8.20.0",
-    "chokidar": "^4.0.3",
     "eslint": "^9.18.0",
     "eslint-plugin-playwright": "^2.1.0",
     "globals": "^15.14.0",
-    "husky": "^9.1.7",
-    "lint-staged": "^15.5.0",
+    "rimraf": "^5.0.10",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.20.0",
-    "rimraf": "^6.0.1"
+    "unbuild": "^3.5.0"
+  },
+  "peerDependencies": {
+    "@playwright/test": "^1.49.1",
+    "@playwright/experimental-ct-vue": "^1.50.0"
   }
 }
