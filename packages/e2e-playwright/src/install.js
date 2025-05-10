@@ -33,7 +33,6 @@ const __dirname = dirname(__filename);
  * @param {...object} sources - Objects to merge
  * @returns {object} New object with merged key/values
  */
-
 function __mergeDeep(...sources) {
   let result = {};
   for (const source of sources) {
@@ -135,7 +134,12 @@ export default async function (api) {
       shouldSupportTypeScript: supportsTypescript,
     });
 
-    const testEnvCommand = `cross-env NODE_ENV=test`;
+    let testEnvCommand = 'cross-env NODE_ENV=test';
+    if (shouldEnableCodeCoverage) {
+      // With this we can set requireEnv in istanbul to true, and it if the user removes this flag
+      // then istanbul will not instrument the code
+      testEnvCommand += ' VITE_COVERAGE=true';
+    }
 
     const packageManager = await api.getNodePackagerName();
     const scripts = {
@@ -144,25 +148,25 @@ export default async function (api) {
         'test:clear': 'rimraf .nyc_output coverage',
         'test:e2e': `${testEnvCommand} playwright test --ui`,
         'test:e2e:ci': `${testEnvCommand} playwright test`,
-        'test:report': `${testEnvCommand} playwright show-report`,
+        'test:report': `playwright show-report`,
       },
     };
 
     if (shouldEnableCodeCoverage) {
       api.render('./templates/code-coverage');
 
-      scripts.scripts['test'] =
-        scripts.scripts['test'] + ` && ${packageManager} coverage-report`;
+      scripts.scripts['test'] += ` && ${packageManager} coverage-report`;
       scripts.scripts['coverage-report'] =
         'nyc report --reporter=html --reporter=text';
     }
 
+    const scriptExtension = supportsTypescript ? 'ts' : 'js';
     // Playwirght only offers native support for component testing with Vite
-    if (api.hasPackage('@quasar/app-vite')) {
+    if (api.hasVite) {
       scripts.scripts['test:component'] =
-        `${testEnvCommand} playwright test -c playwright-ct.config.ts --ui`;
+        `${testEnvCommand} playwright test -c playwright-ct.config.${scriptExtension} --ui`;
       scripts.scripts['test:component:ci'] =
-        `${testEnvCommand} playwright test -c playwright-ct.config.ts`;
+        `${testEnvCommand} playwright test -c playwright-ct.config.${scriptExtension}`;
     }
     extendPackageJson = __mergeDeep(extendPackageJson, scripts);
     api.extendPackageJson(extendPackageJson);

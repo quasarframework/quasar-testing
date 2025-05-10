@@ -5,7 +5,6 @@ export default async function (api) {
   if (api.hasVite) {
     api.compatibleWith('@quasar/app-vite', '^1.0.0 || ^2.0.0');
   } else if (api.hasWebpack) {
-    api.compatibleWith('@quasar/app-webpack', '^3.0.0');
     api.compatibleWith('@quasar/app-webpack', '^3.11.0 || ^4.0.0');
   }
 
@@ -28,6 +27,7 @@ export default async function (api) {
       viteConf.plugins.push(
         istanbul({
           forceBuildInstrument: api.ctx.prod,
+          requireEnv: true,
         }),
       );
     });

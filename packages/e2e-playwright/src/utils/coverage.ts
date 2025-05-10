@@ -11,6 +11,13 @@ function generateUUID() {
 }
 
 export async function addCoverageToContext(context: BrowserContext, use: (r: BrowserContext) => Promise<void>) {
+  if (process.env.VITE_COVERAGE !== 'true') {
+    // `requireEnv` of istanbul should also prevent instrumentation if this flag is not set. So even if 
+    // we remove this check, the coverage will not be collected if the flag is not set.
+    // Let's ignore the rest of the code since coverage is disabled.
+    return use(context);
+  }
+
   // Add beforeunload listener to collect coverage
   await context.addInitScript(
     () => {
