@@ -118,10 +118,18 @@ export default async function (api) {
     const configTemplate = supportsTypescript
       ? './templates/typescript'
       : './templates/javascript';
-    api.render(configTemplate, {
+    api.render(`${configTemplate}/base`, {
       devServerPort,
       codeCoverageIsEnabled: shouldEnableCodeCoverage,
     });
+
+    // Playwright only offers native support for component testing with Vite
+    // https://playwright.dev/docs/test-components
+    if (api.hasVite) {
+      api.render(`${configTemplate}/component-test`, {
+        codeCoverageIsEnabled: shouldEnableCodeCoverage,
+      });
+    }
 
     api.render('./templates/base', {
       shouldSupportTypeScript: supportsTypescript,

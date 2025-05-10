@@ -13,7 +13,7 @@
   </q-dialog>
 </template>
 
-<script lang="ts">
+<script<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
 import { useDialogPluginComponent } from 'quasar';
 import { defineComponent } from 'vue';
 

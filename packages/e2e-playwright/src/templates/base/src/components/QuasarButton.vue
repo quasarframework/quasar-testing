@@ -2,7 +2,7 @@
   <q-btn :label="label" color="positive" rounded icon="edit" @click="$emit('test')" />
 </template>
 
-<script lang="ts">
+<script<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
 import { defineComponent } from 'vue';
 
 export default defineComponent({

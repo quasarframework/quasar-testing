@@ -70,7 +70,7 @@ export default defineConfig({
             include: ['src/**/*'],
             exclude: ['node_modules', 'test/', 'dist/', 'coverage/', '__tests__'],
             extension: ['.js', '.ts', '.vue'],
-            requireEnv: false,
+            requireEnv: true,
             forceBuildInstrument: true,
             checkProd: false,
             cypress: false,

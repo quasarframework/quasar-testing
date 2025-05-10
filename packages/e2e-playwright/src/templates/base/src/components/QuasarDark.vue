@@ -10,7 +10,7 @@
   </q-card>
 </template>
 
-<script lang="ts">
+<script<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
 import { defineComponent } from 'vue';
 import { useQuasar } from 'quasar';
 

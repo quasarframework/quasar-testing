@@ -6,7 +6,8 @@
   <q-radio v-model="selected" val="Value2" data-testid="radio-2">Value2</q-radio>
 </template>
 
-<script lang="ts">
+
+<script<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({

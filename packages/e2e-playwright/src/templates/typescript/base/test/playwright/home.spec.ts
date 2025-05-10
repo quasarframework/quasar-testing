@@ -1,4 +1,7 @@
-import { test, expect } from '@playwright/test';
+import {
+  test,
+  expect,
+} from '@quasar/quasar-app-extension-testing-e2e-playwright';
 
 test('has title', async ({ page }) => {
   await page.goto('https://playwright.dev/');

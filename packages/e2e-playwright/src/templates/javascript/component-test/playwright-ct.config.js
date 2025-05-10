@@ -1,4 +1,5 @@
 // @ts-check
+
 import { defineConfig, devices } from '@playwright/experimental-ct-vue';
 import vue from '@vitejs/plugin-vue';
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin';
@@ -11,7 +12,7 @@ import { quasar, transformAssetUrls } from '@quasar/vite-plugin';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './src/components/__tests__',
+  testDir: './src/components',
   /* The base directory, relative to the config file, for snapshot files created with toMatchSnapshot and toHaveScreenshot. */
   snapshotDir: './__snapshots__',
   /* Maximum time one test can run for. */
@@ -68,34 +69,33 @@ export default defineConfig({
         <% if(codeCoverageIsEnabled) { %>
           // Instrument the code for nyc/istanbul code coverage
           istanbul({
-            include: ['src/**/*.{js,cjs,mjs,jsx,ts,tsx,vue}'],
-            exclude: [
-              '**/__tests__/**',
-              'node_modules',
-              '.quasar/',
-              'dist',
-              '**/*.d.ts',
-            ],
+            include: ['src/**/*'],
+            exclude: ['node_modules', 'test/', 'dist/', 'coverage/', '__tests__'],
             extension: ['.js', '.ts', '.vue'],
             requireEnv: false,
+            forceBuildInstrument: true,
+            checkProd: false,
+            cypress: false,
           }) <% } %>
         ],
-      },
-    },
+  },
+},
 
   /* Configure projects for major browsers */
   projects: [
-    {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
-  ],
+  {
+    name: 'chromium',
+    use: { ...devices['Desktop Chrome'] },
+  },
+  {
+    name: 'firefox',
+    use: { ...devices['Desktop Firefox'] },
+  },
+  {
+    name: 'webkit',
+    use: { ...devices['Desktop Safari'] },
+  },
+],
 });
+
+

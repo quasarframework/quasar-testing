@@ -13,7 +13,7 @@
   </q-btn>
 </template>
 
-<script lang="ts">
+<script<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
 import { defineComponent } from 'vue';
 
 export default defineComponent({

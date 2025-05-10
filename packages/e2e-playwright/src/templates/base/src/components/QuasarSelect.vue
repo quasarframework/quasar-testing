@@ -11,7 +11,7 @@
   <span data-testid="select-value">{{ selected }}</span>
 </template>
 
-<script lang="ts">
+<script<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
 import { defineComponent, ref } from 'vue';
 
 const syncOptions = ['Option 1', 'Option 2', 'Option 3'];
