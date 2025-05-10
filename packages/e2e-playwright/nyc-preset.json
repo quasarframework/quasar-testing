@@ -1,0 +1,30 @@
+{
+    "extends": "@istanbuljs/nyc-config-typescript",
+    "all": true,
+    "include": [
+        "src/**/*.{js,ts,vue}"
+    ],
+    "exclude": [
+        "src/**/*.spec.{js,ts}",
+        "src/**/*.test.{js,ts}",
+        "node_modules",
+        "test/",
+        "coverage/",
+        "__tests__"
+    ],
+    "reporter": [
+        "text",
+        "html",
+        "lcov",
+        "json"
+    ],
+    "extension": [
+        ".js",
+        ".ts",
+        ".vue"
+    ],
+    "report-dir": "coverage",
+    "temp-dir": ".nyc_output",
+    "coverage-provider": "istanbul",
+    "skip-full": false
+}
