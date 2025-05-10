@@ -18,11 +18,11 @@
     "test:clear": "rimraf .nyc_output coverage",
     "dev": "quasar dev",
     "build": "quasar build",
-    "test:e2e": "cross-env NODE_ENV=test playwright test --ui",
-    "test:e2e:ci": "cross-env NODE_ENV=test playwright test",
-    "test:component": "cross-env NODE_ENV=test playwright test -c playwright-ct.config.ts --ui",
-    "test:component:ci": "cross-env NODE_ENV=test playwright test -c playwright-ct.config.ts",
-    "test:report": "cross-env NODE_ENV=test playwright show-report"
+    "test:e2e": "cross-env NODE_ENV=test VITE_COVERAGE=true playwright test --ui",
+    "test:e2e:ci": "cross-env NODE_ENV=test VITE_COVERAGE=true playwright test",
+    "test:component": "cross-env NODE_ENV=test VITE_COVERAGE=true playwright test -c playwright-ct.config.ts --ui",
+    "test:component:ci": "cross-env NODE_ENV=test VITE_COVERAGE=true playwright test -c playwright-ct.config.ts",
+    "test:report": "playwright show-report"
   },
   "dependencies": {
     "@quasar/extras": "^1.16.4",
