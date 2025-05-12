@@ -7,7 +7,6 @@
       <!-- buttons example -->
       <q-card-actions align="right">
         <q-btn
-          data-cy="ok-button"
           data-testid="ok-button"
           color="primary"
           label="OK"

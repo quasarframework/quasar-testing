@@ -8,6 +8,7 @@ import {
 import pluginCypress from 'eslint-plugin-cypress/flat';
 import pluginVue from 'eslint-plugin-vue';
 import globals from 'globals';
+import playwright from 'eslint-plugin-playwright';
 
 const config = defineConfigWithVueTs(
   {
@@ -100,6 +101,17 @@ const config = defineConfigWithVueTs(
     rules: {
       // Allow chai-style assertions, e.g. `expect(foo).to.be.true`
       '@typescript-eslint/no-unused-expressions': 'off',
+    },
+  },
+
+  {
+    name: 'custom/playwright',
+
+    ...playwright.configs['flat/recommended'],
+    files: ['src/components/**/*.spec.ts', 'test/**/*.spec.ts'],
+    rules: {
+      ...playwright.configs['flat/recommended'].rules,
+      '@typescript-eslint/unbound-method': 'off',
     },
   },
 

@@ -2,6 +2,7 @@ import { defineConfig, devices, type PlaywrightTestConfig } from '@playwright/ex
 import vue from '@vitejs/plugin-vue';
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin';
 import istanbul from 'vite-plugin-istanbul';
+import { type PluginOption } from 'vite';
 // import { fileURLToPath } from 'node:url';
 // import AutoImport from 'unplugin-auto-import/vite';
 // import Components from 'unplugin-vue-components/vite';
@@ -75,7 +76,7 @@ export default defineConfig({
           checkProd: false,
           cypress: false,
         }),
-      ],
+      ] as PluginOption[],
     },
   },
 

@@ -69,11 +69,11 @@ function getCompatibleDevDependencies(packageNames) {
   return devDependencies;
 }
 
+// eslint-plugin-playwright works well with both eslint v8 and eslint v9
 let extendPackageJson = {
   devDependencies: getCompatibleDevDependencies([
-    'eslint-plugin-playwright',
     '@playwright/test',
-    '@playwright/experimental-ct-vue',
+    'eslint-plugin-playwright',
   ]),
 };
 
@@ -144,8 +144,7 @@ export default async function (api) {
 
     let testEnvCommand = 'cross-env NODE_ENV=test';
     if (shouldEnableCodeCoverage) {
-      // With this we can set requireEnv in istanbul to true, and it if the user removes this flag
-      // then istanbul will not instrument the code
+      // We have set requireEnv in istanbul to true, so this is needed for instrumentation to work
       testEnvCommand += ' VITE_COVERAGE=true';
     }
 
@@ -162,6 +161,10 @@ export default async function (api) {
 
     if (shouldEnableCodeCoverage) {
       api.render('./templates/code-coverage');
+
+      // Let's add the playwright-ct-vue package to the devDependencies
+      extendPackageJson.devDependencies['@playwright/experimental-ct-vue'] =
+        aeDevDependencies['@playwright/experimental-ct-vue'];
 
       scripts.scripts['test'] += ` && ${packageManager} coverage-report`;
       scripts.scripts['coverage-report'] =
@@ -195,6 +198,18 @@ export default async function (api) {
 
     if (api.prompts.installBrowsers) {
       installPlaywrightBrowsers();
+    }
+
+    if (api.prompts.enableCodeCoverage && api.hasWebpack) {
+      api.onExitLog(
+        "Playwright doesn't support code coverage for Webpack yet. Please use Vite CLI instead.",
+      );
+    }
+
+    if (await api.hasLint()) {
+      api.onExitLog(
+        'Check out https://github.com/quasarframework/quasar-testing/tree/dev/packages/e2e-playwright to see how to add proper Playwright linting configuration to your project.',
+      );
     }
   } catch (error) {
     console.error('An error occurred while installing the extension:', error);

@@ -5,14 +5,14 @@
     :width="200"
     :breakpoint="700"
     elevated
-    data-cy="drawer"
+    data-testid="drawer"
     class="bg-primary text-white"
   >
     <q-scroll-area class="fit">
       <div class="q-pa-sm">
         <div v-for="n in 50" :key="n">Drawer {{ n }} / 50</div>
       </div>
-      <q-btn data-cy="button">Am I on screen?</q-btn>
+      <q-btn data-testid="button">Am I on screen?</q-btn>
     </q-scroll-area>
   </q-drawer>
 </template>

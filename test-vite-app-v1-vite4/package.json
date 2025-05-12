@@ -11,6 +11,9 @@
     "invoke:cypress": "quasar ext invoke @quasar/testing-e2e-cypress && yarn format",
     "invoke:all": "yarn invoke:cypress",
     "sync:invoke:cypress": "yarn sync:cypress && yarn invoke:cypress",
+    "sync:playwright": "yarn --cwd ../packages/e2e-playwright build:local && yarn add -D ../packages/e2e-playwright",
+    "invoke:playwright": "quasar ext invoke @quasar/testing-e2e-playwright && yarn format",
+    "sync:invoke:playwright": "yarn sync:playwright && yarn invoke:playwright",
     "sync:invoke:all": "yarn sync:invoke:cypress",
     "test:cypress": "yarn test:e2e:ci && yarn test:component:ci",
     "test:all": "yarn test:cypress",
@@ -18,11 +21,14 @@
     "sync:invoke:test:all": "yarn sync:invoke:test:cypress",
     "lint": "eslint --ext .js,.ts,.vue ./",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
-    "test": "echo \"See package.json => scripts for available tests.\" && exit 0",
-    "test:e2e": "cross-env NODE_ENV=test start-test \"quasar dev\" http-get://127.0.0.1:8080 \"cypress open --e2e\"",
-    "test:e2e:ci": "cross-env NODE_ENV=test start-test \"quasar dev\" http-get://127.0.0.1:8080 \"cypress run --e2e\"",
-    "test:component": "cross-env NODE_ENV=test cypress open --component",
-    "test:component:ci": "cross-env NODE_ENV=test cypress run --component"
+    "test": "yarn test:clear && yarn test:component:ci && yarn test:e2e:ci && yarn coverage-report",
+    "test:e2e": "cross-env NODE_ENV=test VITE_COVERAGE=true playwright test --ui",
+    "test:e2e:ci": "cross-env NODE_ENV=test VITE_COVERAGE=true playwright test",
+    "test:component": "cross-env NODE_ENV=test VITE_COVERAGE=true playwright test -c playwright-ct.config.ts --ui",
+    "test:component:ci": "cross-env NODE_ENV=test VITE_COVERAGE=true playwright test -c playwright-ct.config.ts",
+    "test:clear": "rimraf .nyc_output coverage",
+    "test:report": "playwright show-report",
+    "coverage-report": "nyc report --reporter=html --reporter=text"
   },
   "dependencies": {
     "@quasar/extras": "^1.16.6",
@@ -40,6 +46,7 @@
     "@intlify/vite-plugin-vue-i18n": "^3.3.1",
     "@quasar/app-vite": "^1.7.1",
     "@quasar/quasar-app-extension-testing-e2e-cypress": "../packages/e2e-cypress",
+    "@quasar/quasar-app-extension-testing-e2e-playwright": "../packages/e2e-playwright",
     "@types/node": "^18.17.15",
     "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@typescript-eslint/parser": "^5.54.0",
@@ -51,7 +58,10 @@
     "eslint-plugin-cypress": "^3.6.0",
     "eslint-plugin-vue": "^9.17.0",
     "prettier": "^3.0.3",
-    "typescript": "^4.9.5"
+    "typescript": "^4.9.5",
+    "@playwright/test": "^1.49.1",
+    "eslint-plugin-playwright": "^2.1.0",
+    "@playwright/experimental-ct-vue": "^1.50.0"
   },
   "resolutionsComments": {
     "vite": "See workaround https://github.com/quasarframework/quasar/issues/14077#issuecomment-1353213893, since Quasar Vite v1 only supports up to Vite 3",

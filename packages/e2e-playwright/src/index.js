@@ -25,10 +25,7 @@ export default async function (api) {
 
     api.extendViteConf((viteConf) => {
       viteConf.plugins.push(
-        istanbul({
-          forceBuildInstrument: api.ctx.prod,
-          requireEnv: true,
-        }),
+        istanbul({ forceBuildInstrument: api.ctx.prod, requireEnv: true }),
       );
     });
   }

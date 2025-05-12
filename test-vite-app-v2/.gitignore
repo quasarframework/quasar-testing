@@ -39,5 +39,10 @@ coverage/
 # Playwright
 /test-results/
 /playwright-report/
-/blob-report/n/playwright/.cache/
+/blob-report
 /playwright/.cache/
+
+
+# Coverage
+.nyc_output
+/coverage

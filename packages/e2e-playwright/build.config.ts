@@ -25,6 +25,11 @@ export default defineBuildConfig({
     // as peerDependencies in package.json. 
     externals: ['@playwright/experimental-ct-vue', '@playwright/test'],
 
+    rollup: {
+        // Explicitly enable generating the CJS bundle.
+        emitCJS: true,
+    },
+
     // There is some strange warning about missing package.json. It doesn't affect the build however.
     // It is most likely a false positive. So for now, let's not fail the build on this warning.
     // See: https://github.com/unjs/unbuild/issues/268

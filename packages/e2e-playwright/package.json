@@ -61,7 +61,7 @@
     "vite-plugin-istanbul": "^7.0.0"
   },
   "devDependenciesComments": {
-    "rimraf": "Requires node 20+, so let's not update it to continue supporting lower versions"
+    "rimraf": "Requires node 20 || >=22, so let's not update it to continue supporting lower versions"
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",
@@ -79,7 +79,12 @@
     "unbuild": "^3.5.0"
   },
   "peerDependencies": {
-    "@playwright/test": "^1.49.1",
-    "@playwright/experimental-ct-vue": "^1.50.0"
+    "@playwright/test": "^1.40.0",
+    "@playwright/experimental-ct-vue": "^1.40.0"
+  },
+  "peerDependenciesMeta": {
+    "eslint-plugin-playwright": {
+      "optional": true
+    }
   }
 }

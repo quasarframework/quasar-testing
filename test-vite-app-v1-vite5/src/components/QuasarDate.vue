@@ -1,11 +1,11 @@
 <template>
-  <q-date v-model="date" data-cy="date-picker" />
+  <q-date v-model="date" data-testid="date-picker" />
 
   <div>
-    <q-input v-model="date" label="Scegli data">
+    <q-input v-model="date" label="Date" data-testid="selected-date-input">
       <template #append>
         <q-btn
-          data-cy="open-date-picker-popup-button"
+          data-testid="open-date-picker-popup-button"
           icon="event"
           flat
           round
@@ -14,11 +14,13 @@
       </template>
     </q-input>
     <q-dialog ref="dateDialogRef">
-      <q-date v-model="date" @update:model-value="dateDialogRef.hide()" />
+      <q-date
+        v-model="date"
+        data-testid="date-proxy"
+        @update:model-value="dateDialogRef.hide()"
+      />
     </q-dialog>
   </div>
-
-  <span data-cy="date-value">{{ date }}</span>
 </template>
 
 <script lang="ts">
