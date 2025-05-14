@@ -105,6 +105,14 @@ export default async function (api) {
   }
 
   try {
+    if (api.prompts.port && api.prompts.port !== enforcedDevServerPort) {
+      console.log(api.prompts.port, enforcedDevServerPort);
+      const port = parseInt(api.prompts.port.trim(), 10);
+      if (!Number.isInteger(port)) {
+        throw new Error(`Invalid port number: ${api.prompts.port}`);
+      }
+    }
+
     const devServerPort = api.prompts.port ?? enforcedDevServerPort;
     const supportsTypescript = await api.hasTypescript();
     const shouldEnableCodeCoverage =
@@ -161,7 +169,7 @@ export default async function (api) {
     }
 
     const scriptExtension = supportsTypescript ? 'ts' : 'js';
-    // Playwirght only offers native support for component testing with Vite
+    // Playwright only offers native support for component testing with Vite
     if (api.hasVite) {
       scripts.scripts['test:component'] =
         `${testEnvCommand} playwright test -c playwright-ct.config.${scriptExtension} --ui`;

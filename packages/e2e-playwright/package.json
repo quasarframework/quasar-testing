@@ -42,12 +42,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/n05la3/testing-e2e-playwright"
+    "url": "https://github.com/quasarframework/quasar-testing"
   },
   "main": "dist/cjs/main.js",
   "module": "dist/esm/main.js",
-  "bugs": "",
-  "homepage": "",
+  "bugs": "https://github.com/quasarframework/quasar-testing/issues",
+  "homepage": "https://github.com/quasarframework/quasar-testing/tree/dev/packages/e2e-playwright",
   "typings": "dist/types/main.d.ts",
   "engines": {
     "node": ">= 12.2.0",

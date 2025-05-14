@@ -8,13 +8,20 @@ export default defineBuildConfig({
         './src/ct/main',
     ],
 
+    rollup: {
+        emitCJS: true,
+        esbuild: {
+            minify: true,
+        },
+    },
+
     // Generate TypeScript declaration files (.d.ts) for all entries.
     declaration: true,
 
     // Will remove the output directory before building.
     clean: true,
 
-    // This ensures that unbuild will not try to compile these packages. We have to also ensure to set them
+    // This ensures that unbuild will not try to build these packages. We have to also to set them
     // as peerDependencies in package.json. 
     externals: ['@playwright/experimental-ct-vue', '@playwright/test'],
 
