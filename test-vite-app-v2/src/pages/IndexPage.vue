@@ -6,6 +6,12 @@
       :todos="todos"
       :meta="meta"
     ></example-component>
+
+    <q-btn
+      label="Open Dialog"
+      data-testid="open-dialog-button"
+      @click="openDialog"
+    />
   </q-page>
 </template>
 
@@ -13,6 +19,8 @@
 import { ref } from 'vue';
 import type { Todo, Meta } from 'components/models';
 import ExampleComponent from 'components/ExampleComponent.vue';
+import QuasarDialog from 'src/components/QuasarDialog.vue';
+import { Dialog } from 'quasar';
 
 const todos = ref<Todo[]>([
   {
@@ -40,4 +48,13 @@ const todos = ref<Todo[]>([
 const meta = ref<Meta>({
   totalCount: 1200,
 });
+
+function openDialog() {
+  Dialog.create({
+    component: QuasarDialog,
+    componentProps: {
+      message: 'Hello world!',
+    },
+  });
+}
 </script>

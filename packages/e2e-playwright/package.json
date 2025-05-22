@@ -1,0 +1,100 @@
+{
+  "name": "@quasar/quasar-app-extension-testing-e2e-playwright",
+  "version": "0.0.1",
+  "description": "A Quasar playwright app extension",
+  "author": "Calson Chiatiah <chiacalson@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build:esm": "tsc -p tsconfig.json",
+    "build:cjs": "tsc -p tsconfig-cjs.json",
+    "build:types": "tsc --emitDeclarationOnly --outDir dist/types",
+    "build": "unbuild",
+    "prepack": "unbuild",
+    "build:local": "yarn install && unbuild && rimraf node_modules",
+    "deploy:alpha": "unbuild && yarn publish --tag alpha",
+    "deploy:beta": "unbuild && yarn publish --tag beta",
+    "deploy:latest": "unbuild && yarn publish --tag latest"
+  },
+  "files": [
+    "dist"
+  ],
+  "exportsComments": {
+    "exports": "Explictly map core AE script as require.resolve(scriptName) in vite v1 fails when installing, invoking, etc the AE"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/main.d.mts",
+        "default": "./dist/main.mjs"
+      },
+      "require": {
+        "types": "./dist/main.d.cts",
+        "default": "./dist/main.cjs"
+      }
+    },
+    "./ct": {
+      "import": {
+        "types": "./dist/ct/main.d.mts",
+        "default": "./dist/ct/main.mjs"
+      },
+      "require": {
+        "types": "./dist/ct/main.d.cts",
+        "default": "./dist/ct/main.cjs"
+      }
+    },
+    "./package.json": "./package.json",
+    "./src/index": "./src/index.js",
+    "./src/prompts": "./src/prompts.js",
+    "./src/install": "./src/install.js",
+    "./src/*": "./src/*",
+    "./nyc-preset": "./nyc-preset.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/quasarframework/quasar-testing"
+  },
+  "main": "dist/main.cjs",
+  "module": "dist/main.mjs",
+  "types": "dist/main.d.cts",
+  "bugs": "https://github.com/quasarframework/quasar-testing/issues",
+  "homepage": "https://github.com/quasarframework/quasar-testing/tree/dev/packages/e2e-playwright",
+  "engines": {
+    "node": ">= 12.2.0",
+    "npm": ">= 5.6.0",
+    "yarn": ">= 1.6.0"
+  },
+  "dependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
+    "cross-env": "^7.0.3",
+    "nyc": "^17.1.0",
+    "vite-plugin-istanbul": "^7.0.0"
+  },
+  "devDependenciesComments": {
+    "rimraf": "Requires node 20 || >=22, so let's not update it to continue supporting lower versions"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.18.0",
+    "@playwright/experimental-ct-vue": "^1.50.0",
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^22.10.7",
+    "@typescript-eslint/eslint-plugin": "^8.20.0",
+    "@typescript-eslint/parser": "^8.20.0",
+    "eslint": "^9.18.0",
+    "eslint-plugin-playwright": "^2.1.0",
+    "globals": "^15.14.0",
+    "rimraf": "^5.0.10",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.20.0",
+    "unbuild": "^3.5.0"
+  },
+  "peerDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@playwright/experimental-ct-vue": "^1.40.0"
+  },
+  "peerDependenciesMeta": {
+    "eslint-plugin-playwright": {
+      "optional": true
+    }
+  }
+}

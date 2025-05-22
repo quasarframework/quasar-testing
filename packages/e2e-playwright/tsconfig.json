@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@utils/*": ["src/utils/*"]
+    },
+    "strict": true,
+    "sourceMap": true,
+    "target": "ESNext",
+    "moduleResolution": "node",
+    "outDir": "dist/esm",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "module": "ESNext",
+    "allowJs": true,
+    "declaration": true,
+    "declarationDir": "dist/types"
+  },
+  "include": [
+    "src/main.ts",
+    "src/ct/main.ts",
+    "coverage.d.ts",
+    "src/utils/coverage.ts",
+    "src/*.js"
+  ]
+}

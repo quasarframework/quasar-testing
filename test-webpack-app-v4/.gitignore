@@ -31,3 +31,10 @@ yarn-error.log*
 
 # local .env files
 .env.local*
+
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report
+/playwright/.cache/

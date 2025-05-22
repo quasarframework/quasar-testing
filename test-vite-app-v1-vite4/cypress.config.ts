@@ -15,9 +15,6 @@ export default defineConfig({
     baseUrl: 'http://localhost:8080/',
     supportFile: 'test/cypress/support/e2e.ts',
     specPattern: 'test/cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
-    // Vite takes quite some time for cold startup, we manually set this in the testing repo
-    // to avoid timeout problems when running local smoke tests
-    defaultCommandTimeout: 10000,
   },
   component: {
     setupNodeEvents(on, config) {

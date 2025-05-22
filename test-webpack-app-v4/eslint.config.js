@@ -8,6 +8,7 @@ import {
 } from '@vue/eslint-config-typescript';
 import prettierSkipFormatting from '@vue/eslint-config-prettier/skip-formatting';
 import pluginCypress from 'eslint-plugin-cypress/flat';
+import playwright from 'eslint-plugin-playwright';
 
 const config = defineConfigWithVueTs(
   {
@@ -90,6 +91,14 @@ const config = defineConfigWithVueTs(
   prettierSkipFormatting,
 
   {
+    name: 'custom/playwright',
+
+    ...playwright.configs['flat/recommended'],
+    files: ['src/components/**/*.spec.ts', 'test/**/*.spec.ts'],
+    rules: playwright.configs['flat/recommended'].rules,
+  },
+
+  {
     name: 'custom/cypress',
 
     files: ['**/*.cy.{js,jsx,ts,tsx}'],
@@ -118,7 +127,7 @@ config.push({
     '@typescript-eslint/no-unsafe-call': 'error',
     '@typescript-eslint/no-unsafe-member-access': 'error',
     '@typescript-eslint/no-unsafe-return': 'error',
-  }
+  },
 });
 
 export default config;

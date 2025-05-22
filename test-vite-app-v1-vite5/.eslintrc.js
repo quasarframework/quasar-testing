@@ -111,5 +111,9 @@ module.exports = {
         '@typescript-eslint/no-unused-expressions': 'off',
       },
     },
+    {
+      files: ['src/**/*.spec.{js,ts}', 'test/**/*.spec.{js,ts}'],
+      extends: 'plugin:playwright/recommended',
+    },
   ],
 };

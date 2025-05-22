@@ -5,5 +5,11 @@
   "@quasar/testing-e2e-cypress": {
     "port": 8080,
     "options": ["code-coverage"]
+  },
+  "@quasar/testing-e2e-playwright": {
+    "port": 8080,
+    "githubWorkflow": true,
+    "installBrowsers": true,
+    "enableCodeCoverage": true
   }
 }
