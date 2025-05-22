@@ -23,12 +23,13 @@ import playwright from 'eslint-plugin-playwright';
 export default [
   // ...
   {
+    name: 'custom/playwright',
+
     ...playwright.configs['flat/recommended'],
     files: ['src/components/**/*.spec.ts', 'test/**/*.spec.ts'],
     rules: {
       ...playwright.configs['flat/recommended'].rules,
-      //  you might need to disable this rule if it's turned on to avoid `mount` being reported as unbound
-      // '@typescript-eslint/unbound-method': 'off',
+      //  Other rules
     },
   },
 ];
@@ -45,8 +46,7 @@ For ESLint versions earlier than v9, add this to your `.eslintrc.js` or `.eslint
       "files": ["src/components/**/*.spec.{js,ts}", "test/**/*.spec.{js,ts}"],
       "extends": "plugin:playwright/recommended",
       "rules": {
-        //  you might need to disable this rule if it's turned on to avoid `mount` being reported as unbound
-        // "@typescript-eslint/unbound-method": "off"
+        // Other rules
       }
     }
   ]

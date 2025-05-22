@@ -1,4 +1,4 @@
-import { defineConfig, devices, type PlaywrightTestConfig } from '@playwright/experimental-ct-vue';
+import { defineConfig, devices } from '@playwright/experimental-ct-vue';
 import vue from '@vitejs/plugin-vue';
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin';
 // import { fileURLToPath } from 'node:url';
@@ -96,4 +96,4 @@ projects: [
     use: { ...devices['Desktop Safari'] },
   },
 ],
-} as PlaywrightTestConfig);
+});

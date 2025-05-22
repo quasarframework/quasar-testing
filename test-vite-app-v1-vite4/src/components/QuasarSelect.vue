@@ -1,14 +1,16 @@
 <template>
   <q-select
     v-model="selected"
+    data-cy="select"
     data-testid="select"
     label="test options selection"
     :options="options"
     :loading="loading"
     :disable="disable"
+    :multiple="multiple"
   />
 
-  <span data-testid="select-value">{{ selected }}</span>
+  <span data-cy="select-value" data-testid="select-value">{{ selected }}</span>
 </template>
 
 <script lang="ts">
@@ -24,6 +26,10 @@ export default defineComponent({
       default: false,
     },
     disable: {
+      type: Boolean,
+      default: false,
+    },
+    multiple: {
       type: Boolean,
       default: false,
     },

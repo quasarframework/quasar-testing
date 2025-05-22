@@ -19,7 +19,6 @@
 import { ref } from 'vue';
 import type { Todo, Meta } from 'components/models';
 import ExampleComponent from 'components/ExampleComponent.vue';
-import { ref } from 'vue';
 import QuasarDialog from 'src/components/QuasarDialog.vue';
 import { Dialog } from 'quasar';
 

@@ -1,5 +1,5 @@
 <template>
-  <q-card :dark="$q.dark.isActive">
+  <q-card data-cy="dark-card" :dark="$q.dark.isActive">
     {{ $q.dark.isActive ? 'Dark ' : 'Light' }} content
 
     <q-btn

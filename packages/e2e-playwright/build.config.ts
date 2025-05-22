@@ -8,13 +8,6 @@ export default defineBuildConfig({
         './src/ct/main',
     ],
 
-    rollup: {
-        emitCJS: true,
-        esbuild: {
-            minify: true,
-        },
-    },
-
     // Generate TypeScript declaration files (.d.ts) for all entries.
     declaration: true,
 
@@ -28,6 +21,9 @@ export default defineBuildConfig({
     rollup: {
         // Explicitly enable generating the CJS bundle.
         emitCJS: true,
+        esbuild: {
+            minify: true,
+        },
     },
 
     // There is some strange warning about missing package.json. It doesn't affect the build however.

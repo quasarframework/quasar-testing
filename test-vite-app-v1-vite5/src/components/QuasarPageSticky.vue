@@ -1,6 +1,12 @@
 <template>
   <q-page-sticky position="bottom-right" :offset="[18, 18]">
-    <q-btn data-testid="button" rounded color="accent" icon="arrow_forward">
+    <q-btn
+      data-cy="button"
+      data-testid="button"
+      rounded
+      color="accent"
+      icon="arrow_forward"
+    >
       {{ title }}
     </q-btn>
   </q-page-sticky>

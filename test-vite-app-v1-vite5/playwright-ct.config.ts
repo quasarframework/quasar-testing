@@ -1,11 +1,9 @@
 import {
   defineConfig,
   devices,
-  type PlaywrightTestConfig,
 } from '@playwright/experimental-ct-vue';
 import vue from '@vitejs/plugin-vue';
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin';
-import { type PluginOption } from 'vite';
 // import { fileURLToPath } from 'node:url';
 // import AutoImport from 'unplugin-auto-import/vite';
 // import Components from 'unplugin-vue-components/vite';
@@ -37,49 +35,58 @@ export default defineConfig({
     /* Port to use for Playwright component endpoint. */
     ctPort: 3100,
 
-    ctViteConfig: {
-      build: {
-        sourcemap: true,
-      },
-      plugins: [
-        vue({ template: { transformAssetUrls } }),
-        // AutoImport({
-        //   imports: [
-        //     'vue',
-        //     'vue-router',
-        //     '@vueuse/head',
-        //     'pinia',
-        //     'quasar',
-        //     {
-        //       '@/store': ['useStore'],
-        //     },
-        //   ],
-        //   dts: 'src/auto-imports.d.ts',
-        //   eslintrc: {
-        //     enabled: true,
-        //   },
-        // }),
-        // Components({
-        //   dirs: ['src/components'],
-        //   extensions: ['vue'],
-        // }),
-        quasar({
-          // sassVariables: fileURLToPath(
-          //   new URL('./src/quasar-variables.sass', import.meta.url),
-          // ),
-        }),
+    ctViteConfig: async () => {
+      const { default: istanbul } = await import('vite-plugin-istanbul');
+      return {
+        build: {
+          sourcemap: true,
+        },
+        plugins: [
+          vue({ template: { transformAssetUrls } }),
+          // AutoImport({
+          //   imports: [
+          //     'vue',
+          //     'vue-router',
+          //     '@vueuse/head',
+          //     'pinia',
+          //     'quasar',
+          //     {
+          //       '@/store': ['useStore'],
+          //     },
+          //   ],
+          //   dts: 'src/auto-imports.d.ts',
+          //   eslintrc: {
+          //     enabled: true,
+          //   },
+          // }),
+          // Components({
+          //   dirs: ['src/components'],
+          //   extensions: ['vue'],
+          // }),
+          quasar({
+            // sassVariables: fileURLToPath(
+            //   new URL('./src/quasar-variables.sass', import.meta.url),
+            // ),
+          }),
 
-        // Instrument the code for nyc/istanbul code coverage
-        istanbul({
-          include: ['src/**/*'],
-          exclude: ['node_modules', 'test/', 'dist/', 'coverage/', '__tests__'],
-          extension: ['.js', '.ts', '.vue'],
-          requireEnv: true,
-          forceBuildInstrument: true,
-          checkProd: false,
-          cypress: false,
-        }),
-      ] as PluginOption[],
+          // Instrument the code for nyc/istanbul code coverage
+          istanbul({
+            include: ['src/**/*'],
+            exclude: [
+              'node_modules',
+              'test/',
+              'dist/',
+              'coverage/',
+              '__tests__',
+            ],
+            extension: ['.js', '.ts', '.vue'],
+            requireEnv: true,
+            forceBuildInstrument: true,
+            checkProd: false,
+            cypress: false,
+          }),
+        ],
+      };
     },
   },
 
@@ -98,4 +105,4 @@ export default defineConfig({
       use: { ...devices['Desktop Safari'] },
     },
   ],
-} as PlaywrightTestConfig);
+});

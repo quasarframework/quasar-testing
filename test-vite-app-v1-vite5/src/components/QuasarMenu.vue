@@ -1,5 +1,5 @@
 <template>
-  <q-btn data-testid="open-menu-btn" label="Open menu">
+  <q-btn data-cy="open-menu-btn" data-testid="open-menu-btn" label="Open menu">
     <q-menu>
       <q-list>
         <q-item v-close-popup clickable>

@@ -106,7 +106,6 @@ export default async function (api) {
 
   try {
     if (api.prompts.port && api.prompts.port !== enforcedDevServerPort) {
-      console.log(api.prompts.port, enforcedDevServerPort);
       const port = parseInt(api.prompts.port.trim(), 10);
       if (!Number.isInteger(port)) {
         throw new Error(`Invalid port number: ${api.prompts.port}`);
@@ -136,11 +135,11 @@ export default async function (api) {
       api.render(`${configTemplate}/component-test`, {
         codeCoverageIsEnabled: shouldEnableCodeCoverage,
       });
-    }
 
-    api.render('./templates/base', {
-      shouldSupportTypeScript: supportsTypescript,
-    });
+      api.render('./templates/component-test', {
+        shouldSupportTypeScript: supportsTypescript,
+      });
+    }
 
     let testEnvCommand = 'cross-env NODE_ENV=test';
     if (shouldEnableCodeCoverage) {

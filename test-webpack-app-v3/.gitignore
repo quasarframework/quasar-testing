@@ -31,3 +31,10 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report
+/playwright/.cache/

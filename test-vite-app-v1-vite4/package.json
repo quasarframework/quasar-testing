@@ -14,9 +14,11 @@
     "sync:playwright": "yarn --cwd ../packages/e2e-playwright build:local && yarn add -D ../packages/e2e-playwright",
     "invoke:playwright": "quasar ext invoke @quasar/testing-e2e-playwright && yarn format",
     "sync:invoke:playwright": "yarn sync:playwright && yarn invoke:playwright",
-    "sync:invoke:all": "yarn sync:invoke:cypress",
+    "sync:invoke:all": "yarn sync:invoke:cypress && yarn sync:invoke:playwright",
     "test:cypress": "yarn test:e2e:ci && yarn test:component:ci",
-    "test:all": "yarn test:cypress",
+    "test:playwright": "yarn test:e2e:ci && yarn test:component:ci",
+    "test:all": "yarn test:cypress && yarn test:playwright",
+    "sync:invoke:test:playwright": "yarn sync:invoke:playwright && yarn test:playwright",
     "sync:invoke:test:cypress": "yarn sync:invoke:cypress && yarn test:cypress",
     "sync:invoke:test:all": "yarn sync:invoke:test:cypress",
     "lint": "eslint --ext .js,.ts,.vue ./",
@@ -44,6 +46,8 @@
   },
   "devDependencies": {
     "@intlify/vite-plugin-vue-i18n": "^3.3.1",
+    "@playwright/experimental-ct-vue": "^1.50.0",
+    "@playwright/test": "^1.49.1",
     "@quasar/app-vite": "^1.7.1",
     "@quasar/quasar-app-extension-testing-e2e-cypress": "../packages/e2e-cypress",
     "@quasar/quasar-app-extension-testing-e2e-playwright": "../packages/e2e-playwright",
@@ -56,12 +60,10 @@
     "eslint": "^8.49.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-cypress": "^3.6.0",
+    "eslint-plugin-playwright": "^2.1.0",
     "eslint-plugin-vue": "^9.17.0",
     "prettier": "^3.0.3",
-    "typescript": "^4.9.5",
-    "@playwright/test": "^1.49.1",
-    "eslint-plugin-playwright": "^2.1.0",
-    "@playwright/experimental-ct-vue": "^1.50.0"
+    "typescript": "^4.9.5"
   },
   "resolutionsComments": {
     "vite": "See workaround https://github.com/quasarframework/quasar/issues/14077#issuecomment-1353213893, since Quasar Vite v1 only supports up to Vite 3",

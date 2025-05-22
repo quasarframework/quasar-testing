@@ -2,6 +2,7 @@ import { defineConfig } from 'vitest/config';
 import vue from '@vitejs/plugin-vue';
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import { PluginOption } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -26,5 +27,5 @@ export default defineConfig({
       // This is needed to avoid Vitest picking up tsconfig.json files from other unrelated projects in the monorepo
       ignoreConfigErrors: true,
     }),
-  ],
+  ] as PluginOption[],
 });

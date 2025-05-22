@@ -1,4 +1,4 @@
-import { defineConfig, devices, PlaywrightTestConfig } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test';
 
 /**
  * Read environment variables from file.
@@ -76,4 +76,4 @@ export default defineConfig({
     url: 'http://localhost:<%= devServerPort %>',
     reuseExistingServer: !process.env.CI,
   },
-} as PlaywrightTestConfig);
+});

@@ -24,14 +24,24 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/main.mjs",
-      "require": "./dist/main.cjs",
-      "types": "./dist/main.d.ts"
+      "import": {
+        "types": "./dist/main.d.mts",
+        "default": "./dist/main.mjs"
+      },
+      "require": {
+        "types": "./dist/main.d.cts",
+        "default": "./dist/main.cjs"
+      }
     },
     "./ct": {
-      "import": "./dist/ct/main.mjs",
-      "require": "./dist/ct/main.cjs",
-      "types": "./dist/ct/main.d.ts"
+      "import": {
+        "types": "./dist/ct/main.d.mts",
+        "default": "./dist/ct/main.mjs"
+      },
+      "require": {
+        "types": "./dist/ct/main.d.cts",
+        "default": "./dist/ct/main.cjs"
+      }
     },
     "./package.json": "./package.json",
     "./src/index": "./src/index.js",
@@ -44,11 +54,11 @@
     "type": "git",
     "url": "https://github.com/quasarframework/quasar-testing"
   },
-  "main": "dist/cjs/main.js",
-  "module": "dist/esm/main.js",
+  "main": "dist/main.cjs",
+  "module": "dist/main.mjs",
+  "types": "dist/main.d.cts",
   "bugs": "https://github.com/quasarframework/quasar-testing/issues",
   "homepage": "https://github.com/quasarframework/quasar-testing/tree/dev/packages/e2e-playwright",
-  "typings": "dist/types/main.d.ts",
   "engines": {
     "node": ">= 12.2.0",
     "npm": ">= 5.6.0",

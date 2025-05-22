@@ -1,6 +1,9 @@
 {
   "extends": "@quasar/app-vite/tsconfig-preset",
   "compilerOptions": {
-    "baseUrl": "."
+    "baseUrl": ".",
+    "moduleResolution": "nodenext",
+    "module": "NodeNext",
+    "target": "ESNext"
   }
 }

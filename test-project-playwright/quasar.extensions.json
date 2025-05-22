@@ -1,8 +1,0 @@
-{
-  "@quasar/testing-e2e-playwright": {
-    "port": 8080,
-    "githubWorkflow": true,
-    "installBrowsers": false,
-    "enableCodeCoverage": true
-  }
-}

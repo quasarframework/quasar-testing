@@ -33,12 +33,15 @@
     "lodash-es": "^4.17.21",
     "vite-tsconfig-paths": "^5.1.4"
   },
+  "devDependenciesComments": {
+    "rimraf": "Other packages in the monorepo require node <=18, so let's not update it to continue supporting lower versions. Updating with prevent installation of those packages"
+  },
   "devDependencies": {
     "@types/lodash-es": "^4.17.12",
     "@vitest/ui": "^3.1.2",
     "@vue/test-utils": "^2.4.6",
     "quasar": "^2.18.1",
-    "rimraf": "^6.0.1",
+    "rimraf": "^5.0.5",
     "vitest": "^3.1.2",
     "vue": "^3.5.13"
   },

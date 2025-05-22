@@ -118,5 +118,10 @@ module.exports = {
         'plugin:jest/style',
       ],
     },
+
+    {
+      files: ['src/components/**/*.spec.{js,ts}', 'test/**/*.spec.{js,ts}'],
+      extends: 'plugin:playwright/recommended',
+    },
   ],
 };
