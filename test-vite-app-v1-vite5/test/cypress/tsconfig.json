@@ -1,9 +1,0 @@
-// This file should be dropped entirely when Cypress 15 is released and all these problems are fixed at their roots
-// See https://github.com/cypress-io/cypress/pull/31520
-{
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    // This is needed when using Typescript >= 5 and Cypress < 13.12, can be removed otherwise
-    "sourceMap": false
-  }
-}
