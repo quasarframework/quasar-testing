@@ -11,6 +11,19 @@ module.exports = async function (api) {
   api.compatibleWith('quasar', '^2.0.0');
   if (api.hasVite) {
     api.compatibleWith('@quasar/app-vite', '^1.0.0 || ^2.0.0');
+
+
+    // app-vite v2.4.0 switches to Vite 7, which requires Cypress v15
+    if (api.hasPackage('@quasar/app-vite', '^2.4.0')) {
+      api.compatibleWith('cypress', '^15.0.0');
+    }
+
+    // Cypress v15 drops support for Vite versions below v5
+    // So if the user has Cypress v15, we need to ensure they are using @quasar/app-vite v2
+    // which uses Vite 6 or above
+    if (api.hasPackage('cypress', '^15.0.0')) {
+      api.compatibleWith('@quasar/app-vite', '^2.0.0');
+    }
   } else if (api.hasWebpack) {
     api.compatibleWith('@quasar/app-webpack', '^3.0.0 || ^4.0.0');
   }

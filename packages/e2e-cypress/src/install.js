@@ -66,8 +66,9 @@ function getEslintPluginCypressDependency(api) {
     devDependencies: {
       // eslint-plugin-cypress v3 doesn't support ESLint v9 and eslint-plugin-cypress v4 only supports ESLint v9,
       // So if the user has ESLint v9 installed, then we will scaffold with eslint-plugin-cypress v4, otherwise we will use v3
+      // We cannot use v5.x of eslint-plugin-cypress because it drops support for non-flat ESLint configs
       'eslint-plugin-cypress': api.hasPackage('eslint', '^9.0.0')
-        ? '^4.2.1'
+        ? '^4.3.0'
         : '^3.6.0',
     },
   };
@@ -78,6 +79,18 @@ module.exports = async function (api) {
   if (api.hasVite) {
     // PromptsAPI and hasTypescript are only available from v1.6.0 onwards
     api.compatibleWith('@quasar/app-vite', '^v1.6.0 || ^2.0.0');
+
+    // app-vite v2.4.0 switches to Vite 7, which requires Cypress v15
+    if (api.hasPackage('@quasar/app-vite', '^2.4.0')) {
+      api.compatibleWith('cypress', '^15.0.0');
+    }
+
+    // Cypress v15 drops support for Vite versions below v5
+    // So if the user has Cypress v15, we need to ensure they are using @quasar/app-vite v2
+    // which uses Vite 6 or above
+    if (api.hasPackage('cypress', '^15.0.0')) {
+      api.compatibleWith('@quasar/app-vite', '^2.0.0');
+    }
   } else if (api.hasWebpack) {
     // PromptsAPI and hasTypescript are only available from v3.11.0 onwards
     api.compatibleWith('@quasar/app-webpack', '^3.11.0 || ^4.0.0');

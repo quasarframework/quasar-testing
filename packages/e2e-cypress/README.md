@@ -104,6 +104,21 @@ You can either apply [this workaround](https://github.com/istanbuljs/nyc/issues/
 
 [nyc-config-preset]: https://github.com/quasarframework/quasar-testing/blob/dev/packages/e2e-cypress/nyc-config-preset.json
 
+### Upgrade from Cypress AE v6.2 to v6.3 onwards
+
+> If you're coming from v6.1, follow the migration guide in the next section first.
+
+Here's all the steps you need to take while upgrading from v6.2 to v6.3:
+
+- If you're using `@quasar/app-vite` v2.4 onwards, you need to upgrade Cypress to v15, as described in the following bullet point. Cypress v14 and below aren't compatible with Vite 7, which is used by `@quasar/app-vite` v2.4 onwards.
+- (**optional, unless you're using `@quasar/app-vite` v2.4 onwards**) Upgrade Cypress to v15 and check out its [migration guide](https://docs.cypress.io/app/references/migration-guide#Migrating-to-Cypress-150). Notice that **Cypress v15 currently doesn't work out of the box due to [this issue](https://github.com/quasarframework/quasar-testing/issues/403)**. Until Vite, TSX or Cypress maintainers manage to fix the issue, there's a [know workaround](https://github.com/cypress-io/cypress/issues/32362#issuecomment-3248361965) that you can apply in your project.
+- (**optional, unless you're using Cypress v15 onwards**) If you upgrade Cypress to v15, you should also upgrade `@quasar/app-vite` to v2. `@quasar/app-vite` v1 uses Vite 3 and Cypress v15 requires at least Vite 5.
+- (**optional**) Migrate your project to use ESLint v9 and `eslint-plugin-cypress` v5, as the next major version of Cypress AE won't support ESLint v8 anymore. You'll also need to update your ESLint config, so check the new installation instruction for ESLint v9 at the top of this page.
+
+In v6.3 we removed both test project for `@quasar/app-vite` v1, testing respectively Vite 4 and Vite 5 setups, and the test project for `@quasar/app-webpack` v3.
+Cypress v15 support made them incompatible with our pre-release automated test system.
+Tests for those setups are still available in a [dedicated branch](https://github.com/quasarframework/quasar-testing/tree/cypress-v14).
+
 ### Upgrade from Cypress AE v6.1 to v6.2 onwards
 
 > If you're coming from v5.1, follow the migration guide in the next section first.
