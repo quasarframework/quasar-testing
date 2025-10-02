@@ -32,21 +32,21 @@
     "yarn": ">= 1.17.3"
   },
   "dependencies": {
-    "@cypress/code-coverage": "^3.12.26",
+    "@cypress/code-coverage": "^3.14.6",
     "cross-env": "^7.0.3",
     "lodash": "^4.17.21",
-    "nyc": "^15.1.0",
-    "start-server-and-test": "^2.0.3",
-    "vite-plugin-istanbul": "^7.0.0"
+    "nyc": "^17.1.0",
+    "start-server-and-test": "^2.1.2",
+    "vite-plugin-istanbul": "^7.2.0"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.202",
-    "cypress": "^14.2.1",
+    "@types/lodash": "^4.17.20",
+    "cypress": "^15.3.0",
     "eslint-plugin-cypress": "^3.6.0",
     "rimraf": "^5.0.5"
   },
   "peerDependencies": {
-    "cypress": "^12.2.0 || ^13.2.0 || ^14.0.0",
+    "cypress": "^12.2.0 || ^13.2.0 || ^14.0.0 || ^15.0.0",
     "eslint-plugin-cypress": ">=2.0.0"
   },
   "peerDependenciesMeta": {

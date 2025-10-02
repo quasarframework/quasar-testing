@@ -93,8 +93,6 @@ export function registerCypressOverwrites() {
     },
   );
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
   chai.Assertion.overwriteProperty('checked', (_super: () => void) => {
     return function (
       this: typeof chai.Assertion & { __flags: { negate?: boolean } },
