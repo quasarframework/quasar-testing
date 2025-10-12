@@ -29,7 +29,7 @@
     "yarn": ">= 1.22.19"
   },
   "dependencies": {
-    "happy-dom": "^15.0.0",
+    "happy-dom": "^20.0.0",
     "lodash-es": "^4.17.21",
     "vite-tsconfig-paths": "^5.1.4"
   },
