@@ -32,7 +32,7 @@
     "yarn": ">= 1.17.3"
   },
   "dependencies": {
-    "@cypress/code-coverage": "^3.14.6",
+    "@cypress/code-coverage": "^3.14.7",
     "cross-env": "^7.0.3",
     "lodash": "^4.17.21",
     "nyc": "^17.1.0",
@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.17.20",
-    "cypress": "^15.3.0",
+    "cypress": "^15.7.0",
     "eslint-plugin-cypress": "^3.6.0",
     "rimraf": "^5.0.5"
   },

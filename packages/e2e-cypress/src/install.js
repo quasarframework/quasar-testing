@@ -6,7 +6,7 @@
 
 const { appendFileSync } = require('fs');
 const { join } = require('path');
-const { enforcedDevServerPort } = require('./shared');
+const { enforcedDevServerPort, enforcedCypress15Vite7Compatibility } = require('./shared');
 
 /**
  * Performs a deep merge of objects and returns new object. Does not modify
@@ -61,6 +61,9 @@ let extendPackageJson = {
 
 // TODO: remove this and roll back to use `getCompatibleDevDependencies` for next Cypress AE major version,
 // which will drop support for ESLint v8 and require a migration of this monorepo to ESLint v9
+// TODO: note that in this monorepo ESLint v8 is used at root level, but test projects use ESLint v9
+// This breaks the resolution logic of `api.hasPackage('eslint', '^9.0.0')` in the context of the AE install script within test projects
+// You'll need to manually set `eslint-plugin-cypress` to v4 in that case when running `sync:invoke:cypress` script
 function getEslintPluginCypressDependency(api) {
   return {
     devDependencies: {
@@ -78,19 +81,9 @@ module.exports = async function (api) {
   api.compatibleWith('quasar', '^2.0.0');
   if (api.hasVite) {
     // PromptsAPI and hasTypescript are only available from v1.6.0 onwards
-    api.compatibleWith('@quasar/app-vite', '^v1.6.0 || ^2.0.0');
+    api.compatibleWith('@quasar/app-vite', '^1.6.0 || ^2.0.0');
 
-    // app-vite v2.4.0 switches to Vite 7, which requires Cypress v15
-    if (api.hasPackage('@quasar/app-vite', '^2.4.0')) {
-      api.compatibleWith('cypress', '^15.0.0');
-    }
-
-    // Cypress v15 drops support for Vite versions below v5
-    // So if the user has Cypress v15, we need to ensure they are using @quasar/app-vite v2
-    // which uses Vite 6 or above
-    if (api.hasPackage('cypress', '^15.0.0')) {
-      api.compatibleWith('@quasar/app-vite', '^2.0.0');
-    }
+    enforcedCypress15Vite7Compatibility(api);
   } else if (api.hasWebpack) {
     // PromptsAPI and hasTypescript are only available from v3.11.0 onwards
     api.compatibleWith('@quasar/app-webpack', '^3.11.0 || ^4.0.0');
