@@ -60,7 +60,10 @@ module.exports = async function (api) {
   // See https://github.com/quasarframework/quasar/issues/14077
   // At the same time, @quasar/app-vite v2 stable release require Vite 6,
   // which cause type mismatch errors in the project when not using Vitest 3
-  api.compatibleWith('@quasar/app-vite', '^1.6.0 || ^2.0.0');
+  // However, we do need to exclude @quasar/app-vite v2.4.0 and above, which uses Vite 7
+  // We could have supported Vite 7 by forcing Vitest 3.2 usage,
+  // but that would require to drop Node 18 due to `happy-dom` version bump, which requires Node 20+
+  api.compatibleWith('@quasar/app-vite', '^1.6.0 || >=2.0.0 <2.4.0');
 
   api.render(
     `./templates/${(await api.hasTypescript()) ? '' : 'no-'}typescript`,
