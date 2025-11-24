@@ -64,16 +64,17 @@ Please check out ["@vue/test-utils" official documentation](https://vue-test-uti
 
 If you're migrating from Jest to Vitest, please check out the official [migration guide](https://vitest.dev/guide/migration.html#migrating-from-jest).
 
-### Upgrade from Vitest AE v0.4 to v1.0 onwards
+### Upgrade from Vitest AE v1.x to v2.0 onwards
 
-All changes are related to Vitest v1.0 breaking changes, Quasar first-party helpers haven't changed.
+Quasar first-party helpers haven't changed.
+All changes are related to Vitest v4.0 breaking changes or ecosystem deprecations.
 
-- Upgrade Node to v18 or newer, v20 is preferred due to some quirks in v18;
-- Upgrade all Vitest related dependencies, especially `@vue/test-utils`, `vitest` and `@vitest/ui`, which minimum peer dependencies versions has been bumped. If you don't want to upgrade these dependencies manually, you can just re-install the AE and it will update all dependencies for you;
+- Upgrade Node to v20.19.0 or newer, but v22.12.0 is preferred. Those versions has been chosen to get `require`-working-with-ESM feature enabled by default, since many packages (e.g. `happy-dom`) rely on;
+- (**optional**) Upgrade `typescript` to v5.8 or later, which supports `require`-working-with-ESM feature;
 - (**optional**) Upgrade `vue` and `quasar` dependencies to the latest version;
-- Rename `vitest.config.[js|ts]` to `vitest.config.[mjs|mts]` or switch your project to "ESM by default" adding `"type": "module"` option in `package.json`. Check out [here](https://vitejs.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated) why CJS build and syntax are deprecated in Vite 5;
-- Vitest 1.0 requires Vite 5, thus you'll need to upgrade `@quasar/app-vite` to v2. If you can't migrate away from v1 yet, you can use this [workaround](https://github.com/quasarframework/quasar/issues/14077#issuecomment-1851463530) until you can migrate. We do test against the setup using that workaround, to ease the migration, but bear in mind that we don't consider it as "officially supported" and we will stop testing against it in the near future;
-- Follow Vitest [upgrade guide](https://vitest.dev/guide/migration.html#migrating-from-vitest-0-34-6) to upgrade from Vitest v34.6 to v1.0
+- Upgrade `@quasar/app-vite` to v2.4 or later, which uses Vite 7;
+- Upgrade all Vitest related packages, in particular `vitest` and `@vitest/ui` to v4.0 or later. If you don't want to upgrade these dependencies manually, you can just re-install the AE and it will update all dependencies for you. Vitest v1, v2 and v3 are no longer supported;
+- Follow Vitest [upgrade guide](https://vitest.dev/guide/migration#vitest-4) to upgrade from Vitest v3.0 to v4.0;
 
 ### installQuasarPlugin(options)
 

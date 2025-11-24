@@ -1,6 +1,7 @@
 {
   "name": "@quasar/quasar-app-extension-testing-unit-vitest",
-  "version": "1.2.4",
+  "version": "2.0.0",
+  "type": "module",
   "license": "MIT",
   "description": "A Quasar App Extension for running tests with Vitest",
   "contributors": [
@@ -21,32 +22,50 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "dist/main.js",
-  "typings": "dist/types/main.d.ts",
+  "main": "./dist/helpers/main.js",
+  "module": "./dist/helpers/main.js",
+  "types": "./dist/helpers/main.d.ts",
+  "exports": {
+    ".": {
+      "import": "./src/helpers/main.ts"
+    },
+    "./package.json": "./package.json",
+    "./dist/index": "./src/index.ts",
+    "./dist/install": "./src/install.ts"
+  },
   "engines": {
-    "node": "^30 || ^28 || ^26 || ^24 || ^22 || ^20 || ^18",
-    "npm": ">= 9.5",
+    "node": "^30 || ^28 || ^26 || ^24 || ^22.12.0 || ^20.19.0",
+    "npm": ">= 10",
     "yarn": ">= 1.22.19"
   },
   "dependencies": {
-    "happy-dom": "^15.0.0",
+    "es-toolkit": "^1.42.0",
+    "happy-dom": "^20.0.10",
     "lodash-es": "^4.17.21",
     "vite-tsconfig-paths": "^5.1.4"
   },
+  "devDependenciesComments": {
+    "@quasar/app-vite": "Only used to typecheck AE TS files",
+    "@quasar/vite-plugin": "Only used to typecheck vitest.config.ts, provided by @quasar/app-vite",
+    "@vitejs/plugin-vue": "Only used to typecheck vitest.config.ts"
+  },
   "devDependencies": {
+    "@quasar/app-vite": "^2.4.0",
     "@types/lodash-es": "^4.17.12",
-    "@vitest/ui": "^3.2.4",
+    "@vitejs/plugin-vue": "^6.0.2",
+    "@vitest/ui": "^4.0.13",
     "@vue/test-utils": "^2.4.6",
-    "quasar": "^2.18.1",
-    "rimraf": "^6.0.1",
-    "vitest": "^3.2.4",
-    "vue": "^3.5.13"
+    "quasar": "^2.18.6",
+    "rimraf": "^6.1.2",
+    "vitest": "^4.0.13",
+    "vue": "^3.5.25"
   },
   "peerDependencies": {
-    "@vitest/ui": "^1.1.0 || ^2.0.0 || ^3.0.0",
-    "@vue/test-utils": "^2.4.3",
+    "@quasar/app-vite": "^2.4.0",
+    "@vitest/ui": "^4.0.0",
+    "@vue/test-utils": "^2.4.6",
     "quasar": "^2.12.7",
-    "vitest": "^1.6.1 || ^2.1.9 || ^3.0.5",
+    "vitest": "^4.0.0",
     "vue": "^3.3.4"
   },
   "peerDependenciesMeta": {

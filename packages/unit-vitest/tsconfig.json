@@ -5,7 +5,8 @@
     // Needed to avoid errors with vitest @types/chai dep, since it uses `{ default as chai }` on a CommonJS module
     // See https://github.com/vitest-dev/vitest/issues/1076
     "esModuleInterop": true,
+    // Needed to avoid errors with `@quasar/app-vite` peer dependencies
     "skipLibCheck": true
   },
-  "include": ["src/helpers"]
+  "include": ["src/index.ts", "src/install.ts", "src/prompts.ts", "src/helpers"]
 }
