@@ -35,18 +35,18 @@
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.12",
-    "@vitest/ui": "^3.2.4",
+    "@vitest/ui": "^4.0.18",
     "@vue/test-utils": "^2.4.6",
     "quasar": "^2.18.1",
     "rimraf": "^6.0.1",
-    "vitest": "^3.2.4",
+    "vitest": "^4.0.18",
     "vue": "^3.5.13"
   },
   "peerDependencies": {
-    "@vitest/ui": "^1.1.0 || ^2.0.0 || ^3.0.0",
+    "@vitest/ui": "^1.1.0 || ^2.0.0 || ^3.0.0 || ^4.0.0",
     "@vue/test-utils": "^2.4.3",
     "quasar": "^2.12.7",
-    "vitest": "^1.6.1 || ^2.1.9 || ^3.0.5",
+    "vitest": "^1.6.1 || ^2.1.9 || ^3.0.5 || ^4.0.0",
     "vue": "^3.3.4"
   },
   "peerDependenciesMeta": {

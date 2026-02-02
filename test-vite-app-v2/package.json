@@ -52,7 +52,7 @@
     "@quasar/quasar-app-extension-testing-e2e-cypress": "../packages/e2e-cypress",
     "@quasar/quasar-app-extension-testing-unit-vitest": "../packages/unit-vitest",
     "@types/node": "^20.5.9",
-    "@vitest/ui": "^3.2.4",
+    "@vitest/ui": "^4.0.18",
     "@vue/eslint-config-prettier": "^10.1.0",
     "@vue/eslint-config-typescript": "^14.4.0",
     "@vue/test-utils": "^2.4.6",
@@ -65,7 +65,7 @@
     "prettier": "^3.3.3",
     "typescript": "~5.5.3",
     "vite-plugin-checker": "^0.9.0",
-    "vitest": "^3.2.4",
+    "vitest": "^4.0.18",
     "vue-tsc": "^2.0.29"
   },
   "engines": {
