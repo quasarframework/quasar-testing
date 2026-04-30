@@ -5,7 +5,7 @@
  * Docs: https://quasar.dev/app-extensions/development-guide/index-api
  */
 
-import { IndexAPI } from '@quasar/app-vite';
+import type { IndexAPI } from '@quasar/app-vite';
 
 export default function index(api: IndexAPI) {
   api.compatibleWith('quasar', '^2.12.7');

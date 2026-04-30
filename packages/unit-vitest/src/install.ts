@@ -1,4 +1,4 @@
-import { InstallAPI } from '@quasar/app-vite';
+import type { InstallAPI } from '@quasar/app-vite';
 import { merge } from 'es-toolkit';
 
 type PackageJson = Record<string, Record<string, string>>;
@@ -22,8 +22,9 @@ export default async function (api: InstallAPI) {
   const { devDependencies: aeDevDependencies } = (await import(
     // We can't import it statically, it would cause a problem with the built output folder structure
     // and `@quasar/app-vite` expects to find AE files (install.js, etc) at the first level of the `dist` folder
-    import.meta.dirname + '../package.json'
-  )) as PackageJson;
+    import.meta.dirname + '/../package.json',
+    { with: { type: 'json' } }
+  )).default as PackageJson;
 
   const extendPackageJson: PackageJson = {
     devDependencies: getCompatibleDevDependencies(aeDevDependencies, [
@@ -40,7 +41,7 @@ export default async function (api: InstallAPI) {
     `./templates/${(await api.hasTypescript()) ? '' : 'no-'}typescript`,
   );
 
-  if ((api.prompts.options as string[]).includes('ui')) {
+  if ((api.prompts.options as string[] | undefined)?.includes('ui')) {
     const ui: PackageJson = {
       devDependencies: getCompatibleDevDependencies(aeDevDependencies, [
         '@vitest/ui',
