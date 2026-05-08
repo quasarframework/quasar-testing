@@ -5,14 +5,14 @@
  * API: https://github.com/quasarframework/quasar/blob/master/app/lib/app-extension/IndexAPI.js
  */
 
-const { enforcedDevServerPort, enforcedCypress15Vite7Compatibility } = require('./shared');
+const { enforcedDevServerPort, enforcedCypress15Vite8Compatibility } = require('./shared');
 
 module.exports = async function (api) {
   api.compatibleWith('quasar', '^2.0.0');
   if (api.hasVite) {
     api.compatibleWith('@quasar/app-vite', '^1.0.0 || ^2.0.0');
 
-    enforcedCypress15Vite7Compatibility(api);
+    enforcedCypress15Vite8Compatibility(api);
   } else if (api.hasWebpack) {
     api.compatibleWith('@quasar/app-webpack', '^3.0.0 || ^4.0.0');
   }

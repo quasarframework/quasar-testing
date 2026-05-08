@@ -37,11 +37,11 @@
     "lodash": "^4.17.21",
     "nyc": "^17.1.0",
     "start-server-and-test": "^2.1.2",
-    "vite-plugin-istanbul": "^7.2.0"
+    "vite-plugin-istanbul": "^8.0.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.17.20",
-    "cypress": "^15.7.0",
+    "cypress": "^15.14.0",
     "eslint-plugin-cypress": "^3.6.0",
     "rimraf": "^5.0.5"
   },

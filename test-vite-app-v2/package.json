@@ -48,7 +48,7 @@
   "devDependencies": {
     "@eslint/js": "^9.14.0",
     "@intlify/unplugin-vue-i18n": "^4.0.0",
-    "@quasar/app-vite": "^2.4.0",
+    "@quasar/app-vite": "^2.5.0",
     "@quasar/quasar-app-extension-testing-e2e-cypress": "../packages/e2e-cypress",
     "@quasar/quasar-app-extension-testing-unit-vitest": "../packages/unit-vitest",
     "@types/node": "^20.5.9",
@@ -57,7 +57,7 @@
     "@vue/eslint-config-typescript": "^14.4.0",
     "@vue/test-utils": "^2.4.6",
     "autoprefixer": "^10.4.16",
-    "cypress": "^15.7.0",
+    "cypress": "^15.14.0",
     "eslint": "^9.14.0",
     "eslint-plugin-cypress": "^4.2.1",
     "eslint-plugin-vue": "^9.30.0",
