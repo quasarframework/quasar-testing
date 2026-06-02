@@ -6,7 +6,7 @@
 
 const { appendFileSync } = require('fs');
 const { join } = require('path');
-const { enforcedDevServerPort, enforcedCypress15Vite8Compatibility } = require('./shared');
+const { enforcedDevServerPort } = require('./shared');
 
 /**
  * Performs a deep merge of objects and returns new object. Does not modify
@@ -81,9 +81,13 @@ module.exports = async function (api) {
   api.compatibleWith('quasar', '^2.0.0');
   if (api.hasVite) {
     // PromptsAPI and hasTypescript are only available from v1.6.0 onwards
-    api.compatibleWith('@quasar/app-vite', '^v1.6.0 || ^2.0.0');
+    api.compatibleWith('@quasar/app-vite', '^1.6.0 || ^2.0.0');
 
-    enforcedCypress15Vite8Compatibility(api);
+    // We cannot run `enforcedCypress15Vite8Compatibility` on install
+    // It would execute a compatibility check for Cypress before we have a chance to add it as a dependency,
+    // which would cause the installation to fail and run the DX
+    // We delay that check to the index.js file, which runs on each dev/build
+    // The DX isn't optimal, but it's the best we can do without adding Cypress as a dependency before installation
   } else if (api.hasWebpack) {
     // PromptsAPI and hasTypescript are only available from v3.11.0 onwards
     api.compatibleWith('@quasar/app-webpack', '^3.11.0 || ^4.0.0');
