@@ -4,7 +4,7 @@
     "strict": true,
     "sourceMap": true,
     "target": "esnext",
-    "module": "nodenext",
-    "moduleResolution": "nodenext"
+    "module": "esnext",
+    "moduleResolution": "bundler"
   }
 }
