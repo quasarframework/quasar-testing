@@ -47,7 +47,7 @@ export const config = {
     // See https://github.com/quasarframework/quasar/issues/17184#issuecomment-2158497588
     '^quasar$': ['quasar/dist/quasar.esm.prod.js', 'quasar/dist/quasar.client.js'],
     '^~/(.*)$': '<rootDir>/$1',
-    '.*css$': '@quasar/quasar-app-extension-testing-unit-jest/stub.css',
+    '\\..*css$': '@quasar/quasar-app-extension-testing-unit-jest/stub.css',
     ...aliases,
   },
   transform: {
