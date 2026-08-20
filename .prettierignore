@@ -1,0 +1,2 @@
+# Uses oxfmt, not prettier. Keeps the IDE prettier extension from formatting it.
+/test-vite-app-v3/

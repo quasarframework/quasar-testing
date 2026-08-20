@@ -1,53 +1,72 @@
 {
   "name": "@quasar/quasar-app-extension-testing-unit-vitest",
-  "version": "2.0.0",
+  "version": "3.0.0",
+  "type": "module",
   "license": "MIT",
   "description": "A Quasar App Extension for running tests with Vitest",
   "contributors": [
     "Paolo Caleffi",
-    "Evert van der Weit"
+    "Evert van der Weit",
+    "Yusuf Kandemir"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/quasarframework/quasar-testing"
   },
   "scripts": {
-    "build": "rimraf dist && tsc --declaration --declarationDir dist/types",
-    "build:local": "yarn install && yarn build && rimraf node_modules",
+    "typecheck": "tsc --noEmit",
+    "build": "obuild",
+    "clean": "rimraf node_modules",
     "deploy:alpha": "yarn build && yarn publish --tag alpha",
     "deploy:beta": "yarn build && yarn publish --tag beta",
     "deploy:latest": "yarn build && yarn publish --tag latest"
   },
+  "files": [
+    "dist",
+    "src"
+  ],
   "publishConfig": {
     "access": "public"
   },
-  "main": "dist/main.js",
-  "typings": "dist/types/main.d.ts",
+  "imports": {
+    "#q-app": "@quasar/app-vite"
+  },
+  "exports": {
+    ".": "./src/helpers/main.ts",
+    "./config": {
+      "types": "./dist/config.d.mts",
+      "import": "./dist/config.mjs"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
   "engines": {
-    "node": "^30 || ^28 || ^26 || ^24 || ^22.12.0 || ^20.19.0",
+    "node": "^30 || ^28 || ^26 || ^24 || ^22.12.0",
     "npm": ">= 10",
     "yarn": ">= 1.22.19"
   },
   "dependencies": {
-    "happy-dom": "^20.11.6",
-    "lodash-es": "^4.17.21",
-    "vite-tsconfig-paths": "^6.1.1"
+    "@clack/prompts": "^1.4.0",
+    "es-toolkit": "^1.42.0",
+    "happy-dom": "^20.11.6"
   },
   "devDependencies": {
-    "@types/lodash-es": "^4.17.12",
+    "@quasar/app-vite": "^3.7.0",
     "@vitest/ui": "^4.1.11",
     "@vue/test-utils": "^2.4.11",
+    "obuild": "^0.4.38",
     "quasar": "^2.25.1",
     "rimraf": "^6.1.3",
+    "typescript": "^5.9.3",
     "vitest": "^4.1.11",
     "vue": "^3.5.41"
   },
   "peerDependencies": {
-    "@quasar/app-vite": "^2.4.0",
-    "@vitest/ui": "^4.0.0",
-    "@vue/test-utils": "^2.4.3",
-    "quasar": "^2.12.7",
-    "vitest": "^4.0.0",
+    "@quasar/app-vite": "^3.0.0",
+    "@vitest/ui": "^4.0.0 || ^5.0.0",
+    "@vue/test-utils": "^2.4.6",
+    "quasar": "^2.24.0",
+    "vitest": "^4.0.0 || ^5.0.0",
     "vue": "^3.3.4"
   },
   "peerDependenciesMeta": {

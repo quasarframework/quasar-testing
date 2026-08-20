@@ -8,6 +8,6 @@ installQuasarPlugin();
 describe('layout example', () => {
   it('should mount component properly', () => {
     const wrapper = mount(LayoutComponent);
-    expect(wrapper.exists()).to.be.true;
+    expect(wrapper.exists()).toBe(true);
   });
 });

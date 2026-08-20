@@ -52,7 +52,8 @@ This App Extension (AE) manages Quasar and Vitest integration for you, both for 
 
 What is included:
 
-- a Vite config file with Quasar configure (`vitest.config.mts`, or `vitest.config.mjs` for JavaScript projects);
+- a Vite config file with Quasar configure (`vitest.config.ts`, or `vitest.config.js` for JavaScript projects);
+- a `quasarViteTestingConfig` function which derives the Vitest config from your quasar.config file;
 - an `installQuasarPlugin` function to help you setup and configure the test Quasar instance on a per-test-suite basis;
 - some examples about how to use it with Pinia and Vue Router;
 - some example components and related example tests inside `test/vitest/__tests__`
@@ -63,6 +64,16 @@ This AE is a lightweight add-on to "@vue/test-utils" package, which helps you te
 Please check out ["@vue/test-utils" official documentation](https://vue-test-utils.vuejs.org/) to learn how to test Vue components.
 
 If you're migrating from Jest to Vitest, please check out the official [migration guide](https://vitest.dev/guide/migration.html#migrating-from-jest).
+
+### Upgrade from Vitest AE v2.x to v3.0 onwards
+
+Quasar first-party helpers haven't changed. The AE now requires `@quasar/app-vite` v3 and derives the Vitest config from your real quasar.config file. It supports both Vitest v4 and v5.
+
+- Upgrade `@quasar/app-vite` to v3. If you can't migrate away from v2 yet, stay on AE v2.x;
+- Upgrade Node to v22.12.0 or newer;
+- The config file is now named `vitest.config.[ts|js]` instead of `vitest.config.[mts|mjs]`: app-vite v3 projects are ESM by default, so the `m` prefix is no longer needed. Rename yours, and make sure only one of the two exists;
+- Re-install the AE (`quasar ext add @quasar/testing-unit-vitest`) and accept file overrides, or update your Vitest config file manually to the new format based on [`quasarViteTestingConfig(options)`](#quasarvitetestingconfigoptions);
+- `vite-tsconfig-paths` is removed as it's not needed in Vite 8, ensure you don't depend on it for any other reason.
 
 ### Upgrade from Vitest AE v1.x to v2.0 onwards
 
@@ -86,6 +97,29 @@ All changes are related to Vitest v1.0 breaking changes, Quasar first-party help
 - Rename `vitest.config.[js|ts]` to `vitest.config.[mjs|mts]` or switch your project to "ESM by default" adding `"type": "module"` option in `package.json`. Check out [here](https://vitejs.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated) why CJS build and syntax are deprecated in Vite 5;
 - Vitest 1.0 requires Vite 5, thus you'll need to upgrade `@quasar/app-vite` to v2. If you can't migrate away from v1 yet, you can use this [workaround](https://github.com/quasarframework/quasar/issues/14077#issuecomment-1851463530) until you can migrate. We do test against the setup using that workaround, to ease the migration, but bear in mind that we don't consider it as "officially supported" and we will stop testing against it in the near future;
 - Follow Vitest [upgrade guide](https://vitest.dev/guide/migration.html#migrating-from-vitest-0-34-6) to upgrade from Vitest v34.6 to v1.0
+
+### quasarViteTestingConfig(options)
+
+Call this helper in your `vitest.config.[ts|js]` file. It returns your app's Vite config, built from your quasar.config file by `@quasar/app-vite`, without the dev-server-only plugins (`vite-plugin-checker` and `vite-plugin-vue-devtools`). Merge your test options on top of it:
+
+```ts
+import { defineConfig, mergeConfig } from 'vitest/config';
+import { quasarViteTestingConfig } from '@quasar/quasar-app-extension-testing-unit-vitest/config';
+
+export default defineConfig(async () =>
+  mergeConfig(await quasarViteTestingConfig(), {
+    test: {
+      /* your test options */
+    },
+  }),
+);
+```
+
+The `excludePlugins` option adjusts the plugin filtering:
+
+- `{ excludePlugins: ['plugin-name'] }` removes more plugins that shouldn't run during tests;
+- `{ excludePlugins: (defaults) => defaults.filter((name) => name !== 'vite-plugin-vue-devtools') }` keeps a plugin that is removed by default;
+- `{ excludePlugins: () => [] }` disables the plugin filtering.
 
 ### installQuasarPlugin(options)
 
