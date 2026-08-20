@@ -54,16 +54,9 @@ let extendPackageJson = {
 module.exports = async function (api) {
   api.compatibleWith('quasar', '^2.12.7');
   api.compatibleWith('vue', '^3.3.4');
-  // hasTypescript is only available from v1.6.0 onwards
-  // Vitest 1.0 and Vitest 2.0 require Vite 5, which isn't officially supported by @quasar/app-vite v1, 
-  // but there are workarounds to make @quasar/app-vite@v1 work with Vite 5, so we aren't restricting this AE only to v2
-  // See https://github.com/quasarframework/quasar/issues/14077
-  // At the same time, @quasar/app-vite v2 stable release require Vite 6,
-  // which cause type mismatch errors in the project when not using Vitest 3
-  // However, we do need to exclude @quasar/app-vite v2.4.0 and above, which uses Vite 7
-  // We could have supported Vite 7 by forcing Vitest 3.2 usage,
-  // but that would require to drop Node 18 due to `happy-dom` version bump, which requires Node 20+
-  api.compatibleWith('@quasar/app-vite', '^1.6.0 || >=2.0.0 <2.4.0');
+  // Vitest 4 requires Vite 6 or newer.
+  // @quasar/app-vite v2.4.0 and above uses Vite 7, which avoids Vite type mismatches between the app and Vitest.
+  api.compatibleWith('@quasar/app-vite', '^2.4.0');
 
   api.render(
     `./templates/${(await api.hasTypescript()) ? '' : 'no-'}typescript`,

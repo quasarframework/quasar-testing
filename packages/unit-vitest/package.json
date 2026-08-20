@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-testing-unit-vitest",
-  "version": "1.2.4",
+  "version": "2.0.0",
   "license": "MIT",
   "description": "A Quasar App Extension for running tests with Vitest",
   "contributors": [
@@ -24,29 +24,30 @@
   "main": "dist/main.js",
   "typings": "dist/types/main.d.ts",
   "engines": {
-    "node": "^30 || ^28 || ^26 || ^24 || ^22 || ^20 || ^18",
-    "npm": ">= 9.5",
+    "node": "^30 || ^28 || ^26 || ^24 || ^22.12.0 || ^20.19.0",
+    "npm": ">= 10",
     "yarn": ">= 1.22.19"
   },
   "dependencies": {
-    "happy-dom": "^15.0.0",
+    "happy-dom": "^20.11.6",
     "lodash-es": "^4.17.21",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^6.1.1"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.12",
-    "@vitest/ui": "^3.2.4",
-    "@vue/test-utils": "^2.4.6",
-    "quasar": "^2.18.1",
-    "rimraf": "^6.0.1",
-    "vitest": "^3.2.4",
-    "vue": "^3.5.13"
+    "@vitest/ui": "^4.1.11",
+    "@vue/test-utils": "^2.4.11",
+    "quasar": "^2.25.1",
+    "rimraf": "^6.1.3",
+    "vitest": "^4.1.11",
+    "vue": "^3.5.41"
   },
   "peerDependencies": {
-    "@vitest/ui": "^1.1.0 || ^2.0.0 || ^3.0.0",
+    "@quasar/app-vite": "^2.4.0",
+    "@vitest/ui": "^4.0.0",
     "@vue/test-utils": "^2.4.3",
     "quasar": "^2.12.7",
-    "vitest": "^1.6.1 || ^2.1.9 || ^3.0.5",
+    "vitest": "^4.0.0",
     "vue": "^3.3.4"
   },
   "peerDependenciesMeta": {

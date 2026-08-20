@@ -2,7 +2,10 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
-    "module": "commonjs"
+    // Jest consumes the preset through require(), so keep CommonJS output.
+    // node10 is the matching resolution mode for CommonJS modules.
+    "module": "commonjs",
+    "moduleResolution": "node10"
   },
   "include": ["src/helpers"]
 }
