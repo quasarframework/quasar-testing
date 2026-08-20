@@ -52,7 +52,7 @@ This App Extension (AE) manages Quasar and Vitest integration for you, both for 
 
 What is included:
 
-- a Vite config file with Quasar configure (`vitest.config.ts`);
+- a Vite config file with Quasar configure (`vitest.config.mts`, or `vitest.config.mjs` for JavaScript projects);
 - an `installQuasarPlugin` function to help you setup and configure the test Quasar instance on a per-test-suite basis;
 - some examples about how to use it with Pinia and Vue Router;
 - some example components and related example tests inside `test/vitest/__tests__`
@@ -63,6 +63,18 @@ This AE is a lightweight add-on to "@vue/test-utils" package, which helps you te
 Please check out ["@vue/test-utils" official documentation](https://vue-test-utils.vuejs.org/) to learn how to test Vue components.
 
 If you're migrating from Jest to Vitest, please check out the official [migration guide](https://vitest.dev/guide/migration.html#migrating-from-jest).
+
+### Upgrade from Vitest AE v1.x to v2.0 onwards
+
+Quasar first-party helpers haven't changed.
+All changes are related to Vitest v4.0 breaking changes or ecosystem deprecations.
+
+- Upgrade Node to v20.19.0 or newer, v22.12.0 or newer is preferred. These versions have been chosen because they enable the `require(esm)` feature by default, which many packages (e.g. `happy-dom`) rely on;
+- (**optional**) Upgrade `typescript` to v5.8 or later, which supports the `require(esm)` feature;
+- (**optional**) Upgrade `vue` and `quasar` dependencies to the latest version;
+- Upgrade `@quasar/app-vite` to v2.4 or later, which uses Vite 7;
+- Upgrade all Vitest related packages, in particular `vitest` and `@vitest/ui`, to v4.0 or later. If you don't want to upgrade these dependencies manually, you can just re-install the AE and it will update all dependencies for you. Vitest v1, v2 and v3 are no longer supported;
+- Follow the Vitest [migration guide](https://vitest.dev/guide/migration#vitest-4) to upgrade from Vitest v3 to v4. If you are on Vitest v1 or v2, upgrade through the intermediate majors' migration guides first;
 
 ### Upgrade from Vitest AE v0.4 to v1.0 onwards
 
@@ -263,7 +275,7 @@ describe('store examples', () => {
 ### Testing the AE
 
 ```sh
-cd test-project-vite
+cd test-vite-app-v2
 yarn sync:vitest # or "yarn sync:all", if it's the first time you run this command
 yarn test:unit:ci # check if unit tests still work with the local version of the AE
 ```

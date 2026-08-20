@@ -4,7 +4,8 @@
     "strict": true,
     "sourceMap": true,
     "target": "esnext",
-    "module": "nodenext",
-    "moduleResolution": "nodenext"
+    // Packages that build CommonJS output override these (unit-jest, e2e-cypress).
+    "module": "esnext",
+    "moduleResolution": "bundler"
   }
 }
