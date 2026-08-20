@@ -21,9 +21,16 @@
     "deploy:beta": "yarn build && yarn publish --tag beta",
     "deploy:latest": "yarn build && yarn publish --tag latest"
   },
+  "filesComments": {
+    "tsconfig.json": [
+      "app-vite v3 loads AE scripts with jiti tsconfig-paths support, which uses the nearest tsconfig.",
+      "Shipping our tsconfig stops the app's tsconfig from mapping '#q-app' to a .d.ts file, which breaks things."
+    ]
+  },
   "files": [
     "dist",
-    "src"
+    "src",
+    "tsconfig.json"
   ],
   "publishConfig": {
     "access": "public"
