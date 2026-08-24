@@ -1,26 +1,16 @@
-<script lang="ts">
+<script setup lang="ts">
 import { Dialog } from "quasar";
-import { defineComponent } from "vue";
+import type { Component } from "vue";
 
-export default defineComponent({
-  name: "DialogWrapper",
-  props: {
-    component: {
-      type: Object,
-      required: true
-    },
-    componentProps: {
-      type: Object,
-      default: () => ({})
-    }
-  },
-  setup(props) {
-    Dialog.create({
-      component: props.component,
+const { component, componentProps = {} } = defineProps<{
+  component: Component;
+  componentProps?: Record<string, unknown>;
+}>();
 
-      // props forwarded to your custom component
-      componentProps: props.componentProps
-    });
-  }
+Dialog.create({
+  component,
+
+  // props forwarded to your custom component
+  componentProps
 });
 </script>

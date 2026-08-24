@@ -12,48 +12,33 @@
   <span data-cy="select-value">{{ selected }}</span>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from "vue";
+<script setup lang="ts">
+import { ref } from "vue";
 
 const syncOptions = ["Option 1", "Option 2", "Option 3"];
 
-export default defineComponent({
-  name: "QuasarSelect",
-  props: {
-    loadOptionsAsync: {
-      type: Boolean,
-      default: false
-    },
-    disable: {
-      type: Boolean,
-      default: false
-    },
-    multiple: {
-      type: Boolean,
-      default: false
-    }
-  },
-  setup(props) {
-    const selected = ref();
-    const loading = ref(false);
+const {
+  loadOptionsAsync = false,
+  disable = false,
+  multiple = false
+} = defineProps<{
+  loadOptionsAsync?: boolean;
+  disable?: boolean;
+  multiple?: boolean;
+}>();
 
-    const options = ref();
+const selected = ref();
+const loading = ref(false);
 
-    if (props.loadOptionsAsync) {
-      loading.value = true;
-      setTimeout(() => {
-        options.value = syncOptions;
-        loading.value = false;
-      }, 2000);
-    } else {
-      options.value = syncOptions;
-    }
+const options = ref();
 
-    return {
-      loading,
-      selected,
-      options
-    };
-  }
-});
+if (loadOptionsAsync) {
+  loading.value = true;
+  setTimeout(() => {
+    options.value = syncOptions;
+    loading.value = false;
+  }, 2000);
+} else {
+  options.value = syncOptions;
+}
 </script>

@@ -12,17 +12,8 @@
   </q-btn>
 </template>
 
-<script<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
-import { ref, defineComponent } from 'vue';
+<script setup<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
+import { ref } from 'vue';
 
-export default defineComponent({
-  name: 'QuasarTooltip',
-  setup() {
-    const showTooltip = ref(true);
-
-    return {
-      showTooltip,
-    };
-  },
-});
+const showTooltip = ref(true);
 </script>

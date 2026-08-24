@@ -4,17 +4,10 @@
   </q-layout>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import type { Component } from "vue";
 
-export default defineComponent({
-  name: "LayoutContainer",
-  inheritAttrs: false,
-  props: {
-    component: {
-      type: Object,
-      required: true
-    }
-  }
-});
+defineOptions({ inheritAttrs: false });
+
+defineProps<{ component: Component }>();
 </script>

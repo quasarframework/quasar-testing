@@ -6,16 +6,15 @@
   </q-page-sticky>
 </template>
 
-<script<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'QuasarPageSticky',
-  props: {
-    title: {
-      type: String,
-      required: true,
-    },
+<script setup<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
+<% if (shouldSupportTypeScript) { %>
+defineProps<{ title: string }>();
+<% } else { %>
+defineProps({
+  title: {
+    type: String,
+    required: true,
   },
 });
+<% } %>
 </script>

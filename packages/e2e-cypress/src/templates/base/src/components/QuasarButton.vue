@@ -9,11 +9,10 @@
   />
 </template>
 
-<script<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'QuasarButton',
-  emits: { test: () => true },
-});
+<script setup<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
+<% if (shouldSupportTypeScript) { %>
+defineEmits<{ test: [] }>();
+<% } else { %>
+defineEmits(['test']);
+<% } %>
 </script>

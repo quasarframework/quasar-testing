@@ -2,42 +2,31 @@
   <q-date v-model="date" data-cy="date-picker" />
 
   <div>
-    <q-input v-model="date" label="Scegli data">
+    <q-input v-model="date" label="Choose date">
       <template #append>
         <q-btn
           data-cy="open-date-picker-popup-button"
           icon="event"
           flat
           round
-          @click="dateDialogRef.show()"
+          @click="dateDialogRef?.show()"
         />
       </template>
     </q-input>
     <q-dialog ref="dateDialogRef">
-      <q-date v-model="date" @update:model-value="dateDialogRef.hide()" />
+      <q-date v-model="date" @update:model-value="dateDialogRef?.hide()" />
     </q-dialog>
   </div>
 
   <span data-cy="date-value">{{ date }}</span>
 </template>
 
-<script<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
+<script setup<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
 <% if (shouldSupportTypeScript) { %>
 import type { QDialog } from 'quasar';
-import type { Ref } from 'vue';
 <% } %>
-import { defineComponent, ref } from 'vue';
+import { ref, useTemplateRef } from 'vue';
 
-export default defineComponent({
-  name: 'QuasarDate',
-  setup() {
-    const date = ref('');
-    const dateDialogRef = ref()<% if (shouldSupportTypeScript) { %> as Ref<QDialog><% } %>;
-
-    return {
-      date,
-      dateDialogRef,
-    };
-  },
-});
+const date = ref('');
+const dateDialogRef = useTemplateRef<% if (shouldSupportTypeScript) { %><QDialog><% } %>('dateDialogRef');
 </script>

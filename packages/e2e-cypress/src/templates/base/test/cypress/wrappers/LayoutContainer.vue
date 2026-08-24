@@ -4,17 +4,21 @@
   </q-layout>
 </template>
 
-<script<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
-import { defineComponent } from 'vue';
+<script setup<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
+<% if (shouldSupportTypeScript) { %>
+import type { Component } from 'vue';
+<% } %>
 
-export default defineComponent({
-  name: 'LayoutContainer',
-  inheritAttrs: false,
-  props: {
-    component: {
-      type: Object,
-      required: true,
-    },
+defineOptions({ inheritAttrs: false });
+
+<% if (shouldSupportTypeScript) { %>
+defineProps<{ component: Component }>();
+<% } else { %>
+defineProps({
+  component: {
+    type: Object,
+    required: true,
   },
 });
+<% } %>
 </script>
