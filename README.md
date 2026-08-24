@@ -12,7 +12,7 @@ You can install multiple pre-rigged testing harnesses (test runners) to your Qua
 - scaffold necessary configuration files;
 - add script commands which expose some functionality of the respective harness.
 
-> App Extensions (such as these testing harnesses) only work with Quasar CLI, not with Vue CLI, nor by directly installing packages via a package manager as npm or yarn. Use `quasar ext add ...` or the installation step won't be executed and configuration files won't be copied over.
+> App Extensions (such as these testing harnesses) only work with Quasar CLI, not by directly installing packages via a package manager. Use `quasar ext add ...` or the installation step won't be executed and configuration files won't be copied over.
 
 Testing is not in and of itself hard. The most complicated part is setting up the testing harness. The trick lies in knowing what to test. If you are new to testing, it is absolutely imperative that you familiarize yourself with some of the concepts and patterns. There are some links for further reading at the end of this document page.
 
