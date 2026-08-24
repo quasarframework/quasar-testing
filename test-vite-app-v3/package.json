@@ -55,7 +55,6 @@
     "@vue/test-utils": "^2.4.11",
     "autoprefixer": "^10.4.27",
     "cypress": "^15.14.0",
-    "eslint-plugin-cypress": "^4.3.0",
     "oxfmt": "^0.x",
     "oxlint": "^1.x",
     "oxlint-tsgolint": "^7.0.2001",

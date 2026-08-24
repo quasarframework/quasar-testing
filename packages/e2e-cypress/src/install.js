@@ -79,12 +79,15 @@ module.exports = async function (api) {
     requiresPublicPath: true,
   });
 
+  // eslint-plugin-cypress v7 requires ESLint v10
+  const shouldAddEslintPlugin = api.hasPackage('eslint', '>=10');
+
   api.extendPackageJson(
     __mergeDeep(
       {
         devDependencies: getCompatibleDevDependencies([
           'cypress',
-          'eslint-plugin-cypress',
+          ...(shouldAddEslintPlugin ? ['eslint-plugin-cypress'] : []),
         ]),
       },
       {
