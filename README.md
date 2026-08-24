@@ -32,7 +32,6 @@ The Test Driven Design approach will help you to write better (and fewer) tests.
 - [Upgrade](#upgrade)
 - Provided App Extensions
   - Unit testing
-    - [Jest](packages/unit-jest/README.md)
     - [Vitest](packages/unit-vitest/README.md)
 
   - E2E testing
@@ -60,7 +59,7 @@ You can add multiple harnesses and even use them into your continuous integratio
 You can remove a testing harness running:
 
 ```shell
-$ quasar ext remove @quasar/testing-unit-jest
+$ quasar ext remove @quasar/testing-unit-vitest
 ```
 
 This will remove the associated NPM package and run the Quasar App Extensions uninstall hook.
@@ -71,7 +70,7 @@ If not done into the AE uninstall hook, the removal won't delete test or configu
 If you mess up your configuration and need to reset, or just want to check out if there has been any changes into new versions configuration, you should run:
 
 ```shell
-$ quasar ext add @quasar/testing-unit-jest
+$ quasar ext add @quasar/testing-unit-vitest
 ```
 
 Be careful though, this will overwrite ALL existing files (including configurations) if you allow it to. Make sure to have some kind of version control in place before proceeding. This operation will also upgrade the NPM package and its dependencies.
@@ -79,7 +78,7 @@ Be careful though, this will overwrite ALL existing files (including configurati
 To prevent installing new or updated dependencies, you should run:
 
 ```shell
-$ quasar ext invoke @quasar/testing-unit-jest
+$ quasar ext invoke @quasar/testing-unit-vitest
 ```
 
 ## Upgrade
@@ -87,7 +86,7 @@ $ quasar ext invoke @quasar/testing-unit-jest
 You can upgrade a testing harness and its dependencies by updating its related NPM package.
 
 ```
-$ yarn add -D @quasar/quasar-app-extension-testing-unit-jest
+$ yarn add -D @quasar/quasar-app-extension-testing-unit-vitest
 ```
 
 This won't change existing test or configuration files.
@@ -98,15 +97,11 @@ When upgrading between major versions, since there are major changes, we suggest
 Ensure your source control is clean before proceeding, then answer (y) and "Overwrite all" when prompted to overwrite existing files and individually `git diff` all changes manually to check out which changes you want to keep and which you want to revert.
 
 ```shell
-$ quasar ext remove @quasar/testing-unit-jest
-$ quasar ext add @quasar/testing-unit-jest
+$ quasar ext remove @quasar/testing-unit-vitest
+$ quasar ext add @quasar/testing-unit-vitest
 ```
 
 ## Unit Testing
-
-### [Jest](https://jestjs.io/)
-
-[Check out Jest AE documentation](packages/unit-jest/README.md)
 
 ### [Vitest](https://vitest.dev/)
 
@@ -145,13 +140,10 @@ The `Lighthouse` tool can help you identify issues with your PWA app, but only i
 
 - [Introduction to TDD](https://www.computer.org/csdl/magazine/so/2007/03/s3024/13rRUygT7kK)
 - [Overview of JavaScript testing 2020](https://medium.com/welldone-software/an-overview-of-javascript-testing-7ce7298b9870)
-- [Unit Testing Vue Router with Jest](https://medium.com/js-dojo/unit-testing-vue-router-1d091241312)
-- [Jest tests debugging](https://artsy.github.io/blog/2018/08/24/How-to-debug-jest-tests/)
 
 ### Documentation
 
 - [@vue/test-utils](https://vue-test-utils.vuejs.org)
-- [jest 24](https://facebook.github.io/jest/)
 - [cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Is-Simple)
 - [lighthouse](https://developers.google.com/web/tools/lighthouse/#cli)
 - [snyk](https://snyk.io/test)

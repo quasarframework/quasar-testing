@@ -11,7 +11,6 @@ Hi! I’m really excited that you are interested in contributing to Quasar. Befo
 ## Issue Reporting Guidelines
 
 - The issue list of this repo is **exclusively** for bug reports and feature requests. Non-conforming issues will be closed immediately.
-
   - For simple beginner questions, you can get quick answers from the [Quasar Discord chat room](https://discord.gg/5TDhbDg).
 
   - For more complicated questions, you can use [the official forum](http://forum.quasar-framework.org/). Make sure to provide enough information when asking your questions - this makes it easier for others to help you!
@@ -45,7 +44,6 @@ Hi! I’m really excited that you are interested in contributing to Quasar. Befo
 - If you need to make additions to the host package.json, follow the format in the package_template.json
 
 - If adding new feature:
-
   - Provide convincing reason to add this feature. Ideally you should open a suggestion issue first and have it greenlighted before working on it.
 
 - If fixing a bug:
@@ -62,7 +60,7 @@ The packages in this repo follow the following naming convention:
 - @quasar/app-extension-testing-e2e-\*
 - @quasar/app-extension-testing-quality
 
-Quasar internally maps extensions (pruning "app-extension-") when running `quasar ext ...` commands, eg. `jest` test-runner App Extension (AE) id would be `@quasar/testing-unit-jest`.
+Quasar internally maps extensions (pruning "app-extension-") when running `quasar ext ...` commands, eg. `vitest` test-runner App Extension (AE) id would be `@quasar/testing-unit-vitest`.
 
 If you would like to help us add official harnesses, please open an issue or get in touch on Quasar Discord server #testing channel.
 Avoid opening PRs without getting in touch with us, as we may refuse to merge integrations we cannot commit to maintain.
@@ -77,7 +75,7 @@ Use the Quasar CLI to create a new Quasar project to test out the changes you'll
 
 Fork this monorepo and clone it locally via `git clone https://github.com/<YOUR-GITHUB-HANDLE>/quasar-testing.git`
 Move into the monorepo folder (`cd quasar-testing`) and run `yarn install` at root level
-Move into the package you're interested into, eg `cd packages/unit-jest`, and start hacking!
+Move into the package you're interested into, eg `cd packages/unit-vitest`, and start hacking!
 When you're ready to test your changes:
 
 - run `yarn build`, if that package has a build step
@@ -85,8 +83,8 @@ When you're ready to test your changes:
 
 Then move to your example project (**it must be OUTSIDE `quasar-testing` folder**):
 
-- install the dependency locally, eg. `yarn add -D <path of testing repo>/packages/unit-jest`
-- invoke the AE to trigger the installation process, eg. `quasar ext invoke @quasar/testing-unit-jest`. You can skip this if you didn't change anything into `prompts.js` and `install.js` AE files
+- install the dependency locally, eg. `yarn add -D <path of testing repo>/packages/unit-vitest`
+- invoke the AE to trigger the installation process, eg. `quasar ext invoke @quasar/testing-unit-vitest`. You can skip this if you didn't change anything into `prompts.js` and `install.js` AE files
 - try out the new features you added!
 
 ## Project Structure
