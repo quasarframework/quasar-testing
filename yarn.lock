@@ -887,6 +887,44 @@
     vite "^8.2.1"
     webpack-merge "^6.0.1"
 
+"@quasar/app-vite@^3.8.0":
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/@quasar/app-vite/-/app-vite-3.8.0.tgz#93c34a42e97c2d65ed68c577fdd192f4b4b8fb3c"
+  integrity sha512-iNZKl86C80r2u3d/MCP7zK7Ia2Jv9FpOng2vIsPYaiawkJMku3WY+BegnicR7c2PWZrAQFDf6cn1IPF5GRwG0Q==
+  dependencies:
+    "@clack/prompts" "^1.7.0"
+    "@quasar/art" "^1.0.0"
+    "@quasar/render-ssr-error" "^2.2.6"
+    "@quasar/ssl-certificate" "^2.1.0"
+    "@quasar/vite-plugin" "^2.0.1"
+    "@types/chrome" "^0.2.2"
+    "@types/cordova" "^11.0.3"
+    "@vitejs/plugin-vue" "^6.0.8"
+    chokidar "^5.0.0"
+    ci-info "^4.4.0"
+    confbox "^0.2.4"
+    cross-spawn "^7.0.6"
+    dot-prop "10.2.0"
+    dotenv-expand "^13.0.0"
+    elementtree "0.1.7"
+    fflate "^0.8.2"
+    fs-extra "^11.4.0"
+    html-minifier-terser "^7.2.0"
+    jiti "^2.7.0"
+    kolorist "^1.8.0"
+    mlly "^1.8.2"
+    open "^11.0.0"
+    picomatch "^4.0.5"
+    rolldown "^1.2.3"
+    sass-embedded "^1.100.0"
+    semver "^7.8.5"
+    serialize-javascript "^7.0.7"
+    serve-static "^2.2.1"
+    tinyglobby "^0.2.17"
+    ts-essentials "^10.2.0"
+    vite "^8.2.1"
+    webpack-merge "^6.0.1"
+
 "@quasar/art@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@quasar/art/-/art-1.0.0.tgz#29c23715d730b55a40d42e69672129634862e603"
@@ -911,6 +949,11 @@
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@quasar/vite-plugin/-/vite-plugin-2.0.0.tgz#fd79529b31cab6d529edf2c4199d41b21fa23999"
   integrity sha512-eY47hWU6sW/v9vEIlT/OcXLy8KqQyjmqiO7Ws8r8CmLxYQ50poUfYttX8dqOgamOGzvkm2H5urIcdf04OQ04Nw==
+
+"@quasar/vite-plugin@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@quasar/vite-plugin/-/vite-plugin-2.0.1.tgz#371301d14b9537a7465b1a31b2805bb5a47a2206"
+  integrity sha512-FHw7tjI9aNowd56Eyc6sNlNvkwdb3WCR2mOltUCUZq4byUC6MMG+BDoG38Rxpt6NC4kVgYxyy+p7+cHg8zyiNQ==
 
 "@rolldown/binding-android-arm-eabi@1.2.5":
   version "1.2.5"
@@ -2901,12 +2944,12 @@ eslint-config-prettier@^10.1.8:
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-10.1.8.tgz#15734ce4af8c2778cc32f0b01b37b0b5cd1ecb97"
   integrity sha512-82GZUjRS0p/jganf6q1rEO25VSoHH0hKPCTrgillPjdI/3bgBhAE1QzHrHTizjpRvy6pGAvKjDJtk2pF9NDq8w==
 
-eslint-plugin-cypress@^3.6.0:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-cypress/-/eslint-plugin-cypress-3.6.0.tgz#d0e2f68f27b9a34ecf565bef58ed82c8f10d39a8"
-  integrity sha512-7IAMcBbTVu5LpWeZRn5a9mQ30y4hKp3AfTz+6nSD/x/7YyLMoBI6X7XjDLYI6zFvuy4Q4QVGl563AGEXGW/aSA==
+eslint-plugin-cypress@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-cypress/-/eslint-plugin-cypress-4.3.0.tgz#fce3c67c836541cb652c653f5e33088c8926a988"
+  integrity sha512-CgS/S940MJlT8jtnWGKI0LvZQBGb/BB0QCpgBOxFMM/Z6znD+PZUwBhCTwHKN2GEr5AOny3xB92an0QfzBGooQ==
   dependencies:
-    globals "^13.20.0"
+    globals "^15.15.0"
 
 eslint-scope@^7.2.2:
   version "7.2.2"
@@ -3549,12 +3592,17 @@ globals@^11.1.0:
   resolved "https://registry.yarnpkg.com/globals/-/globals-11.12.0.tgz#ab8795338868a0babd8525758018c2a7eb95c42e"
   integrity sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==
 
-globals@^13.19.0, globals@^13.20.0:
+globals@^13.19.0:
   version "13.24.0"
   resolved "https://registry.yarnpkg.com/globals/-/globals-13.24.0.tgz#8432a19d78ce0c1e833949c36adb345400bb1171"
   integrity sha512-AhO5QUcj8llrbG09iWhPU2B204J1xnPeL8kQmVorSsy+Sjj1sk8gIyh6cUocGmH4L0UuhAJy+hJMRA4mgA4mFQ==
   dependencies:
     type-fest "^0.20.2"
+
+globals@^15.15.0:
+  version "15.15.0"
+  resolved "https://registry.yarnpkg.com/globals/-/globals-15.15.0.tgz#7c4761299d41c32b075715a4ce1ede7897ff72a8"
+  integrity sha512-7ACyT3wmyp3I61S4fG682L0VA2RGD9otkqGJIwNUMF1SWUombIIk+af1unuDYgMm082aHYwD+mzJvv9Iu8dsgg==
 
 globalthis@^1.0.1:
   version "1.0.4"

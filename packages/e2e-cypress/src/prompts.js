@@ -1,35 +1,36 @@
 /**
  * Quasar App Extension prompts script
- *
- * Inquirer prompts
- * (answers are available as "api.prompts" in the other scripts)
- * https://www.npmjs.com/package/inquirer#question
- *
+ * https://quasar.dev/app-extensions/development-guide/prompts-api
  */
 
 const { enforcedDevServerPort } = require('./shared');
 
-module.exports = function (api) {
-  return [
-    {
-      name: 'port',
-      type: 'text',
-      required: true,
-      default: enforcedDevServerPort,
-      message: 'Choose which port the app will be served when run for Cypress:',
-    },
-    {
-      name: 'options',
-      type: 'checkbox',
-      message:
-        'Cypress e2e and component Test Harness will now be installed. Please choose additional options:',
-      choices: [
-        {
-          name: 'enable code coverage (currently only supported using Vite, not Webpack)',
-          value: 'code-coverage',
-          checked: api.hasVite,
-        },
-      ],
-    },
-  ];
+module.exports = async function () {
+  // TODO: @clack/prompts is ESM-only, this file is CJS until the TS rewrite
+  const { text, confirm, cancel, isCancel } = await import('@clack/prompts');
+
+  const port = await text({
+    message: 'Choose which port the app will be served when run for Cypress:',
+    initialValue: String(enforcedDevServerPort),
+    validate: (value) =>
+      /^\d+$/.test(value) ? undefined : 'Enter a valid port number',
+  });
+  if (isCancel(port)) {
+    cancel('Operation cancelled.');
+    process.exit(0);
+  }
+
+  const wantsCodeCoverage = await confirm({
+    message: 'Enable code coverage?',
+    initialValue: false,
+  });
+  if (isCancel(wantsCodeCoverage)) {
+    cancel('Operation cancelled.');
+    process.exit(0);
+  }
+
+  return {
+    port: Number(port),
+    options: wantsCodeCoverage ? ['code-coverage'] : [],
+  };
 };

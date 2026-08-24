@@ -157,15 +157,20 @@ export function registerPortalHelpers() {
   });
 
   Cypress.Commands.add('withinSelectMenu', function (fnOrOptions) {
-    return portalDerivateCommand('.q-menu', '[role=listbox]', fnOrOptions);
+    // Quasar places role=listbox on the options wrapper inside the menu,
+    // not on the .q-menu element itself
+    return portalDerivateCommand(
+      '.q-menu',
+      ':has([role=listbox])',
+      fnOrOptions,
+    );
   });
 
   Cypress.Commands.add('withinMenu', function (fnOrOptions) {
-    // QMenu only have a role attribute from Quasar v2.8.4 onwards
-    // Without the suffixes specification this would match select options menus too
+    // Without the suffix specification this would match select options menus too
     return portalDerivateCommand(
       '.q-menu',
-      [':not([role])', '[role=menu]'],
+      ':not(:has([role=listbox]))',
       fnOrOptions,
     );
   });

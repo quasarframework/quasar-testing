@@ -104,6 +104,18 @@ You can either apply [this workaround](https://github.com/istanbuljs/nyc/issues/
 
 [nyc-config-preset]: https://github.com/quasarframework/quasar-testing/blob/dev/packages/e2e-cypress/nyc-config-preset.json
 
+### Upgrade from Cypress AE v6.x to v7.0 onwards
+
+The AE now requires `@quasar/app-vite` v3. Cypress helpers and commands haven't changed their APIs.
+
+- Upgrade `@quasar/app-vite` to v3. If you can't migrate away from v2 yet, stay on AE v6.x;
+- `@quasar/app-webpack` is no longer supported. Webpack users stay on AE v6.x;
+- Upgrade Node to v22.22.0 or newer;
+- Upgrade `cypress` to v15.14 or later and `eslint-plugin-cypress` to v4 or later;
+- The component-testing Vite config is now derived from your quasar.config file through `@quasar/app-vite`'s testing endpoint. `injectQuasarDevServerConfig()` usage in `cypress.config` is unchanged;
+- Delete `test/cypress/tsconfig.json`: Cypress v15 processes TypeScript with tsx, so the ts-node workarounds (including the `TS_NODE_PROJECT` environment variable in the test scripts) are gone. Re-installing the AE updates the test scripts for you;
+- Replace `'src/...'` alias imports in your Cypress files with `'@/...'` and `'app/...'` imports with `'@/../...'`: app-vite v3 only provides the `@` alias by default.
+
 ### Upgrade from Cypress AE v6.2 to v6.3 onwards
 
 > If you're coming from v6.1, follow the migration guide in the next section first.

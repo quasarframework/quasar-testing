@@ -5,7 +5,6 @@ module.exports = {
   // The test apps manage their own linting (test-vite-app-v3 uses oxlint).
   // Without this, the IDE extension applies this config to their files.
   ignorePatterns: [
-    '/test-vite-app-v2/',
     '/test-vite-app-v3/',
     '/test-vue-cli/',
     '/test-webpack-app-v4/',

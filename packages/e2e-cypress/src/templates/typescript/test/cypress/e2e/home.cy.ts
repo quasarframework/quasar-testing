@@ -10,8 +10,10 @@ describe('Landing', () => {
   });
   it('.should() - assert that <title> is correct', () => {
     cy.title().should('include', 'Quasar');
-    cy.get('li').first().click();
-    cy.contains('Clicks on todos: 1').should('exist');
+  });
+  it('navigates to the second page', () => {
+    cy.contains('a', 'Go to Second Page').click();
+    cy.url().should('include', '/second');
   });
 });
 
@@ -41,7 +43,7 @@ describe('Landing', () => {
 //   });
 // });
 
-<% if (shouldSupportTypeScriptAndVite) { %> 
+<% if (shouldSupportTypeScriptAndVite) { %>
 // Workaround for Cypress AE + TS + Vite
 // See: https://github.com/quasarframework/quasar-testing/issues/262#issuecomment-1154127497
 export {};
