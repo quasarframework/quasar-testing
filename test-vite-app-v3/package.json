@@ -1,0 +1,58 @@
+{
+  "name": "test-vite-app-v3",
+  "version": "0.0.1",
+  "private": true,
+  "description": "A Quasar Project",
+  "keywords": [
+    "quasar",
+    "quasar-app",
+    "quasar-app-vite",
+    "quasar-cli",
+    "vite",
+    "vue",
+    "vuejs"
+  ],
+  "author": "Yusuf Kandemir <yusuf.kandemir@outlook.com.tr>",
+  "type": "module",
+  "scripts": {
+    "lint": "oxfmt && oxlint --fix",
+    "lint:check": "oxfmt --check && oxlint",
+    "dev": "quasar dev",
+    "build": "quasar build",
+    "typecheck": "vue-tsc --noEmit",
+    "postinstall": "quasar prepare --silent",
+    "sync:vitest": "yarn cache clean @quasar/quasar-app-extension-testing-unit-vitest && yarn --cwd ../packages/unit-vitest build && yarn --cwd ../packages/unit-vitest clean && yarn add -D ../packages/unit-vitest --ignore-scripts && yarn --cwd .. install && yarn postinstall",
+    "invoke:vitest": "quasar ext invoke @quasar/testing-unit-vitest",
+    "sync:invoke:vitest": "yarn sync:vitest && yarn invoke:vitest",
+    "test:vitest": "yarn test:unit:ci",
+    "test": "echo \"See package.json => scripts for available tests.\" && exit 0",
+    "test:unit": "vitest",
+    "test:unit:ci": "vitest run",
+    "test:unit:ui": "vitest --ui"
+  },
+  "dependencies": {
+    "@quasar/extras": "^2.0.4",
+    "quasar": "^2.25.1",
+    "vue": "^3.5.22",
+    "vue-router": "^5.0.6"
+  },
+  "devDependencies": {
+    "@quasar/app-vite": "^3.7.0",
+    "@quasar/quasar-app-extension-testing-unit-vitest": "../packages/unit-vitest",
+    "@types/node": "^22.19.11",
+    "@vitest/ui": "^4.1.11",
+    "@vue/test-utils": "^2.4.11",
+    "autoprefixer": "^10.4.27",
+    "oxfmt": "^0.x",
+    "oxlint": "^1.x",
+    "oxlint-tsgolint": "^7.0.2001",
+    "postcss": "^8.5.8",
+    "typescript": "^6.0.0",
+    "vitest": "^4.1.11",
+    "vue-tsc": "^3.3.3"
+  },
+  "engines": {
+    "node": ">= 26 || ^24 || ^22.12"
+  },
+  "productName": "Quasar App"
+}

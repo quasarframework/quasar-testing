@@ -8,13 +8,13 @@
     </q-list>
 
     <p>Count: {{ todoCount }} / {{ meta.totalCount }}</p>
-    <p>Active: {{ active ? 'yes' : 'no' }}</p>
+    <p>Active: {{ active ? "yes" : "no" }}</p>
     <p>Clicks on todos: {{ clickCount }}</p>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
+import { computed, ref } from "vue";
 
 interface Todo {
   id: number;
@@ -33,8 +33,8 @@ const props = withDefaults(
     active?: boolean;
   }>(),
   {
-    todos: () => [],
-  },
+    todos: () => []
+  }
 );
 
 const clickCount = ref(0);
@@ -46,6 +46,6 @@ function increment() {
 const todoCount = computed(() => props.todos.length);
 
 defineExpose({
-  clickCount,
+  clickCount
 });
 </script>
