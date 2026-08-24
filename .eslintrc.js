@@ -6,8 +6,6 @@ module.exports = {
   // Without this, the IDE extension applies this config to their files.
   ignorePatterns: [
     '/test-vite-app-v3/',
-    '/test-vue-cli/',
-    '/test-webpack-app-v4/',
   ],
 
   env: {
