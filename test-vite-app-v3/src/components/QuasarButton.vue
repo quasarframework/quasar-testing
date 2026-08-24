@@ -9,11 +9,6 @@
   />
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "QuasarButton",
-  emits: { test: () => true }
-});
+<script setup lang="ts">
+defineEmits<{ test: [] }>();
 </script>

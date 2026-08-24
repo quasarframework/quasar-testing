@@ -12,11 +12,3 @@
     </q-menu>
   </q-btn>
 </template>
-
-<script<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'QuasarMenu',
-});
-</script>

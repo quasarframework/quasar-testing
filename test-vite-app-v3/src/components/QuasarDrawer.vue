@@ -17,17 +17,8 @@
   </q-drawer>
 </template>
 
-<script lang="ts">
-import { ref, defineComponent } from "vue";
+<script setup lang="ts">
+import { ref } from "vue";
 
-export default defineComponent({
-  name: "QuasarDrawer",
-  setup() {
-    const showDrawer = ref(true);
-
-    return {
-      showDrawer
-    };
-  }
-});
+const showDrawer = ref(true);
 </script>
