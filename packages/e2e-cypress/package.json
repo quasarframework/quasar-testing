@@ -33,10 +33,10 @@
   },
   "dependencies": {
     "@clack/prompts": "^1.4.0",
-    "@cypress/code-coverage": "^3.14.7",
+    "@cypress/code-coverage": "^4.0.3",
     "cross-env": "^7.0.3",
     "lodash": "^4.17.21",
-    "nyc": "^17.1.0",
+    "nyc": "^18.0.0",
     "start-server-and-test": "^2.1.2",
     "vite-plugin-istanbul": "^9.0.1"
   },
