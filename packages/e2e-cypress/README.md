@@ -1,6 +1,6 @@
 ## [Cypress](https://www.cypress.io/)
 
-> You’re looking at Cypress AE v5 (Cypress 12 & 13) docs. If you're searching for Cypress AE v4 (Cypress 9) docs, head [here](https://github.com/quasarframework/quasar-testing/tree/cypress-v4/packages/e2e-cypress)
+> You're looking at Cypress AE v7 (`@quasar/app-vite` v3, Cypress 15) docs. If you're searching for Cypress AE v6 (`@quasar/app-vite` v1/v2, `@quasar/app-webpack`, Cypress 12-15) docs, head [here](https://github.com/quasarframework/quasar-testing/tree/08eecc6/packages/e2e-cypress)
 
 ```shell
 $ npm quasar ext add @quasar/testing-e2e-cypress
@@ -10,28 +10,10 @@ $ yarn quasar ext add @quasar/testing-e2e-cypress
 $ pnpm quasar ext add @quasar/testing-e2e-cypress
 ```
 
-For ESLint < v9, add into your `.eslintrc.js` the following code:
+If your project uses ESLint, the AE adds `eslint-plugin-cypress` for you (v7, which requires ESLint v10). Add into your `eslint.config.js` the following code:
 
 ```js
-{
-  // ...
-  overrides: [
-    {
-      files: ['test/cypress/**/*.{js,jsx,ts,tsx}', '**/*.cy.{js,jsx,ts,tsx}'],
-      extends: [
-        // Add Cypress-specific lint rules, globals and Cypress plugin
-        // See https://github.com/cypress-io/eslint-plugin-cypress#rules
-        'plugin:cypress/recommended',
-      ],
-    },
-  ],
-}
-```
-
-For ESLint v9 onwards, add into your `eslint.config.js` the following code:
-
-```js
-import pluginCypress from 'eslint-plugin-cypress/flat';
+import pluginCypress from 'eslint-plugin-cypress';
 
 export default [
   // ...
@@ -51,6 +33,8 @@ export default [
   },
 ];
 ```
+
+If your project uses oxlint, it works out of the box, no additional packages or configuration needed.
 
 ---
 
@@ -114,7 +98,10 @@ The AE now requires `@quasar/app-vite` v3. Cypress helpers and commands haven't 
 - Upgrade `cypress` to v15.14 or later and `eslint-plugin-cypress` to v4 or later;
 - The component-testing Vite config is now derived from your quasar.config file through `@quasar/app-vite`'s testing endpoint. `injectQuasarDevServerConfig()` usage in `cypress.config` is unchanged;
 - Delete `test/cypress/tsconfig.json`: Cypress v15 processes TypeScript with tsx, so the ts-node workarounds (including the `TS_NODE_PROJECT` environment variable in the test scripts) are gone. Re-installing the AE updates the test scripts for you;
-- Replace `'src/...'` alias imports in your Cypress files with `'@/...'` and `'app/...'` imports with `'@/../...'`: app-vite v3 only provides the `@` alias by default.
+- Replace `'src/...'` alias imports in your Cypress files with `'@/...'` and `'app/...'` imports with `'@/../...'`: app-vite v3 only provides the `@` alias by default;
+- `@cypress/code-coverage` is upgraded to v4, check their [upgrade guide](https://github.com/cypress-io/code-coverage/blob/v4.0.3/README.md#cypresscode-coverage-3x-to-4x);
+- New projects are scaffolded with `allowCypressEnv: false`, following the `Cypress.env()` deprecation. Check their [migration guide](https://on.cypress.io/cypress-env-migration);
+- `eslint-plugin-cypress` is only added when your project has ESLint v10 or newer, since plugin v7 requires it. You can freely upgrade your ESLint and plugin version as needed.
 
 ### Upgrade from Cypress AE v6.2 to v6.3 onwards
 
@@ -313,7 +300,7 @@ Check out more examples [here](./src/templates/typescript/src/components/___test
 ### Testing the AE
 
 ```sh
-cd test-project-webpack # or "cd test-project-vite" or "cd test-project-app"
+cd test-vite-app-v3
 yarn sync:cypress # or "yarn sync:all", if it's the first time you run this command
 yarn test:e2e:ci # check if e2e tests still work with the local version of the AE
 yarn test:component:ci # check if component tests still work with the local version of the AE
