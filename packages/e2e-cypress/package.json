@@ -44,17 +44,11 @@
     "@quasar/app-vite": "^3.8.0",
     "@types/lodash": "^4.17.20",
     "cypress": "^15.14.0",
-    "eslint-plugin-cypress": "^4.3.0",
+    "eslint-plugin-cypress": "^7.0.1",
     "rimraf": "^5.0.5"
   },
   "peerDependencies": {
     "@quasar/app-vite": "^3.0.0",
-    "cypress": "^15.14.0",
-    "eslint-plugin-cypress": ">=4.0.0"
-  },
-  "peerDependenciesMeta": {
-    "eslint-plugin-cypress": {
-      "optional": true
-    }
+    "cypress": "^15.14.0"
   }
 }
