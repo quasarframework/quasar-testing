@@ -53,8 +53,8 @@
     "yarn": ">= 1.22.19"
   },
   "dependencies": {
-    "@clack/prompts": "^1.4.0",
-    "es-toolkit": "^1.42.0",
+    "@clack/prompts": "^1.7.0",
+    "es-toolkit": "^1.51.0",
     "happy-dom": "^20.11.6"
   },
   "devDependencies": {
