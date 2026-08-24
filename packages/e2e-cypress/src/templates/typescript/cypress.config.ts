@@ -9,6 +9,7 @@ export default defineConfig({
   screenshotsFolder: 'test/cypress/screenshots',
   videosFolder: 'test/cypress/videos',
   video: true,
+  allowCypressEnv: false,
   e2e: {
 <% if (shouldAddCodeCoverage) { %>
     setupNodeEvents(on, config) {
