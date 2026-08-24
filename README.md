@@ -31,10 +31,7 @@ The Test Driven Design approach will help you to write better (and fewer) tests.
 - [Reset](#reset)
 - [Upgrade](#upgrade)
 - Provided App Extensions
-
-  - [Testing Harnesses Manager](packages/testing/README.md) (**DEPRECATED**)
   - Unit testing
-
     - [Jest](packages/unit-jest/README.md)
     - [Vitest](packages/unit-vitest/README.md)
 
@@ -54,10 +51,7 @@ Does your business or personal projects depend on these App Extensions? How much
 
 ## Installation
 
-You can add test harnesses:
-
-- in a centralized way via the [Testing Harnesses Manager](packages/testing/README.md) (**DEPRECATED**);
-- using an "a-la-carte" approach, checking each harness documentation.
+You can add test harnesses with an "a-la-carte" approach: check each harness documentation for its installation command.
 
 You can add multiple harnesses and even use them into your continuous integration pipelines.
 
@@ -100,17 +94,13 @@ This won't change existing test or configuration files.
 
 ### Upgrade to a new major version with NPM
 
-When upgrading between major versions, since there are major changes, we suggest you to remove and re-add the AE, to obtain lastest configuration files too.
+When upgrading between major versions, since there are major changes, we suggest you to remove and re-add the AE, to obtain latest configuration files too.
 Ensure your source control is clean before proceeding, then answer (y) and "Overwrite all" when prompted to overwrite existing files and individually `git diff` all changes manually to check out which changes you want to keep and which you want to revert.
 
 ```shell
 $ quasar ext remove @quasar/testing-unit-jest
 $ quasar ext add @quasar/testing-unit-jest
 ```
-
-## Testing Harnesses Manager (**DEPRECATED**)
-
-[Check out Testing Harnesses Manager AE documentation](packages/testing/README.md)
 
 ## Unit Testing
 
