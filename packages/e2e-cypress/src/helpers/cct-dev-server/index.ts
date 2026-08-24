@@ -1,153 +1,48 @@
 /* eslint-disable */
-import { join } from 'path';
 
-type AvailableBundlers = 'vite' | 'webpack';
+// These plugins serve the dev server, not tests. checker spawns type-check and
+// lint processes, the devtools plugin injects a browser-only overlay.
+const EXCLUDED_PLUGIN_NAMES = [
+  'vite-plugin-checker',
+  'vite-plugin-vue-devtools',
+];
 
-function getPackageJson() {
-  return require(join(process.cwd(), 'package.json'));
+// Some plugins register companion plugins with names like
+// "vite-plugin-vue-devtools:append-code", so match the prefix too.
+function isExcludedPlugin(name: string) {
+  return EXCLUDED_PLUGIN_NAMES.some(
+    (excludedName) =>
+      name === excludedName || name.startsWith(`${excludedName}:`),
+  );
 }
 
-async function getSharedConfigImports(
-  quasarAppPackage: string,
-  bundler: AvailableBundlers,
-) {
-  const { default: extensionRunner } = await import(
-    `${quasarAppPackage}/lib/app-extension/extensions-runner`
-  );
-  const { default: getQuasarCtx } = await import(
-    `${quasarAppPackage}/lib/helpers/get-quasar-ctx`
-  );
-  const { default: QuasarConfFile } = await import(
-    `${quasarAppPackage}/lib/quasar-${
-      bundler === 'vite' ? 'config' : 'conf'
-    }-file`
-  );
-
-  return {
-    extensionRunner,
-    getQuasarCtx,
-    QuasarConfFile,
-  };
-}
-
-async function quasarSharedConfig(
-  quasarAppPackage: string,
-  bundler: AvailableBundlers,
-) {
-  const { extensionRunner, getQuasarCtx, QuasarConfFile } =
-    await getSharedConfigImports(quasarAppPackage, bundler);
-
-  const ctx = getQuasarCtx({
-    mode: 'spa',
-    target: void 0,
-    debug: false,
-    dev: true,
-    prod: false,
-  });
-
-  // register app extensions
-  await extensionRunner.registerExtensions(ctx);
-
-  return {
-    quasarAppPackage,
-    QuasarConfFile,
-    ctx,
-  };
-}
-
-async function quasarWebpackConfig(quasarAppPackage: string) {
-  const { QuasarConfFile, ctx } = await quasarSharedConfig(
-    quasarAppPackage,
-    'webpack',
-  );
-
-  const {
-    default: { splitWebpackConfig },
-  } = await import(`${quasarAppPackage}/lib/webpack/symbols`);
-
-  const quasarConfFile = new QuasarConfFile(ctx);
-
-  try {
-    await quasarConfFile.prepare();
-  } catch (e) {
-    console.log(e);
-    return;
-  }
-  await quasarConfFile.compile();
-
-  const configEntries = splitWebpackConfig(quasarConfFile.webpackConf, 'spa');
-
-  return configEntries[0].webpack;
-}
-
-async function getQuasarViteSpaConfig(quasarAppPackage: string) {
-  const { default: quasarSpaConfig } = await import(
-    `${quasarAppPackage}/lib/modes/spa/spa-config`
-  );
-
-  return quasarSpaConfig;
-}
-
-async function quasarViteConfig(quasarAppPackage: string) {
-  const { QuasarConfFile, ctx } = await quasarSharedConfig(
-    quasarAppPackage,
-    'vite',
-  );
-  const quasarConfFile = new QuasarConfFile({ ctx });
-
-  const quasarConf = await quasarConfFile.read();
-  if (quasarConf.error !== void 0) {
-    console.log(quasarConf.error);
-  }
-
-  const quasarSpaConfig = await getQuasarViteSpaConfig(quasarAppPackage);
-
-  // [1] -> https://github.com/cypress-io/cypress/issues/22505#issuecomment-1277855100
-  // [1] Make sure to use the root for predictability
-  quasarConf.publicPath = '/';
-
-  const result = await quasarSpaConfig['vite'](quasarConf);
-
-  // [1] Delete base so it can correctly be set by Cypress
-  delete result.base;
-
-  return result;
-}
-
-// TODO: Prefer exposing an object with the dev server as prop
-// https://github.com/quasarframework/quasar-testing/issues/395
 export function injectQuasarDevServerConfig() {
-  const { devDependencies } = getPackageJson();
-  const bundler: AvailableBundlers = devDependencies.hasOwnProperty(
-    '@quasar/app-vite',
-  )
-    ? 'vite'
-    : 'webpack';
-
-  const quasarAppPackage =
-    bundler === 'webpack' &&
-    !devDependencies.hasOwnProperty('@quasar/app-webpack')
-      ? '@quasar/app'
-      : `@quasar/app-${bundler}`;
-
-  const configExtractor =
-    bundler === 'vite' ? quasarViteConfig : quasarWebpackConfig;
-
   return {
     framework: 'vue',
-    bundler,
-    [`${bundler}Config`]: async () => {
-      // Trying q/app-vite 2+ & q/app-webpack 4+ specs
-      try {
-        // we workaround the build system because
-        // we explicitly need an "import()" statement
-        // otherwise this will fail for q/app-vite (as the imported file is an ES6 module)
-        const promise = eval('import(`${quasarAppPackage}/lib/testing.js`);');
-        const { getTestingConfig } = await promise;
-        return getTestingConfig();
-      } catch (_) {}
+    bundler: 'vite',
+    viteConfig: async () => {
+      const { getTestingConfig } = await import('@quasar/app-vite/testing');
+      const config = await getTestingConfig();
 
-      return configExtractor(quasarAppPackage);
+      // The dev config warms up the generated client entry (.quasar/dev-spa/client-entry.js).
+      // Only "quasar dev" generates that file, so Vite logs a pre-transform error otherwise.
+      delete config.server?.warmup;
+
+      const plugins = ((config.plugins ?? []) as unknown[]).flat(Infinity) as (
+        | { name?: string }
+        | null
+        | undefined
+        | false
+      )[];
+      config.plugins = plugins.filter(
+        (plugin) => !!plugin && !isExcludedPlugin(plugin.name ?? ''),
+      ) as NonNullable<typeof config.plugins>;
+
+      // [1] -> https://github.com/cypress-io/cypress/issues/22505#issuecomment-1277855100
+      // [1] Delete base so it can correctly be set by Cypress
+      delete config.base;
+
+      return config;
     },
   };
 }

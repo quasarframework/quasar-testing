@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-testing-e2e-cypress",
-  "version": "6.3.0",
+  "version": "7.0.0",
   "license": "MIT",
   "description": "A Quasar App Extension for Cypress e2e",
   "contributors": [
@@ -27,11 +27,12 @@
   },
   "typings": "dist/main.d.ts",
   "engines": {
-    "node": "^30 || ^28 || ^26 || ^24 || ^22 || ^20 || ^18",
+    "node": "^30 || ^28 || ^26 || ^24 || ^22.22.0",
     "npm": ">= 6.14.12",
     "yarn": ">= 1.17.3"
   },
   "dependencies": {
+    "@clack/prompts": "^1.4.0",
     "@cypress/code-coverage": "^3.14.7",
     "cross-env": "^7.0.3",
     "lodash": "^4.17.21",
@@ -40,14 +41,16 @@
     "vite-plugin-istanbul": "^9.0.1"
   },
   "devDependencies": {
+    "@quasar/app-vite": "^3.8.0",
     "@types/lodash": "^4.17.20",
     "cypress": "^15.14.0",
-    "eslint-plugin-cypress": "^3.6.0",
+    "eslint-plugin-cypress": "^4.3.0",
     "rimraf": "^5.0.5"
   },
   "peerDependencies": {
-    "cypress": "^12.2.0 || ^13.2.0 || ^14.0.0 || ^15.0.0",
-    "eslint-plugin-cypress": ">=2.0.0"
+    "@quasar/app-vite": "^3.0.0",
+    "cypress": "^15.14.0",
+    "eslint-plugin-cypress": ">=4.0.0"
   },
   "peerDependenciesMeta": {
     "eslint-plugin-cypress": {

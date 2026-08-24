@@ -11,6 +11,10 @@ describe('Landing', () => {
   it('.should() - assert that <title> is correct', () => {
     cy.title().should('include', 'Quasar');
   });
+  it('navigates to the second page', () => {
+    cy.contains('a', 'Go to Second Page').click();
+    cy.url().should('include', '/second');
+  });
 });
 
 // ** The following code is an example to show you how to write some tests for your home page **

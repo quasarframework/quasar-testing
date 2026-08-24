@@ -2,20 +2,16 @@
  * Quasar App Extension index/runner script
  * (runs on each dev/build)
  *
- * API: https://github.com/quasarframework/quasar/blob/master/app/lib/app-extension/IndexAPI.js
+ * Docs: https://quasar.dev/app-extensions/development-guide/index-api
  */
 
-const { enforcedDevServerPort, enforcedCypress15Vite8Compatibility } = require('./shared');
+const { enforcedDevServerPort } = require('./shared');
 
 module.exports = async function (api) {
-  api.compatibleWith('quasar', '^2.0.0');
-  if (api.hasVite) {
-    api.compatibleWith('@quasar/app-vite', '^1.0.0 || ^2.0.0');
-
-    enforcedCypress15Vite8Compatibility(api);
-  } else if (api.hasWebpack) {
-    api.compatibleWith('@quasar/app-webpack', '^3.0.0 || ^4.0.0');
-  }
+  api.compatibleWith('quasar', '^2.24.0');
+  api.compatibleWith('@quasar/app-vite', '^3.0.0');
+  // Vite 8 requires Cypress 15.14+ for component testing support
+  api.compatibleWith('cypress', '^15.14.0');
 
   // We cannot use process.env.CYPRESS here as this code is executed outside Cypress process
   if (process.env.NODE_ENV !== 'test') {
@@ -27,27 +23,20 @@ module.exports = async function (api) {
     // tab as Cypress opens its own window
     conf.devServer.open = false;
 
-    // Force a specific port for Cypress
-    conf.devServer.port = api.prompts.port ?? enforcedDevServerPort;
+    // Force a specific port for Cypress (prompts may store it as a string)
+    conf.devServer.port = Number(api.prompts.port) || enforcedDevServerPort;
   });
 
   if (api.prompts.options.includes('code-coverage')) {
-    if (api.hasVite) {
-      // TODO: known problem with Vue3 + Vite source maps: https://github.com/iFaxity/vite-plugin-istanbul/issues/14
-      const { default: istanbul } = await import('vite-plugin-istanbul');
+    // TODO: known problem with Vue3 + Vite source maps: https://github.com/iFaxity/vite-plugin-istanbul/issues/14
+    const { default: istanbul } = await import('vite-plugin-istanbul');
 
-      api.extendViteConf((viteConf) => {
-        viteConf.plugins.push(
-          istanbul({
-            forceBuildInstrument: api.ctx.prod,
-          }),
-        );
-      });
-    } else {
-      // TODO: add webpack code coverage support
-      // See https://www.npmjs.com/package/istanbul-instrumenter-loader
-      // https://github.com/vuejs/vue-cli/issues/1363#issuecomment-405352542
-      // https://github.com/akoidan/vue-webpack-typescript
-    }
+    api.extendViteConf((viteConf) => {
+      viteConf.plugins.push(
+        istanbul({
+          forceBuildInstrument: api.ctx.prod,
+        }),
+      );
+    });
   }
 };

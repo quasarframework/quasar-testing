@@ -1,7 +1,11 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "cct-dev-server"
+    "outDir": "cct-dev-server",
+    // node16 resolves the "@quasar/app-vite/testing" exports subpath and
+    // keeps the dynamic import() call as-is in the CommonJS output.
+    "module": "node16",
+    "moduleResolution": "node16"
   },
   "include": ["src/helpers/cct-dev-server/index.ts"]
 }

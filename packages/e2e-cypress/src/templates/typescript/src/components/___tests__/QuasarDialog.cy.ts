@@ -1,4 +1,4 @@
-import DialogWrapper from 'app/test/cypress/wrappers/DialogWrapper.vue';
+import DialogWrapper from '@/../test/cypress/wrappers/DialogWrapper.vue';
 import QuasarDialog from '../QuasarDialog.vue';
 
 describe('QuasarDialog', () => {

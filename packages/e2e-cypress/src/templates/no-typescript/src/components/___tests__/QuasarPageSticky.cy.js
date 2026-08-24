@@ -1,4 +1,4 @@
-import LayoutContainer from 'app/test/cypress/wrappers/LayoutContainer.vue';
+import LayoutContainer from '@/../test/cypress/wrappers/LayoutContainer.vue';
 import QuasarPageSticky from '../QuasarPageSticky.vue';
 
 describe('QuasarPageSticky', () => {

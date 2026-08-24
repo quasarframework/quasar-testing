@@ -22,8 +22,10 @@
 </template>
 
 <script<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>
-<% if (shouldSupportTypeScript) { %>import type { QDialog } from 'quasar';
-import type { Ref } from 'vue';<% } %>
+<% if (shouldSupportTypeScript) { %>
+import type { QDialog } from 'quasar';
+import type { Ref } from 'vue';
+<% } %>
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
