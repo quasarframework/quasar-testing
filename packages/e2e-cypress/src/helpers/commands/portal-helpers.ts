@@ -105,7 +105,7 @@ interface WithinPortalDerivateOptions<E extends HTMLElement = HTMLElement> {
 
 // TODO: make cy.dataCy Withinable as cy.get
 function getDataCySelector(dataCy: string) {
-  return `[data-cy=${dataCy}]`;
+  return `[data-cy="${dataCy}"]`;
 }
 
 function portalDerivateCommand<E extends HTMLElement = HTMLElement>(

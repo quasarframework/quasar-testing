@@ -191,7 +191,7 @@
     fast-wrap-ansi "^0.2.0"
     sisteransi "^1.0.5"
 
-"@clack/prompts@^1.4.0", "@clack/prompts@^1.7.0":
+"@clack/prompts@^1.7.0":
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/@clack/prompts/-/prompts-1.7.0.tgz#2d6ced363a608ba23f6b9611205b8306c85bbf0d"
   integrity sha512-y7/yvZ2TPAnR9+jnc00klvNNLkJiXFFrQA/hlLCcxA9a2A4zQIOimyFQ9XfwYKiGD1fb5GY8vbKIIgO8d5Tb2A==
@@ -886,8 +886,8 @@
 "@quasar/quasar-app-extension-testing-unit-vitest@../packages/unit-vitest":
   version "3.0.0"
   dependencies:
-    "@clack/prompts" "^1.4.0"
-    es-toolkit "^1.42.0"
+    "@clack/prompts" "^1.7.0"
+    es-toolkit "^1.51.0"
     happy-dom "^20.11.6"
 
 "@quasar/render-ssr-error@^2.2.6":
@@ -2154,7 +2154,7 @@ es-set-tostringtag@^2.1.0:
     has-tostringtag "^1.0.2"
     hasown "^2.0.2"
 
-es-toolkit@^1.42.0:
+es-toolkit@^1.51.0:
   version "1.51.0"
   resolved "https://registry.yarnpkg.com/es-toolkit/-/es-toolkit-1.51.0.tgz#f1f0fe1944e6405ef5e4d19a92b91c1b65e8b657"
   integrity sha512-zC2lQGkM7QX+Gm6iM3+WIdZJzthsEd14LvRNJneSO2hzyz/zNBENR8+YXWo1cKxgPBtV6ksPYHELbcwBRzmdCw==

@@ -26,7 +26,7 @@ export function registerDataCy() {
     { prevSubject: 'optional' },
     (subject, value, options) => {
       return cy.get(
-        `[data-cy=${value}]`,
+        `[data-cy="${value}"]`,
         Object.assign({ withinSubject: subject }, options),
       );
     },

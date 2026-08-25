@@ -13,4 +13,12 @@ describe("dataCy command", () => {
 
     cy.dataCy("wrapper").dataCy("paragraph").should("exist");
   });
+
+  it("supports special characters in the value", () => {
+    cy.mount(DataCyComponent);
+
+    cy.dataCy("dotted.name")
+      .should("exist")
+      .and("contain", "Special characters");
+  });
 });

@@ -99,6 +99,7 @@ The AE now requires `@quasar/app-vite` v3. Cypress helpers and commands haven't 
 - The component-testing Vite config is now derived from your quasar.config file through `@quasar/app-vite`'s testing endpoint. `injectQuasarDevServerConfig()` usage in `cypress.config` is unchanged;
 - Delete `test/cypress/tsconfig.json`: Cypress v15 processes TypeScript with tsx, so the ts-node workarounds (including the `TS_NODE_PROJECT` environment variable in the test scripts) are gone. Re-installing the AE updates the test scripts for you;
 - Replace `'src/...'` alias imports in your Cypress files with `'@/...'` and `'app/...'` imports with `'@/../...'`: app-vite v3 only provides the `@` alias by default;
+- `cy.dataCy` now quotes the attribute value, so names with special characters (e.g. dots) work. If you worked around this by passing pre-quoted values, e.g. `cy.dataCy('"foo.bar"')`, drop the extra quotes;
 - `@cypress/code-coverage` is upgraded to v4, check their [upgrade guide](https://github.com/cypress-io/code-coverage/blob/v4.0.3/README.md#cypresscode-coverage-3x-to-4x);
 - New projects are scaffolded with `allowCypressEnv: false`, following the `Cypress.env()` deprecation. Check their [migration guide](https://on.cypress.io/cypress-env-migration);
 - `eslint-plugin-cypress` is only added when your project has ESLint v10 or newer, since plugin v7 requires it. You can freely upgrade your ESLint and plugin version as needed.
