@@ -1,7 +1,7 @@
 <% if (shouldAddCodeCoverage) { %>
 const registerCodeCoverageTasks = require('@cypress/code-coverage/task');
 <% } %>
-const { injectQuasarDevServerConfig } = require('@quasar/quasar-app-extension-testing-e2e-cypress/cct-dev-server');
+const { quasarComponentTestingConfig } = require('@quasar/quasar-app-extension-testing-e2e-cypress/cct-dev-server');
 const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
@@ -32,13 +32,9 @@ module.exports = defineConfig({
 <% } else { %>
     // setupNodeEvents(on, config) {},
 <% } %>
+    ...quasarComponentTestingConfig(),
     supportFile: 'test/cypress/support/component.js',
     specPattern: 'src/**/*.cy.{js,jsx,ts,tsx}',
     indexHtmlFile: 'test/cypress/support/component-index.html',
-    devServer: injectQuasarDevServerConfig(),
-<% if (requiresPublicPath) { %>
-    // If not set it will break tests related to components that load public assets. See https://github.com/quasarframework/quasar-testing/issues/379
-    devServerPublicPathRoute: '',
-<% } %>
   },
 });

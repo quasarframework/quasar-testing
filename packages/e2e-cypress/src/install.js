@@ -75,8 +75,6 @@ module.exports = async function (api) {
     devServerPort,
     shouldAddCodeCoverage,
     shouldSupportTypeScriptAndVite: shouldSupportTypeScript,
-    // See https://github.com/quasarframework/quasar-testing/issues/379
-    requiresPublicPath: true,
   });
 
   // eslint-plugin-cypress v7 requires ESLint v10
