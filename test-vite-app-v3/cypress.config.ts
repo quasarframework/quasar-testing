@@ -1,5 +1,5 @@
 import registerCodeCoverageTasks from "@cypress/code-coverage/task";
-import { injectQuasarDevServerConfig } from "@quasar/quasar-app-extension-testing-e2e-cypress/cct-dev-server";
+import { quasarComponentTestingConfig } from "@quasar/quasar-app-extension-testing-e2e-cypress/cct-dev-server";
 import { defineConfig } from "cypress";
 
 export default defineConfig({
@@ -22,11 +22,9 @@ export default defineConfig({
       registerCodeCoverageTasks(on, config);
       return config;
     },
+    ...quasarComponentTestingConfig(),
     supportFile: "test/cypress/support/component.ts",
     specPattern: "src/**/*.cy.{js,jsx,ts,tsx}",
-    indexHtmlFile: "test/cypress/support/component-index.html",
-    devServer: injectQuasarDevServerConfig(),
-    // @ts-expect-error -- If not set it will break tests related to components that load public assets. See https://github.com/quasarframework/quasar-testing/issues/379
-    devServerPublicPathRoute: ""
+    indexHtmlFile: "test/cypress/support/component-index.html"
   }
 });

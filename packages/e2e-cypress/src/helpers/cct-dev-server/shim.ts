@@ -22,5 +22,14 @@
 // we should be able to remove this workaround and rely on something much simpler
 
 declare module '@quasar/quasar-app-extension-testing-e2e-cypress/cct-dev-server' {
-  function injectQuasarDevServerConfig(): Cypress.DevServerConfigOptions;
+  interface QuasarComponentTestingConfigOptions {
+    excludePlugins?: string[] | ((defaultExclusions: string[]) => string[]);
+  }
+
+  function quasarComponentTestingConfig(
+    options?: QuasarComponentTestingConfigOptions,
+  ): {
+    devServer: Cypress.DevServerConfigOptions;
+    devServerPublicPathRoute: string;
+  };
 }

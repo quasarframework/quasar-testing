@@ -60,6 +60,31 @@ This AE is a wrapper around Cypress, you won't be able to use this or understand
 As for "e2e" tests, you'll need to first take a look to their [official documentation](https://docs.cypress.io/guides/component-testing/writing-your-first-component-test), or you won't understand many of the concepts described into this documentation.
 Consequentially, we may rename this package from `@quasar/quasar-app-extension-testing-e2e-cypress` to `@quasar/quasar-app-extension-testing-cypress` in a future release.
 
+### quasarComponentTestingConfig(options)
+
+Spread this helper into the `component` block of your Cypress configuration. It provides the component-testing dev server, with a Vite config built from your quasar.config file by `@quasar/app-vite`, without the dev-server-only plugins (`vite-plugin-checker` and `vite-plugin-vue-devtools`):
+
+```ts
+import { quasarComponentTestingConfig } from '@quasar/quasar-app-extension-testing-e2e-cypress/cct-dev-server';
+import { defineConfig } from 'cypress';
+
+export default defineConfig({
+  // ...
+  component: {
+    ...quasarComponentTestingConfig(),
+    supportFile: 'test/cypress/support/component.ts',
+    specPattern: 'src/**/*.cy.{js,jsx,ts,tsx}',
+    indexHtmlFile: 'test/cypress/support/component-index.html',
+  },
+});
+```
+
+The `excludePlugins` option adjusts the plugin filtering:
+
+- `{ excludePlugins: ['plugin-name'] }` removes more plugins that shouldn't run during tests;
+- `{ excludePlugins: (defaults) => defaults.filter((name) => name !== 'vite-plugin-vue-devtools') }` keeps a plugin that is removed by default;
+- `{ excludePlugins: () => [] }` disables the plugin filtering.
+
 ### Code coverage
 
 We support scaffolding [code coverage configuration for Cypress tests](https://docs.cypress.io/guides/tooling/code-coverage), when using Vite-based Quasar CLI.
@@ -90,18 +115,45 @@ You can either apply [this workaround](https://github.com/istanbuljs/nyc/issues/
 
 ### Upgrade from Cypress AE v6.x to v7.0 onwards
 
-The AE now requires `@quasar/app-vite` v3. Cypress helpers and commands haven't changed their APIs.
+The AE now requires `@quasar/app-vite` v3.
 
 - Upgrade `@quasar/app-vite` to v3. If you can't migrate away from v2 yet, stay on AE v6.x;
 - `@quasar/app-webpack` is no longer supported. Webpack users stay on AE v6.x;
 - Upgrade Node to v22.22.0 or newer;
-- Upgrade `cypress` to v15.14 or later and `eslint-plugin-cypress` to v4 or later;
-- The component-testing Vite config is now derived from your quasar.config file through `@quasar/app-vite`'s testing endpoint. `injectQuasarDevServerConfig()` usage in `cypress.config` is unchanged;
-- Delete `test/cypress/tsconfig.json`: Cypress v15 processes TypeScript with tsx, so the ts-node workarounds (including the `TS_NODE_PROJECT` environment variable in the test scripts) are gone. Re-installing the AE updates the test scripts for you;
+- Upgrade `cypress` to v15.14 or later.
+
+Then either re-install the AE (`quasar ext add @quasar/testing-e2e-cypress`) accepting the file overwrites, or apply the changes manually. Accepting an overwrite replaces the whole file, so if you customized your Cypress config, support files or example tests, prefer the manual steps or review each overwrite carefully.
+
+Manual steps:
+
+- Update your Cypress config file:
+
+  ```diff
+  -import { injectQuasarDevServerConfig } from '@quasar/quasar-app-extension-testing-e2e-cypress/cct-dev-server';
+  +import { quasarComponentTestingConfig } from '@quasar/quasar-app-extension-testing-e2e-cypress/cct-dev-server';
+   import { defineConfig } from 'cypress';
+
+   export default defineConfig({
+     // ...
+  +  allowCypressEnv: false,
+     component: {
+  +    ...quasarComponentTestingConfig(),
+       supportFile: 'test/cypress/support/component.ts',
+       specPattern: 'src/**/*.cy.{js,jsx,ts,tsx}',
+       indexHtmlFile: 'test/cypress/support/component-index.html',
+  -    devServer: injectQuasarDevServerConfig(),
+  -    // @ts-expect-error -- If not set it will break tests related to components that load public assets. See https://github.com/quasarframework/quasar-testing/issues/379
+  -    devServerPublicPathRoute: '',
+     },
+   });
+  ```
+
+  [`quasarComponentTestingConfig(options)`](#quasarcomponenttestingconfigoptions) derives the component-testing Vite config from your quasar.config file through `@quasar/app-vite`'s testing endpoint. `allowCypressEnv: false` follows the `Cypress.env()` deprecation: if your tests call `Cypress.env()`, check the [migration guide](https://on.cypress.io/cypress-env-migration) or leave the option out;
+
+- Delete `test/cypress/tsconfig.json` and remove `TS_NODE_PROJECT=test/cypress/tsconfig.json` from the `test:*` scripts in your package.json: Cypress v15 processes TypeScript with tsx, so the ts-node workarounds are gone;
 - Replace `'src/...'` alias imports in your Cypress files with `'@/...'` and `'app/...'` imports with `'@/../...'`: app-vite v3 only provides the `@` alias by default;
 - `cy.dataCy` now quotes the attribute value, so names with special characters (e.g. dots) work. If you worked around this by passing pre-quoted values, e.g. `cy.dataCy('"foo.bar"')`, drop the extra quotes;
 - `@cypress/code-coverage` is upgraded to v4, check their [upgrade guide](https://github.com/cypress-io/code-coverage/blob/v4.0.3/README.md#cypresscode-coverage-3x-to-4x);
-- New projects are scaffolded with `allowCypressEnv: false`, following the `Cypress.env()` deprecation. Check their [migration guide](https://on.cypress.io/cypress-env-migration);
 - `eslint-plugin-cypress` is only added when your project has ESLint v10 or newer, since plugin v7 requires it. You can freely upgrade your ESLint and plugin version as needed.
 
 ### Upgrade from Cypress AE v6.2 to v6.3 onwards
