@@ -61,7 +61,8 @@ export function quasarComponentTestingConfig(
         ) as ({ name?: string } | null | undefined | false)[];
         config.plugins = plugins.filter(
           (plugin) =>
-            !!plugin && !isExcludedPlugin(plugin.name ?? '', excludedPluginNames),
+            !!plugin &&
+            !isExcludedPlugin(plugin.name ?? '', excludedPluginNames),
         ) as NonNullable<typeof config.plugins>;
 
         // [1] -> https://github.com/cypress-io/cypress/issues/22505#issuecomment-1277855100
@@ -74,5 +75,5 @@ export function quasarComponentTestingConfig(
     // If not set, tests for components that load public assets break.
     // See https://github.com/quasarframework/quasar-testing/issues/379
     devServerPublicPathRoute: '',
-  };
+  } as const;
 }

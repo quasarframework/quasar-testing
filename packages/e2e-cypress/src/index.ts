@@ -5,9 +5,10 @@
  * Docs: https://quasar.dev/app-extensions/development-guide/index-api
  */
 
-const { enforcedDevServerPort } = require('./shared');
+import { defineIndexScript } from '#q-app';
+import { normalizePromptsAnswers } from './prompts';
 
-module.exports = async function (api) {
+export default defineIndexScript(async (api) => {
   api.compatibleWith('quasar', '^2.24.0');
   api.compatibleWith('@quasar/app-vite', '^3.0.0');
   // Vite 8 requires Cypress 15.14+ for component testing support
@@ -18,25 +19,23 @@ module.exports = async function (api) {
     return;
   }
 
-  api.extendQuasarConf(async (conf) => {
-    // Prevent Quasar from opening the project into a new browser
-    // tab as Cypress opens its own window
-    conf.devServer.open = false;
+  const prompts = normalizePromptsAnswers(api.prompts);
 
-    // Force a specific port for Cypress (prompts may store it as a string)
-    conf.devServer.port = Number(api.prompts.port) || enforcedDevServerPort;
-  });
+  api.extendQuasarConf(() => ({
+    devServer: {
+      // Prevent Quasar from opening the project into a new browser
+      // tab as Cypress opens its own window
+      open: false,
+      port: prompts.port,
+    },
+  }));
 
-  if (api.prompts.options.includes('code-coverage')) {
+  if (prompts.options.includes('code-coverage')) {
     // TODO: known problem with Vue3 + Vite source maps: https://github.com/iFaxity/vite-plugin-istanbul/issues/14
     const { default: istanbul } = await import('vite-plugin-istanbul');
 
-    api.extendViteConf((viteConf) => {
-      viteConf.plugins.push(
-        istanbul({
-          forceBuildInstrument: api.ctx.prod,
-        }),
-      );
-    });
+    api.extendViteConf(() => ({
+      plugins: [istanbul({ forceBuildInstrument: api.ctx.prod })],
+    }));
   }
-};
+});
