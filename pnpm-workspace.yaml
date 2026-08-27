@@ -1,0 +1,7 @@
+packages:
+  - packages/*
+
+allowBuilds:
+  '@parcel/watcher': true
+  cypress: true
+  snyk: false

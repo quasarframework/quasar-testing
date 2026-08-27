@@ -93,7 +93,9 @@ export function registerCypressOverwrites() {
     },
   );
 
-  chai.Assertion.overwriteProperty('checked', (_super: () => void) => {
+  chai.Assertion.overwriteProperty('checked', (...args: unknown[]) => {
+    const _super = args[0] as () => void;
+
     return function (
       this: typeof chai.Assertion & { __flags: { negate?: boolean } },
     ) {

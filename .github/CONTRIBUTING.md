@@ -74,16 +74,16 @@ We'll try to help you getting started and link your integration on this README :
 Use the Quasar CLI to create a new Quasar project to test out the changes you'll be doing on testing packages, eg. `quasar create my-example-project`
 
 Fork this monorepo and clone it locally via `git clone https://github.com/<YOUR-GITHUB-HANDLE>/quasar-testing.git`
-Move into the monorepo folder (`cd quasar-testing`) and run `yarn install` at root level
+Move into the monorepo folder (`cd quasar-testing`) and run `pnpm install` at root level.
 Move into the package you're interested into, eg `cd packages/unit-vitest`, and start hacking!
 When you're ready to test your changes:
 
-- run `yarn build`, if that package has a build step
-- run `rm -rf node_modules`, to avoid undebuggable runtime errors due to dependency chain pollution. See https://github.com/yarnpkg/yarn/issues/2822 for more info, remember to rerun `yarn install` when coming back for more changes
+- run `pnpm build`, if that package has a build step
+- run `rm -rf node_modules` to start fresh, remember to rerun `pnpm install` when coming back for more changes
 
 Then move to your example project (**it must be OUTSIDE `quasar-testing` folder**):
 
-- install the dependency locally, eg. `yarn add -D <path of testing repo>/packages/unit-vitest`
+- install the dependency locally, eg. `pnpm add -D <path of testing repo>/packages/unit-vitest`
 - invoke the AE to trigger the installation process, eg. `quasar ext invoke @quasar/testing-unit-vitest`. You can skip this if you didn't change anything into `prompts.js` and `install.js` AE files
 - try out the new features you added!
 

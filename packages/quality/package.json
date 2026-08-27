@@ -14,8 +14,7 @@
   },
   "engines": {
     "node": ">= 10.13.0",
-    "npm": ">= 5.6.0",
-    "yarn": ">= 1.6.0"
+    "npm": ">= 5.6.0"
   },
   "dependencies": {
     "lighthouse": "^5.1.0",

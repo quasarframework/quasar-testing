@@ -17,9 +17,8 @@
     "typescript": "^5.9.3"
   },
   "engines": {
-    "node": ">= 18.0.0",
-    "npm": ">= 10",
-    "yarn": ">= 1.22.19"
+    "node": ">= 22.22.0",
+    "npm": ">= 10"
   },
   "bugs": {
     "url": "https://github.com/quasarframework/quasar-testing/issues"
@@ -28,27 +27,5 @@
     "lint": "eslint --ext .js,.ts \"packages/*/src/*\" --fix --report-unused-disable-directives",
     "format": "prettier --write \"packages/*/src/**/*.{js,ts}\""
   },
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ],
-    "nohoistComments": {
-      "@quasar/app-vite": [
-        "app-vite resolves packages starting from the parent of the app dir (mlly resolvePathSync gets the dir without a trailing slash).",
-        "A root-hoisted copy would shadow the version each package or test app expects.",
-        "The nohoist keeps every @quasar/app-vite in its own package's node_modules."
-      ],
-      "vite-plugin-istanbul": [
-        "The CLI loads AE scripts from the workspace, so the cypress AE's import of vite-plugin-istanbul resolves here instead of in the test app.",
-        "The plugin imports its vite peer from its own location, so both must sit inside the package's node_modules."
-      ]
-    },
-    "nohoist": [
-      "**/@quasar/app-vite",
-      "**/@quasar/app-vite/**",
-      "**/vite-plugin-istanbul",
-      "**/vite"
-    ]
-  },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  "packageManager": "pnpm@11.20.0"
 }

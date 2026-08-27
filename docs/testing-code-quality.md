@@ -34,7 +34,7 @@ There are two methods of running Lighthouse, both of which have their respective
 
 This example mode requires that you install lighthouse globally, and runs Lighthouse as a CLI interface. 
 ```bash
-$ yarn global add lighthouse
+$ pnpm add -g lighthouse
 ``` 
 
 The following command will run lighthouse and create a very detailed report for you, which will be placed in `/test/lighthouse/reports`. This report will be automatically opened in your browser. 
