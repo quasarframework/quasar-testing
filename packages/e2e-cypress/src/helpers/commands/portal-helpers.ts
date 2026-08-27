@@ -1,4 +1,4 @@
-import { castArray } from 'lodash';
+import { castArray } from 'es-toolkit/compat';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace

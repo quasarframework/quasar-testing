@@ -1,4 +1,7 @@
 {
+  // This file ships on purpose, see package.json > filesComments.
+  // Never add "paths", they apply to the runtime resolution of the AE scripts.
+  // Never use "extends", get-tsconfig would fail to resolve it at runtime.
   "compilerOptions": {
     "esModuleInterop": true,
     "skipLibCheck": true,

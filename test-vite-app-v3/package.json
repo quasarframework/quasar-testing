@@ -54,7 +54,7 @@
     "@vitest/ui": "^4.1.11",
     "@vue/test-utils": "^2.4.11",
     "autoprefixer": "^10.4.27",
-    "cypress": "^15.14.0",
+    "cypress": "^15.21.0",
     "oxfmt": "^0.x",
     "oxlint": "^1.x",
     "oxlint-tsgolint": "^7.0.2001",

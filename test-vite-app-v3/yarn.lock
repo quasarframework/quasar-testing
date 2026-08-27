@@ -878,7 +878,7 @@
     "@clack/prompts" "^1.7.0"
     "@cypress/code-coverage" "^4.0.3"
     cross-env "^10.1.0"
-    lodash "^4.18.1"
+    es-toolkit "^1.42.0"
     nyc "^18.0.0"
     start-server-and-test "^3.0.12"
     vite-plugin-istanbul "^9.0.1"
@@ -1883,7 +1883,7 @@ csstype@^3.2.3:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.2.3.tgz#ec48c0f3e993e50648c86da559e2610995cf989a"
   integrity sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==
 
-cypress@^15.14.0:
+cypress@^15.21.0:
   version "15.21.0"
   resolved "https://registry.yarnpkg.com/cypress/-/cypress-15.21.0.tgz#61017bb85ae2886fefcd2b9b4c21b47cb62a1b6b"
   integrity sha512-6uPy5GUjao97t/QDIwlPyJz4JUqPpFIPq5lNazN95LSA3ynJoYC1sHZ3W+aj4f+K1OFGbMfno0+OX2Gx0OmlPA==
@@ -2154,7 +2154,7 @@ es-set-tostringtag@^2.1.0:
     has-tostringtag "^1.0.2"
     hasown "^2.0.2"
 
-es-toolkit@^1.51.0:
+es-toolkit@^1.42.0, es-toolkit@^1.51.0:
   version "1.51.0"
   resolved "https://registry.yarnpkg.com/es-toolkit/-/es-toolkit-1.51.0.tgz#f1f0fe1944e6405ef5e4d19a92b91c1b65e8b657"
   integrity sha512-zC2lQGkM7QX+Gm6iM3+WIdZJzthsEd14LvRNJneSO2hzyz/zNBENR8+YXWo1cKxgPBtV6ksPYHELbcwBRzmdCw==

@@ -122,7 +122,7 @@ The AE now requires `@quasar/app-vite` v3.
 - Upgrade Node to v22.22.0 or newer;
 - Upgrade `cypress` to v15.14 or later.
 
-Then either re-install the AE (`quasar ext add @quasar/testing-e2e-cypress`) accepting the file overwrites, or apply the changes manually. Accepting an overwrite replaces the whole file, so if you customized your Cypress config, support files or example tests, prefer the manual steps or review each overwrite carefully.
+Then either re-install the AE (`quasar ext add @quasar/testing-e2e-cypress`) accepting the file overwrites, or apply the changes manually. Accepting an overwrite replaces the whole file, so if you customized your Cypress config, support files or example tests, prefer the manual steps or review each overwrite carefully. When re-installing in a JS project, delete the old `cypress.config.cjs` afterwards: the new file is named `cypress.config.js`, so it gets scaffolded alongside instead of overwriting it.
 
 Manual steps:
 
@@ -154,7 +154,9 @@ Manual steps:
 - Replace `'src/...'` alias imports in your Cypress files with `'@/...'` and `'app/...'` imports with `'@/../...'`: app-vite v3 only provides the `@` alias by default;
 - `cy.dataCy` now quotes the attribute value, so names with special characters (e.g. dots) work. If you worked around this by passing pre-quoted values, e.g. `cy.dataCy('"foo.bar"')`, drop the extra quotes;
 - `@cypress/code-coverage` is upgraded to v4, check their [upgrade guide](https://github.com/cypress-io/code-coverage/blob/v4.0.3/README.md#cypresscode-coverage-3x-to-4x);
-- `eslint-plugin-cypress` is only added when your project has ESLint v10 or newer, since plugin v7 requires it. You can freely upgrade your ESLint and plugin version as needed.
+- `eslint-plugin-cypress` is only added when your project has ESLint v10 or newer, since plugin v7 requires it. You can freely upgrade your ESLint and plugin version as needed;
+- The package is now ESM-only with an exports map. The documented entry points (`.`, `./cct-dev-server`, `./nyc-config-preset`) keep working, other deep imports are no longer available;
+- (**JS projects only**) Rename `cypress.config.cjs` to `cypress.config.js` and switch its `require()`/`module.exports` syntax to `import`/`export default`: app-vite v3 projects are ESM by default.
 
 ### Upgrade from Cypress AE v6.2 to v6.3 onwards
 
