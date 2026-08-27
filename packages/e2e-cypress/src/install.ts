@@ -39,9 +39,7 @@ export default defineInstallScript(async (api) => {
   const shouldAddCodeCoverage = prompts.options.includes('code-coverage');
   const testEnvCommand = 'cross-env NODE_ENV=test';
   // "http-get" must be used because the underlying "wait-on" performs HEAD requests by default
-  // On some OSes "localhost" resolves to "::1" instead of "127.0.0.1", so use the IP explicitly
-  // See https://github.com/bahmutov/start-server-and-test/issues/358
-  const e2eServerCommand = `${testEnvCommand} start-test "quasar dev" http-get://127.0.0.1:${prompts.port}`;
+  const e2eServerCommand = `${testEnvCommand} start-test "quasar dev" http-get://localhost:${prompts.port}`;
 
   api.render('./templates/base', { shouldSupportTypeScript });
 
