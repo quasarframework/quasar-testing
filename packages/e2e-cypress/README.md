@@ -52,7 +52,7 @@ Some custom commands are included out-of-the-box:
 
 > Check out how to use these commands, and other recipes about testing Quasar UI components, into our [automated tests suite](./src/templates/typescript/src/components/___tests__).
 
-You must have a running dev server in order to run integration tests. The scripts added by this AE automatically take care of this: `yarn test:e2e` and `yarn test:e2e:ci` will launch `quasar dev` when starting up the tests and kill it when cypress process ends.
+You must have a running dev server in order to run integration tests. The scripts added by this AE automatically take care of this: `test:e2e` and `test:e2e:ci` will launch `quasar dev` when starting up the tests and kill it when cypress process ends.
 
 This AE is a wrapper around Cypress, you won't be able to use this or understand most of the documentation if you haven't read [the official documentation](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html).
 
@@ -90,7 +90,7 @@ The `excludePlugins` option adjusts the plugin filtering:
 We support scaffolding [code coverage configuration for Cypress tests](https://docs.cypress.io/guides/tooling/code-coverage), when using Vite-based Quasar CLI.
 
 To generate reports, run `test:e2e:ci` and/or `test:component:ci` scripts.
-Running them both sequentially within the same command (eg. `yarn test:e2e:ci && yarn test:component:ci`) will result in combined coverage report.
+Running them both sequentially within the same command (eg. `pnpm test:e2e:ci && pnpm test:component:ci`) will result in combined coverage report.
 You'll find the generated report into `coverage/lcov-report` folder.
 
 We provide a [preset configuration][nyc-config-preset] for the coverage report which:
@@ -356,7 +356,7 @@ Check out more examples [here](./src/templates/typescript/src/components/___test
 
 ```sh
 cd test-vite-app-v3
-yarn sync:cypress # or "yarn sync:all", if it's the first time you run this command
-yarn test:e2e:ci # check if e2e tests still work with the local version of the AE
-yarn test:component:ci # check if component tests still work with the local version of the AE
+pnpm sync:cypress # or "pnpm sync:all", if it's the first time you run this command
+pnpm test:e2e:ci # check if e2e tests still work with the local version of the AE
+pnpm test:component:ci # check if component tests still work with the local version of the AE
 ```

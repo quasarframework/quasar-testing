@@ -79,4 +79,4 @@ This mode ships with a **spec** that verifies:
 - that your app/site has some quality according to Lighthouse
 
 #### TIP!
-> On some setups we have noticed that **nyc** will not reinitialise itself unless you remove its output files from the output folder - which can be rather disconcerting when changes have been made to your coverage settings. Make sure you have the latest **yarn** or **npm**.
+> On some setups we have noticed that **nyc** will not reinitialise itself unless you remove its output files from the output folder - which can be rather disconcerting when changes have been made to your coverage settings. Make sure you have the latest **pnpm** or **npm**.

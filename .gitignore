@@ -10,3 +10,7 @@ node_modules
 /packages/*/service-account.json
 /packages/*/*.log*
 /**/coverage
+pnpm-debug.log*
+.corepack/
+.cypress-cache/
+.pnpm-store/

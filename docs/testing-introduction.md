@@ -5,7 +5,7 @@ Testing is a method of verifying that code does what it is supposed to do - befo
 
 Tests provide you with a method to audit your codebase and allow development teams to have explicit agreement upon what the code **must** do. Continuous Integration (CI) systems use tests to make sure that the code still exhibits expected behaviour after changes have been made to the code - and most importantly makes sure that the parts work together as expected. In fact, code not passing tests is the most common cause of failed pull-requests. Making sure that you follow the best practice pattern of keeping new versions of your code compliant with the specs that you have written is one step toward enlightenment through test writing. ;)
 
-You may be used to running `yarn test` to run your tests, but we have extended the `quasar-cli` and the framework to integrate testing as a first-class citizen of the Quasar Framework environment for your development pleasure.
+You may be used to running `pnpm test` to run your tests, but we have extended the `quasar-cli` and the framework to integrate testing as a first-class citizen of the Quasar Framework environment for your development pleasure.
 
 There are four kinds of tests that this mode will enable you to run:
 - Unit tests (Make sure your "code-units" work atomically) `quasar test -u`
@@ -32,7 +32,7 @@ Google's Lighthouse tool audits the performance, PWA, accessibility, best practi
 Although it is available to you within the devtools of the Chrome browser, we wanted to integrate it deeply into the testing mode so that you have its statistics immediately at hand. We recommend installing it globally:
 
 ```bash
-$ yarn global add lighthouse
+$ pnpm add -g lighthouse
 ```
 
 #### When you will want to have tests:

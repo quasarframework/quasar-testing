@@ -86,7 +86,7 @@ $ quasar ext invoke @quasar/testing-unit-vitest
 You can upgrade a testing harness and its dependencies by updating its related NPM package.
 
 ```
-$ yarn add -D @quasar/quasar-app-extension-testing-unit-vitest
+$ pnpm add -D @quasar/quasar-app-extension-testing-unit-vitest
 ```
 
 This won't change existing test or configuration files.
