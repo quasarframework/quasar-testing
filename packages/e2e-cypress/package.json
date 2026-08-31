@@ -43,19 +43,18 @@
   },
   "dependencies": {
     "@clack/prompts": "^1.7.0",
-    "@cypress/code-coverage": "^4.0.3",
-    "cross-env": "^10.1.0",
-    "nyc": "^18.0.0",
-    "start-server-and-test": "^3.0.12",
-    "vite-plugin-istanbul": "^9.0.1",
-    "es-toolkit": "^1.42.0"
+    "es-toolkit": "^1.42.0",
+    "vite-plugin-istanbul": "^9.0.1"
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^4.0.3",
     "@quasar/app-vite": "^3.8.0",
+    "cross-env": "^10.1.0",
     "cypress": "^15.21.0",
     "eslint-plugin-cypress": "^7.0.1",
     "obuild": "^0.4.38",
     "quasar": "^2.25.1",
+    "start-server-and-test": "^3.0.12",
     "vue": "^3.5.41",
     "vue-router": "^5.0.6"
   },

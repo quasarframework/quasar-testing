@@ -53,8 +53,20 @@ export default defineInstallScript(async (api) => {
   const shouldAddEslintPlugin = api.hasPackage('eslint', '>=10');
 
   api.extendPackageJson({
+    // Package managers with isolated node_modules (e.g. pnpm) do not expose deps transitively.
+    // So, for package.json scripts and direct imports in app code, deps must be installed explicitly.
     devDependencies: pickDevDependencies([
+      // Let the users freely control the Cypress version
       'cypress',
+
+      // The scaffolded scripts use these packages
+      'cross-env',
+      'start-server-and-test',
+
+      // Cypress config and support files import this package
+      ...(shouldAddCodeCoverage ? ['@cypress/code-coverage'] : []),
+
+      // Completely optional and allow user to freely control the version
       ...(shouldAddEslintPlugin ? ['eslint-plugin-cypress'] : []),
     ]),
     scripts: {

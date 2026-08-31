@@ -35,28 +35,22 @@ importers:
       '@clack/prompts':
         specifier: ^1.7.0
         version: 1.7.0
-      '@cypress/code-coverage':
-        specifier: ^4.0.3
-        version: 4.0.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/preset-env@7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(babel-loader@10.1.1(@babel/core@7.29.7(supports-color@8.1.1))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(cypress@15.21.0)(supports-color@8.1.1)(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26))
-      cross-env:
-        specifier: ^10.1.0
-        version: 10.1.0
       es-toolkit:
         specifier: ^1.42.0
         version: 1.51.0
-      nyc:
-        specifier: ^18.0.0
-        version: 18.0.0(supports-color@8.1.1)
-      start-server-and-test:
-        specifier: ^3.0.12
-        version: 3.0.12(supports-color@8.1.1)
       vite-plugin-istanbul:
         specifier: ^9.0.1
         version: 9.0.1(supports-color@8.1.1)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))
     devDependencies:
+      '@cypress/code-coverage':
+        specifier: ^4.0.3
+        version: 4.0.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/preset-env@7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(babel-loader@10.1.1(@babel/core@7.29.7(supports-color@8.1.1))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(cypress@15.21.0)(supports-color@8.1.1)(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26))
       '@quasar/app-vite':
         specifier: ^3.8.0
         version: 3.8.1(@types/node@20.19.43)(quasar@2.25.1)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@5.9.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@5.9.3))(yaml@2.9.0)
+      cross-env:
+        specifier: ^10.1.0
+        version: 10.1.0
       cypress:
         specifier: ^15.21.0
         version: 15.21.0
@@ -69,6 +63,9 @@ importers:
       quasar:
         specifier: ^2.25.1
         version: 2.25.1
+      start-server-and-test:
+        specifier: ^3.0.12
+        version: 3.0.12(supports-color@8.1.1)
       vue:
         specifier: ^3.5.41
         version: 3.5.41(typescript@5.9.3)
@@ -159,7 +156,7 @@ importers:
         version: 3.7.0(@types/node@22.20.1)(quasar@2.25.1)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0)
       '@quasar/quasar-app-extension-testing-e2e-cypress':
         specifier: workspace:*
-        version: file:packages/e2e-cypress(68a2d87ce769529b1da8e83ea25837ed)
+        version: file:packages/e2e-cypress(@quasar/app-vite@3.7.0(@types/node@22.20.1)(quasar@2.25.1)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0))(cypress@15.21.0)(quasar@2.25.1)(supports-color@8.1.1)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))
       '@quasar/quasar-app-extension-testing-unit-vitest':
         specifier: workspace:*
         version: file:packages/unit-vitest(@quasar/app-vite@3.7.0(@types/node@22.20.1)(quasar@2.25.1)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0))(@vitest/ui@4.1.11)(@vue/test-utils@2.4.11(@vue/compiler-dom@3.5.41)(@vue/server-renderer@3.5.41)(vue@3.5.41(typescript@6.0.3)))(quasar@2.25.1)(vitest@4.1.11)(vue@3.5.41(typescript@6.0.3))
@@ -1359,6 +1356,8 @@ packages:
     peerDependencies:
       '@quasar/app-vite': ^3.0.0
       cypress: ^15.14.0
+      quasar: ^2.24.0
+      vue: ^3.3.4
 
   '@quasar/quasar-app-extension-testing-unit-vitest@file:packages/unit-vitest':
     resolution: {directory: packages/unit-vitest, type: directory}
@@ -6793,24 +6792,18 @@ snapshots:
 
   '@quasar/extras@2.0.4': {}
 
-  '@quasar/quasar-app-extension-testing-e2e-cypress@file:packages/e2e-cypress(68a2d87ce769529b1da8e83ea25837ed)':
+  '@quasar/quasar-app-extension-testing-e2e-cypress@file:packages/e2e-cypress(@quasar/app-vite@3.7.0(@types/node@22.20.1)(quasar@2.25.1)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0))(cypress@15.21.0)(quasar@2.25.1)(supports-color@8.1.1)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))':
     dependencies:
       '@clack/prompts': 1.7.0
-      '@cypress/code-coverage': 4.0.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/preset-env@7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(babel-loader@10.1.1(@babel/core@7.29.7(supports-color@8.1.1))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(cypress@15.21.0)(supports-color@8.1.1)(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26))
       '@quasar/app-vite': 3.7.0(@types/node@22.20.1)(quasar@2.25.1)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0)
-      cross-env: 10.1.0
       cypress: 15.21.0
       es-toolkit: 1.51.0
-      nyc: 18.0.0(supports-color@8.1.1)
-      start-server-and-test: 3.0.12(supports-color@8.1.1)
+      quasar: 2.25.1
       vite-plugin-istanbul: 9.0.1(supports-color@8.1.1)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))
+      vue: 3.5.41(typescript@6.0.3)
     transitivePeerDependencies:
-      - '@babel/core'
-      - '@babel/preset-env'
-      - babel-loader
       - supports-color
       - vite
-      - webpack
 
   '@quasar/quasar-app-extension-testing-unit-vitest@file:packages/unit-vitest(@quasar/app-vite@3.7.0(@types/node@22.20.1)(quasar@2.25.1)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0))(@vitest/ui@4.1.11)(@vue/test-utils@2.4.11(@vue/compiler-dom@3.5.41)(@vue/server-renderer@3.5.41)(vue@3.5.41(typescript@6.0.3)))(quasar@2.25.1)(vitest@4.1.11)(vue@3.5.41(typescript@6.0.3))':
     dependencies:

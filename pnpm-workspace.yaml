@@ -19,5 +19,5 @@ allowBuilds:
   '@parcel/watcher': false
   # cypress downloads its binary in its postinstall.
   cypress: true
-  # this is a dependency of the legacy quality package and we don't need it's scripts
+  # this is a dependency of the legacy quality package and we don't need its scripts
   snyk: false

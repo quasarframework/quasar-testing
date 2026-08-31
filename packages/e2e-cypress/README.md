@@ -88,6 +88,7 @@ The `excludePlugins` option adjusts the plugin filtering:
 ### Code coverage
 
 We support scaffolding [code coverage configuration for Cypress tests](https://docs.cypress.io/guides/tooling/code-coverage), when using Vite-based Quasar CLI.
+Enabling this option adds `@cypress/code-coverage` to your devDependencies.
 
 To generate reports, run `test:e2e:ci` and/or `test:component:ci` scripts.
 Running them both sequentially within the same command (eg. `pnpm test:e2e:ci && pnpm test:component:ci`) will result in combined coverage report.
@@ -154,6 +155,7 @@ Manual steps:
 - Replace `'src/...'` alias imports in your Cypress files with `'@/...'` and `'app/...'` imports with `'@/../...'`: app-vite v3 only provides the `@` alias by default;
 - `cy.dataCy` now quotes the attribute value, so names with special characters (e.g. dots) work. If you worked around this by passing pre-quoted values, e.g. `cy.dataCy('"foo.bar"')`, drop the extra quotes;
 - `@cypress/code-coverage` is upgraded to v4, check their [upgrade guide](https://github.com/cypress-io/code-coverage/blob/v4.0.3/README.md#cypresscode-coverage-3x-to-4x);
+- `cross-env`, `start-server-and-test` and, when using code coverage, `@cypress/code-coverage` are now devDependencies of your project instead of dependencies of the AE. Re-installing/re-invoking the AE adds them for you, otherwise run `pnpm add -D cross-env start-server-and-test @cypress/code-coverage` (or the npm/yarn equivalent) yourself. This fixes these tools not being reachable with package managers that isolate dependencies, like pnpm;
 - `eslint-plugin-cypress` is only added when your project has ESLint v10 or newer, since plugin v7 requires it. You can freely upgrade your ESLint and plugin version as needed;
 - The package is now ESM-only with an exports map. The documented entry points (`.`, `./cct-dev-server`, `./nyc-config-preset`) keep working, other deep imports are no longer available;
 - (**JS projects only**) Rename `cypress.config.cjs` to `cypress.config.js` and switch its `require()`/`module.exports` syntax to `import`/`export default`: app-vite v3 projects are ESM by default.
