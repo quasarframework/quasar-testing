@@ -1,2 +1,5 @@
 # Uses oxfmt, not prettier. Keeps the IDE prettier extension from formatting it.
 /test-vite-app-v3/
+
+# AE templates hold EJS tags, which prettier cannot parse.
+/packages/*/src/templates/

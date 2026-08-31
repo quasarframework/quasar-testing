@@ -21,11 +21,11 @@
     "build": "quasar build",
     "typecheck": "vue-tsc --noEmit",
     "postinstall": "quasar prepare --silent",
-    "sync:vitest": "pnpm --dir ../packages/unit-vitest build && pnpm add -D file:../packages/unit-vitest --ignore-scripts && pnpm --dir .. install && pnpm postinstall",
+    "sync:vitest": "pnpm --filter @quasar/quasar-app-extension-testing-unit-vitest build && quasar clean --cache && pnpm postinstall",
     "invoke:vitest": "quasar ext invoke @quasar/testing-unit-vitest && pnpm lint",
     "sync:invoke:vitest": "pnpm sync:vitest && pnpm invoke:vitest",
     "test:vitest": "pnpm test:unit:ci",
-    "sync:cypress": "pnpm --dir ../packages/e2e-cypress build:local && pnpm add -D file:../packages/e2e-cypress --ignore-scripts && pnpm --dir .. install && pnpm postinstall",
+    "sync:cypress": "pnpm --filter @quasar/quasar-app-extension-testing-e2e-cypress build && quasar clean --cache && pnpm postinstall",
     "invoke:cypress": "quasar ext invoke @quasar/testing-e2e-cypress && pnpm lint",
     "sync:invoke:cypress": "pnpm sync:cypress && pnpm invoke:cypress",
     "test:cypress": "pnpm test:e2e:ci && pnpm test:component:ci",
@@ -49,8 +49,8 @@
   "devDependencies": {
     "@cypress/code-coverage": "^4.0.3",
     "@quasar/app-vite": "^3.7.0",
-    "@quasar/quasar-app-extension-testing-e2e-cypress": "file:../packages/e2e-cypress",
-    "@quasar/quasar-app-extension-testing-unit-vitest": "file:../packages/unit-vitest",
+    "@quasar/quasar-app-extension-testing-e2e-cypress": "workspace:*",
+    "@quasar/quasar-app-extension-testing-unit-vitest": "workspace:*",
     "@types/node": "^22.19.11",
     "@vitest/ui": "^4.1.11",
     "@vue/test-utils": "^2.4.11",
@@ -65,6 +65,14 @@
     "typescript": "^6.0.0",
     "vitest": "^4.1.11",
     "vue-tsc": "^3.3.3"
+  },
+  "dependenciesMeta": {
+    "@quasar/quasar-app-extension-testing-e2e-cypress": {
+      "injected": true
+    },
+    "@quasar/quasar-app-extension-testing-unit-vitest": {
+      "injected": true
+    }
   },
   "engines": {
     "node": ">= 26 || ^24 || ^22.12"
