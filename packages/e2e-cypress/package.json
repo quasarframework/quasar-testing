@@ -36,6 +36,7 @@
     },
     "./nyc-config-preset": "./nyc-config-preset.json",
     "./nyc-config-preset.json": "./nyc-config-preset.json",
+    "./src/*": "./src/*",
     "./package.json": "./package.json"
   },
   "engines": {
@@ -60,7 +61,9 @@
   },
   "peerDependencies": {
     "@quasar/app-vite": "^3.0.0",
-    "cypress": "^15.14.0"
+    "cypress": "^15.14.0",
+    "quasar": "^2.24.0",
+    "vue": "^3.3.4"
   },
   "filesComments": {
     "tsconfig.json": [
