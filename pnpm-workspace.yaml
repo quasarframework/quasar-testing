@@ -1,7 +1,23 @@
+# test-vite-app-v3 depends on the AE packages as injected workspace
+# dependencies (see its dependenciesMeta). pnpm hard-copies them into the
+# virtual store and resolves their peer dependencies against the app, which
+# matches how a published install behaves, to properly test all aspects.
 packages:
   - packages/*
+  - test-vite-app-v3
+
+# Re-copy the injected AE packages into the test app after an AE build,
+# so the app sees the fresh dist without a full install.
+syncInjectedDepsAfterScripts:
+  - build
+
+# "pnpm publish" refuses to run outside master/main unless told otherwise.
+publishBranch: dev
 
 allowBuilds:
-  '@parcel/watcher': true
+  # @parcel/watcher ships prebuilt binaries as optional dependencies.
+  '@parcel/watcher': false
+  # cypress downloads its binary in its postinstall.
   cypress: true
+  # this is a dependency of the legacy quality package and we don't need it's scripts
   snyk: false

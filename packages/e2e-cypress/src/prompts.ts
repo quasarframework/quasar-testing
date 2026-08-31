@@ -17,9 +17,15 @@ export interface PromptsAnswers {
 export function normalizePromptsAnswers(
   prompts: Record<string, unknown>,
 ): PromptsAnswers {
+  const rawOptions = prompts['options'];
+
   return {
     port: Number(prompts['port']) || enforcedDevServerPort,
-    options: Array.isArray(prompts['options']) ? prompts['options'] : [],
+    options: Array.isArray(rawOptions)
+      ? rawOptions.filter(
+          (option: unknown): option is string => typeof option === 'string',
+        )
+      : [],
   };
 }
 

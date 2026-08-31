@@ -93,6 +93,9 @@ export function registerCypressOverwrites() {
     },
   );
 
+  // The chai types bundled with Cypress omit the _super parameter, so a typed
+  // parameter fails to typecheck when @types/chai is not visible to the
+  // compiler. A rest parameter is assignable to both signatures.
   chai.Assertion.overwriteProperty('checked', (...args: unknown[]) => {
     const _super = args[0] as () => void;
 

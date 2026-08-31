@@ -16,7 +16,6 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "build": "obuild",
-    "clean": "rimraf node_modules",
     "deploy:alpha": "pnpm build && pnpm publish --tag alpha",
     "deploy:beta": "pnpm build && pnpm publish --tag beta",
     "deploy:latest": "pnpm build && pnpm publish --tag latest"
@@ -48,8 +47,7 @@
     "./package.json": "./package.json"
   },
   "engines": {
-    "node": "^30 || ^28 || ^26 || ^24 || ^22.12.0",
-    "npm": ">= 10"
+    "node": "^30 || ^28 || ^26 || ^24 || ^22.12.0"
   },
   "dependencies": {
     "@clack/prompts": "^1.7.0",
