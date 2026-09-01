@@ -11,12 +11,15 @@ export function registerCypressOverwrites() {
     'select',
     (originalFn, subject, valueOrTextOrIndex, options) => {
       // Hijack the subject to be the root q-select element if we notice we are inside one of them
-      // This is due to Quasar passing data-cy attr to the underlying "q-field__native" element
+      // This is due to Quasar passing the data-cy attr down to an inner element,
+      // "q-field__native" until Quasar 2.25 and "q-select__focus-target" since Quasar 2.26
       // The re-target allow to use this command seamlessly, but the problem will still bite back in other scenarios
       // TODO: the best solution would be to exempt data-cy from being copied down by Quasar
-      if (subject.hasClass('q-field__native')) {
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        subject = subject.closest('.q-select') || subject;
+      if (!subject.hasClass('q-select')) {
+        const rootSelect = subject.closest('.q-select');
+        if (rootSelect.length > 0) {
+          subject = rootSelect;
+        }
       }
 
       if (subject.hasClass('q-select')) {
