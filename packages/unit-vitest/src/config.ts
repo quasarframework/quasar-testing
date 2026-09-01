@@ -6,7 +6,13 @@
  */
 
 import { getTestingConfig } from '@quasar/app-vite/testing';
-import type { PluginOption, UserConfig } from 'vite';
+
+// We can't import vite types directly because vite is not our dependency.
+// A peer dependency wouldn't be the best either: apps get vite through
+// @quasar/app-vite, so a second copy could end up with mismatching types.
+// Deriving the types from getTestingConfig always matches the app's vite.
+type UserConfig = Awaited<ReturnType<typeof getTestingConfig>>;
+type PluginOption = NonNullable<UserConfig['plugins']>[number];
 
 // These plugins serve the dev server, not tests. checker spawns type-check and
 // lint processes, the devtools plugin injects a browser-only overlay.
