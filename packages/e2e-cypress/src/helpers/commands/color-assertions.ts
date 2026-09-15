@@ -40,7 +40,6 @@ export function registerColorAssertions() {
   // we should add them via Chai methods
   for (const property of COLOR_RELATED_CSS_PROPERTIES) {
     chai.Assertion.addMethod(property, function (colorValue: string) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const targetElement = (this._obj as JQuery<HTMLElement>).get(0);
 
       const tempElement = document.createElement('div');

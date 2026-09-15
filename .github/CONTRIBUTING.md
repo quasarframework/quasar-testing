@@ -81,6 +81,8 @@ When you're ready to test your changes, move into `test-vite-app-v3` and run the
 It rebuilds the AE, refreshes the injected copies and the caches, and re-runs `quasar prepare`.
 Then run the test scripts, e.g., `pnpm test:vitest`, or `pnpm invoke:vitest` if you changed the `prompts`, `install` or template files.
 
+For the Playwright AE, install the browsers once with `pnpm exec playwright install chromium` inside `test-vite-app-v3`. Its sync and invoke scripts are `pnpm sync:playwright` and `pnpm invoke:playwright`.
+
 To test against an external project instead:
 
 - install the dependency locally, eg. `pnpm add -D file:<path of testing repo>/packages/unit-vitest`

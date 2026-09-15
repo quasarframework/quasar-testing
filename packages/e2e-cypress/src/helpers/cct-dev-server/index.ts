@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 // These plugins serve the dev server, not tests. checker spawns type-check and
 // lint processes, the devtools plugin injects a browser-only overlay.
 const EXCLUDED_PLUGIN_NAMES = [

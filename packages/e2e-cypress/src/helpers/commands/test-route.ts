@@ -22,7 +22,7 @@ export function registerTestRoute() {
         Cypress.minimatch(target, pattern, {
           nocomment: true,
         }),
-      ).to.be.true;
+      ).to.equal(true);
     });
   });
 }

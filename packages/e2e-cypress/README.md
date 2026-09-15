@@ -13,9 +13,10 @@ $ pnpm quasar ext add @quasar/testing-e2e-cypress
 If your project uses ESLint, the AE adds `eslint-plugin-cypress` for you (v7, which requires ESLint v10). Add into your `eslint.config.js` the following code:
 
 ```js
+import { defineConfig } from 'eslint/config';
 import pluginCypress from 'eslint-plugin-cypress';
 
-export default [
+export default defineConfig(
   // ...
   {
     name: 'custom/cypress',
@@ -31,7 +32,7 @@ export default [
       '@typescript-eslint/no-unused-expressions': 'off',
     },
   },
-];
+);
 ```
 
 If your project uses oxlint, it works out of the box, no additional packages or configuration needed.
@@ -113,6 +114,19 @@ You can either apply [this workaround](https://github.com/istanbuljs/nyc/issues/
 > Please open an issue if you notice some files are missing from generated reports in this scenario.
 
 [nyc-config-preset]: https://github.com/quasarframework/quasar-testing/blob/dev/packages/e2e-cypress/nyc-config-preset.json
+
+### Removal
+
+```shell
+$ quasar ext remove @quasar/testing-e2e-cypress
+```
+
+This only uninstalls and unregisters the AE. For a full cleanup including Cypress itself, also do:
+
+- delete `cypress.config.[ts|js]`, `test/cypress/`, `.nycrc`, the scaffolded example components under `src/components/` (`QuasarButton.vue`, `QuasarSelect.vue` and the other files that arrived with the AE) and the `*.cy.*` files you no longer need
+- remove the `test`, `test:e2e`, `test:e2e:ci`, `test:component` and `test:component:ci` scripts from `package.json`
+- remove the `cypress`, `cross-env`, `start-server-and-test`, `@cypress/code-coverage` and `eslint-plugin-cypress` devDependencies from `package.json`, unless something else in the project uses them
+- remove the `.nyc_output` and `coverage/` lines from `.gitignore` and the Cypress block from your ESLint config
 
 ### Upgrade from Cypress AE v6.x to v7.0 onwards
 

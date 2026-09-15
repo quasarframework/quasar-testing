@@ -1,0 +1,26 @@
+{
+  // This file ships on purpose, see package.json > filesComments.
+  // Never add "paths", they apply to the runtime resolution of the AE scripts.
+  // Never use "extends", get-tsconfig would fail to resolve it at runtime.
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "esnext",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "moduleResolution": "bundler",
+    "isolatedModules": true,
+    "module": "preserve",
+    "noEmit": true,
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "strict": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "noImplicitOverride": true,
+    "exactOptionalPropertyTypes": true,
+    "noUncheckedIndexedAccess": true
+  },
+  "include": ["src/**/*", "build.config.ts", "vitest.config.ts"],
+  "exclude": ["node_modules", "src/templates"]
+}

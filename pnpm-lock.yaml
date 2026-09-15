@@ -73,6 +73,52 @@ importers:
         specifier: ^5.0.6
         version: 5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26))
 
+  packages/playwright:
+    dependencies:
+      '@clack/prompts':
+        specifier: ^1.7.0
+        version: 1.7.0
+      nano-spawn:
+        specifier: ^2.1.0
+        version: 2.1.0
+      vite-plugin-istanbul:
+        specifier: ^9.0.1
+        version: 9.0.1(supports-color@8.1.1)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))
+    devDependencies:
+      '@playwright/test':
+        specifier: ^1.63.0
+        version: 1.63.0
+      '@quasar/app-vite':
+        specifier: ^3.8.0
+        version: 3.8.1(@types/node@20.19.43)(quasar@2.32.2)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@5.9.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@5.9.3))(yaml@2.9.0)
+      eslint-plugin-playwright:
+        specifier: ^2.11.0
+        version: 2.11.0(eslint@8.57.1(supports-color@8.1.1))
+      happy-dom:
+        specifier: ^20.11.6
+        version: 20.11.6
+      nyc:
+        specifier: ^18.0.0
+        version: 18.0.0(supports-color@8.1.1)
+      obuild:
+        specifier: ^0.4.38
+        version: 0.4.38(@volar/typescript@2.4.28(typescript@5.9.3))(chokidar@5.0.0)(dotenv@17.4.2)(jiti@2.7.0)(typescript@5.9.3)(vue-tsc@3.3.11(typescript@5.9.3))
+      quasar:
+        specifier: ^2.32.0
+        version: 2.32.2
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+      vitest:
+        specifier: ^4.1.11
+        version: 4.1.11(@types/node@20.19.43)(@vitest/ui@4.1.11)(happy-dom@20.11.6)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))
+      vue:
+        specifier: ^3.5.41
+        version: 3.5.41(typescript@5.9.3)
+      yaml:
+        specifier: ^2.9.0
+        version: 2.9.0
+
   packages/quality:
     dependencies:
       lighthouse:
@@ -128,8 +174,8 @@ importers:
         specifier: ^2.0.4
         version: 2.0.4
       quasar:
-        specifier: ^2.25.1
-        version: 2.25.1
+        specifier: ^2.32.0
+        version: 2.32.2
       vue:
         specifier: ^3.5.22
         version: 3.5.41(typescript@6.0.3)
@@ -139,21 +185,29 @@ importers:
     dependenciesMeta:
       '@quasar/quasar-app-extension-testing-e2e-cypress':
         injected: true
+      '@quasar/quasar-app-extension-testing-playwright':
+        injected: true
       '@quasar/quasar-app-extension-testing-unit-vitest':
         injected: true
     devDependencies:
       '@cypress/code-coverage':
         specifier: ^4.0.3
         version: 4.0.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/preset-env@7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(babel-loader@10.1.1(@babel/core@7.29.7(supports-color@8.1.1))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(cypress@15.21.0)(supports-color@8.1.1)(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26))
+      '@playwright/test':
+        specifier: ^1.63.0
+        version: 1.63.0
       '@quasar/app-vite':
-        specifier: ^3.7.0
-        version: 3.7.0(@types/node@22.20.1)(quasar@2.25.1)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0)
+        specifier: ^3.8.0
+        version: 3.8.1(@types/node@22.20.1)(quasar@2.32.2)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0)
       '@quasar/quasar-app-extension-testing-e2e-cypress':
         specifier: workspace:*
-        version: file:packages/e2e-cypress(@quasar/app-vite@3.7.0(@types/node@22.20.1)(quasar@2.25.1)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0))(cypress@15.21.0)(quasar@2.25.1)(supports-color@8.1.1)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))
+        version: file:packages/e2e-cypress(@quasar/app-vite@3.8.1(@types/node@22.20.1)(quasar@2.32.2)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0))(cypress@15.21.0)(quasar@2.32.2)(supports-color@8.1.1)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))
+      '@quasar/quasar-app-extension-testing-playwright':
+        specifier: workspace:*
+        version: file:packages/playwright(@playwright/test@1.63.0)(@quasar/app-vite@3.8.1(@types/node@22.20.1)(quasar@2.32.2)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0))(quasar@2.32.2)(supports-color@8.1.1)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))
       '@quasar/quasar-app-extension-testing-unit-vitest':
         specifier: workspace:*
-        version: file:packages/unit-vitest(@quasar/app-vite@3.7.0(@types/node@22.20.1)(quasar@2.25.1)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0))(@vitest/ui@4.1.11)(@vue/test-utils@2.4.11(@vue/compiler-dom@3.5.41)(@vue/server-renderer@3.5.41)(vue@3.5.41(typescript@6.0.3)))(quasar@2.25.1)(vitest@4.1.11)(vue@3.5.41(typescript@6.0.3))
+        version: file:packages/unit-vitest(@quasar/app-vite@3.8.1(@types/node@22.20.1)(quasar@2.32.2)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0))(@vitest/ui@4.1.11)(@vue/test-utils@2.4.11(@vue/compiler-dom@3.5.41)(@vue/server-renderer@3.5.41)(vue@3.5.41(typescript@6.0.3)))(quasar@2.32.2)(vitest@4.1.11)(vue@3.5.41(typescript@6.0.3))
       '@types/node':
         specifier: ^22.19.11
         version: 22.20.1
@@ -172,6 +226,12 @@ importers:
       cypress:
         specifier: ^15.21.0
         version: 15.21.0
+      eslint-plugin-playwright:
+        specifier: ^2.11.0
+        version: 2.11.0(eslint@8.57.1(supports-color@8.1.1))
+      nyc:
+        specifier: ^18.0.0
+        version: 18.0.0(supports-color@8.1.1)
       oxfmt:
         specifier: ^0.x
         version: 0.64.0
@@ -1267,6 +1327,11 @@ packages:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
 
+  '@playwright/test@1.63.0':
+    resolution: {integrity: sha512-oxMK4vllB9RK5NQ2l1pq1IfOf2AvnEuj/vYGDj0H2nMtmtZpKtCwt/l00GEO6xjGfpBNAvjovvYdCm50dRQkpQ==}
+    engines: {node: '>=20'}
+    hasBin: true
+
   '@polka/url@1.0.0-next.29':
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
 
@@ -1352,6 +1417,15 @@ packages:
       cypress: ^15.14.0
       quasar: ^2.24.0
       vue: ^3.3.4
+
+  '@quasar/quasar-app-extension-testing-playwright@file:packages/playwright':
+    resolution: {directory: packages/playwright, type: directory}
+    engines: {node: ^30 || ^28 || ^26 || ^24 || ^22.22.0}
+    peerDependencies:
+      '@playwright/test': ^1.63.0
+      '@quasar/app-vite': ^3.8.0
+      quasar: ^2.31.0
+      vue: ^3.5.0
 
   '@quasar/quasar-app-extension-testing-unit-vitest@file:packages/unit-vitest':
     resolution: {directory: packages/unit-vitest, type: directory}
@@ -2770,6 +2844,12 @@ packages:
       '@typescript-eslint/parser':
         optional: true
 
+  eslint-plugin-playwright@2.11.0:
+    resolution: {integrity: sha512-zOIEYyv1TSn2izXkyg/yj0LXc4YBQI6pl3xIFWwMCcXt/dgQCz8dBqXiXFMoM3xc/GqZThAtaGYo8aPu/vBd+Q==}
+    engines: {node: '>=16.9.0'}
+    peerDependencies:
+      eslint: '>=8.40.0'
+
   eslint-scope@5.1.1:
     resolution: {integrity: sha512-2NxwbF/hZ0KpepYN0cNbo+FN6XoK7GaHlQhgx/hIZl6Va0bF45RQOOwhLIy8lQDbuCiadSLCBnH2CFYquit5bw==}
     engines: {node: '>=8.0.0'}
@@ -3899,6 +3979,10 @@ packages:
   mute-stream@0.0.7:
     resolution: {integrity: sha512-r65nCZhrbXXb6dXOACihYApHw2Q6pV0M3V0PSxd74N0+D8nzAdEAITq2oAjA1jVnKI+tGvEBUpqiMh0+rW6zDQ==}
 
+  nano-spawn@2.1.0:
+    resolution: {integrity: sha512-yTW+2okrElHiH4fsiz/+/zc0EDo9BDDoC3iKk8dpv1GeRc9nUWzUZHx6TofMWErchhUQR8hY9/Eu1Uja9x1nqA==}
+    engines: {node: '>=20.17'}
+
   nanoid@3.3.18:
     resolution: {integrity: sha512-DTg4MJbGMWkfi6VZFdNt2/caMbQy4Ou+Op/hJQvGEWcnVfoA1QA+xzRKAzw9jD6+GVOOeYr/mIcuDSdug6F6+w==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
@@ -4183,6 +4267,16 @@ packages:
     resolution: {integrity: sha512-emEcLuomt2j03vxD54giVB4SxTjnsqkU692xZOZXHDVoYyypEm+b3jpiTcc+Cf+myooc+/Ly0z01jqeNHVgJGw==}
     engines: {node: '>=16.0.0'}
 
+  playwright-core@1.63.0:
+    resolution: {integrity: sha512-rYCsBF/M5HjUch52bbtVONEFjv6Xu8sm8h72dNlR5bzIE1fvC/bxgspzkjSfU+MweEMmPM8KJebG6nnyxo5mCg==}
+    engines: {node: '>=20'}
+    hasBin: true
+
+  playwright@1.63.0:
+    resolution: {integrity: sha512-+7ziBLidS4NaNCdt57SUDT+wYmmd5fmiQejUic/kb+YsYSCPyOOE9sebzMjNmQrsnNpDJqd4WHvV/8lfKfUDUg==}
+    engines: {node: '>=20'}
+    hasBin: true
+
   postcss-value-parser@4.2.0:
     resolution: {integrity: sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==}
 
@@ -4270,6 +4364,10 @@ packages:
   quasar@2.25.1:
     resolution: {integrity: sha512-wDc+rLS0MHzp3wl1ILo7FXk6V15aotljHDO8DVpBlm1foATO4jbY8QTfZJW5e8tqAD/zJw6paHC6BeV4eSPMwg==}
     engines: {node: '>= 10.18.1', npm: '>= 6.13.4', yarn: '>= 1.21.1'}
+
+  quasar@2.32.2:
+    resolution: {integrity: sha512-IqQHHYoYL8bfFDAwy5E5X1xv7VpMAdhFHjSaLycueRdLOkXMbntUUphAIof8Q/wgvKQcskYflGV9/OyIPvbkLA==}
+    engines: {node: '>= 22.0.0'}
 
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
@@ -6624,6 +6722,10 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
+  '@playwright/test@1.63.0':
+    dependencies:
+      playwright: 1.63.0
+
   '@polka/url@1.0.0-next.29': {}
 
   '@quasar/app-vite@3.7.0(@types/node@20.19.43)(quasar@2.25.1)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@5.9.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@5.9.3))(yaml@2.9.0)':
@@ -6665,58 +6767,6 @@ snapshots:
       webpack-merge: 6.0.1
     optionalDependencies:
       typescript: 5.9.3
-    transitivePeerDependencies:
-      - '@types/node'
-      - '@vitejs/devtools'
-      - esbuild
-      - less
-      - sass
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-      - tsx
-      - yaml
-
-  '@quasar/app-vite@3.7.0(@types/node@22.20.1)(quasar@2.25.1)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0)':
-    dependencies:
-      '@clack/prompts': 1.7.0
-      '@quasar/art': 1.0.0
-      '@quasar/render-ssr-error': 2.2.6
-      '@quasar/ssl-certificate': 2.1.0
-      '@quasar/vite-plugin': 2.0.1(@vitejs/plugin-vue@6.0.8(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3)))(quasar@2.25.1)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))
-      '@types/chrome': 0.2.7
-      '@types/cordova': 11.0.3
-      '@vitejs/plugin-vue': 6.0.8(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))
-      chokidar: 5.0.0
-      ci-info: 4.4.0
-      confbox: 0.2.4
-      cross-spawn: 7.0.6
-      dot-prop: 10.2.0
-      dotenv-expand: 13.0.0
-      elementtree: 0.1.7
-      fflate: 0.8.3
-      fs-extra: 11.4.0
-      html-minifier-terser: 7.2.0
-      jiti: 2.7.0
-      kolorist: 1.8.0
-      mlly: 1.8.2
-      open: 11.0.1
-      picomatch: 4.0.7
-      quasar: 2.25.1
-      rolldown: 1.2.5
-      sass-embedded: 1.103.1
-      semver: 7.8.5
-      serialize-javascript: 7.1.0
-      serve-static: 2.2.1(supports-color@8.1.1)
-      tinyglobby: 0.2.17
-      ts-essentials: 10.2.1(typescript@6.0.3)
-      vite: 8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0)
-      vue: 3.5.41(typescript@6.0.3)
-      vue-router: 5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26))
-      webpack-merge: 6.0.1
-    optionalDependencies:
-      typescript: 6.0.3
     transitivePeerDependencies:
       - '@types/node'
       - '@vitejs/devtools'
@@ -6782,31 +6832,148 @@ snapshots:
       - tsx
       - yaml
 
+  '@quasar/app-vite@3.8.1(@types/node@20.19.43)(quasar@2.32.2)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@5.9.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@5.9.3))(yaml@2.9.0)':
+    dependencies:
+      '@clack/prompts': 1.7.0
+      '@quasar/art': 1.0.0
+      '@quasar/render-ssr-error': 2.2.6
+      '@quasar/ssl-certificate': 2.1.0
+      '@quasar/vite-plugin': 2.0.2(@vitejs/plugin-vue@6.0.8(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3)))(quasar@2.32.2)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))
+      '@types/chrome': 0.2.7
+      '@types/cordova': 11.0.3
+      '@vitejs/plugin-vue': 6.0.8(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))
+      chokidar: 5.0.0
+      ci-info: 4.4.0
+      confbox: 0.2.4
+      cross-spawn: 7.0.6
+      dot-prop: 10.2.0
+      dotenv-expand: 13.0.0
+      elementtree: 0.1.7
+      fflate: 0.8.3
+      fs-extra: 11.4.0
+      html-minifier-terser: 7.2.0
+      jiti: 2.7.0
+      kolorist: 1.8.0
+      mlly: 1.8.2
+      open: 11.0.1
+      picomatch: 4.0.7
+      quasar: 2.32.2
+      rolldown: 1.2.5
+      sass-embedded: 1.103.1
+      semver: 7.8.5
+      serialize-javascript: 7.1.0
+      serve-static: 2.2.1(supports-color@8.1.1)
+      tinyglobby: 0.2.17
+      ts-essentials: 10.2.1(typescript@5.9.3)
+      vite: 8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0)
+      vue: 3.5.41(typescript@5.9.3)
+      vue-router: 5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26))
+      webpack-merge: 6.0.1
+    optionalDependencies:
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - '@types/node'
+      - '@vitejs/devtools'
+      - esbuild
+      - less
+      - sass
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+      - tsx
+      - yaml
+
+  '@quasar/app-vite@3.8.1(@types/node@22.20.1)(quasar@2.32.2)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0)':
+    dependencies:
+      '@clack/prompts': 1.7.0
+      '@quasar/art': 1.0.0
+      '@quasar/render-ssr-error': 2.2.6
+      '@quasar/ssl-certificate': 2.1.0
+      '@quasar/vite-plugin': 2.0.2(@vitejs/plugin-vue@6.0.8(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3)))(quasar@2.32.2)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))
+      '@types/chrome': 0.2.7
+      '@types/cordova': 11.0.3
+      '@vitejs/plugin-vue': 6.0.8(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))
+      chokidar: 5.0.0
+      ci-info: 4.4.0
+      confbox: 0.2.4
+      cross-spawn: 7.0.6
+      dot-prop: 10.2.0
+      dotenv-expand: 13.0.0
+      elementtree: 0.1.7
+      fflate: 0.8.3
+      fs-extra: 11.4.0
+      html-minifier-terser: 7.2.0
+      jiti: 2.7.0
+      kolorist: 1.8.0
+      mlly: 1.8.2
+      open: 11.0.1
+      picomatch: 4.0.7
+      quasar: 2.32.2
+      rolldown: 1.2.5
+      sass-embedded: 1.103.1
+      semver: 7.8.5
+      serialize-javascript: 7.1.0
+      serve-static: 2.2.1(supports-color@8.1.1)
+      tinyglobby: 0.2.17
+      ts-essentials: 10.2.1(typescript@6.0.3)
+      vite: 8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0)
+      vue: 3.5.41(typescript@6.0.3)
+      vue-router: 5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26))
+      webpack-merge: 6.0.1
+    optionalDependencies:
+      typescript: 6.0.3
+    transitivePeerDependencies:
+      - '@types/node'
+      - '@vitejs/devtools'
+      - esbuild
+      - less
+      - sass
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+      - tsx
+      - yaml
+
   '@quasar/art@1.0.0': {}
 
   '@quasar/extras@2.0.4': {}
 
-  '@quasar/quasar-app-extension-testing-e2e-cypress@file:packages/e2e-cypress(@quasar/app-vite@3.7.0(@types/node@22.20.1)(quasar@2.25.1)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0))(cypress@15.21.0)(quasar@2.25.1)(supports-color@8.1.1)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))':
+  '@quasar/quasar-app-extension-testing-e2e-cypress@file:packages/e2e-cypress(@quasar/app-vite@3.8.1(@types/node@22.20.1)(quasar@2.32.2)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0))(cypress@15.21.0)(quasar@2.32.2)(supports-color@8.1.1)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))':
     dependencies:
       '@clack/prompts': 1.7.0
-      '@quasar/app-vite': 3.7.0(@types/node@22.20.1)(quasar@2.25.1)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0)
+      '@quasar/app-vite': 3.8.1(@types/node@22.20.1)(quasar@2.32.2)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0)
       cypress: 15.21.0
       es-toolkit: 1.51.0
-      quasar: 2.25.1
+      quasar: 2.32.2
       vite-plugin-istanbul: 9.0.1(supports-color@8.1.1)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))
       vue: 3.5.41(typescript@6.0.3)
     transitivePeerDependencies:
       - supports-color
       - vite
 
-  '@quasar/quasar-app-extension-testing-unit-vitest@file:packages/unit-vitest(@quasar/app-vite@3.7.0(@types/node@22.20.1)(quasar@2.25.1)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0))(@vitest/ui@4.1.11)(@vue/test-utils@2.4.11(@vue/compiler-dom@3.5.41)(@vue/server-renderer@3.5.41)(vue@3.5.41(typescript@6.0.3)))(quasar@2.25.1)(vitest@4.1.11)(vue@3.5.41(typescript@6.0.3))':
+  '@quasar/quasar-app-extension-testing-playwright@file:packages/playwright(@playwright/test@1.63.0)(@quasar/app-vite@3.8.1(@types/node@22.20.1)(quasar@2.32.2)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0))(quasar@2.32.2)(supports-color@8.1.1)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))':
     dependencies:
       '@clack/prompts': 1.7.0
-      '@quasar/app-vite': 3.7.0(@types/node@22.20.1)(quasar@2.25.1)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0)
+      '@playwright/test': 1.63.0
+      '@quasar/app-vite': 3.8.1(@types/node@22.20.1)(quasar@2.32.2)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0)
+      nano-spawn: 2.1.0
+      quasar: 2.32.2
+      vite-plugin-istanbul: 9.0.1(supports-color@8.1.1)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))
+      vue: 3.5.41(typescript@6.0.3)
+    transitivePeerDependencies:
+      - supports-color
+      - vite
+
+  '@quasar/quasar-app-extension-testing-unit-vitest@file:packages/unit-vitest(@quasar/app-vite@3.8.1(@types/node@22.20.1)(quasar@2.32.2)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0))(@vitest/ui@4.1.11)(@vue/test-utils@2.4.11(@vue/compiler-dom@3.5.41)(@vue/server-renderer@3.5.41)(vue@3.5.41(typescript@6.0.3)))(quasar@2.32.2)(vitest@4.1.11)(vue@3.5.41(typescript@6.0.3))':
+    dependencies:
+      '@clack/prompts': 1.7.0
+      '@quasar/app-vite': 3.8.1(@types/node@22.20.1)(quasar@2.32.2)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@6.0.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@6.0.3))(yaml@2.9.0)
       '@vue/test-utils': 2.4.11(@vue/compiler-dom@3.5.41)(@vue/server-renderer@3.5.41)(vue@3.5.41(typescript@6.0.3))
       es-toolkit: 1.51.0
       happy-dom: 20.11.6
-      quasar: 2.25.1
+      quasar: 2.32.2
       vitest: 4.1.11(@types/node@22.20.1)(@vitest/ui@4.1.11)(happy-dom@20.11.6)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))
       vue: 3.5.41(typescript@6.0.3)
     optionalDependencies:
@@ -6831,19 +6998,26 @@ snapshots:
       vite: 8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0)
       vue: 3.5.41(typescript@5.9.3)
 
-  '@quasar/vite-plugin@2.0.1(@vitejs/plugin-vue@6.0.8(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3)))(quasar@2.25.1)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))':
-    dependencies:
-      '@vitejs/plugin-vue': 6.0.8(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))
-      quasar: 2.25.1
-      vite: 8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0)
-      vue: 3.5.41(typescript@6.0.3)
-
   '@quasar/vite-plugin@2.0.2(@vitejs/plugin-vue@6.0.8(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3)))(quasar@2.25.1)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))':
     dependencies:
       '@vitejs/plugin-vue': 6.0.8(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))
       quasar: 2.25.1
       vite: 8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0)
       vue: 3.5.41(typescript@5.9.3)
+
+  '@quasar/vite-plugin@2.0.2(@vitejs/plugin-vue@6.0.8(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3)))(quasar@2.32.2)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))':
+    dependencies:
+      '@vitejs/plugin-vue': 6.0.8(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))
+      quasar: 2.32.2
+      vite: 8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0)
+      vue: 3.5.41(typescript@5.9.3)
+
+  '@quasar/vite-plugin@2.0.2(@vitejs/plugin-vue@6.0.8(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3)))(quasar@2.32.2)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))':
+    dependencies:
+      '@vitejs/plugin-vue': 6.0.8(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))
+      quasar: 2.32.2
+      vite: 8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0)
+      vue: 3.5.41(typescript@6.0.3)
 
   '@rolldown/binding-android-arm-eabi@1.2.5':
     optional: true
@@ -8246,6 +8420,11 @@ snapshots:
     optionalDependencies:
       '@typescript-eslint/parser': 8.68.0(eslint@8.57.1(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.9.3)
 
+  eslint-plugin-playwright@2.11.0(eslint@8.57.1(supports-color@8.1.1)):
+    dependencies:
+      eslint: 8.57.1(supports-color@8.1.1)
+      globals: 17.11.0
+
   eslint-scope@5.1.1:
     dependencies:
       esrecurse: 4.3.0
@@ -9381,6 +9560,8 @@ snapshots:
 
   mute-stream@0.0.7: {}
 
+  nano-spawn@2.1.0: {}
+
   nanoid@3.3.18: {}
 
   natural-compare@1.4.0: {}
@@ -9723,6 +9904,12 @@ snapshots:
       pvutils: 1.2.0
       tslib: 2.8.1
 
+  playwright-core@1.63.0: {}
+
+  playwright@1.63.0:
+    dependencies:
+      playwright-core: 1.63.0
+
   postcss-value-parser@4.2.0: {}
 
   postcss@8.5.26:
@@ -9788,6 +9975,8 @@ snapshots:
   quansync@0.2.11: {}
 
   quasar@2.25.1: {}
+
+  quasar@2.32.2: {}
 
   queue-microtask@1.2.3: {}
 

@@ -1,0 +1,9 @@
+{
+  "all": true,
+  "extension": [".js", ".cjs", ".mjs", ".jsx", ".ts", ".tsx", ".vue"],
+  "include": ["src/**/*.{js,cjs,mjs,jsx,ts,tsx,vue}"],
+  "exclude": ["**/__tests__/**", "**/*.d.ts"],
+  "report-dir": "coverage",
+  "temp-dir": ".nyc_output",
+  "reporter": ["text", "html", "lcov", "json"]
+}

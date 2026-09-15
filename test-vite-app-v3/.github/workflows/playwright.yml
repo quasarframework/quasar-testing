@@ -1,0 +1,45 @@
+# playwright.config runs Chromium, so this workflow only installs that.
+# Add the other browsers to this step when the config gains projects for them.
+# playwright.config ships a commented-out command that builds the app and serves the bundle when CI is set.
+# Uncomment it to run the tests against the production bundle here. GitHub Actions sets CI.
+name: Playwright tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: test-vite-app-v3/package.json
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm exec playwright install --with-deps chromium
+        working-directory: test-vite-app-v3
+
+      - run: pnpm exec playwright test
+        working-directory: test-vite-app-v3
+
+      - run: pnpm test:coverage:report
+        if: ${{ !cancelled() }}
+        working-directory: test-vite-app-v3
+
+      - uses: actions/upload-artifact@v7
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: |
+            test-vite-app-v3/playwright-report/
+            test-vite-app-v3/coverage/
+          retention-days: 30
