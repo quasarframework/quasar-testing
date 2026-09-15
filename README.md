@@ -36,6 +36,7 @@ The Test Driven Design approach will help you to write better (and fewer) tests.
 
   - E2E testing
     - [Cypress](packages/e2e-cypress/README.md)
+    - [Playwright](packages/playwright/README.md)
   - [Quality Auditing](#quality-auditing) (**OUTDATED, not migrated to Qv2 yet**)
 
 - [Roadmap](#roadmap)
@@ -109,11 +110,15 @@ $ quasar ext add @quasar/testing-unit-vitest
 
 ## E2E Testing
 
-We recommend testing webapps with Cypress if you target Chrome-based browsers (Chrome, Edge, Electron) or Firefox - but if you want to test Safari or Cordova/Capacitor apps, then you should consider using webdriver.io.
+Cypress and Playwright both cover Chrome-based browsers (Chrome, Edge, Electron) and Firefox. For Safari, Playwright has native Webkit support and Cypress has experimental support. For Cordova/Capacitor apps consider webdriver.io.
 
 ### [Cypress](https://www.cypress.io/)
 
 [Check out Cypress AE documentation](packages/e2e-cypress/README.md)
+
+### [Playwright](https://playwright.dev/)
+
+[Check out Playwright AE documentation](packages/playwright/README.md)
 
 ### Quality Auditing (**OUTDATED, not migrated to Qv2 yet**)
 

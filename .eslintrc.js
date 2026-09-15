@@ -1,4 +1,6 @@
-const { resolve } = require('path');
+const SHARED_IMPORT_MESSAGE =
+  'A module of src/shared runs in node and in the browser, so it imports nothing outside this directory.';
+
 module.exports = {
   root: true,
 
@@ -6,6 +8,13 @@ module.exports = {
   // Without this, the IDE extension applies this config to their files.
   ignorePatterns: [
     '/test-vite-app-v3/',
+
+    // App Extension templates hold EJS tags and belong to the app they scaffold.
+    'packages/*/src/templates/',
+
+    // The quality AE is plain JS and predates the TS setup, so every file it has
+    // fails to parse with this config. It's ancient anyway, so we just ignore it.
+    'packages/quality/',
   ],
 
   env: {
@@ -17,7 +26,9 @@ module.exports = {
   parserOptions: {
     // https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/parser#configuration
     // https://github.com/TypeStrong/fork-ts-checker-webpack-plugin#eslint
-    project: resolve(__dirname, './tsconfig.json'),
+    // Each package is parsed with its own tsconfig, so a rule that needs type
+    // information sees the same types as its package's tsc run.
+    project: true,
     tsconfigRootDir: __dirname,
     ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
     sourceType: 'module', // Allows for the use of imports
@@ -47,6 +58,51 @@ module.exports = {
         '@typescript-eslint',
       ],
     },
+    {
+      // The ./gallery entry of the Playwright AE is loaded by the browser from
+      // a generated page. It may import vue and its own files, nothing else.
+      files: ['packages/playwright/src/gallery/**/*.ts'],
+      excludedFiles: ['**/*.test.ts'],
+      rules: {
+        'no-restricted-imports': [
+          'error',
+          {
+            paths: ['#q-app', 'quasar', '@playwright/test', 'vite'].map(
+              (name) => ({
+                name,
+                message:
+                  'The gallery runtime runs in the browser and may import vue only.',
+              }),
+            ),
+            patterns: [
+              {
+                group: ['node:*'],
+                message:
+                  'The gallery runtime runs in the browser and may import vue only.',
+              },
+            ],
+          },
+        ],
+      },
+    },
+    {
+      // src/shared holds what both sides import: the AE scripts in node and the
+      // gallery runtime in the browser. Those modules import nothing at all.
+      files: ['packages/playwright/src/shared/**/*.ts'],
+      rules: {
+        'no-restricted-imports': [
+          'error',
+          {
+            paths: ['vue', 'quasar', '#q-app', '@playwright/test', 'vite'].map(
+              (name) => ({ name, message: SHARED_IMPORT_MESSAGE }),
+            ),
+            patterns: [
+              { group: ['node:*', '../*'], message: SHARED_IMPORT_MESSAGE },
+            ],
+          },
+        ],
+      },
+    },
   ],
 
   plugins: [
@@ -64,7 +120,6 @@ module.exports = {
     'no-else-return': ['warn', { allowElseIf: false }],
     eqeqeq: 'error',
     'no-alert': 'warn',
-    'no-debugger': 'error',
     'prefer-const': 'warn',
 
     // allow debugger during development only

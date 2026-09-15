@@ -28,28 +28,36 @@
     "sync:cypress": "pnpm --filter @quasar/quasar-app-extension-testing-e2e-cypress build && quasar clean --cache && pnpm postinstall",
     "invoke:cypress": "quasar ext invoke @quasar/testing-e2e-cypress && pnpm lint",
     "sync:invoke:cypress": "pnpm sync:cypress && pnpm invoke:cypress",
-    "test:cypress": "pnpm test:e2e:ci && pnpm test:component:ci",
-    "sync:all": "pnpm sync:vitest && pnpm sync:cypress",
-    "test:all": "pnpm test:vitest && pnpm test:cypress",
+    "test:cypress": "cross-env NODE_ENV=test start-test \"quasar dev\" http-get://localhost:8080 \"cypress run --e2e\" && cross-env NODE_ENV=test cypress run --component",
+    "sync:playwright": "pnpm --filter @quasar/quasar-app-extension-testing-playwright build && quasar clean --cache && pnpm postinstall",
+    "invoke:playwright": "quasar ext invoke @quasar/testing-playwright && pnpm lint",
+    "sync:invoke:playwright": "pnpm sync:playwright && pnpm invoke:playwright",
+    "test:playwright": "playwright test",
+    "sync:all": "pnpm sync:vitest && pnpm sync:cypress && pnpm sync:playwright",
+    "test:all": "pnpm test:vitest && pnpm test:cypress && pnpm test:playwright",
     "test": "echo \"See package.json => scripts for available tests.\" && exit 0",
     "test:unit": "vitest",
     "test:unit:ci": "vitest run",
     "test:unit:ui": "vitest --ui",
-    "test:e2e": "cross-env NODE_ENV=test start-test \"quasar dev\" http-get://localhost:8080 \"cypress open --e2e\"",
-    "test:e2e:ci": "cross-env NODE_ENV=test start-test \"quasar dev\" http-get://localhost:8080 \"cypress run --e2e\"",
-    "test:component": "cross-env NODE_ENV=test cypress open --component",
-    "test:component:ci": "cross-env NODE_ENV=test cypress run --component"
+    "test:e2e": "playwright test --project=e2e --ui",
+    "test:e2e:ci": "playwright test --project=e2e",
+    "test:component": "playwright test --project=components --ui",
+    "test:component:ci": "playwright test --project=components",
+    "test:coverage:report": "nyc report",
+    "test:report": "playwright show-report"
   },
   "dependencies": {
     "@quasar/extras": "^2.0.4",
-    "quasar": "^2.25.1",
+    "quasar": "^2.32.0",
     "vue": "^3.5.22",
     "vue-router": "^5.0.6"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^4.0.3",
-    "@quasar/app-vite": "^3.7.0",
+    "@playwright/test": "^1.63.0",
+    "@quasar/app-vite": "^3.8.0",
     "@quasar/quasar-app-extension-testing-e2e-cypress": "workspace:*",
+    "@quasar/quasar-app-extension-testing-playwright": "workspace:*",
     "@quasar/quasar-app-extension-testing-unit-vitest": "workspace:*",
     "@types/node": "^22.19.11",
     "@vitest/ui": "^4.1.11",
@@ -57,6 +65,8 @@
     "autoprefixer": "^10.4.27",
     "cross-env": "^10.1.0",
     "cypress": "^15.21.0",
+    "eslint-plugin-playwright": "^2.11.0",
+    "nyc": "^18.0.0",
     "oxfmt": "^0.x",
     "oxlint": "^1.x",
     "oxlint-tsgolint": "^7.0.2001",
@@ -68,6 +78,9 @@
   },
   "dependenciesMeta": {
     "@quasar/quasar-app-extension-testing-e2e-cypress": {
+      "injected": true
+    },
+    "@quasar/quasar-app-extension-testing-playwright": {
       "injected": true
     },
     "@quasar/quasar-app-extension-testing-unit-vitest": {

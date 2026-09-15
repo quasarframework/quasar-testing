@@ -1,0 +1,87 @@
+{
+  "name": "@quasar/quasar-app-extension-testing-playwright",
+  "version": "1.0.0-alpha.0",
+  "type": "module",
+  "license": "MIT",
+  "description": "A Quasar App Extension for e2e and component testing with Playwright",
+  "contributors": [
+    "Yusuf Kandemir",
+    "Calson Chiatiah"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/quasarframework/quasar-testing",
+    "directory": "packages/playwright"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "build": "obuild",
+    "deploy:alpha": "pnpm build && pnpm publish --tag alpha",
+    "deploy:beta": "pnpm build && pnpm publish --tag beta",
+    "deploy:latest": "pnpm build && pnpm publish --tag latest",
+    "test:watch": "vitest"
+  },
+  "filesComments": {
+    "tsconfig.json": [
+      "app-vite v3 loads AE scripts with jiti tsconfig-paths support, which uses the nearest tsconfig.",
+      "Shipping ours stops the app's tsconfig from mapping '#q-app' to a .d.ts file."
+    ]
+  },
+  "files": [
+    "dist",
+    "nyc-config-preset.json",
+    "src",
+    "!src/**/*.test.ts",
+    "tsconfig.json"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "imports": {
+    "#q-app": "@quasar/app-vite"
+  },
+  "exports": {
+    ".": {
+      "types": "./src/helpers/main.ts",
+      "import": "./dist/helpers/main.mjs",
+      "default": "./dist/helpers/main.mjs"
+    },
+    "./gallery": {
+      "types": "./src/gallery/index.ts",
+      "import": "./dist/gallery/index.mjs",
+      "default": "./dist/gallery/index.mjs"
+    },
+    "./nyc-config-preset": "./nyc-config-preset.json",
+    "./nyc-config-preset.json": "./nyc-config-preset.json",
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "engines": {
+    "node": "^30 || ^28 || ^26 || ^24 || ^22.22.0"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.7.0",
+    "nano-spawn": "^2.1.0",
+    "vite-plugin-istanbul": "^9.0.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@quasar/app-vite": "^3.8.0",
+    "eslint-plugin-playwright": "^2.11.0",
+    "happy-dom": "^20.11.6",
+    "nyc": "^18.0.0",
+    "obuild": "^0.4.38",
+    "quasar": "^2.32.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.11",
+    "vue": "^3.5.41",
+    "yaml": "^2.9.0"
+  },
+  "peerDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@quasar/app-vite": "^3.8.0",
+    "quasar": "^2.31.0",
+    "vue": "^3.5.0"
+  }
+}

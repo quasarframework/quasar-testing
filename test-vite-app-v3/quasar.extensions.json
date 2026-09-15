@@ -5,5 +5,8 @@
   "@quasar/testing-e2e-cypress": {
     "port": 8080,
     "options": ["code-coverage"]
+  },
+  "@quasar/testing-playwright": {
+    "options": ["code-coverage", "demo", "github-workflow"]
   }
 }
