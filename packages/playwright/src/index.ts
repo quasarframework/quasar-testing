@@ -19,6 +19,8 @@ import {
 import { normalizePromptsAnswers } from './prompt-answers';
 import { withStoryTypesExcluded } from './story-registry/service-worker-tsconfig';
 import {
+  AE_SWITCH_ON,
+  AE_SWITCH_VARIABLE,
   APP_VITE_SUPPORT_NOTE,
   GALLERY_URL_DIRECTORY,
   PLAYWRIGHT_TYPES_FILE_NAME,
@@ -27,7 +29,8 @@ import { createStoryTypesPlugin } from './story-registry/plugin';
 
 // app-vite defines resolve.entry() with defineHiddenProp, so the public types
 // do not list it. It resolves a file inside .quasar/<dev|prod>-<mode>, where
-// app-vite writes the generated entry files.
+// app-vite writes the generated entry files. Cordova and capacitor append the
+// target name.
 interface AppPathsResolveWithEntry {
   entry: (dir: string) => string;
 }
@@ -41,7 +44,8 @@ const SASS_VARIABLES_FILES = [
 // The page app-vite renders the app into. The gallery reuses it as its template.
 const INDEX_HTML_TEMPLATE = 'index.html';
 
-// The default app-vite applies later. The index script reads the raw config.
+// app-vite's default before it normalizes the config. It overwrites the value
+// for ssr, ssg, cordova, capacitor, electron and bex.
 const DEFAULT_VUE_ROUTER_MODE = 'hash';
 
 const GALLERY_MAIN_ENTRY = `${GALLERY_OUTPUT_DIRECTORY}/${GALLERY_MAIN_FILE_NAME}`;
@@ -51,10 +55,6 @@ const EJECTED_GALLERY_ENTRY = `${GALLERY_URL_DIRECTORY}${GALLERY_HTML_FILE_NAME}
 
 // Where app-vite writes its generated files. The story registry goes here too.
 const QUASAR_GENERATED_DIRECTORY = '.quasar';
-
-// The scaffolded playwright.config sets this on the dev server it starts.
-const AE_SWITCH_VARIABLE = 'QUASAR_TESTING_PLAYWRIGHT';
-const AE_SWITCH_ON = 'true';
 
 // playwright.config sets this, so changing the port there is enough.
 const PORT_VARIABLE = 'QUASAR_TESTING_PLAYWRIGHT_PORT';
@@ -78,7 +78,7 @@ export default defineIndexScript(async (api) => {
 
   // The registry is written on every config read, so quasar prepare produces it
   // for CI and editors, and the Vite plugin refreshes it while the dev server
-  // runs. A JavaScript app has no use for it.
+  // runs.
   const hasTypescript = await api.hasTypescript();
   const storyTypes = hasTypescript
     ? createStoryTypesPlugin({
@@ -93,12 +93,19 @@ export default defineIndexScript(async (api) => {
   // Runs on every quasar.config read. The config is still raw, app-vite has not normalized it yet.
   api.extendQuasarConf((conf) => {
     // The scaffolded stories are TSX files. app-vite 3.8 compiles JSX with Vue's
-    // runtime when build.vueJsx is set. A value the user chose always wins.
+    // runtime when build.vueJsx is set.
     conf.build ??= {};
     conf.build.vueJsx ??= true;
 
-    // The generated main.js names the dev entry directory. Only the dev server
-    // serves the gallery page.
+    // app-vite forwards a variable to app code only when its name starts with
+    // the client prefix, QCLI_ by default. The switch needs its own define. The
+    // same key set in build.define loses. app-vite assigns defineEnv over define.
+    conf.build.defineEnv ??= {};
+    conf.build.defineEnv[AE_SWITCH_VARIABLE] ??=
+      process.env[AE_SWITCH_VARIABLE] === AE_SWITCH_ON;
+
+    // main.js imports .quasar/dev-<mode>/app.js, which only quasar dev writes.
+    // Only the dev server serves the gallery page.
     if (api.ctx.dev) {
       const hasSassVariables = SASS_VARIABLES_FILES.some((file) =>
         existsSync(api.resolve.src(file)),
@@ -172,8 +179,8 @@ export default defineIndexScript(async (api) => {
       : {}),
   }));
 
-  // The switch forces the port, keeps the dev server from opening a browser and
-  // turns on the coverage instrumentation. NODE_ENV stays what app-vite sets.
+  // The switch sets the port from QUASAR_TESTING_PLAYWRIGHT_PORT, keeps the dev
+  // server from opening a browser and turns on the coverage instrumentation.
   if (process.env[AE_SWITCH_VARIABLE] !== AE_SWITCH_ON) {
     return;
   }

@@ -5,6 +5,12 @@ export const defaultDevServerPort = 8080;
 export const APP_VITE_SUPPORT_NOTE =
   'The AE supports @quasar/app-vite ^3.8.0, report an issue if your version is in range.';
 
+/** The variable the scaffolded playwright.config sets on the dev server it starts. */
+export const AE_SWITCH_VARIABLE = 'QUASAR_TESTING_PLAYWRIGHT';
+
+/** The value AE_SWITCH_VARIABLE carries while Playwright is active. */
+export const AE_SWITCH_ON = 'true';
+
 /** The app path the gallery page is served under, with a trailing slash and no public path. */
 export const GALLERY_URL_DIRECTORY = 'playwright/gallery/';
 
