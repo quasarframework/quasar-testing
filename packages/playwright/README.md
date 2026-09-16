@@ -88,7 +88,7 @@ setup('authenticate', async ({ page }) => {
 },
 ```
 
-A spec that tests the login itself opts out with `test.use({ storageState: { cookies: [], origins: [] } })`. Add `test/playwright/.auth/` to `.gitignore`. Quasar's `LocalStorage` plugin and cookies are captured as they are; `sessionStorage` is not, see the [Playwright authentication guide](https://playwright.dev/docs/auth) for that case. Logging in through the API instead of the form is faster when the app exposes how it stores the session.
+A spec that tests the login itself opts out with `test.use({ storageState: { cookies: [], origins: [] } })`. Add `test/playwright/.auth/` to `.gitignore`. Quasar's `LocalStorage` plugin and cookies are captured as they are; `sessionStorage` is not, see the [Playwright authentication guide](https://playwright.dev/docs/auth) for that case. Logging in through the API instead of the form is faster when the app exposes how it stores the session. For a fixture that logs in through the API, see [Authentication](#authentication-1) in the GraphQL chapter.
 
 Several roles: one setup test and one state file per role, and `test.use({ storageState: adminFile })` in the specs that need it. To log in lazily instead, a worker-scoped fixture can log a role in on its first use and cache the state file per role and worker, exposed as a `role` option: tests start without a session and a file or a describe block picks one with `test.use({ role: 'admin' })`. Tests where two users interact open a second context with the other role's state. The [Playwright authentication guide](https://playwright.dev/docs/auth) documents both patterns.
 
@@ -298,6 +298,294 @@ Two Quasar behaviors to know: a closed overlay stays in the DOM for a few hundre
 
 > Check out how to use these helpers, and other recipes about testing Quasar UI components, in the [demo suite of the test app](../../test-vite-app-v3/test/playwright/demo), which is what the demo prompt scaffolds.
 
+### GraphQL
+
+The `graphql` fixture answers operations in component tests, calls the API in e2e tests, and reads a single response when the UI shows nothing. Take it from the first argument of the test function, next to `page` or `mount`. It stays inert until a test uses it: a spec that never calls `graphql.mock()` installs no route, so a suite that does not talk GraphQL is unaffected.
+
+Component tests mock the network per operation. The story mounts the component with the app's own client, and the test answers each operation by name through `graphql.mock()`. Loading, empty, error and validation states belong here, where the response is under the test's control.
+
+E2E tests are black-box journeys. The state a journey needs exists before it starts, created through `graphql.execute()` or by a seed script, and the flow itself is driven and asserted through the UI. Ids come from the arrange call, not from a mutation the UI sent.
+
+An e2e test does not wait on an operation after a click. Assert on what the response changed, and Playwright retries the assertion until the data arrives. `graphql.waitForOperation()` is for the read whose screen is identical on purpose, where the server's answer is the only evidence there is.
+
+The Cypress pattern of wrapping every action in the operation it triggers, `cy.withinGraphqlOperation(doc, fn)`, is not ported. It ties the spec to how many requests the implementation sends. A web-first assertion does not. The migration table below maps it.
+
+#### Mock an operation
+
+`graphql.mock(descriptor, response, options?)` answers an operation from the browser side. The descriptor is a codegen document or an operation name. The response is an object with `data`, `errors` or both, or a resolver that receives `{ operationName, variables }` and may be async. `mock()` is asynchronous: await it before the action that triggers the request. An exception thrown inside a resolver fails the test at teardown with that exception, and the request it was answering gets the exception message as a GraphQL error.
+
+```ts
+// test/playwright/components/ItemList.spec.ts
+import { expect, test } from '../fixtures';
+import { CreateItemDocument, ListItemsDocument } from '../graphql/documents';
+
+test('renders the items it receives', async ({ mount, graphql }) => {
+  await graphql.mock(ListItemsDocument, {
+    data: {
+      items: [
+        { id: '1', name: 'Alpha' },
+        { id: '2', name: 'Beta' },
+      ],
+    },
+  });
+
+  const component = await mount('components/ItemList/Default');
+
+  await expect(component.getByTestId('item')).toHaveText(['Alpha', 'Beta']);
+});
+
+test('shows the error the server sent', async ({ mount, graphql }) => {
+  await graphql.mock(ListItemsDocument, {
+    errors: [{ message: 'Items are unavailable' }],
+  });
+
+  const component = await mount('components/ItemList/Default');
+
+  await expect(component.getByTestId('error')).toHaveText(
+    'Items are unavailable',
+  );
+});
+```
+
+`mock()` returns a handle. Its `calls` holds the variables of every call it answered, and `waitForCall()` resolves with the variables of the next one, or at once with the last call when one already happened. `waitForCall()` rejects after five seconds, Playwright's default expect timeout, which `{ timeout }` overrides. A higher expect timeout in the config does not raise it, because the runner gives a fixture no access to that value. Assert on those rather than on the request:
+
+```ts
+test('sends the name the user typed', async ({ mount, graphql }) => {
+  // Once a test mocks one operation, every operation the component sends needs a mock.
+  await graphql.mock(ListItemsDocument, { data: { items: [] } });
+  const createItem = await graphql.mock(CreateItemDocument, {
+    data: { createItem: { id: '1', name: 'Gamma' } },
+  });
+
+  const component = await mount('components/ItemList/Default');
+  await component.getByTestId('name-input').fill('Gamma');
+  await component.getByTestId('create-button').click();
+
+  expect(await createItem.waitForCall()).toEqual({ name: 'Gamma' });
+  expect(createItem.calls).toHaveLength(1);
+});
+```
+
+The last mock registered for a name answers, so a `beforeEach` can register the defaults and a single test can override one of them. `remove()` on the handle unregisters it, and the mock registered before it answers again. `times: 1` unregisters the mock after one answer, which is how a screen that sends the same operation twice gets two different responses. `delay` holds the answer back for that many milliseconds, long enough to assert on a loading state.
+
+Once a test has registered its first mock, every operation it sends needs one. An operation without a mock is answered with `{ errors: [{ message: 'No mock for GraphQL operation "X"' }] }`, and the test fails at teardown with every such name listed. Set `graphqlUnmocked: 'passthrough'` to let them reach the real server instead.
+
+The helpers match a request by the `operationName` field of its JSON body, or by the `operationName` search parameter of a GET request. A request that carries neither is never mocked and falls through to the network, which leaves `calls` empty and reports nothing at teardown. Apollo Client, urql and graphql-request send the field by default.
+
+A batched request, an array body, is answered item by item with an array. Under `graphqlUnmocked: 'passthrough'` a batch goes to the server whole as soon as one of its operations has no mock, the mocked ones included. A GET persisted query is matched on its `operationName` search parameter. Multipart uploads are never mocked and fall through to the network. The scaffolded `components` project sets `serviceWorkers: 'block'`, because a service worker would answer requests before the mock can answer them.
+
+#### Arrange e2e state
+
+`graphql.execute(descriptor, variables?, options?)` calls the API through the page's request context, outside the browser, and returns `data`. It is the arrange step of a journey:
+
+```ts
+// test/playwright/e2e/items.spec.ts
+import { expect, test } from '../fixtures';
+import { CreateItemDocument } from '../graphql/documents';
+
+test('renames an item', async ({ page, graphql }) => {
+  const { createItem } = await graphql.execute(CreateItemDocument, {
+    name: 'Zeta',
+  });
+
+  await page.goto(`/items/${createItem.id}`);
+  await page.getByTestId('name-input').fill('Renamed');
+  await page.getByTestId('save-button').click();
+
+  await expect(page.getByTestId('name')).toHaveText('Renamed');
+});
+```
+
+`execute()` sends the query text, so it needs a document. A name alone throws. Headers go in the third argument, `{ headers: { authorization: token } }`, on top of the `graphqlHeaders` option, which the Authentication part below covers. It throws on a non-2xx status, on a body that is not JSON, on a response without `data`, and when `data` has no field for the operation's root selection. When the response carries `errors` it throws `GraphqlExecutionError`, which holds `operationName`, `errors` and the Playwright `response`.
+
+#### Wait for one response
+
+`graphql.waitForOperation(descriptor, options?)` resolves with the browser's response to the next request that carries the operation, as `{ data, errors, response }`. Register it before the action and await it after:
+
+```ts
+// test/playwright/e2e/articles.spec.ts
+import { expect, test } from '../fixtures';
+import { TrackArticleViewDocument } from '../graphql/documents';
+
+test('records the view of an article', async ({ page, graphql }) => {
+  await page.goto('/articles/42');
+
+  const viewed = graphql.waitForOperation(TrackArticleViewDocument);
+  await page.getByTestId('read-more-button').click();
+  const { data, errors } = await viewed;
+
+  expect(errors).toBeUndefined();
+  expect(data?.trackArticleView.viewCount).toBe(7);
+});
+```
+
+It does not throw when the response carries GraphQL errors. The test asserts on `errors` itself. It throws when nothing matches within the timeout, and when the body is not JSON. Reach for it only when the click leaves the screen unchanged: as soon as something on screen moves, assert on that instead.
+
+#### Options
+
+| Option            | Default      | When to set it                                                                                                                                                                                                                                                         |
+| ----------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `graphqlEndpoint` | `'/graphql'` | The app posts somewhere else. A pathname matches that path on any origin, an absolute URL matches its origin and path, a `RegExp` is tested against the whole URL, and a function receives the `URL`.                                                                  |
+| `graphqlUnmocked` | `'error'`    | Set `'passthrough'` when a spec mocks one operation and lets the others reach the real server. It is consulted only once the test has registered a mock.                                                                                                               |
+| `graphqlApiUrl`   | `undefined`  | `execute()` posts here. Without it, an absolute `graphqlEndpoint` is posted to as it is and a pathname is resolved against `baseURL`. Set it when the endpoint is a `RegExp` or a function, which give no URL to post to, or when the API is not behind the `baseURL`. |
+| `graphqlHeaders`  | `{}`         | The API needs a header on every `execute()` call, an `authorization` for instance. An app sets it from the fixture that owns its session, see the Authentication part below.                                                                                           |
+
+They are option fixtures: set them for a file or a describe block with `test.use({ graphqlEndpoint: '/api/graphql' })`, or for a whole project in `playwright.config`, whose `defineConfig` then takes `GraphqlOptions` as its first type argument:
+
+```ts
+// playwright.config.ts
+import { defineConfig } from '@playwright/test';
+import type { GraphqlOptions } from '@quasar/quasar-app-extension-testing-playwright';
+
+// With coverage on, the scaffolded config already has a second type argument:
+// defineConfig<GraphqlOptions, QuasarWorkerOptions>
+export default defineConfig<GraphqlOptions>({
+  // ...
+  use: { graphqlEndpoint: '/api/graphql' },
+});
+```
+
+#### Authentication
+
+The `mock()` and `waitForOperation()` helpers act on the requests the browser sends, which already carry the session. The `execute()` helper sends a request of its own, through the page's request context. Two questions decide what you set up: how your app carries a session, and where a test gets one.
+
+##### Cookie sessions
+
+You don't need to set anything up. The request context shares the cookie jar of the page's context, http-only cookies included. Both a `storageState` file and a login your test performs in the browser apply to `execute()`.
+
+##### Token headers
+
+If your app sends a token, set the `graphqlHeaders` option once, in the fixtures file that every spec imports. Every `execute()` call then carries it:
+
+```ts
+// test/playwright/fixtures/index.ts
+import { test as quasarTest } from '@quasar/quasar-app-extension-testing-playwright';
+import { tokenFor } from './session';
+
+export const test = quasarTest.extend<{ role: 'admin' | 'user' }>({
+  // The account a spec acts as. A file or a describe block picks one
+  // with test.use({ role: 'admin' }).
+  role: ['user', { option: true }],
+
+  graphqlHeaders: async ({ role }, use) => {
+    await use({ authorization: `Bearer ${await tokenFor(role)}` });
+  },
+});
+```
+
+The `tokenFor()` function is your own helper. It reads the token from the file the following section writes.
+
+Two options override the headers for a single call:
+
+- To call the API as somebody else, pass `{ headers: { authorization: adminToken } }`. This replaces that one header and keeps the others.
+- To call the API anonymously, pass `{ defaultHeaders: false }`. This sends none of the default headers.
+
+##### Log in through the API
+
+This section is about how the tests obtain a session. A login mutation is faster and more stable than launching and filling in the login form, and one login per worker is enough. A worker-scoped fixture has no `page` fixture and no `graphql` fixture, so it opens a page and builds the helpers with `createGraphqlFixture()`.
+
+For a cookie session, the response sets the cookies on the page's context, because `page.request` uses the same cookie jar as that context. Save the context and you have the file:
+
+```ts
+await graphql.execute(LogInDocument, { email, password });
+await page.context().storageState({ path: file });
+```
+
+For a token, write the entry your app reads:
+
+```ts
+// test/playwright/fixtures/session.ts
+import { writeFileSync } from 'node:fs';
+import type { Browser } from '@playwright/test';
+import { createGraphqlFixture } from '@quasar/quasar-app-extension-testing-playwright';
+import { LogInDocument } from '../graphql/documents';
+
+export async function writeSessionState(
+  browser: Browser,
+  baseURL: string,
+  file: string,
+) {
+  const page = await browser.newPage({ baseURL });
+  const graphql = createGraphqlFixture(page, { baseURL });
+
+  const { logIn } = await graphql.execute(LogInDocument, {
+    email: 'user@example.com',
+    password: 'secret',
+  });
+
+  writeFileSync(
+    file,
+    JSON.stringify({
+      cookies: [],
+      origins: [
+        {
+          // An origin has no trailing slash and no path, a baseURL may have both.
+          origin: new URL(baseURL).origin,
+          localStorage: [{ name: 'token', value: logIn.token }],
+        },
+      ],
+    }),
+  );
+  await page.close();
+}
+```
+
+The cookie path and the token path both write a Playwright storage state. Specs start from one through the `storageState` option, and `tokenFor()` reads the token back out of it. Write the entries the way your app writes them, because your app reads them back. Quasar's `LocalStorage` plugin prefixes its values, `__q_strn|` for a string. Write the prefix into the storage state when your app reads values back through that plugin.
+
+The `createGraphqlFixture()` function takes every `GraphqlOptions` property and `baseURL`, all optional and with the same defaults. It also returns `dispose()`, which removes the route and reports what its mocks recorded. Call it when you are done with the helpers, the way the `graphql` fixture does at the end of each test. The preceding snippet registers no mock and closes its page, so it has nothing to dispose.
+
+The `execute()` helper sends the document as written, so the data holds only the fields the document selects. Apollo Client adds `__typename` to every object it stores, so a user object you store from `execute()` is missing it.
+
+#### Type the operations
+
+A codegen document carries its own types, so `mock()`, `waitForOperation()` and `execute()` infer the response and the variables from it with no cast. Generate the documents into a test-only target, so the test runner loads no app module:
+
+```ts
+// codegen.ts
+import type { CodegenConfig } from '@graphql-codegen/cli';
+
+const config: CodegenConfig = {
+  schema: 'schema.graphql',
+  documents: ['test/playwright/graphql/**/*.graphql'],
+  generates: {
+    'test/playwright/graphql/documents.ts': {
+      plugins: ['typescript', 'typescript-operations', 'typed-document-node'],
+      config: { useTypeImports: true },
+    },
+  },
+};
+
+export default config;
+```
+
+Write the output outside `src/`, then git-ignore it and exclude it from linting, like the rest of the generated code.
+
+The other form is the operation name as a string. It reads its types from the `GraphqlOperations` registry, which the app augments:
+
+```ts
+// test/playwright/graphql-operations.d.ts
+import type {
+  ListItemsQuery,
+  ListItemsQueryVariables,
+} from './graphql/documents';
+
+declare module '@quasar/quasar-app-extension-testing-playwright' {
+  interface GraphqlOperations {
+    ListItems: { data: ListItemsQuery; variables: ListItemsQueryVariables };
+  }
+}
+```
+
+`graphql.mock('ListItems', { data: { items: [] } })` is then checked the same way the document is. A name the registry does not list still works, the same way an unregistered story id does: it compiles, with `unknown` data and a plain record for the variables. A project that generates its documents can generate this block from the same codegen run.
+
+#### The `graphql` package
+
+`execute()` prints the document with `print` from the `graphql` package, imported on its first call, so the package has to be in the project's devDependencies to use it. `mock()` and `waitForOperation()` read the operation name off the document's AST and need nothing installed, so a project that only mocks never loads it.
+
+#### Not covered
+
+Subscriptions over WebSocket or server-sent events (SSE), multipart uploads, persisted query hashing and client cache helpers such as Apollo's are out of scope. Mock those with `page.route()`, or assert their visible effect.
+
 ### Code coverage
 
 Answer "yes" to the coverage prompt when installing the AE. It then:
@@ -415,6 +703,10 @@ A Cypress component test mounts the component with props. Here the scenario live
 | `should('have.backgroundColor', 'red')`                                                        | `await expect(el).toHaveBackgroundColor('red')`                                                                                                                            |
 | `cy.testRoute('home')`                                                                         | `await expect(page).toHaveRoute('home')`                                                                                                                                   |
 | `cy.session(id, setupFn)`                                                                      | a setup project that logs in once and saves `storageState`, or the lazy `role` fixture, see Authentication above                                                           |
+| `cy.withinGraphqlOperation(doc, fn)`                                                           | the action, then a web-first assertion on what the response changed                                                                                                        |
+| `cy.waitGraphql(doc)` for a read the UI does not show                                          | `graphql.waitForOperation(doc)`, registered before the action                                                                                                              |
+| `cy.intercept` with a stubbed GraphQL body                                                     | `await graphql.mock(doc, { data })`                                                                                                                                        |
+| UI-driven setup utilities                                                                      | `await graphql.execute(doc, variables)` before the flow                                                                                                                    |
 | `test:e2e`, `test:component` scripts                                                           | same names. Installing both AEs overwrites them with the last one installed.                                                                                               |
 | `quasarComponentTestingConfig()` in `cypress.config`                                           | the `components` project of the scaffolded `playwright.config`                                                                                                             |
 

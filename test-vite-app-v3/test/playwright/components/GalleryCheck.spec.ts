@@ -1,7 +1,7 @@
 import { expect, test } from "../fixtures";
 
 test.describe("GalleryCheck", () => {
-  test("provides the urlPath, publicPath and parameter keys through the gallery", async ({
+  test("reads the gallery boot parameters and the Playwright env switch", async ({
     mount
   }) => {
     const component = await mount(
@@ -17,5 +17,8 @@ test.describe("GalleryCheck", () => {
       "app,publicPath,redirect,router,ssrContext,urlPath"
     );
     await expect(component.getByTestId("boot-gallery-flag")).toHaveText("true");
+
+    // Playwright starts the dev server with the switch on, so the define is true here.
+    await expect(component.getByTestId("env-testing-flag")).toHaveText("true");
   });
 });

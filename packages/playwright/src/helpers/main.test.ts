@@ -11,7 +11,7 @@ import { expect, test } from 'vitest';
 */
 
 const HELPERS_DIR = fileURLToPath(new URL('.', import.meta.url));
-const SURFACE_FILES = ['main.ts', 'fixtures/quasar.ts'];
+const SURFACE_FILES = ['main.ts', 'fixtures/quasar.ts', 'fixtures/graphql.ts'];
 
 const TYPE_DECLARATION_RE = /^export (?:interface|type) (\w+)/gm;
 const TYPE_RE_EXPORT_RE = /^export type \{([^}]*)\}/gm;
