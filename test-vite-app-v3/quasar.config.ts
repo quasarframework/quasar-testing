@@ -59,7 +59,7 @@ export default defineConfig((/* ctx */) => {
 
       extendViteConf(viteConf) {
         // The Playwright specs need a GraphQL endpoint. See test/playwright/graphql-server.ts.
-        if (process.env.QUASAR_TESTING_PLAYWRIGHT === "true") {
+        if (import.meta.env.QUASAR_TESTING_PLAYWRIGHT) {
           viteConf.plugins ??= [];
           viteConf.plugins.push(graphqlServer());
         }

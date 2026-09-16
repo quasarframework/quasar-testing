@@ -174,6 +174,20 @@ webServer: {
 
 A `quasar dev` that Playwright reuses was started without these variables, so restart it after changing them.
 
+The AE defines one env variable, on every dev, build and prepare run: `import.meta.env.QUASAR_TESTING_PLAYWRIGHT` is `true` when Playwright started the server and `false` otherwise. Override it in `quasar.config` > `build` > `defineEnv`. It differs from `globalThis.__QUASAR_PLAYWRIGHT_GALLERY__`, which is true only on the gallery page of a component test, while this one is true for all test runs, including e2e tests.
+
+```ts
+import { defineBoot } from '#q-app';
+
+export default defineBoot(() => {
+  if (import.meta.env.QUASAR_TESTING_PLAYWRIGHT) {
+    return;
+  }
+
+  // the analytics the tests must not send
+});
+```
+
 #### Eject
 
 To own the gallery page yourself, create `playwright/gallery/index.html` in the app. The AE then serves that file at the gallery URL instead of its generated one. Copy `.quasar/playwright-gallery/index.html` and `main.js`, written by a `quasar dev` run, into `playwright/gallery/`, point the script tag at `/playwright/gallery/main.js`, and own both files from then on. Nothing else is needed.
