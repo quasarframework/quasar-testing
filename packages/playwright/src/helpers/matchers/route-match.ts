@@ -1,8 +1,9 @@
 import { posix } from 'node:path';
 
 /**
- * Cypress testRoute parity: the glob is matched against the hash for hash-mode
- * routers and against the pathname otherwise. The matcher adds the leading "/" or "#/" itself.
+ * The glob is matched against the hash when the hash starts with "#/", and
+ * against the pathname otherwise. The leading "/" or "#/" is added here. A
+ * query string inside the hash is removed before matching.
  */
 export function matchesRoute(url: URL, glob: string): boolean {
   const HASH_MODE_PREFIX = '#/';

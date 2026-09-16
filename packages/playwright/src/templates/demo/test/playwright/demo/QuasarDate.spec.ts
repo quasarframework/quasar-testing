@@ -13,7 +13,7 @@ test.describe('QuasarDate', () => {
   test('selects a date by parts', async ({ mount, quasar }) => {
     const component = await mount('test/playwright/demo/QuasarDate/Default');
 
-    // Another year and month, so the navigation runs the other way round.
+    // The parts form. month is 1 to 12, so 11 is November.
     await quasar.selectDate(component.getByTestId('date-picker'), {
       year: 2024,
       month: 11,
@@ -29,7 +29,10 @@ test.describe('QuasarDate', () => {
     await component.getByTestId('open-date-picker-popup-button').click();
     // The component hides the dialog on update. withinDialog waits for that.
     await quasar.withinDialog(async (dialog) => {
-      await quasar.selectDate(dialog.locator('.q-date'), targetDate);
+      await quasar.selectDate(
+        dialog.getByTestId('date-picker-popup'),
+        targetDate,
+      );
     });
     await expect(component.getByTestId('date-value')).toHaveText(targetDate);
   });

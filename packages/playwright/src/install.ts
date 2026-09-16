@@ -24,8 +24,8 @@ import {
 import { normalizePromptsAnswers } from './prompt-answers';
 import { defaultDevServerPort } from './shared';
 
-// devDependencies is the version source because peerDependencies can hold
-// ranges spanning multiple majors.
+// nyc and eslint-plugin-playwright have no peerDependencies entry, so the
+// devDependencies range is the only version source.
 const { version: aeVersion, devDependencies: aeDevDependencies } = JSON.parse(
   readFileSync(new URL('../package.json', import.meta.url), 'utf-8'),
 ) as { version: string; devDependencies: Partial<Record<string, string>> };

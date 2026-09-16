@@ -1,7 +1,7 @@
 /*
-  Both matchers of this package wrap a built-in Playwright assertion, which
-  retries on its own. Each one reads the actual value off a failure and flips
-  the result when isNot is set. That part is identical, so it lives here.
+  Every matcher of this package wraps a built-in Playwright assertion. The
+  built-in one retries on its own. Each matcher reads the actual value off a
+  failure and flips the result when isNot is set.
 */
 
 interface MatcherError {

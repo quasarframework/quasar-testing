@@ -16,41 +16,44 @@ $ npx playwright install
 $ pnpm exec playwright install
 ```
 
-This App Extension (AE) manages Quasar and Playwright integration for you, both for JavaScript and TypeScript. It scaffolds:
+This App Extension (AE) integrates Quasar and Playwright, for JavaScript and TypeScript. It scaffolds the following files:
 
-- `playwright.config.[ts|js]` with an `e2e` project and a `components` project, both served by one `quasar dev`;
-- example components, stories and tests, when you answer yes to the demo prompt;
-- `test`, `test:e2e`, `test:e2e:ci`, `test:component`, `test:component:ci` and `test:report` scripts, plus `test:coverage:report` with coverage;
-- optional Istanbul code coverage;
-- an optional `.github/workflows/playwright.yml` GitHub Actions workflow.
+- A `playwright.config.[ts|js]` file with an `e2e` project and a `components` project, both served by one `quasar dev`.
+- Example components, stories and tests, when you answer yes to the demo prompt.
+- The `test`, `test:e2e`, `test:e2e:ci`, `test:component`, `test:component:ci` and `test:report` scripts, plus `test:coverage:report` with coverage.
+- Istanbul code coverage, when you ask for it.
+- A `.github/workflows/playwright.yml` GitHub Actions workflow, when you ask for it.
 
 It also generates the component gallery your stories render in, from your `index.html`, `quasar.config` and boot files, so nothing about the gallery is scaffolded into your app.
 
-This AE is a wrapper around Playwright, read [the official documentation](https://playwright.dev/docs/intro) first.
+This AE wraps Playwright. Read the [Playwright documentation](https://playwright.dev/docs/intro) first.
 
-A re-invoke (`quasar ext invoke @quasar/testing-playwright`) adds and overwrites files, it never removes any: answering no to coverage or to the demo suite leaves the earlier files in place. To change the port, edit `devServerPort` at the top of `playwright.config`.
+A re-invoke (`quasar ext invoke @quasar/testing-playwright`) asks before it overwrites each file that already exists, and it removes nothing: answering no to coverage or to the demo suite leaves the earlier files in place. To change the port, edit `devServerPort` at the top of `playwright.config`.
 
 ### Prompts
 
 `quasar ext add` asks four questions:
 
-- **code coverage**, default no. Adds `nyc`, the Istanbul plugin, a `.nycrc` and the `test:coverage:report` script.
-- **the demo suite**, default yes. Writes example components, stories and specs under `test/playwright/demo/`. You can delete that whole directory once you checked the examples and wrote your own stories and specs.
-- **a GitHub Actions workflow**, default no. Writes `.github/workflows/playwright.yml`, described under Continuous integration.
-- **installing Chromium**, default yes. Runs the Playwright browser install through your package manager.
+- **Code coverage**, default no. Adds `nyc`, the Istanbul plugin, a `.nycrc` and the `test:coverage:report` script.
+- **The demo suite**, default yes. Writes example components, stories and specs under `test/playwright/demo/`. You can delete that whole directory once you checked the examples and wrote your own stories and specs.
+- **A GitHub Actions workflow**, default no. Writes `.github/workflows/playwright.yml`, described under Continuous integration.
+- **The Chromium install**, default yes. Runs the Playwright browser install through your package manager.
 
 ### Requirements
 
-- `@quasar/app-vite` v3.8 or newer and `quasar` v2.31 or newer;
-- `vue` v3.5 or newer;
-- `@playwright/test` v1.63 or newer;
-- component testing runs against `quasar dev` in SPA mode. SSR and SSG dev servers do not serve the gallery page. E2E tests work with any mode `quasar dev` serves over HTTP.
+The AE needs the following versions:
+
+- `@quasar/app-vite` 3.8 or later, and `quasar` 2.31 or later.
+- `vue` 3.5 or later.
+- `@playwright/test` 1.63 or later.
+
+Component tests run against `quasar dev` in SPA mode. The SSR and SSG dev servers don't serve the gallery page. E2E tests work with any mode `quasar dev` serves over HTTP.
 
 ### E2E tests
 
 E2E tests live in `test/playwright/e2e`. Playwright starts `quasar dev` through its `webServer` option, passing `QUASAR_TESTING_PLAYWRIGHT=true` and the port from `devServerPort` at the top of `playwright.config`. Under `QUASAR_TESTING_PLAYWRIGHT=true` the AE keeps the browser closed, listens on that port and, when enabled, instruments the code for coverage.
 
-Locally, a `quasar dev` that is already running is reused (`reuseExistingServer`), but only when it listens on the port in `playwright.config`. A plain `quasar dev` uses Quasar's own port, 9000 by default, so Playwright starts its own server alongside it. To run one server yourself on the port the tests use, set both variables: `QUASAR_TESTING_PLAYWRIGHT=true QUASAR_TESTING_PLAYWRIGHT_PORT=8080 quasar dev`.
+Locally, the `reuseExistingServer` option reuses a `quasar dev` that's already running, but only when it listens on the port in `playwright.config`. A plain `quasar dev` uses Quasar's own port, 9000 by default, so Playwright starts its own server alongside it. To run one server yourself on the port the tests use, set both variables: `QUASAR_TESTING_PLAYWRIGHT=true QUASAR_TESTING_PLAYWRIGHT_PORT=8080 quasar dev`.
 
 ### Authentication
 
@@ -88,11 +91,11 @@ setup('authenticate', async ({ page }) => {
 },
 ```
 
-A spec that tests the login itself opts out with `test.use({ storageState: { cookies: [], origins: [] } })`. Add `test/playwright/.auth/` to `.gitignore`. Quasar's `LocalStorage` plugin and cookies are captured as they are; `sessionStorage` is not, see the [Playwright authentication guide](https://playwright.dev/docs/auth) for that case. Logging in through the API instead of the form is faster when the app exposes how it stores the session. For a fixture that logs in through the API, see [Authentication](#authentication-1) in the GraphQL chapter.
+A spec that tests the login itself opts out with `test.use({ storageState: { cookies: [], origins: [] } })`. Add `test/playwright/.auth/` to `.gitignore`. Quasar's `LocalStorage` plugin and cookies are captured as they are. `sessionStorage` isn't. For that case, see the [Playwright authentication guide](https://playwright.dev/docs/auth). Logging in through the API instead of the form is faster when the app exposes how it stores the session. For a fixture that logs in through the API, see [Authentication](#authentication-1) in the GraphQL chapter.
 
-Several roles: one setup test and one state file per role, and `test.use({ storageState: adminFile })` in the specs that need it. To log in lazily instead, a worker-scoped fixture can log a role in on its first use and cache the state file per role and worker, exposed as a `role` option: tests start without a session and a file or a describe block picks one with `test.use({ role: 'admin' })`. Tests where two users interact open a second context with the other role's state. The [Playwright authentication guide](https://playwright.dev/docs/auth) documents both patterns.
+To cover several roles, write one setup test and one state file per role, then add `test.use({ storageState: adminFile })` to the specs that need it. To log in lazily instead, a worker-scoped fixture can log a role in on its first use and cache the state file per role and worker, exposed as a `role` option: tests start without a session and a file or a describe block picks one with `test.use({ role: 'admin' })`. Tests where two users interact open a second context with the other role's state. The [Playwright authentication guide](https://playwright.dev/docs/auth) documents both patterns.
 
-### Testing the production bundle
+### Run the tests against the production bundle
 
 `quasar dev` serves the tests by default. To run them against the bundle that ships, for instance on CI, switch the `webServer` command in `playwright.config`:
 
@@ -108,13 +111,13 @@ webServer: {
 },
 ```
 
-`quasar serve` comes with `@quasar/cli`. `QUASAR_TESTING_PLAYWRIGHT=true` on the build keeps the code coverage instrumentation, so `test:coverage:report` works on CI runs too. Do not set `NODE_ENV=test` on the build: Vue and most libraries would ship in development mode. Component tests always run against `quasar dev`.
+`quasar serve` comes with `@quasar/cli`. `QUASAR_TESTING_PLAYWRIGHT=true` on the build keeps the code coverage instrumentation, so `test:coverage:report` works on CI runs too. Do not set `NODE_ENV=test` on the build: Vue and most libraries then ship in development mode. Component tests always run against `quasar dev`.
 
 ### Continuous integration
 
 Answer yes to the "Add a GitHub Actions workflow that runs the tests?" prompt and the AE writes `.github/workflows/playwright.yml`.
 
-The workflow uses your package manager and your Node version, read from `.node-version`, `.nvmrc` or `engines.node` in `package.json`, and defaults to the current LTS if none is specified. It installs Chromium only, runs `playwright test` once, and uploads `playwright-report/` and `coverage/`(if coverage is enabled) as an artifact for 30 days.
+The workflow uses your package manager and your Node version, read from `.node-version`, `.nvmrc` or `engines.node` in `package.json`, and defaults to the current LTS if none is specified. The workflow installs Chromium only and runs `playwright test` once. With coverage enabled it then runs `test:coverage:report`. It uploads `playwright-report/`, and `coverage/` when coverage is enabled, as one artifact kept for 30 days.
 
 The file is written only when it does not exist yet, so a re-invoke keeps your edits.
 
@@ -122,11 +125,11 @@ Edit it to fit your project: the branch names under `on.push`, the browsers in t
 
 With pnpm and no `packageManager` field in `package.json`, the workflow pins `version: latest` for `pnpm/action-setup`. Replace it with the version you use, or add the field and delete the `with:` block.
 
-If your app is not at the repository root, a package of a monorepo for instance, the Playwright steps get a `working-directory`, but move the file to `.github/workflows/` at the repository root since it's the only place GitHub reads workflows from, as the AE should tell you when it scaffolds the file.
+If your app is not at the repository root, a package of a monorepo for instance, the Playwright steps get a `working-directory`, but move the file to `.github/workflows/` at the repository root since that's the only place GitHub reads workflows from. The AE prints this reminder when it scaffolds the file.
 
 ### Component tests
 
-Component tests use Playwright's [story gallery model](https://playwright.dev/docs/test-components): a **story** is a small component that wraps the component under test in one scenario, and the built-in `mount` fixture renders it by id.
+Component tests use Playwright's [story gallery model](https://playwright.dev/docs/test-components): a **story** is a small component that renders the component under test in one state, and the built-in `mount` fixture renders it by id.
 
 #### Layout
 
@@ -140,11 +143,11 @@ test/playwright/demo/                 optional: example components, stories and 
 
 The demo suite is scaffolded only when you answer yes to the demo prompt. Delete `test/playwright/demo/` when you no longer need it. Everything else is scaffolded either way. Without the demo suite, `test:component:ci` reports `No tests found` until you add your first spec under `test/playwright/components/`.
 
-Stories are discovered under `src/` and under `test/playwright/`, in `*.story.[tsx|jsx|ts|js|vue]` files. Each named export of a `.tsx`, `.jsx`, `.ts` or `.js` story file is a story, and its id is the path from the app root without the `.story.*` extension plus the export name. A leading `src/` is dropped, so `src/components/Foo.story.tsx` gives ids like `components/Foo/Default`, while the demos keep their full path and give `test/playwright/demo/QuasarSelect/Default`. A `.story.vue` file is one story, addressed by that path alone.
+Stories are discovered under `src/` and under `test/playwright/`, in `*.story.[tsx|jsx|ts|js|vue]` files. Every export of a `.tsx`, `.jsx`, `.ts` or `.js` story file is a story. A named export takes the path from the app root without the `.story.*` extension, plus the export name. A default export takes that path alone. A leading `src/` is dropped, so `src/components/Foo.story.tsx` gives ids like `components/Foo/Default`, while the demos keep their full path and give `test/playwright/demo/QuasarSelect/Default`. A `.story.vue` file is one story, addressed by that path alone.
 
 The gallery is your app without its root component. `quasar dev` generates it from your `index.html`, `quasar.config` and boot files, so there is nothing to keep in sync by hand, and a new story doesn't need a restart. It boots Quasar with the `framework` options of your `quasar.config`, your router, your store when the app has one, then every boot file in order, with the same parameters as in the app. Each story renders inside `#root`. A boot file that calls `redirect()` or throws makes `mount()` reject with a message naming that boot file. Components that need a Quasar plugin such as `Dialog` or `Notify` work when the plugin is listed in `quasar.config` > `framework` > `plugins`, exactly as in the app. Boot files, css, extras and animations that another App Extension adds through its own `extendQuasarConf` reach the gallery only when that extension is listed before `@quasar/testing-playwright` in `quasar.extensions.json`.
 
-The `components` project sets `reuseContext: true`, which reuses one browser context per worker across component tests and speeds suites up a lot. Playwright marks it experimental: it is ignored when `video` is on, and a `test.use()` change other than viewport, color scheme, user agent and a few emulation options creates a fresh context.
+The `components` project sets `reuseContext: true`, which reuses one browser context per worker across component tests. Playwright marks the option experimental. Playwright ignores it when `video` is on. Only `colorScheme`, `contrast`, `forcedColors`, `reducedMotion`, `screen`, `testIdAttribute`, `userAgent` and `viewport` can change between tests. A `test.use()` change to any other option creates a fresh context.
 
 #### Customization
 
@@ -190,9 +193,9 @@ export default defineBoot(() => {
 
 #### Eject
 
-To own the gallery page yourself, create `playwright/gallery/index.html` in the app. The AE then serves that file at the gallery URL instead of its generated one. Copy `.quasar/playwright-gallery/index.html` and `main.js`, written by a `quasar dev` run, into `playwright/gallery/`, point the script tag at `/playwright/gallery/main.js`, and own both files from then on. Nothing else is needed.
+To own the gallery page yourself, create `playwright/gallery/index.html` in the app. The AE then serves that file at the gallery URL instead of its generated one. Copy `.quasar/playwright-gallery/index.html` and `main.js`, written by a `quasar dev` run, into `playwright/gallery/`, point the script tag at `/playwright/gallery/main.js`, and own both files from then on.
 
-#### Writing stories
+#### Write a story
 
 There are three ways to write a story: a TSX/JSX function, a `defineComponent` with a JSX or a render function, or a `.story.vue` single-file component.
 
@@ -206,7 +209,7 @@ export const Default = () => <QuasarSelect />;
 export const Disabled = () => <QuasarSelect disable />;
 ```
 
-Use `mount('test/playwright/demo/QuasarSelect/Disabled')` to render the second one.
+To render the second one, use `mount('test/playwright/demo/QuasarSelect/Disabled')`.
 
 A story that owns state returns the render function from `defineComponent`. Record what the test asserts into a hidden form:
 
@@ -244,7 +247,7 @@ test('emits on click', async ({ mount }) => {
 });
 ```
 
-A `*.story.vue` single-file component is one story, addressed by its path alone: `src/components/Greeting.primary.story.vue` is mounted with `mount('components/Greeting.primary')`. Write one file per story. Prefer it for template-heavy and slot-heavy scenarios, and for a component that needs an ancestor:
+A `*.story.vue` single-file component is one story, addressed by its path alone: `src/components/Greeting.primary.story.vue` is mounted with `mount('components/Greeting.primary')`. Write one file per story. Prefer it for template-heavy and slot-heavy stories, and for a component that needs an ancestor:
 
 ```vue
 <!-- test/playwright/demo/QuasarDrawer.inLayout.story.vue -->
@@ -272,7 +275,7 @@ Playwright ships this methodology as an agent skill: `npx playwright init-skills
 
 ### The `quasar` fixture and the matchers
 
-Every spec imports `test` and `expect` from `test/playwright/fixtures/index.ts`. That file re-exports the AE's `test`, which carries the `quasar` fixture and the coverage collector, and the AE's `expect`, which carries the matchers. Extend both there, so every spec gets the app's own fixtures and matchers from the same import.
+Every spec imports `test` and `expect` from `test/playwright/fixtures/index.ts`. That file re-exports the AE's `test`, which carries the `quasar` fixture, the `graphql` fixture and the coverage collector, and the AE's `expect`, which carries the matchers. Extend both there, so every spec gets the app's own fixtures and matchers from the same import.
 
 `quasar` is a [Playwright fixture](https://playwright.dev/docs/test-fixtures): take it from the first argument of the test function, next to `page` or `mount`. It works on the page of that test. For any other page, a popup for instance, `createQuasarFixture(page)` from the AE builds the same helpers.
 
@@ -298,7 +301,7 @@ test('asks before deleting', async ({ page, quasar }) => {
 | `quasar.withinDialog(fn, options?)`             | `await quasar.withinDialog(async (dialog) => { await dialog.getByRole('button', { name: 'OK' }).click(); })`           | Runs the callback with the dialog locator, then waits for the dialog to be removed. `{ persistent: true }` skips that wait.                                                                                                                                                                                                              |
 | `quasar.closeDialog(dialog, via?)`              | `await quasar.closeDialog(quasar.dialog(), 'backdrop')`                                                                | Closes with Escape (default) or a backdrop click and waits for the removal. Escape only reaches the top-most modal dialog.                                                                                                                                                                                                               |
 | `quasar.menu(options?)`                         | `quasar.menu()` <br /> `quasar.menu({ hasText: 'Item 1' })`                                                            | Locator for the top-most open QMenu. QSelect menus are excluded.                                                                                                                                                                                                                                                                         |
-| `quasar.openMenu(trigger, options?)`            | `const menu = await quasar.openMenu(page.getByTestId('open-menu-btn'))`                                                | Clicks the trigger and returns the menu that opened. `{ contextMenu: true }` right-clicks.                                                                                                                                                                                                                                               |
+| `quasar.openMenu(trigger, options?)`            | `const menu = await quasar.openMenu(page.getByTestId('open-menu-button'))`                                             | Clicks the trigger and returns the menu that opened. `{ contextMenu: true }` right-clicks.                                                                                                                                                                                                                                               |
 | `quasar.select(target)`                         | `const select = quasar.select(page.getByTestId('select')); await select.pick('Option 1')`                              | Handle for a QSelect: `root`, `combobox`, `open()`, `close()`, `listbox()`, `options()`, `pick(values, { exact, keepOpen })`. The target can be any inner element. `root` is the in-page QSelect; on mobile platforms the open dialog holds a copy of the field, use `open()`/`pick()` rather than asserting on `root` while it is open. |
 | `quasar.selectOption(target, values, options?)` | `await quasar.selectOption(page.getByTestId('select'), 'Option 1')` <br /> `await quasar.selectOption(target, [0, 2])` | Shortcut for `select(target).pick(...)`. Strings match option labels exactly, numbers are option indexes. Arrays need a multiple QSelect. Long lists are scrolled.                                                                                                                                                                       |
 | `quasar.selectDate(target, value)`              | `await quasar.selectDate(page.getByTestId('date-picker'), '2023/02/23')`                                               | Navigates a QDate through its years and months views and clicks the day. Accepts a `Date`, a string `new Date()` parses, or `{ year, month, day }` as displayed.                                                                                                                                                                         |
@@ -306,11 +309,11 @@ test('asks before deleting', async ({ page, quasar }) => {
 | `expect(locator).toHaveBackgroundColor(color)`  | `await expect(el).toHaveBackgroundColor('var(--q-positive)')`                                                          | Same for the background color.                                                                                                                                                                                                                                                                                                           |
 | `expect(page).toHaveRoute(glob)`                | `await expect(page).toHaveRoute('books/*/pages/*')`                                                                    | Matches the current route with Node's `path.posix.matchesGlob()`. Hash-mode routers are detected, leading `#` and `/` are added for you.                                                                                                                                                                                                 |
 
-Playwright already covers what the Cypress AE needed custom commands for: `getByTestId()` reads `data-testid` (see [Keeping `data-cy` attributes](#keeping-data-cy-attributes) for Cypress suites), and `check()`, `uncheck()` and `toBeChecked()` drive QCheckbox, QToggle and QRadio through their `aria-checked` attribute.
+Playwright already covers what the Cypress AE needed custom commands for: `getByTestId()` reads `data-testid` (see [Keep the `data-cy` attributes](#keep-the-data-cy-attributes) for Cypress suites), and `check()`, `uncheck()` and `toBeChecked()` drive QCheckbox, QToggle and QRadio through their `aria-checked` attribute.
 
 Two Quasar behaviors to know: a closed overlay stays in the DOM for a few hundred milliseconds, so the helpers wait for its removal; and `page.clock.install()` freezes those timers, so tick the clock before waiting on a closed overlay.
 
-> Check out how to use these helpers, and other recipes about testing Quasar UI components, in the [demo suite of the test app](../../test-vite-app-v3/test/playwright/demo), which is what the demo prompt scaffolds.
+> For these helpers in use, and other recipes for testing Quasar UI components, see the [demo suite of the test app](https://github.com/quasarframework/quasar-testing/tree/dev/test-vite-app-v3/test/playwright/demo). The demo prompt scaffolds the same files.
 
 ### GraphQL
 
@@ -602,11 +605,11 @@ Subscriptions over WebSocket or server-sent events (SSE), multipart uploads, per
 
 ### Code coverage
 
-Answer "yes" to the coverage prompt when installing the AE. It then:
+Answer yes to the coverage prompt when installing the AE. It then makes the following changes:
 
-- instruments the app with `vite-plugin-istanbul` when `QUASAR_TESTING_PLAYWRIGHT=true`;
-- collects the coverage from the browser after every test into `.nyc_output/`;
-- adds `nyc` and a `test:coverage:report` script, and a `.nycrc` extending the AE preset, which reports as text, html, lcov and json. You can change the reporters in your `.nycrc` if needed.
+- Instruments the app with `vite-plugin-istanbul` when `QUASAR_TESTING_PLAYWRIGHT=true`.
+- Collects the coverage from the browser after every test into `.nyc_output/`.
+- Adds `nyc` and a `test:coverage:report` script, and a `.nycrc` file extending the AE preset, which reports as text, html, lcov and json. You can change the reporters in your `.nycrc` file.
 
 The collector is off unless `playwright.config` sets it. The install writes `use: { coverage: true }` for you when you answer yes to the prompt, and removing that line turns it off again. It is off by default because the collector opens a browser page for every test, including one that only uses `request`.
 
@@ -614,7 +617,7 @@ Run the tests, then `npm run test:coverage:report`. Delete `.nyc_output/` betwee
 
 ### Linting
 
-If your project uses ESLint, the AE adds `eslint-plugin-playwright` for you. Add into your `eslint.config.js`:
+If your project uses ESLint, the AE adds `eslint-plugin-playwright` for you. Add this to your `eslint.config.js` file:
 
 ```js
 import { defineConfig } from 'eslint/config';
@@ -663,9 +666,9 @@ export default defineConfig(
 
 The rule catches an editor auto-import that picked `@playwright/test`, which has neither the Quasar fixtures nor the matchers.
 
-If your project uses oxlint, its JS plugin layer can run `eslint-plugin-playwright`, see the oxlint documentation on `jsPlugins`.
+If your project uses oxlint, its JS plugin layer can run `eslint-plugin-playwright`. For more information, see the [oxlint `jsPlugins` documentation](https://oxc.rs/docs/guide/usage/linter/js-plugins.html).
 
-oxlint lints the scaffolded files out of the box, except that its type check (`options.typeCheck: true`, the create-quasar default) cannot read `.vue` imports and reports `TS2322` on every prop a TSX story passes. Ignore the story files there; `vue-tsc` type-checks them:
+oxlint lints the scaffolded files out of the box, except that its type check can't read `.vue` imports and reports `TS2322` on every prop a TSX story passes. The `options.typeCheck` setting is `true` by default in a create-quasar app. Ignore the story files there; `vue-tsc` type-checks them:
 
 ```ts
 // oxlint.config.ts
@@ -686,16 +689,16 @@ export default defineConfig({
 
 If `quasar.config` > `build` > `publicPath` is not `/`, set `appUrl` in `playwright.config` to include it, such as `http://localhost:8080/my-app/`. The e2e `baseURL`, the `webServer.url` and `galleryUrl` derive from `appUrl`, and the gallery is served under the public path too, so nothing else changes.
 
-### Migrating from the Cypress AE
+### Migrate from the Cypress AE
 
 Follow these steps to migrate from the Cypress AE to Playwright:
 
-1. Remove the Cypress AE and its files, see the [Removal section of its README](https://github.com/quasarframework/quasar-testing/tree/dev/packages/e2e-cypress#removal). To reduce code changes to a minimum, you can keep the `data-cy` attributes in your components, see [Keeping `data-cy` attributes](#keeping-data-cy-attributes).
+1. Remove the Cypress AE and its files, see the [Removal section of its README](https://github.com/quasarframework/quasar-testing/tree/dev/packages/e2e-cypress#removal). To reduce code changes to a minimum, you can keep the `data-cy` attributes in your components, see [Keep the `data-cy` attributes](#keep-the-data-cy-attributes).
 2. Run `quasar ext add @quasar/testing-playwright` and answer the prompts, then install the browsers as shown at the top of this file.
 3. Move the e2e specs from `test/cypress/e2e/*.cy.ts` to `test/playwright/e2e/*.spec.ts`, and turn each component spec into a story next to the component plus a spec file under `test/playwright/components/`, using the table below.
 4. If you have a CI, replace the `cypress run` steps with `test:e2e:ci` and `test:component:ci`, and add `playwright install --with-deps` before them.
 
-A Cypress component test mounts the component with props. Here the scenario lives in a story, written in TSX or as a `.story.vue` single-file component, and the test mounts it by id.
+A Cypress component test mounts the component with props. Here each case is a story, written in TSX or as a `.story.vue` single-file component, and the test mounts it by id.
 
 | Cypress AE                                                                                     | Playwright AE                                                                                                                                                              |
 | ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -724,7 +727,7 @@ A Cypress component test mounts the component with props. Here the scenario live
 | `test:e2e`, `test:component` scripts                                                           | same names. Installing both AEs overwrites them with the last one installed.                                                                                               |
 | `quasarComponentTestingConfig()` in `cypress.config`                                           | the `components` project of the scaffolded `playwright.config`                                                                                                             |
 
-#### Keeping `data-cy` attributes
+#### Keep the `data-cy` attributes
 
 `getByTestId()` reads `data-testid`. To keep the `data-cy` attributes of a Cypress suite, set the attribute in `playwright.config`. Playwright 1.61 and newer accept a list, so both work side by side during a migration:
 
@@ -740,9 +743,9 @@ use: {
 $ quasar ext remove @quasar/testing-playwright
 ```
 
-This only uninstalls and unregisters the AE. For a full cleanup including Playwright itself, also do:
+This only uninstalls and unregisters the AE. For a full cleanup including Playwright itself, do the following:
 
-- delete `playwright.config.[ts|js]`, `test/playwright/fixtures/`, `test/playwright/e2e/`, `test/playwright/components/`, `test/playwright/demo/`, `.nycrc`, `.github/workflows/playwright.yml` and the `*.story.*` files you no longer need
-- remove the `test`, `test:e2e`, `test:e2e:ci`, `test:component`, `test:component:ci`, `test:report` and `test:coverage:report` scripts from `package.json`
-- remove `@playwright/test`, `nyc` and `eslint-plugin-playwright` devDependencies from `package.json`
-- remove `test-results/`, `playwright-report/`, `blob-report/`, `.nyc_output` and `coverage/` lines from `.gitignore`
+- Delete `playwright.config.[ts|js]`, `test/playwright/fixtures/`, `test/playwright/e2e/`, `test/playwright/components/`, `test/playwright/demo/`, `.nycrc`, `.github/workflows/playwright.yml` and the `*.story.*` files you no longer need.
+- Remove the `test`, `test:e2e`, `test:e2e:ci`, `test:component`, `test:component:ci`, `test:report` and `test:coverage:report` scripts from `package.json`.
+- Remove the `@playwright/test`, `nyc` and `eslint-plugin-playwright` devDependencies from `package.json`.
+- Remove the `test-results/`, `playwright-report/`, `blob-report/`, `.nyc_output` and `coverage/` lines from `.gitignore`.

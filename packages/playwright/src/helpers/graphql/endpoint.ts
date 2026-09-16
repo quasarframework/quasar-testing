@@ -2,12 +2,28 @@ export type GraphqlEndpoint = string | RegExp | ((url: URL) => boolean);
 
 const STATEFUL_REGEXP_FLAGS = /[gy]/g;
 
+const ABSOLUTE_ENDPOINT_PROTOCOLS = ['http:', 'https:'];
+
+/**
+ * The URL of an absolute endpoint, or undefined when the string is a pathname.
+ * The URL parser reads "localhost:8080/graphql" with "localhost:" for its
+ * protocol. Such an endpoint matches no request, so the string is refused.
+ */
 function parseAbsoluteUrl(value: string): URL | undefined {
+  let url: URL;
   try {
-    return new URL(value);
+    url = new URL(value);
   } catch {
     return undefined;
   }
+
+  if (!ABSOLUTE_ENDPOINT_PROTOCOLS.includes(url.protocol)) {
+    throw new Error(
+      `The graphqlEndpoint option "${value}" is neither an absolute http URL nor a pathname. Add the scheme, as in "http://localhost:8080/graphql", or start it with a slash.`,
+    );
+  }
+
+  return url;
 }
 
 /**

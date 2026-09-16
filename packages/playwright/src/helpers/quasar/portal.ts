@@ -77,9 +77,9 @@ export async function waitForNewPortal(
 
   await trigger();
 
-  // evaluateAll() returns elements in document order, and Quasar re-appends
-  // or moves portal nodes at runtime, so document order does not track index
-  // order. The newest portal is the one with the highest index.
+  // evaluateAll() returns elements in document order. Quasar re-appends and
+  // moves portal nodes at runtime. Document order does not track index order.
+  // The newest portal is the one with the highest index.
   let newIndex: number | undefined;
   await expect
     .poll(

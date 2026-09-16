@@ -75,10 +75,9 @@ function resolveAssetPath(assetPath: string, aliasPrefix: string) {
 
 /**
  * Same rules as parseAssetProperty(aliasPrefix) and the client filter of
- * app-vite's entry template. app-vite deduplicates by path first, in the config
- * file, and drops the entries the client does not run afterwards, in the
- * template. A path listed twice keeps its first entry, so "client: false" on
- * that first entry drops the path.
+ * app-vite's entry template. app-vite deduplicates by path in the config file,
+ * then the template drops the entries with "client: false". A path listed twice
+ * keeps its first entry.
  */
 function normalizeAssets(
   assets: ReadonlyArray<RawAsset>,

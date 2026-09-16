@@ -70,7 +70,8 @@ test('names the exports when only the export name is wrong', async () => {
     }),
   );
 
-  // A JavaScript app has no registry to catch this, so the message has to
+  // A JavaScript app has no registry to catch this, so the message names the
+  // file and lists its exports.
   await expect(
     galleryWindow.mount({ story: 'components/Button/Primaryy' }),
   ).rejects.toThrow(

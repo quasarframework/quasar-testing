@@ -8,6 +8,7 @@ type Route = Parameters<Handler>[0];
 function createFakePage() {
   const routed: Handler[] = [];
   const unrouted: Handler[] = [];
+  let isClosed = false;
 
   const page: Page = {
     route: (_url, handler) => {
@@ -18,9 +19,17 @@ function createFakePage() {
       unrouted.push(handler);
       return Promise.resolve();
     },
+    isClosed: () => isClosed,
   };
 
-  return { page, routed, unrouted };
+  return {
+    page,
+    routed,
+    unrouted,
+    close: () => {
+      isClosed = true;
+    },
+  };
 }
 
 function createFakeRoute(
@@ -145,6 +154,101 @@ test('times removes the mock after that many answers', async () => {
   expect(first.fulfilled).toEqual([{ data: { items: ['once'] } }]);
   expect(second.fulfilled).toEqual([{ data: { items: ['always'] } }]);
   await registry.dispose();
+});
+
+test('a batch that names one operation twice consumes times once', async () => {
+  const { registry, handler } = createRegistry();
+  await registry.mock('ListItems', { data: { items: ['always'] } });
+  const once = await registry.mock(
+    'ListItems',
+    { data: { items: ['once'] } },
+    { times: 1 },
+  );
+  const { route, fulfilled } = createFakeRoute([
+    { operationName: 'ListItems', query: '' },
+    { operationName: 'ListItems', query: '' },
+  ]);
+
+  await handler()?.(route);
+
+  expect(fulfilled).toEqual([
+    [{ data: { items: ['once'] } }, { data: { items: ['always'] } }],
+  ]);
+  expect(once.calls).toHaveLength(1);
+  await registry.dispose();
+});
+
+test('remove() inside a resolver applies to the rest of the batch', async () => {
+  const { registry, handler } = createRegistry();
+  await registry.mock('ListItems', { data: { items: ['always'] } });
+  const handle = await registry.mock('ListItems', () => {
+    handle.remove();
+    return { data: { items: ['first only'] } };
+  });
+  const { route, fulfilled } = createFakeRoute([
+    { operationName: 'ListItems', query: '' },
+    { operationName: 'ListItems', query: '' },
+  ]);
+
+  await handler()?.(route);
+
+  expect(fulfilled).toEqual([
+    [{ data: { items: ['first only'] } }, { data: { items: ['always'] } }],
+  ]);
+  await registry.dispose();
+});
+
+test('times below 1 is refused', async () => {
+  const { registry, routed } = createRegistry();
+
+  await expect(
+    registry.mock('ListItems', { data: { items: [] } }, { times: 0 }),
+  ).rejects.toThrow(
+    'graphql.mock() needs a times option of at least 1, got 0.',
+  );
+  expect(routed).toEqual([]);
+});
+
+test('dispose on a closed page skips the unroute and still reports', async () => {
+  const { registry, handler, unrouted, close } = createRegistry();
+  await registry.mock('ItemCount', { data: { itemCount: 0 } });
+  await handler()?.(
+    createFakeRoute({ operationName: 'ListItems', query: '' }).route,
+  );
+
+  close();
+
+  await expect(registry.dispose()).rejects.toThrow(
+    'GraphQL operations without a mock: ListItems',
+  );
+  expect(unrouted).toEqual([]);
+});
+
+test('dispose reports the resolver errors and the unmocked names together', async () => {
+  const { registry, handler } = createRegistry();
+  await registry.mock('CreateItem', () => {
+    throw new Error('first resolver broke');
+  });
+  await registry.mock('UpdateItem', () => {
+    throw new Error('second resolver broke');
+  });
+  const call = (operationName: string) =>
+    createFakeRoute({ operationName, query: '' }).route;
+
+  await handler()?.(call('CreateItem'));
+  await handler()?.(call('UpdateItem'));
+  await handler()?.(call('ListItems'));
+
+  const failure = (await registry
+    .dispose()
+    .catch((error: unknown) => error)) as AggregateError | undefined;
+
+  expect(failure).toBeInstanceOf(AggregateError);
+  expect(failure?.message).toContain('first resolver broke');
+  expect(failure?.message).toContain('second resolver broke');
+  expect(failure?.message).toContain(
+    'GraphQL operations without a mock: ListItems.',
+  );
 });
 
 test('a resolver receives the call and may be async', async () => {

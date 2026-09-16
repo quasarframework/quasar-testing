@@ -25,6 +25,22 @@ test('an absolute URL matches its origin and pathname', () => {
   expect(matches(new URL('http://localhost:8080/graphql'))).toBe(false);
 });
 
+test('a string with a scheme that is not http is refused', () => {
+  const message =
+    'The graphqlEndpoint option "localhost:8080/graphql" is neither an absolute http URL nor a pathname.';
+
+  expect(() => createEndpointMatcher('localhost:8080/graphql')).toThrow(
+    message,
+  );
+  expect(() =>
+    resolveApiUrl(
+      'localhost:8080/graphql',
+      undefined,
+      'http://localhost:8080/',
+    ),
+  ).toThrow(message);
+});
+
 test('a RegExp tests the href', () => {
   const matches = createEndpointMatcher(/\/api\/(graphql|gql)$/);
 

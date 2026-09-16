@@ -86,11 +86,10 @@ export function createSelectHandle(page: Page, target: Locator): SelectHandle {
   }
 
   // Quasar ignores a click while the select has no options, no "no-option"
-  // slot and no no-option-label prop. The gate is showPopup() in QSelect.js.
-  // A select that
-  // loads its options after mount stays closed on the first click. The click
-  // is repeated until the menu opens. toPass() has no default timeout. The
-  // loop sets one.
+  // slot and no no-option-label prop. The gate is showPopup() in QSelect.js. A
+  // select that loads its options after mount stays closed on the first click,
+  // so the click is repeated until the menu opens. toPass() has no default
+  // timeout. The call below sets one.
   async function open() {
     if ((await fieldRoot.getAttribute('aria-disabled')) === 'true') {
       throw new Error('The QSelect is disabled');
@@ -181,8 +180,8 @@ export function createSelectHandle(page: Page, target: Locator): SelectHandle {
       await page.waitForTimeout(VIRTUAL_SCROLL_RENDER_WAIT_MS);
     }
 
-    // The loop can exit right after a scroll (reachedEnd) without waiting, so
-    // the last slice may not have rendered yet.
+    // Quasar renders the new slice asynchronously. This wait is the last chance
+    // for it before the count check below decides the option is missing.
     await page.waitForTimeout(VIRTUAL_SCROLL_RENDER_WAIT_MS);
 
     if ((await option.count()) === 0) {

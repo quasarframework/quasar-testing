@@ -12,7 +12,7 @@
       <div class="q-pa-sm">
         <div v-for="n in 50" :key="n">Drawer {{ n }} / 50</div>
       </div>
-      <q-btn data-testid="button">Am I on screen?</q-btn>
+      <q-btn data-testid="offscreen-button">Am I on screen?</q-btn>
     </q-scroll-area>
   </q-drawer>
 </template>

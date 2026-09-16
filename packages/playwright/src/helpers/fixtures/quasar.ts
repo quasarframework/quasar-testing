@@ -76,7 +76,10 @@ export function createQuasarFixture(page: Page): QuasarFixture {
  * sets one types itself with defineConfig<object, QuasarWorkerOptions>().
  */
 export interface QuasarWorkerOptions {
-  /** Turns the coverage collector on. The install writes it when coverage is enabled. */
+  /**
+   * Turns the coverage collector on. The install writes "use: { coverage: true }"
+   * into playwright.config when coverage is enabled.
+   */
   coverage: boolean;
 }
 
@@ -84,8 +87,6 @@ export const test = base.extend<
   { quasar: QuasarFixture; collectCoverage: void },
   QuasarWorkerOptions
 >({
-  // The install script writes "use: { coverage: true }" into playwright.config
-  // when the coverage prompt is answered yes.
   coverage: [false, { option: true, scope: 'worker' }],
 
   collectCoverage: [

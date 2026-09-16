@@ -17,6 +17,9 @@ import { ref } from "vue";
 
 const syncOptions = ["Option 1", "Option 2", "Option 3"];
 
+// Long enough that the first click lands before the options exist.
+const ASYNC_OPTIONS_DELAY_MS = 500;
+
 const {
   loadOptionsAsync = false,
   disable = false,
@@ -37,7 +40,7 @@ if (loadOptionsAsync) {
   setTimeout(() => {
     options.value = syncOptions;
     loading.value = false;
-  }, 2000);
+  }, ASYNC_OPTIONS_DELAY_MS);
 } else {
   options.value = syncOptions;
 }

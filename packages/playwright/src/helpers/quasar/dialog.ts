@@ -80,7 +80,8 @@ async function modalDialogIndexes(page: Page): Promise<number[]> {
 }
 
 // Escape reaches the top-most modal dialog. Pressing it for a dialog
-// underneath closes the wrong one, and the wait below then expires.
+// underneath closes the wrong one. closeDialog() then waits for a container
+// that never detaches.
 async function assertTopMostDialog(page: Page, containerId: string) {
   const indexMatch = DIALOG_PORTAL_INDEX_PATTERN.exec(containerId);
   if (indexMatch === null) {

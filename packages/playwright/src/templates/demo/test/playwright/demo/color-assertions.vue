@@ -1,3 +1,3 @@
 <template>
-  <div class="wrapper text-primary bg-black">Text1</div>
+  <div data-testid="colored-text" class="text-primary bg-black">Text1</div>
 </template>

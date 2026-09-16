@@ -5,8 +5,8 @@ import { closestWithClass } from './root';
 export type { DateInput, DateParts } from './date-parts';
 
 /*
-  The list of QDate facts from Quasar source code we rely on are listed below.
-  Last verified against Quasar 2.32.3. The QuasarDate demo spec covers them.
+  The QDate facts this file relies on, from the Quasar source. Last verified
+  against Quasar 2.32.3. The QuasarDate demo spec covers them.
   - .q-date__view is the active view; two exist during the fade between views
   - the calendar navigation has 6 direct children: arrow, month label, arrow,
     arrow, year label, arrow. Each label wrapper holds a .q-btn inside a jump
