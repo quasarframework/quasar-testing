@@ -18,6 +18,40 @@ test('an empty errors array counts as no errors', () => {
   expect(readGraphqlResult({ data: {}, errors: [] }).errors).toBeUndefined();
 });
 
+test('every error item gets a string message', () => {
+  const { errors } = readGraphqlResult({
+    errors: ['boom', { msg: 'boom' }, { message: 4 }],
+  });
+
+  expect(errors).toEqual([
+    { message: 'boom' },
+    { message: '{"msg":"boom"}' },
+    { message: '{"message":4}' },
+  ]);
+});
+
+test('path and extensions are kept when they have the shape of one', () => {
+  const { errors } = readGraphqlResult({
+    errors: [
+      {
+        message: 'Name taken',
+        path: ['createItem', 0],
+        extensions: { code: 'BAD_USER_INPUT' },
+      },
+      { message: 'Name taken', path: 'createItem', extensions: 'BAD' },
+    ],
+  });
+
+  expect(errors).toEqual([
+    {
+      message: 'Name taken',
+      path: ['createItem', 0],
+      extensions: { code: 'BAD_USER_INPUT' },
+    },
+    { message: 'Name taken' },
+  ]);
+});
+
 test('anything that is not a GraphQL body gives undefined for both', () => {
   expect(readGraphqlResult('text')).toEqual({
     data: undefined,

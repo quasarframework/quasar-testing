@@ -87,6 +87,8 @@ async function colorMatcher(
   const expectedComputed = await locator
     .page()
     .evaluate(resolveExpectedColor, expected);
+  // The built-in assertion gets .not so it retries toward the outcome the test
+  // asked for.
   const { pass, actual } = await runRetryingAssertion(state.isNot, () =>
     (state.isNot ? expect(locator).not : expect(locator)).toHaveCSS(
       property,

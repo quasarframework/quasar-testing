@@ -9,7 +9,9 @@ import type { Page, TestInfo } from '@playwright/test';
   fixture reads the final state after the test. Without instrumentation both
   paths find no window.__coverage__ and do nothing.
 
-  It registers on the page, not on the context, so it works with reuseContext.
+  It registers on the page, not on the context. The components project reuses
+  one browser context across tests, and the registration must not outlive a
+  test.
   Playwright removes bindings and init scripts between tests.
 */
 

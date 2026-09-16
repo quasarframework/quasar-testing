@@ -4,10 +4,10 @@ import { fileURLToPath } from 'node:url';
 import { expect, test } from 'vitest';
 
 /*
-  The public surface is the QuasarFixture interface and the matchers. A user
-  names the type of a parameter through the main entry, so every type a module
-  behind that surface exports must be re-exported there. main.ts lists them by
-  hand. This test fails when a module gains a type the list lacks.
+  The public surface is main.ts and the two fixture modules it re-exports. A
+  user names one of their types on a parameter. Every type those modules export
+  must therefore be re-exported from main.ts. main.ts lists them by hand. This
+  test fails when a module gains a type the list lacks.
 */
 
 const HELPERS_DIR = fileURLToPath(new URL('.', import.meta.url));

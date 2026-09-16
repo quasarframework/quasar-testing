@@ -5,13 +5,28 @@ import { execute, GraphqlExecutionError, printWithGraphql } from './execute';
 type Context = Parameters<typeof execute>[0];
 type Posted = Parameters<Context['post']>;
 
+interface Reply {
+  ok?: boolean;
+  status?: number;
+  body?: unknown;
+  /** The raw body of a response that is not JSON. json() rejects with it. */
+  text?: string;
+}
+
+function bodyText(reply: Reply) {
+  if (reply.text !== undefined) {
+    return reply.text;
+  }
+
+  if (reply.body === undefined) {
+    return '';
+  }
+
+  return JSON.stringify(reply.body);
+}
+
 function createContext(
-  reply: {
-    ok?: boolean;
-    status?: number;
-    body?: unknown;
-    text?: string;
-  },
+  reply: Reply,
   defaultHeaders: Record<string, string> = {},
 ) {
   const posted: Posted[] = [];
@@ -22,6 +37,7 @@ function createContext(
       reply.text === undefined
         ? Promise.resolve(reply.body)
         : Promise.reject(new SyntaxError(reply.text)),
+    text: () => Promise.resolve(bodyText(reply)),
   };
   const context: Context = {
     post: (...args) => {
@@ -115,6 +131,35 @@ test('defaultHeaders false sends none of the defaults', async () => {
   expect(posted[0]?.[2]).toEqual({ 'x-request-id': '7' });
 });
 
+test('a per-call header replaces a default that differs only in case', async () => {
+  const { context, posted } = createContext(
+    { body: { data: CREATE_ITEM_DATA } },
+    DEFAULT_HEADERS,
+  );
+
+  await execute(
+    context,
+    CreateItem,
+    {},
+    { headers: { Authorization: 'Bearer call' } },
+  );
+
+  expect(posted[0]?.[2]).toEqual({
+    authorization: 'Bearer call',
+    'x-tenant': 'one',
+  });
+});
+
+test('a call without headers posts an empty headers object', async () => {
+  const { context, posted } = createContext({
+    body: { data: CREATE_ITEM_DATA },
+  });
+
+  await execute(context, CreateItem);
+
+  expect(posted[0]?.[2]).toEqual({});
+});
+
 test('a name alone is refused', async () => {
   const { context } = createContext({});
 
@@ -129,6 +174,34 @@ test('a failing status throws with the status', async () => {
   await expect(execute(context, CreateItem)).rejects.toThrow(
     'GraphQL operation "CreateItem" failed with status 503.',
   );
+});
+
+test('a failing status reports the body it could not read', async () => {
+  const { context } = createContext({
+    ok: false,
+    status: 502,
+    text: '<html>Bad gateway</html>',
+  });
+
+  await expect(execute(context, CreateItem)).rejects.toThrow(
+    'GraphQL operation "CreateItem" failed with status 502. The response body was: <html>Bad gateway</html>',
+  );
+});
+
+test('GraphQL errors on a failing status throw a GraphqlExecutionError', async () => {
+  const errors = [{ message: 'Variable "$name" got invalid value 1' }];
+  const { context } = createContext({
+    ok: false,
+    status: 400,
+    body: { errors },
+  });
+
+  const failure = await execute(context, CreateItem).catch(
+    (error: unknown) => error,
+  );
+
+  expect(failure).toBeInstanceOf(GraphqlExecutionError);
+  expect((failure as GraphqlExecutionError).errors).toEqual(errors);
 });
 
 test('a body that is not JSON throws with the status', async () => {

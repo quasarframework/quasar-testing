@@ -8,7 +8,7 @@ import { isRecord } from './is-record';
 import { readGraphqlResult, type GraphqlError } from './response';
 
 export interface ExecuteOptions {
-  /** Merged on top of the graphqlHeaders option, key by key. */
+  /** Merged on top of the graphqlHeaders option, name by name. A name matches whatever its case. */
   headers?: Record<string, string>;
   /** false sends none of the graphqlHeaders option, for an anonymous call. */
   defaultHeaders?: boolean;
@@ -43,7 +43,7 @@ interface ExecuteContext {
       query: string;
       variables: Record<string, unknown>;
     },
-    headers: Record<string, string> | undefined,
+    headers: Record<string, string>,
   ): Promise<APIResponse>;
   /** Resolves the URL on every call, so a config error surfaces in the test that calls execute(). */
   resolveUrl(): string;
@@ -61,6 +61,32 @@ async function importGraphql() {
       { cause: error },
     );
   }
+}
+
+/** HTTP header names are case-insensitive, so the merge lowercases them. The last source wins. */
+function mergeHeaders(
+  ...sources: (Record<string, string> | undefined)[]
+): Record<string, string> {
+  const merged: Record<string, string> = {};
+
+  for (const source of sources) {
+    for (const [name, value] of Object.entries(source ?? {})) {
+      merged[name.toLowerCase()] = value;
+    }
+  }
+
+  return merged;
+}
+
+/** The body of a failing response, for its error message. Empty when there is none. */
+async function bodyNote(response: APIResponse) {
+  // The status is the error. A body that cannot be read adds nothing to it.
+  const text = await response.text().catch(() => '');
+  if (text === '') {
+    return '';
+  }
+
+  return ` The response body was: ${text}`;
 }
 
 /** Prints with the graphql package, loaded on demand. */
@@ -86,35 +112,43 @@ export async function execute(
   }
 
   const query = await context.printDocument(document);
-  const headers = {
-    ...(options.defaultHeaders === false ? {} : context.defaultHeaders),
-    ...options.headers,
-  };
+  const headers = mergeHeaders(
+    options.defaultHeaders === false ? undefined : context.defaultHeaders,
+    options.headers,
+  );
   const response = await context.post(
     context.resolveUrl(),
     { operationName: name, query, variables },
-    Object.keys(headers).length === 0 ? undefined : headers,
+    headers,
   );
 
-  if (!response.ok()) {
-    throw new Error(
-      `GraphQL operation "${name}" failed with status ${response.status()}.`,
-    );
-  }
-
   let body: unknown;
+  let jsonError: unknown;
   try {
     body = await response.json();
   } catch (error) {
-    throw new Error(
-      `GraphQL operation "${name}" answered with a body that is not JSON (status ${response.status()}).`,
-      { cause: error },
-    );
+    jsonError = error;
   }
 
+  // The GraphQL over HTTP spec allows a complete error response on a 4xx status,
+  // and Apollo Server answers 400 that way for a validation error. The errors of
+  // the body name the problem, the status alone does not.
   const { data, errors } = readGraphqlResult(body);
   if (errors !== undefined) {
     throw new GraphqlExecutionError(name, errors, response);
+  }
+
+  if (!response.ok()) {
+    throw new Error(
+      `GraphQL operation "${name}" failed with status ${response.status()}.${await bodyNote(response)}`,
+    );
+  }
+
+  if (jsonError !== undefined) {
+    throw new Error(
+      `GraphQL operation "${name}" answered with a body that is not JSON (status ${response.status()}).`,
+      { cause: jsonError },
+    );
   }
 
   if (data === null || data === undefined) {

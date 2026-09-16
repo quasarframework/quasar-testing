@@ -1,5 +1,5 @@
 <template>
-  <img :src="iconSrc" height="200px" data-testid="test-image" />
+  <img :src="iconSrc" height="200" data-testid="test-image" />
 </template>
 
 <script setup<% if (shouldSupportTypeScript) { %> lang="ts"<% } %>>

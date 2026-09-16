@@ -13,10 +13,11 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   reporter: 'html',
   use: {
-    // Tests do not retry locally, so a failed test keeps its trace. On CI the retry records it.
+    // Locally every failed test keeps its trace. On CI only a retry records one.
     trace: process.env.CI ? 'on-first-retry' : 'retain-on-failure',
 <% if (shouldAddCodeCoverage) { %>
-    // The collector opens a page for every test, so it stays off without this
+    // Turns the coverage collector on. It is off by default because it needs a
+    // page, and that would create one even for a test that opens none.
     coverage: true,
 <% } %>
   },

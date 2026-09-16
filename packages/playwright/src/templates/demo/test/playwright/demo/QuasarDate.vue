@@ -14,7 +14,11 @@
       </template>
     </q-input>
     <q-dialog ref="dateDialogRef">
-      <q-date v-model="date" @update:model-value="dateDialogRef?.hide()" />
+      <q-date
+        v-model="date"
+        data-testid="date-picker-popup"
+        @update:model-value="dateDialogRef?.hide()"
+      />
     </q-dialog>
   </div>
 

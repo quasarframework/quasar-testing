@@ -35,8 +35,8 @@ export type UnmockedPolicy = 'error' | 'passthrough';
 
 /**
  * The part of a Playwright Page the registry uses. A test passes a literal.
- * Both methods resolve with a value the registry ignores. page.route() resolves
- * with a Disposable.
+ * Both route methods resolve with a value the registry ignores. page.route()
+ * resolves with a Disposable, so the return type here is unknown.
  */
 interface RoutablePage {
   route(
@@ -47,6 +47,7 @@ interface RoutablePage {
     url: (url: URL) => boolean,
     handler: (route: RouteLike) => Promise<void>,
   ): Promise<unknown>;
+  isClosed(): boolean;
 }
 
 /** The part of a Playwright Route the handler uses. A test passes a literal. */
@@ -71,7 +72,7 @@ interface MockRegistry {
       | MockResolver<unknown, Record<string, unknown>>,
     options?: MockOptions,
   ): Promise<MockHandle<Record<string, unknown>>>;
-  /** Removes the route, then throws a recorded resolver exception, then the unmocked names. */
+  /** Removes the route, then throws the resolver exceptions and the unmocked names it recorded. */
   dispose(): Promise<void>;
 }
 
@@ -86,6 +87,9 @@ interface MockEntry {
   calls: Record<string, unknown>[];
   waiters: ((variables: Record<string, unknown>) => void)[];
 }
+
+/** A mock answers at least one call. */
+const MINIMUM_TIMES = 1;
 
 function errorMessage(error: unknown) {
   return error instanceof Error ? error.message : String(error);
@@ -152,6 +156,8 @@ export function createMockRegistry(
     }
   }
 
+  // This records the call and releases the waiters before the delay runs.
+  // waitForCall() resolves while the response is still pending.
   async function answer(
     entry: MockEntry,
     call: OperationCall,
@@ -220,33 +226,43 @@ export function createMockRegistry(
       return;
     }
 
-    const matched = parsed.operations.map((call) => ({
-      call,
-      entry: activeEntry(call.operationName),
-    }));
-
-    const hasUnmocked = matched.some(({ entry }) => entry === undefined);
+    // The policy applies to the whole request. One operation without a mock
+    // sends the batch to the server, the mocked operations included.
+    const hasUnmocked = parsed.operations.some(
+      (call) => activeEntry(call.operationName) === undefined,
+    );
     if (hasUnmocked && options.unmocked === 'passthrough') {
       await route.fallback();
       return;
     }
 
-    const answers = await Promise.all(
-      matched.map(async ({ call, entry }) => {
-        if (entry === undefined) {
-          unmockedNames.add(call.operationName);
-          return unmockedAnswer(call.operationName);
-        }
+    // Each item of the batch looks its entry up when its turn comes. A mock with
+    // times: 1 that one batch names twice answers the first item only. The second
+    // item gets the mock registered before it.
+    const answers: MockResponse<unknown>[] = [];
+    for (const call of parsed.operations) {
+      const entry = activeEntry(call.operationName);
+      if (entry === undefined) {
+        unmockedNames.add(call.operationName);
+        answers.push(unmockedAnswer(call.operationName));
+        continue;
+      }
 
-        return answer(entry, call);
-      }),
-    );
+      answers.push(await answer(entry, call));
+    }
 
     await route.fulfill({ json: parsed.isBatched ? answers : answers[0] });
   }
 
   return {
     async mock(operationName, response, mockOptions = {}) {
+      const { times } = mockOptions;
+      if (times !== undefined && times < MINIMUM_TIMES) {
+        throw new Error(
+          `graphql.mock() needs a times option of at least ${MINIMUM_TIMES}, got ${times}.`,
+        );
+      }
+
       routeInstallation ??= page.route(options.matchesEndpoint, handleRoute);
       await routeInstallation;
 
@@ -254,7 +270,7 @@ export function createMockRegistry(
         operationName,
         response,
         delay: mockOptions.delay,
-        times: mockOptions.times,
+        times,
         answered: 0,
         calls: [],
         waiters: [],
@@ -286,17 +302,29 @@ export function createMockRegistry(
       }
       waitTimers.clear();
 
-      if (routeInstallation !== undefined) {
+      // The route dies with the page. unroute() on a closed page rejects.
+      if (routeInstallation !== undefined && !page.isClosed()) {
         await page.unroute(options.matchesEndpoint, handleRoute);
       }
 
-      if (resolverErrors.length > 0) {
-        throw resolverErrors[0];
+      const problems: unknown[] = [...resolverErrors];
+      if (unmockedNames.size > 0) {
+        problems.push(
+          new Error(
+            `GraphQL operations without a mock: ${[...unmockedNames].sort().join(', ')}. Register them with graphql.mock() or set the graphqlUnmocked option to "passthrough".`,
+          ),
+        );
       }
 
-      if (unmockedNames.size > 0) {
-        throw new Error(
-          `GraphQL operations without a mock: ${[...unmockedNames].sort().join(', ')}. Register them with graphql.mock() or set the graphqlUnmocked option to "passthrough".`,
+      if (problems.length === 1) {
+        throw problems[0];
+      }
+
+      if (problems.length > 1) {
+        // One error carries them all, so a test run shows every problem at once.
+        throw new AggregateError(
+          problems,
+          `The GraphQL mocks recorded ${problems.length} problems:\n${problems.map(errorMessage).join('\n')}`,
         );
       }
     },

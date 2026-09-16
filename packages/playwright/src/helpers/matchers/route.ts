@@ -13,8 +13,10 @@ export interface RouteMatcherOptions {
 
 export const routeMatchers = {
   /**
-   * Asserts that the current route matches the glob, e.g. `toHaveRoute('books/*')`.
-   * Hash-mode routers are detected automatically.
+   * Asserts the current route against the glob. A hash-mode router is detected
+   * and its hash is matched instead of the pathname.
+   *
+   * @example await expect(page).toHaveRoute('books/*')
    */
   async toHaveRoute(
     this: ExpectMatcherState,
@@ -29,6 +31,8 @@ export const routeMatchers = {
       throw new Error(`${assertionName}() expects a Page`);
     }
 
+    // The built-in assertion gets .not so it retries toward the outcome the
+    // test asked for.
     const { pass, actual } = await runRetryingAssertion(this.isNot, () =>
       (this.isNot ? expect(page).not : expect(page)).toHaveURL(
         (url) => matchesRoute(url, glob),

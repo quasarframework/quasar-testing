@@ -6,7 +6,8 @@ const MESSAGE = 'Hello, I am a plugin dialog';
 
 // The story holds the state and writes what the test reads into a hidden form
 export const Default = defineComponent(() => {
-  // We check for the plugin's existence to give a more helpful error message.
+  // Quasar defines Dialog.create when the Dialog plugin is installed. The demo
+  // needs "Dialog" in quasar.config > framework > plugins.
   if (typeof Dialog.create !== 'function') {
     throw new Error(
       'The QuasarDialogPlugin demo needs the Dialog plugin. Add "Dialog" to framework > plugins in quasar.config.',
@@ -20,8 +21,12 @@ export const Default = defineComponent(() => {
       component: QuasarDialogPlugin,
       componentProps: { message: MESSAGE },
     })
-      .onOk(() => (outcome.value = 'ok'))
-      .onCancel(() => (outcome.value = 'cancel'));
+      .onOk(() => {
+        outcome.value = 'ok';
+      })
+      .onCancel(() => {
+        outcome.value = 'cancel';
+      });
   }
 
   return () => (
