@@ -66,9 +66,11 @@
     "vite-plugin-istanbul": "^9.0.1"
   },
   "devDependencies": {
+    "@graphql-typed-document-node/core": "^3.2.0",
     "@playwright/test": "^1.63.0",
     "@quasar/app-vite": "^3.8.0",
     "eslint-plugin-playwright": "^2.11.0",
+    "graphql": "^16.14.2",
     "happy-dom": "^20.11.6",
     "nyc": "^18.0.0",
     "obuild": "^0.4.38",
@@ -81,7 +83,13 @@
   "peerDependencies": {
     "@playwright/test": "^1.63.0",
     "@quasar/app-vite": "^3.8.0",
+    "graphql": "^16.0.0",
     "quasar": "^2.31.0",
     "vue": "^3.5.0"
+  },
+  "peerDependenciesMeta": {
+    "graphql": {
+      "optional": true
+    }
   }
 }

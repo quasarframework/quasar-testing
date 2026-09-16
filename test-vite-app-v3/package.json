@@ -54,6 +54,7 @@
   },
   "devDependencies": {
     "@cypress/code-coverage": "^4.0.3",
+    "@graphql-typed-document-node/core": "^3.2.0",
     "@playwright/test": "^1.63.0",
     "@quasar/app-vite": "^3.8.0",
     "@quasar/quasar-app-extension-testing-e2e-cypress": "workspace:*",
@@ -66,6 +67,8 @@
     "cross-env": "^10.1.0",
     "cypress": "^15.21.0",
     "eslint-plugin-playwright": "^2.11.0",
+    "graphql": "^16.14.2",
+    "graphql-yoga": "^5.23.0",
     "nyc": "^18.0.0",
     "oxfmt": "^0.x",
     "oxlint": "^1.x",

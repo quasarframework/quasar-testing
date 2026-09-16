@@ -2,6 +2,7 @@
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file
 
 import { defineConfig } from "#q-app";
+import { graphqlServer } from "./test/playwright/graphql-server";
 
 export default defineConfig((/* ctx */) => {
   return {
@@ -46,7 +47,7 @@ export default defineConfig((/* ctx */) => {
       // https://v2.quasar.dev/quasar-cli-vite/page-routing-with-vue-router#filename-based-routing
       // filenameBasedRouting: true,
 
-      vueRouterMode: "hash" // available values: 'hash', 'history'
+      vueRouterMode: "hash", // available values: 'hash', 'history'
       // vueRouterBase,
 
       // publicPath: '/',
@@ -56,7 +57,14 @@ export default defineConfig((/* ctx */) => {
       // minify: false,
       // distDir
 
-      // extendViteConf (viteConf) {},
+      extendViteConf(viteConf) {
+        // The Playwright specs need a GraphQL endpoint. See test/playwright/graphql-server.ts.
+        if (process.env.QUASAR_TESTING_PLAYWRIGHT === "true") {
+          viteConf.plugins ??= [];
+          viteConf.plugins.push(graphqlServer());
+        }
+      }
+
       // viteVuePluginOptions: {},
 
       // vitePlugins: [
