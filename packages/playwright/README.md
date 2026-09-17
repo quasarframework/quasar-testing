@@ -191,6 +191,26 @@ export default defineBoot(() => {
 });
 ```
 
+#### Skip some Vite plugins during a test run
+
+The dev server Playwright starts runs your Vite plugins, including `vite-plugin-checker`. So, type-checking and linting the whole app happens on every test run. This may cause problems, will slow down tests, and might cause memory issues in CI. So, it's recommended to disable plugins like checkers, bundle analyzers, etc. during a test run.
+
+The third element of `vitePlugins` entry takes `client` and `server`, so you can utilize those:
+
+```ts
+// quasar.config file
+const isTestRun = import.meta.env.QUASAR_TESTING_PLAYWRIGHT;
+
+// inside build
+vitePlugins: [
+  [
+    'vite-plugin-checker',
+    { vueTsc: true, eslint: { lintCommand: 'eslint .' } },
+    { client: !isTestRun, server: false },
+  ],
+],
+```
+
 #### Eject
 
 To own the gallery page yourself, create `playwright/gallery/index.html` in the app. The AE then serves that file at the gallery URL instead of its generated one. Copy `.quasar/playwright-gallery/index.html` and `main.js`, written by a `quasar dev` run, into `playwright/gallery/`, point the script tag at `/playwright/gallery/main.js`, and own both files from then on.
