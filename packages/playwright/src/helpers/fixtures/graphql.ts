@@ -142,10 +142,7 @@ function createGraphqlHelpers(
         {
           // page.request carries the cookies of the page's context.
           post: (url, data, headers) =>
-            page.request.post(url, {
-              data,
-              ...(headers === undefined ? {} : { headers }),
-            }),
+            page.request.post(url, { data, headers }),
           resolveUrl: () =>
             resolveApiUrl(graphqlEndpoint, graphqlApiUrl, baseURL),
           defaultHeaders: graphqlHeaders,
