@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-testing-playwright",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0",
   "type": "module",
   "license": "MIT",
   "description": "A Quasar App Extension for e2e and component testing with Playwright",
