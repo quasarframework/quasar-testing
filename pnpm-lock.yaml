@@ -47,7 +47,7 @@ importers:
         version: 4.0.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/preset-env@7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(babel-loader@10.1.1(@babel/core@7.29.7(supports-color@8.1.1))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(cypress@15.21.0)(supports-color@8.1.1)(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26))
       '@quasar/app-vite':
         specifier: ^3.8.0
-        version: 3.8.1(@types/node@20.19.43)(quasar@2.25.1)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@5.9.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@5.9.3))(yaml@2.9.0)
+        version: 3.8.1(@types/node@20.19.43)(quasar@2.32.2)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@5.9.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@5.9.3))(yaml@2.9.0)
       cross-env:
         specifier: ^10.1.0
         version: 10.1.0
@@ -61,8 +61,8 @@ importers:
         specifier: ^0.4.38
         version: 0.4.38(@volar/typescript@2.4.28(typescript@5.9.3))(chokidar@5.0.0)(dotenv@17.4.2)(jiti@2.7.0)(typescript@5.9.3)(vue-tsc@3.3.11(typescript@5.9.3))
       quasar:
-        specifier: ^2.25.1
-        version: 2.25.1
+        specifier: ^2.32.2
+        version: 2.32.2
       start-server-and-test:
         specifier: ^3.0.12
         version: 3.0.12(supports-color@8.1.1)
@@ -151,7 +151,7 @@ importers:
     devDependencies:
       '@quasar/app-vite':
         specifier: ^3.7.0
-        version: 3.7.0(@types/node@20.19.43)(quasar@2.25.1)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@5.9.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@5.9.3))(yaml@2.9.0)
+        version: 3.7.0(@types/node@20.19.43)(quasar@2.32.2)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@5.9.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@5.9.3))(yaml@2.9.0)
       '@vitest/ui':
         specifier: ^4.1.11
         version: 4.1.11(vitest@4.1.11)
@@ -162,8 +162,8 @@ importers:
         specifier: ^0.4.38
         version: 0.4.38(@volar/typescript@2.4.28(typescript@5.9.3))(chokidar@5.0.0)(dotenv@17.4.2)(jiti@2.7.0)(typescript@5.9.3)(vue-tsc@3.3.11(typescript@5.9.3))
       quasar:
-        specifier: ^2.25.1
-        version: 2.25.1
+        specifier: ^2.32.2
+        version: 2.32.2
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -2028,133 +2028,157 @@ packages:
     resolution: {integrity: sha512-C/0zV5IhgVdYhGJTwrY0v8dknxlhiKwtVJkMUaexu9/QvRmzlV4vfU3hZlUSgqc2BxQHntL1mCVbDq8j0FRFDw==}
     cpu: [arm64]
     os: [android]
+    deprecated: yuku-codegen is pure JavaScript since 0.14
 
   '@yuku-codegen/binding-darwin-arm64@0.8.7':
     resolution: {integrity: sha512-/u+REDMI4a0/lsJXTM4c53/w31OGZLOReZIyg62uhgLs0kc8NHsj/nOcxTdlQjq5gi0zhdkccD9LaLTXcdzPvw==}
     cpu: [arm64]
     os: [darwin]
+    deprecated: yuku-codegen is pure JavaScript since 0.14
 
   '@yuku-codegen/binding-darwin-x64@0.8.7':
     resolution: {integrity: sha512-sMMzFOwCo4WXR+/6zIBThOocSC50iIIZZdfiIDbaLvj0Ax/rWt/iavyfEAqajyvzydLyCqR/ZItdLWSRlu1umw==}
     cpu: [x64]
     os: [darwin]
+    deprecated: yuku-codegen is pure JavaScript since 0.14
 
   '@yuku-codegen/binding-freebsd-x64@0.8.7':
     resolution: {integrity: sha512-MpdpKXix9P+Y1rKgjvcNeNtGjXeL1CmttNhYINrWls8kRpm4xM/oBGTmn6w7to8lAlwj5jm8q03dQPl5mRv4Qw==}
     cpu: [x64]
     os: [freebsd]
+    deprecated: yuku-codegen is pure JavaScript since 0.14
 
   '@yuku-codegen/binding-linux-arm-gnu@0.8.7':
     resolution: {integrity: sha512-rr1srFLlPAmC1vtxfc9C1YLDe3iH09YjfSeeIidBqKhzx1MATjOAq4mjlRUOnhr/L27MotWIYOFKwVsd5JZFOg==}
     cpu: [arm]
     os: [linux]
     libc: [glibc]
+    deprecated: yuku-codegen is pure JavaScript since 0.14
 
   '@yuku-codegen/binding-linux-arm-musl@0.8.7':
     resolution: {integrity: sha512-eAufXh8qBRpiSO6ueaMDL+yyoXIGLhpUce72YbcACtZU2qhExwBIJyEtQf5kH2Ki0X2aqkSjSfog4OPtKXan3Q==}
     cpu: [arm]
     os: [linux]
     libc: [musl]
+    deprecated: yuku-codegen is pure JavaScript since 0.14
 
   '@yuku-codegen/binding-linux-arm64-gnu@0.8.7':
     resolution: {integrity: sha512-gw4w6wPoHObBrdIC4duVWLmJOvpdE25j5D7yrM5mACNlK4klRz/lv8hK+ssQk9EJHBgZjSaqZIJVFgqNYbfv7A==}
     cpu: [arm64]
     os: [linux]
     libc: [glibc]
+    deprecated: yuku-codegen is pure JavaScript since 0.14
 
   '@yuku-codegen/binding-linux-arm64-musl@0.8.7':
     resolution: {integrity: sha512-L68N6Y4XkqcIaKo3Ra88JEvBEH4AHff44A4INcrxeVWZ8CZtu2tCpfVxe3hR8qQQMcvBSQlDn24KpkCKEhVvfA==}
     cpu: [arm64]
     os: [linux]
     libc: [musl]
+    deprecated: yuku-codegen is pure JavaScript since 0.14
 
   '@yuku-codegen/binding-linux-x64-gnu@0.8.7':
     resolution: {integrity: sha512-dzyAbltJmf3Cqlb8HcFuYIf5Yn0fl1vTr3XJ9HiVNNvOlhqPSArOqtw9vI1p6/VTXTjrMLXlU+s+/kNHiIy/Cw==}
     cpu: [x64]
     os: [linux]
     libc: [glibc]
+    deprecated: yuku-codegen is pure JavaScript since 0.14
 
   '@yuku-codegen/binding-linux-x64-musl@0.8.7':
     resolution: {integrity: sha512-Otw4MH3404q0Bbvl+YTdW9aoUV5vXmUw8260bWvt1XlaoIX/ceSgI4ygheRDMfBPoHt6FDayQaO9OLVUZAgkFA==}
     cpu: [x64]
     os: [linux]
     libc: [musl]
+    deprecated: yuku-codegen is pure JavaScript since 0.14
 
   '@yuku-codegen/binding-win32-arm64@0.8.7':
     resolution: {integrity: sha512-qo/jyrzryiBuKEsFiuWaBCBe3tRMynQ0qFWFgOEjcCMQeZfBm+wKiVEUEFXXLc7bh8YezguAWp0Mtnhq4ARNyA==}
     cpu: [arm64]
     os: [win32]
+    deprecated: yuku-codegen is pure JavaScript since 0.14
 
   '@yuku-codegen/binding-win32-x64@0.8.7':
     resolution: {integrity: sha512-D5lDsVDx6m00E6bWySlWdH72Ca4TPSaphDqB6QjU6MpuNLIJqoGoatYyq2rOmBE8Zv/kunot/o58KGL03P3eiA==}
     cpu: [x64]
     os: [win32]
+    deprecated: yuku-codegen is pure JavaScript since 0.14
 
   '@yuku-parser/binding-android-arm64@0.8.7':
     resolution: {integrity: sha512-eGKYiUDX7Y0V7tDTmg+JTVnXnjMqfXXsorZ+EDf5kxwchQ3Or1HS14MzI2fw+jFhHR85fCWt+mtX33Yao73hIQ==}
     cpu: [arm64]
     os: [android]
+    deprecated: yuku-parser runs on yuku-core since 0.14
 
   '@yuku-parser/binding-darwin-arm64@0.8.7':
     resolution: {integrity: sha512-Re0RHelKLnjEURulY2/KxW+Ngb8zuNA4BRZuMwgGQNzVumT6u4U2N2hc01oeYVNVof0i7GrXE4UCNBgbpRRnjQ==}
     cpu: [arm64]
     os: [darwin]
+    deprecated: yuku-parser runs on yuku-core since 0.14
 
   '@yuku-parser/binding-darwin-x64@0.8.7':
     resolution: {integrity: sha512-Hn8DROtQkjlA1ACbPgj4a7eP9IuVOI504oiTwpkWPbpaDWD9KdmnVYCqW+1LfenNK/g7O9NhWGpXEdaCNX7lIA==}
     cpu: [x64]
     os: [darwin]
+    deprecated: yuku-parser runs on yuku-core since 0.14
 
   '@yuku-parser/binding-freebsd-x64@0.8.7':
     resolution: {integrity: sha512-bAP2OV8wRuzplX/jYxv9+vvqQT8JxyNphI8fLfXGL054Xs+4/J5u33cIm3y4rxY8rdoLmmdiJs2Tq7r7lrDRfA==}
     cpu: [x64]
     os: [freebsd]
+    deprecated: yuku-parser runs on yuku-core since 0.14
 
   '@yuku-parser/binding-linux-arm-gnu@0.8.7':
     resolution: {integrity: sha512-kTYwJQQgmZeAWdDIWabiReIZMpmfLueIj1tCmjStUtFGhR1Z0qwxonKVfUC4N7h/VhGGzLZ//7O1kgt1QKqgCg==}
     cpu: [arm]
     os: [linux]
     libc: [glibc]
+    deprecated: yuku-parser runs on yuku-core since 0.14
 
   '@yuku-parser/binding-linux-arm-musl@0.8.7':
     resolution: {integrity: sha512-uL4jE8HPT2BLlxAXyD10LqgPuXa9eDa0BKpCdSANmzIJghq/2eZo3/gQNtaxPZMupWoxjYzSad9IXrwu7aYPXQ==}
     cpu: [arm]
     os: [linux]
     libc: [musl]
+    deprecated: yuku-parser runs on yuku-core since 0.14
 
   '@yuku-parser/binding-linux-arm64-gnu@0.8.7':
     resolution: {integrity: sha512-3gVN4pWSKZmXiNX7cU164dR9MPvesCHnlH6nPfpK+yQsCuYphjKKplcb4SnZBrhiqmXbgb2HR0c2TS0IZUPhgA==}
     cpu: [arm64]
     os: [linux]
     libc: [glibc]
+    deprecated: yuku-parser runs on yuku-core since 0.14
 
   '@yuku-parser/binding-linux-arm64-musl@0.8.7':
     resolution: {integrity: sha512-S0mwfEjoLpxzXeZw802Wa4RaELsQiPtWqG6INcy8j4GtvNFtl4LCX3eGO1XLn9pyLAISLzTRyU3zUCBUPin8lg==}
     cpu: [arm64]
     os: [linux]
     libc: [musl]
+    deprecated: yuku-parser runs on yuku-core since 0.14
 
   '@yuku-parser/binding-linux-x64-gnu@0.8.7':
     resolution: {integrity: sha512-lnbWdPmerE5D1uH1G4IEZKnPzCrWCStRGrtgpSIe1RibAo5bZIjDbbbPYXmMHCEh4F+x/JaJpElh26a3r+BPbg==}
     cpu: [x64]
     os: [linux]
     libc: [glibc]
+    deprecated: yuku-parser runs on yuku-core since 0.14
 
   '@yuku-parser/binding-linux-x64-musl@0.8.7':
     resolution: {integrity: sha512-769uwndMvMzUvATWbAcEvyLHKA+DzhHSCl/obBUrRdYfRo26yxui6S8y3z7uJ+Naup7UKrDxrpK7OnQkxkl9KQ==}
     cpu: [x64]
     os: [linux]
     libc: [musl]
+    deprecated: yuku-parser runs on yuku-core since 0.14
 
   '@yuku-parser/binding-win32-arm64@0.8.7':
     resolution: {integrity: sha512-mEB/9PlaAkisJ6KWGz0zvywXoU6+80dTlR2LwS7s/jcXXoU6fm2+sitBZXtqu3+Q4DcDgPxM45uWMCzPs0TSRw==}
     cpu: [arm64]
     os: [win32]
+    deprecated: yuku-parser runs on yuku-core since 0.14
 
   '@yuku-parser/binding-win32-x64@0.8.7':
     resolution: {integrity: sha512-8vNB2DP0ou61nGb8tc/qfi41gfyDXz1MHr2zqL3nR+cJ6CEbiuWV/l/a/vv151gCgiZLLAyGkQGENpozdg716w==}
     cpu: [x64]
     os: [win32]
+    deprecated: yuku-parser runs on yuku-core since 0.14
 
   '@yuku-toolchain/types@0.8.7':
     resolution: {integrity: sha512-2Z53dNxAJL6UvFoIrDZvYf3zlO8s4VJK4O2hhaB4mXVwwpX/7ajtss3cmfqKvamlNLWyt9FSWs4eoYdlbxpnHA==}
@@ -4482,10 +4506,6 @@ packages:
 
   quansync@0.2.11:
     resolution: {integrity: sha512-AifT7QEbW9Nri4tAwR5M/uzpBuqfZf+zwaEM/QkzEjj7NBuFD2rBuy0K3dE+8wltbezDV7JMA0WfnCPYRSYbXA==}
-
-  quasar@2.25.1:
-    resolution: {integrity: sha512-wDc+rLS0MHzp3wl1ILo7FXk6V15aotljHDO8DVpBlm1foATO4jbY8QTfZJW5e8tqAD/zJw6paHC6BeV4eSPMwg==}
-    engines: {node: '>= 10.18.1', npm: '>= 6.13.4', yarn: '>= 1.21.1'}
 
   quasar@2.32.2:
     resolution: {integrity: sha512-IqQHHYoYL8bfFDAwy5E5X1xv7VpMAdhFHjSaLycueRdLOkXMbntUUphAIof8Q/wgvKQcskYflGV9/OyIPvbkLA==}
@@ -6931,13 +6951,13 @@ snapshots:
 
   '@polka/url@1.0.0-next.29': {}
 
-  '@quasar/app-vite@3.7.0(@types/node@20.19.43)(quasar@2.25.1)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@5.9.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@5.9.3))(yaml@2.9.0)':
+  '@quasar/app-vite@3.7.0(@types/node@20.19.43)(quasar@2.32.2)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@5.9.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@5.9.3))(yaml@2.9.0)':
     dependencies:
       '@clack/prompts': 1.7.0
       '@quasar/art': 1.0.0
       '@quasar/render-ssr-error': 2.2.6
       '@quasar/ssl-certificate': 2.1.0
-      '@quasar/vite-plugin': 2.0.1(@vitejs/plugin-vue@6.0.8(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3)))(quasar@2.25.1)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))
+      '@quasar/vite-plugin': 2.0.1(@vitejs/plugin-vue@6.0.8(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3)))(quasar@2.32.2)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))
       '@types/chrome': 0.2.7
       '@types/cordova': 11.0.3
       '@vitejs/plugin-vue': 6.0.8(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))
@@ -6956,59 +6976,7 @@ snapshots:
       mlly: 1.8.2
       open: 11.0.1
       picomatch: 4.0.7
-      quasar: 2.25.1
-      rolldown: 1.2.5
-      sass-embedded: 1.103.1
-      semver: 7.8.5
-      serialize-javascript: 7.1.0
-      serve-static: 2.2.1(supports-color@8.1.1)
-      tinyglobby: 0.2.17
-      ts-essentials: 10.2.1(typescript@5.9.3)
-      vite: 8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0)
-      vue: 3.5.41(typescript@5.9.3)
-      vue-router: 5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26))
-      webpack-merge: 6.0.1
-    optionalDependencies:
-      typescript: 5.9.3
-    transitivePeerDependencies:
-      - '@types/node'
-      - '@vitejs/devtools'
-      - esbuild
-      - less
-      - sass
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-      - tsx
-      - yaml
-
-  '@quasar/app-vite@3.8.1(@types/node@20.19.43)(quasar@2.25.1)(sass@1.103.1)(supports-color@8.1.1)(terser@5.50.0)(typescript@5.9.3)(vue-router@5.2.0(@vue/compiler-sfc@3.5.41)(rolldown@1.2.5)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))(webpack@5.109.2(clean-css@5.3.3)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)))(vue@3.5.41(typescript@5.9.3))(yaml@2.9.0)':
-    dependencies:
-      '@clack/prompts': 1.7.0
-      '@quasar/art': 1.0.0
-      '@quasar/render-ssr-error': 2.2.6
-      '@quasar/ssl-certificate': 2.1.0
-      '@quasar/vite-plugin': 2.0.2(@vitejs/plugin-vue@6.0.8(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3)))(quasar@2.25.1)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))
-      '@types/chrome': 0.2.7
-      '@types/cordova': 11.0.3
-      '@vitejs/plugin-vue': 6.0.8(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))
-      chokidar: 5.0.0
-      ci-info: 4.4.0
-      confbox: 0.2.4
-      cross-spawn: 7.0.6
-      dot-prop: 10.2.0
-      dotenv-expand: 13.0.0
-      elementtree: 0.1.7
-      fflate: 0.8.3
-      fs-extra: 11.4.0
-      html-minifier-terser: 7.2.0
-      jiti: 2.7.0
-      kolorist: 1.8.0
-      mlly: 1.8.2
-      open: 11.0.1
-      picomatch: 4.0.7
-      quasar: 2.25.1
+      quasar: 2.32.2
       rolldown: 1.2.5
       sass-embedded: 1.103.1
       semver: 7.8.5
@@ -7196,17 +7164,10 @@ snapshots:
       fs-extra: 11.4.0
       selfsigned: 5.5.0
 
-  '@quasar/vite-plugin@2.0.1(@vitejs/plugin-vue@6.0.8(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3)))(quasar@2.25.1)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))':
+  '@quasar/vite-plugin@2.0.1(@vitejs/plugin-vue@6.0.8(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3)))(quasar@2.32.2)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))':
     dependencies:
       '@vitejs/plugin-vue': 6.0.8(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))
-      quasar: 2.25.1
-      vite: 8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0)
-      vue: 3.5.41(typescript@5.9.3)
-
-  '@quasar/vite-plugin@2.0.2(@vitejs/plugin-vue@6.0.8(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3)))(quasar@2.25.1)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))':
-    dependencies:
-      '@vitejs/plugin-vue': 6.0.8(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))(vue@3.5.41(typescript@5.9.3))
-      quasar: 2.25.1
+      quasar: 2.32.2
       vite: 8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0)
       vue: 3.5.41(typescript@5.9.3)
 
@@ -7583,7 +7544,7 @@ snapshots:
       sirv: 3.0.2
       tinyglobby: 0.2.17
       tinyrainbow: 3.1.1
-      vitest: 4.1.11(@types/node@22.20.1)(@vitest/ui@4.1.11)(happy-dom@20.11.6)(vite@8.2.2(@types/node@22.20.1)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))
+      vitest: 4.1.11(@types/node@20.19.43)(@vitest/ui@4.1.11)(happy-dom@20.11.6)(vite@8.2.2(@types/node@20.19.43)(jiti@2.7.0)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.50.0)(yaml@2.9.0))
 
   '@vitest/utils@4.1.11':
     dependencies:
@@ -10235,8 +10196,6 @@ snapshots:
   qs@6.5.5: {}
 
   quansync@0.2.11: {}
-
-  quasar@2.25.1: {}
 
   quasar@2.32.2: {}
 
