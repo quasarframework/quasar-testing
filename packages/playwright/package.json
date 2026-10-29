@@ -71,7 +71,7 @@
     "@quasar/app-vite": "^3.8.0",
     "eslint-plugin-playwright": "^2.11.0",
     "graphql": "^16.14.2",
-    "happy-dom": "^20.11.6",
+    "happy-dom": "^21.0.4",
     "nyc": "^18.0.0",
     "obuild": "^0.4.38",
     "quasar": "^2.32.0",
