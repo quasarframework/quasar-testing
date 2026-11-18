@@ -50,19 +50,19 @@
     "node": "^30 || ^28 || ^26 || ^24 || ^22.12.0"
   },
   "dependencies": {
-    "@clack/prompts": "^1.7.0",
-    "es-toolkit": "^1.51.0",
-    "happy-dom": "^20.11.6"
+    "@clack/prompts": "^1.9.0",
+    "es-toolkit": "^1.53.2",
+    "happy-dom": "^21.0.4"
   },
   "devDependencies": {
-    "@quasar/app-vite": "^3.7.0",
-    "@vitest/ui": "^4.1.11",
-    "@vue/test-utils": "^2.4.11",
-    "obuild": "^0.4.38",
-    "quasar": "^2.25.1",
+    "@quasar/app-vite": "^3.10.4",
+    "@vitest/ui": "^4.1.12",
+    "@vue/test-utils": "^2.6.0",
+    "obuild": "^0.4.45",
+    "quasar": "^2.35.5",
     "typescript": "^5.9.3",
-    "vitest": "^4.1.11",
-    "vue": "^3.5.41"
+    "vitest": "^4.1.12",
+    "vue": "^3.5.45"
   },
   "peerDependencies": {
     "@quasar/app-vite": "^3.0.0",

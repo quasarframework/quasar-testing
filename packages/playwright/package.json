@@ -61,24 +61,24 @@
     "node": "^30 || ^28 || ^26 || ^24 || ^22.22.0"
   },
   "dependencies": {
-    "@clack/prompts": "^1.7.0",
+    "@clack/prompts": "^1.9.0",
     "nano-spawn": "^2.1.0",
     "vite-plugin-istanbul": "^9.0.1"
   },
   "devDependencies": {
     "@graphql-typed-document-node/core": "^3.2.0",
-    "@playwright/test": "^1.63.0",
-    "@quasar/app-vite": "^3.8.0",
-    "eslint-plugin-playwright": "^2.11.0",
-    "graphql": "^16.14.2",
-    "happy-dom": "^20.11.6",
+    "@playwright/test": "^1.65.1",
+    "@quasar/app-vite": "^3.10.4",
+    "eslint-plugin-playwright": "^2.12.2",
+    "graphql": "^16.15.0",
+    "happy-dom": "^21.0.4",
     "nyc": "^18.0.0",
-    "obuild": "^0.4.38",
-    "quasar": "^2.32.0",
+    "obuild": "^0.4.45",
+    "quasar": "^2.35.5",
     "typescript": "^5.9.3",
-    "vitest": "^4.1.11",
-    "vue": "^3.5.41",
-    "yaml": "^2.9.0"
+    "vitest": "^4.1.12",
+    "vue": "^3.5.45",
+    "yaml": "^2.9.1"
   },
   "peerDependencies": {
     "@playwright/test": "^1.63.0",

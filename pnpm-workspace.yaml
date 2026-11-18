@@ -14,6 +14,14 @@ syncInjectedDepsAfterScripts:
 # "pnpm publish" refuses to run outside master/main unless told otherwise.
 publishBranch: dev
 
+# quasar declares no vue peer. Its types then resolve "vue" through the hidden
+# pnpm hoist, which can point at a different vue copy than the importer uses.
+# TypeScript then reports "$q" as missing and rejects Quasar as a Vue plugin.
+packageExtensions:
+  quasar:
+    peerDependencies:
+      vue: ^3.5.0
+
 allowBuilds:
   # @parcel/watcher ships prebuilt binaries as optional dependencies.
   '@parcel/watcher': false
